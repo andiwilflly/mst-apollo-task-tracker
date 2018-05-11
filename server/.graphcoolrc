@@ -1,0 +1,3 @@
+targets:
+  mst-apollo-task-tracker: shared-eu-west-1/cjh1v6rdw1kmk0171da10ighp
+  default: mst-apollo-task-tracker

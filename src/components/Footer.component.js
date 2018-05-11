@@ -1,15 +1,15 @@
 import React from 'react';
 
 
-class Header extends React.Component {
+class Footer extends React.Component {
 
 	render() {
 		return (
 			<div>
-				Header
+				Footer
 			</div>
 		)
 	}
 }
 
-export default Header
+export default Footer

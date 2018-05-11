@@ -27,4 +27,6 @@ onPatch(store, (patch)=> {
 	console.groupEnd(`%c🦄🌈 [@action: ${patch.op} ${patch.path}]`, color);
 });
 
+console.log('store', store);
+
 export default store;

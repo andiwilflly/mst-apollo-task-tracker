@@ -5,6 +5,7 @@ import { observer } from 'mobx-react';
 // Pages
 import Layout from "components/Layout.component";
 import HomePage from "components/pages/HomePage.component";
+import LoginPage from "components/pages/LoginPage.component";
 import Page404 from "components/pages/Page404.component";
 // Store
 import store from 'store';
@@ -35,6 +36,7 @@ const Routes = ()=> {
 				<div style={{ margin: "0 auto", width: 1000, marginTop: 20 }}>
 					<Switch>
 						<RouteComponent exact path="/" component={HomePage} />
+						<RouteComponent exact path="/login" component={LoginPage} />
 						<RouteComponent component={Page404} />
 					</Switch>
 				</div>

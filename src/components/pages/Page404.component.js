@@ -1,17 +1,20 @@
 import React from 'react';
+// Utils
+import permissions from "utils/permissions.utils";
 
 
-class HomePage extends React.Component {
+@permissions
+class Page404 extends React.Component {
 
 	render() {
 
 		return (
 			<div>
-				HomePage
+				404
 			</div>
 		)
 	}
 }
 
 
-export default HomePage;
+export default Page404;

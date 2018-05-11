@@ -22,3 +22,5 @@ type User @model {
     email: String! @isUnique
     password: String!
 }
+
+

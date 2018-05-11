@@ -4,7 +4,7 @@ const modalStyle = {
     backgroundColor: 'rgba(255,255,255,.6)',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   content: {
     position: 'relative',
@@ -18,8 +18,8 @@ const modalStyle = {
     padding: 0,
     border: 'none',
     background: 'none',
-    boxShadow: '0 1px 7px rgba(0,0,0,.2)',
-  },
+    boxShadow: '0 1px 7px rgba(0,0,0,.2)'
+  }
 }
 
 export default modalStyle

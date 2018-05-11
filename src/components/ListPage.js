@@ -5,7 +5,6 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
 class ListPage extends React.Component {
-
   componentWillReceiveProps(nextProps) {
     if (this.props.location.key !== nextProps.location.key) {
       this.props.allPostsQuery.refetch()
@@ -16,10 +15,7 @@ class ListPage extends React.Component {
     if (this.props.allPostsQuery.loading) {
       return (
         <div className='flex w-100 h-100 items-center justify-center pt7'>
-          <div>
-            Loading
-            (from {process.env.REACT_APP_GRAPHQL_ENDPOINT})
-          </div>
+          <div>Loading (from {process.env.REACT_APP_GRAPHQL_ENDPOINT})</div>
         </div>
       )
     }
@@ -31,7 +27,7 @@ class ListPage extends React.Component {
 
     return (
       <div className={'w-100 flex justify-center pa6' + blurClass}>
-        <div className='w-100 flex flex-wrap' style={{maxWidth: 1150}}>
+        <div className='w-100 flex flex-wrap' style={{ maxWidth: 1150 }}>
           <Link
             to='/create'
             className='ma3 box new-post br2 flex flex-column items-center justify-center ttu fw6 f20 black-30 no-underline'
@@ -43,13 +39,14 @@ class ListPage extends React.Component {
             />
             <div>New Post</div>
           </Link>
-          {this.props.allPostsQuery.allPosts && this.props.allPostsQuery.allPosts.map(post => (
-            <Post
-              key={post.id}
-              post={post}
-              refresh={() => this.props.allPostsQuery.refetch()}
-            />
-          ))}
+          {this.props.allPostsQuery.allPosts &&
+            this.props.allPostsQuery.allPosts.map(post => (
+              <Post
+                key={post.id}
+                post={post}
+                refresh={() => this.props.allPostsQuery.refetch()}
+              />
+            ))}
         </div>
         {this.props.children}
       </div>
@@ -70,8 +67,8 @@ const ALL_POSTS_QUERY = gql`
 const ListPageWithQuery = graphql(ALL_POSTS_QUERY, {
   name: 'allPostsQuery',
   options: {
-    fetchPolicy: 'network-only',
-  },
+    fetchPolicy: 'network-only'
+  }
 })(ListPage)
 
 export default ListPageWithQuery

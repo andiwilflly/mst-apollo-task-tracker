@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 // MobX
 import { observer } from "mobx-react";
 // Queries
@@ -14,6 +14,7 @@ import Wrapper from "components/Wrapper.component";
 class Header extends React.Component {
 
 	render() {
+		console.log(this.props, 42);
 		return (
 			<div>
 				<Wrapper query={ ALL_POSTS_QUERY }
@@ -27,14 +28,17 @@ class Header extends React.Component {
 						</div>
 						:
 						<div>
-							<Link to="/login">Log in</Link>
+							{ this.props.location.pathname !== "/login" ?
+								<Link to="/login">Log in</Link>
+								: null }
 						</div>
 					}
 
+					<Link to="/">Home</Link><br/>
 				</Wrapper>
 			</div>
 		)
 	}
 }
 
-export default Header;
+export default withRouter(Header);

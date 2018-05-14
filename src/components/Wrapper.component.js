@@ -2,6 +2,7 @@ import React from 'react';
 // GraphQl
 import client from "graphql/client";
 // MobX
+import { observable } from "mobx";
 import { observer } from "mobx-react";
 // Store
 import store from "store";
@@ -13,22 +14,30 @@ import PreLoader from "components/parts/PreLoader.component";
 class Wrapper extends React.Component {
 
 	static defaultProps = {
-		queryId: `queryId_${Math.random()}`,
 		variables: {}
 	};
 
 
+	@observable isLoaded = false;
+
+
 	componentDidMount() {
-		client.query({
-			query: this.props.query,
-			variables: this.props.variables
-		}).catch((e)=> {}).finally(e => {
-			store.setQuery(this.props.queryId);
-		})
+		if(!store.queries.get(this.props.queryId)) {
+			client.query({
+				query: this.props.query,
+				variables: this.props.variables
+			}).catch((e)=> {}).finally(e => {
+				if(this.props.queryId) store.setQuery(this.props.queryId);
+				this.isLoaded = true;
+			})
+		} else {
+			console.log("cached", this.props.queryId);
+		}
 	}
 
 
 	render() {
+		if(!this.props.queryId && this.isLoaded) return this.props.children; // For no cached queries
 		if(store.queries.get(this.props.queryId)) return this.props.children;
 
 		return (

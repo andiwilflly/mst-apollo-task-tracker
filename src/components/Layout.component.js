@@ -15,22 +15,30 @@ import Footer from "components/Footer.component";
 class Layout extends React.Component {
 
 
-	render() {
+	renderContent() {
 		return (
 			<div>
 				<Header />
 				<hr/>
-				{ store.user ?
-					<Wrapper query={ GET_USER_INFO_QUERY }
-							 queryId={ `getUserInfo_${store.user.id}` }
-							 variables={{ id: store.user.id }}>
-						{ this.props.children }
-					</Wrapper>
-					:
-					this.props.children
-				}
+				{ this.props.children }
 				<hr/>
 				<Footer />
+			</div>
+		);
+	}
+
+
+	render() {
+		return (
+			<div>
+				{ store.user ?
+					<Wrapper query={ GET_USER_INFO_QUERY }
+							 variables={{ id: store.user.id }}>
+						{ this.renderContent() }
+					</Wrapper>
+					:
+					this.renderContent()
+				}
 			</div>
 		)
 	}

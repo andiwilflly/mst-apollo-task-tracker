@@ -10,10 +10,9 @@ export default function (response = [], request = {}) {
 		const data = response.data[dataName];
 		const errors = response.errors;
 
-		console.groupCollapsed(`%c🕺 REQUEST`, "color: darkgreen");
+		console.groupCollapsed(`%c🕺 REQUEST ${operationName}`, "color: darkgreen");
 		console.log("request", request);
 		console.log("response", response);
-		console.log("operationName", operationName);
 		console.groupEnd(`%c🕺 REQUEST`, "color: darkgreen");
 
 		switch (dataName) {

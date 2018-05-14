@@ -16,7 +16,7 @@ const httpLink = new BatchHttpLink({
 			.fetch(url, request)
 			.then(response => response.json())
 			.then(response => {
-				responseResolver(response);
+				responseResolver(response, JSON.parse(request.body)[0].operationName);
 			})
 	},
 	batchKey: str => {
@@ -39,13 +39,6 @@ const errorLink = onError(({ networkError, graphQLErrors }) => {
 });
 
 
-const resolverLink = new ApolloLink((operation, forward)=> {
-	return forward(operation).map(response => {
-		console.log(response, "===== > AFTERR??");
-		return responseResolver(response.data);
-	});
-});
-
 
 const link = ApolloLink.from([
 	errorLink,
@@ -54,7 +47,7 @@ const link = ApolloLink.from([
 
 
 const client = new ApolloClient({
-	link,
+	link: link,
 	cache: new InMemoryCache()
 });
 

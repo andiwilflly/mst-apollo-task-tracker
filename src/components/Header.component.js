@@ -10,7 +10,7 @@ class Header extends React.Component {
 	render() {
 		return (
 			<div>
-				<Wrapper query={ ALL_POSTS_QUERY } queryId={ "allPosts" }>
+				<Wrapper query={ ALL_POSTS_QUERY } queryId={ "allPostsIds" }>
 					Header
 				</Wrapper>
 			</div>

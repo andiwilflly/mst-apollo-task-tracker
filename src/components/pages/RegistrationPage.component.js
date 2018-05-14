@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 // MobX
 import { observer } from "mobx-react";
 import { observable } from "mobx";
+// Apollo
+import { Mutation } from 'react-apollo';
 // Utils
 import permissions from "utils/permissions.utils";
+// Mutations
+import SIGN_UP_USER_MUTATION from "graphql/mutations/signupUser.mutation";
 
 
 @observer
@@ -22,8 +26,11 @@ class LoginPage extends React.Component {
 	};
 
 
-	login = ()=> {
-		console.log("register!", this.form.email, this.form.password);
+	login = (signUpMutation)=> {
+		signUpMutation({ variables: {
+			email: this.form.email,
+			password: this.form.password
+		}}).catch((e)=> {});
 	};
 
 
@@ -36,9 +43,13 @@ class LoginPage extends React.Component {
 				<input type="password"
 					   value={ this.form.password }
 					   onChange={ (e)=> this.form.password = e.currentTarget.value }/>
-				<button onClick={ this.login }>Register</button>
 				<hr/>
 				<Link to="/login">Sign in</Link>
+				<Mutation mutation={SIGN_UP_USER_MUTATION}>
+					{
+						(signUpMutation)=> <button onClick={ this.login.bind(this, signUpMutation) }>Register</button>
+					}
+				</Mutation>
 			</div>
 		)
 	}

@@ -2,7 +2,9 @@ import { onPatch } from "mobx-state-tree";
 // Models
 import RootModel from "models/Root.model";
 
-const store = RootModel.create({});
+const store = RootModel.create({
+	queries: {}
+});
 
 
 // @SOURCE: https://github.com/mobxjs/mobx-state-tree/blob/master/API.md#onpatch
@@ -27,6 +29,5 @@ onPatch(store, (patch)=> {
 	console.groupEnd(`%c🦄🌈 [@action: ${patch.op} ${patch.path}]`, color);
 });
 
-console.log('store', store);
 
 export default store;

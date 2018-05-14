@@ -4,21 +4,23 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { BatchHttpLink } from 'apollo-link-batch-http';
 import { onError } from "apollo-link-error";
+// GraphQL
+import responseResolver from "graphql/responseResolver";
+
 
 const httpLink = new BatchHttpLink({
 	uri: 'https://api.graph.cool/simple/v1/cjh1v6rdw1kmk0171da10ighp',
 	batchInterval: 200,
-	// fetch: async (url, request)=> {
-	// 	return window
-	// 		.fetch(url, request)
-	// 		.then(response => response.json())
-	// 		.then(response => {
-	// 			console.log(response, 42)
-	// 		})
-	// },
+	fetch: async (url, request)=> {
+		return window
+			.fetch(url, request)
+			.then(response => response.json())
+			.then(response => {
+				responseResolver(response);
+			})
+	},
 	batchKey: str => {
-		console.log(str, '????');
-		return str.operationName
+		return str.operationName;
 	}
 });
 
@@ -37,17 +39,16 @@ const errorLink = onError(({ networkError, graphQLErrors }) => {
 });
 
 
-const responseResolver = new ApolloLink((operation, forward)=> {
+const resolverLink = new ApolloLink((operation, forward)=> {
 	return forward(operation).map(response => {
 		console.log(response, "===== > AFTERR??");
-		return response;
+		return responseResolver(response.data);
 	});
 });
 
 
 const link = ApolloLink.from([
 	errorLink,
-	responseResolver,
 	httpLink
 ]);
 

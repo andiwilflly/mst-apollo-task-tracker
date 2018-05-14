@@ -8,7 +8,7 @@ import { observable } from "mobx";
 // Utils
 import permissions from "utils/permissions.utils";
 // Mutations
-import SIGN_UP_USER_MUTATION from "graphql/mutations/signupUser.mutation";
+import SIGN_IN_USER_MUTATION from "graphql/mutations/authenticateUser.mutation";
 
 
 @observer
@@ -26,12 +26,11 @@ class LoginPage extends React.Component {
 	};
 
 
-	login = async (signUpMutation)=> {
-		const promise = signUpMutation({ variables: {
+	login = async (signInMutation)=> {
+		signInMutation({ variables: {
 			email: this.form.email,
 			password: this.form.password
 		}}).catch((e)=> {});
-		const response = await promise;
 	};
 
 
@@ -46,9 +45,9 @@ class LoginPage extends React.Component {
 					   onChange={ (e)=> this.form.password = e.currentTarget.value }/>
 				<hr/>
 				<Link to="/registration">Sign up</Link>
-				<Mutation mutation={SIGN_UP_USER_MUTATION}>
+				<Mutation mutation={SIGN_IN_USER_MUTATION}>
 					{
-						(signUpMutation)=> <button onClick={ this.login.bind(this, signUpMutation) }>Login</button>
+						(signInMutation)=> <button onClick={ this.login.bind(this, signInMutation) }>Login</button>
 					}
 				</Mutation>
 			</div>

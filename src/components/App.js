@@ -1,6 +1,10 @@
 import React from 'react';
 // Routes
 import Router from "components/Router";
+// Apollo
+import { ApolloProvider } from 'react-apollo';
+// GraphQL
+import client from "graphql/client";
 
 
 class App extends React.Component {
@@ -8,7 +12,11 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<Router />
+			<ApolloProvider client={client}>
+				<div>
+					<Router />
+				</div>
+			</ApolloProvider>
 		)
 	}
 }

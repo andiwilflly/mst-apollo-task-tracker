@@ -10,7 +10,9 @@ class Layout extends React.Component {
 		return (
 			<div>
 				<Header />
+				<hr/>
 				{ this.props.children }
+				<hr/>
 				<Footer />
 			</div>
 		)

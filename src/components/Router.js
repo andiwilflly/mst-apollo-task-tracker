@@ -6,6 +6,7 @@ import { observer } from 'mobx-react';
 import Layout from "components/Layout.component";
 import HomePage from "components/pages/HomePage.component";
 import LoginPage from "components/pages/LoginPage.component";
+import RegistrationPage from "components/pages/RegistrationPage.component";
 import Page404 from "components/pages/Page404.component";
 // Store
 import store from 'store';
@@ -19,11 +20,10 @@ const RouteComponent = ({ component: Component, ...rest })=> {
 
 	// Default case
 	return (
-		<Route {...rest} render={(props)=>
+		<Route { ...rest } render={ (props)=>
 			React.createElement(Layout, props, React.createElement(Component, props))
-		}/>
+		} />
 	);
-	// return <Route { ...rest } render={ (props)=> <Component { ...props } /> }/>
 };
 
 
@@ -37,6 +37,7 @@ const Routes = ()=> {
 					<Switch>
 						<RouteComponent exact path="/" component={HomePage} />
 						<RouteComponent exact path="/login" component={LoginPage} />
+						<RouteComponent exact path="/registration" component={RegistrationPage} />
 						<RouteComponent component={Page404} />
 					</Switch>
 				</div>

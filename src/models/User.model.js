@@ -2,16 +2,16 @@ import { types } from "mobx-state-tree";
 
 
 const UserModel = {
-	name: types.maybe(types.string),
-	bio: types.maybe(types.string),
-	avatar: types.maybe(types.string),
-	followers: types.maybe(types.number),
-	following: types.maybe(types.number)
+	id: types.maybe(types.string),
+	email: types.maybe(types.string),
 };
 
 
-const actions = (store)=> {
+const actions = (self)=> {
 	return {
+		setInfo: (data)=> {
+			Object.keys(self).map((fieldName)=> self[fieldName] = data[fieldName]);
+		}
 	};
 };
 

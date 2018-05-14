@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 // Apollo
 import { Mutation } from 'react-apollo';
 // MobX
@@ -16,7 +17,8 @@ import SIGN_IN_USER_MUTATION from "graphql/mutations/authenticateUser.mutation";
 class LoginPage extends React.Component {
 
 	static permissions = {
-		notForAuth: true
+		notForAuth: true,
+		redirectPath: "/"
 	};
 
 
@@ -27,10 +29,11 @@ class LoginPage extends React.Component {
 
 
 	login = async (signInMutation)=> {
-		signInMutation({ variables: {
+		await signInMutation({ variables: {
 			email: this.form.email,
 			password: this.form.password
-		}}).catch((e)=> {});
+		}}).catch((e)=> {}).finally(()=> {});
+		this.props.history.push("/");
 	};
 
 
@@ -56,4 +59,4 @@ class LoginPage extends React.Component {
 }
 
 
-export default LoginPage;
+export default withRouter(LoginPage);

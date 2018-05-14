@@ -14,7 +14,12 @@ const actions = (store)=> {
 	return {
 
 		// Queries
-		setQuery: (queryId)=> store.queries.set(queryId, { id: queryId })
+		setQuery: (queryId)=> store.queries.set(queryId, { id: queryId }),
+
+
+		// User
+		loginUser: (userId)=> { store.user = { id: userId } },
+		logOutUser: ()=> { store.user = null }
 	};
 };
 

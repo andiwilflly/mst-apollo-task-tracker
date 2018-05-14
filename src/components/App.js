@@ -5,7 +5,6 @@ import Router from "components/Router";
 import { ApolloProvider } from 'react-apollo';
 // GraphQL
 import client from "graphql/client";
-// Queries
 import LOGGED_IN_USER_QUERY from "graphql/queries/loggedInUser.query";
 // Components
 import Wrapper from "components/Wrapper.component";

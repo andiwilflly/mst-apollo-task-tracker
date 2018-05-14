@@ -5,19 +5,23 @@ import client from "graphql/client";
 import { observer } from "mobx-react";
 // Store
 import store from "store";
+// Components
+import PreLoader from "components/parts/PreLoader.component";
 
 
 @observer
 class Wrapper extends React.Component {
 
 	static defaultProps = {
-		queryId: `queryId_${Math.random()}`
+		queryId: `queryId_${Math.random()}`,
+		variables: {}
 	};
 
 
 	componentDidMount() {
 		client.query({
-			query: this.props.query
+			query: this.props.query,
+			variables: this.props.variables
 		}).catch((e)=> {}).finally(e => {
 			store.setQuery(this.props.queryId);
 		})
@@ -27,9 +31,8 @@ class Wrapper extends React.Component {
 	render() {
 		if(store.queries.get(this.props.queryId)) return this.props.children;
 
-		// TODO: need to check fields here
 		return (
-			<div>Loading...</div>
+			<PreLoader />
 		)
 	}
 }

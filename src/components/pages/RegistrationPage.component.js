@@ -16,7 +16,8 @@ import SIGN_UP_USER_MUTATION from "graphql/mutations/signupUser.mutation";
 class LoginPage extends React.Component {
 
 	static permissions = {
-		notForAuth: true
+		notForAuth: true,
+		redirectPath: "/"
 	};
 
 

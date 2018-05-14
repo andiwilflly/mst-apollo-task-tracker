@@ -16,8 +16,8 @@ const httpLink = new BatchHttpLink({
 			.fetch(url, request)
 			.then(response => response.json())
 			.then(response => {
-				responseResolver(response, JSON.parse(request.body)[0].operationName);
-			})
+				responseResolver(response, JSON.parse(request.body));
+			});
 	},
 	batchKey: str => {
 		return str.operationName;
@@ -34,8 +34,6 @@ const errorLink = onError(({ networkError, graphQLErrors }) => {
 			),
 		);
 	}
-
-	if (networkError) console.log(`%c [Network error]: \n ${networkError}`, "color: red");
 });
 
 

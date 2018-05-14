@@ -6,7 +6,9 @@ interface User {
 }
 
 export default async (event: FunctionEvent<{}>) => {
-  console.log(event)
+  console.log('==========');
+  console.log(event.context);
+  console.log('==========');
 
   try {
     // no logged in user

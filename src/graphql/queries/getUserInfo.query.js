@@ -7,8 +7,6 @@ export default gql`query getUserInfo($id: ID!) {
         email
         boards {
             id
-            name
-            description
         }
     }
 }`

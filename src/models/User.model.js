@@ -27,6 +27,10 @@ const actions = (self)=> {
 		},
 
 
+		updateBoard(board = {}) {
+			self.boards.set(board.id, { ...self.boards.get(board.id), ...board });
+		},
+
 		deleteBoard(boardId) {
 			// TODO: graphQL!
 			self.boards.delete(boardId);

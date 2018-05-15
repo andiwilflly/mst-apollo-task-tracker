@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 // MobX
 import { observer } from "mobx-react";
 import { observable, computed } from "mobx";
@@ -30,14 +31,13 @@ class BoardsPage extends React.Component {
 
 
 	render() {
-		console.log(this.boards, 42);
 		return (
 			<div>
 				<ul>
 					{ Object.keys(this.boards).map((boardId)=> {
 						return (
 							<li key={boardId}>
-								Board: { boardId }
+								<Link to={ `/board/${boardId}`}>{ boardId }</Link>
 								<button onClick={ ()=> store.user.deleteBoard(boardId) }>Delete</button>
 							</li>
 						);

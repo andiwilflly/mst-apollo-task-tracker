@@ -18,7 +18,8 @@ export default function (operation = {}, data = {}) {
 
 	switch (dataName) {
 		case "loggedInUser":
-			// console.log("loggedIn user!!!", data);
+			// TESTING
+			store.loginUser('cjh63pscwblsf0120pb9drds8');
 			break;
 		case "authenticateUser":
 			errors ?
@@ -28,6 +29,9 @@ export default function (operation = {}, data = {}) {
 			break;
 		case "User":
 			store.user.setInfo(data);
+			break;
+		case "Board":
+			store.user.updateBoard(data);
 			break;
 		default:
 			//console.log("dataName: ", operationName, dataName, data);

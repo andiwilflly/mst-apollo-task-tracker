@@ -4,7 +4,7 @@ import store from "store";
 // Apollo
 import { Mutation } from 'react-apollo';
 // Mutations
-import CREATE_BOARD_MUTATION from "graphql/mutations/createBoard.mutation";
+import CREATE_BOARD_MUTATION from "graphql/mutations/boards/createBoard.mutation";
 
 
 @withRouter

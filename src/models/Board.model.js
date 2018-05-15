@@ -2,7 +2,9 @@ import { types } from 'mobx-state-tree';
 
 
 const Board = {
-	id: types.identifier(types.string)
+	id: types.identifier(types.string),
+	name: types.maybe(types.string),
+	description: types.maybe(types.string)
 };
 
 

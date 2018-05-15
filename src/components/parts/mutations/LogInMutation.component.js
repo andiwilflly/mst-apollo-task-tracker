@@ -3,11 +3,11 @@ import { withRouter } from "react-router-dom";
 // Apollo
 import { Mutation } from 'react-apollo';
 // Mutations
-import SIGN_IN_USER_MUTATION from "graphql/mutations/authenticateUser.mutation";
+import LOG_IN_USER_MUTATION from "graphql/mutations/authenticateUser.mutation";
 
 
 @withRouter
-class LoginMutation extends React.Component {
+class LogInMutation extends React.Component {
 
 	login = async (signInMutation)=> {
 		await signInMutation({ variables: {
@@ -20,7 +20,7 @@ class LoginMutation extends React.Component {
 
 	render() {
 		return (
-			<Mutation mutation={SIGN_IN_USER_MUTATION}>
+			<Mutation mutation={LOG_IN_USER_MUTATION}>
 				{
 					(signInMutation)=> <button onClick={ this.login.bind(this, signInMutation) }>Login</button>
 				}
@@ -30,4 +30,4 @@ class LoginMutation extends React.Component {
 }
 
 
-export default LoginMutation;
+export default LogInMutation;

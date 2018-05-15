@@ -1,4 +1,7 @@
 import React from 'react';
+// Styles
+import "styles/reset.css";
+import "styles/basic.css";
 // Routes
 import Router from "components/Router";
 // Apollo

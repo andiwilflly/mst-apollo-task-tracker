@@ -6,7 +6,7 @@ import { observable } from "mobx";
 // Utils
 import permissions from "utils/permissions.utils";
 // Components
-import LoginMutation from "components/parts/mutations/LoginMutation.component";
+import LogInMutation from "components/parts/mutations/LogInMutation.component";
 
 
 @observer
@@ -37,7 +37,7 @@ class LoginPage extends React.Component {
 					   onChange={ (e)=> this.form.password = e.currentTarget.value }/>
 				<hr/>
 				<Link to="/registration">Sign up</Link>
-				<LoginMutation form={ this.form } />
+				<LogInMutation form={ this.form } />
 			</div>
 		)
 	}

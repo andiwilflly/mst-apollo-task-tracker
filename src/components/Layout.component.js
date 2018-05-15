@@ -1,4 +1,6 @@
 import React from 'react';
+// Styles
+import "styles/layout.css";
 // MobX
 import { observer } from "mobx-react";
 // GraphQL
@@ -19,9 +21,9 @@ class Layout extends React.Component {
 		return (
 			<div>
 				<Header />
-				<hr/>
-				{ this.props.children }
-				<hr/>
+				<div className="wrapper">
+					{ this.props.children }
+				</div>
 				<Footer />
 			</div>
 		);

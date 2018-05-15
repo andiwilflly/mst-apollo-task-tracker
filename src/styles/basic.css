@@ -1,0 +1,42 @@
+body {
+	font-family: Sathu;
+	font-size: 14px;
+	line-height: 120%;
+}
+
+
+a {
+	color: cornflowerblue;
+	display: block;
+}
+
+a:hover {
+	opacity: 0.7;
+}
+
+
+button {
+	padding: 5px 10px;
+	border: 1px solid lightgray;
+	cursor: pointer;
+	transition: 0.5s background;
+	background: lightgray;
+}
+
+button:hover {
+	background: white;
+}
+
+
+input {
+	border: none;
+	background-color: lightgray !important;
+	outline: none;
+	padding: 5px;
+	transition: 0.5s background;
+	border-bottom: 1px solid lightgray;
+}
+
+input:focus {
+	background-color: white !important;
+}

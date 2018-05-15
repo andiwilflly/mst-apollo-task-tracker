@@ -32,16 +32,13 @@ const RouteComponent = ({ component: Component, ...rest })=> {
 const Routes = ()=> {
 	return (
 		<Router>
-			<div>
-				<div style={{ margin: "0 auto", width: 1000, marginTop: 20 }}>
-					<Switch>
-						<RouteComponent exact path="/" component={HomePage} />
-						<RouteComponent exact path="/login" component={LoginPage} />
-						<RouteComponent exact path="/registration" component={RegistrationPage} />
-						<RouteComponent component={Page404} />
-					</Switch>
-				</div>
-			</div>
+			<Switch>
+				<RouteComponent exact path="/" component={HomePage} />
+				<RouteComponent exact path="/login" component={LoginPage} />
+				<RouteComponent exact path="/registration" component={RegistrationPage} />
+				<RouteComponent component={Page404} />
+			</Switch>
+
 		</Router>
 	);
 }

@@ -15,12 +15,13 @@ const actions = (self)=> {
 		setInfo: (data)=> {
 			Object.keys(self).map((fieldName)=> {
 				if(fieldName === "boards") {
-					data[fieldName].map((board)=> self.createBoard(board));
+					data[fieldName].map((board)=> self.updateBoard(board));
 				} else {
 					self[fieldName] = data[fieldName];
 				}
 			});
 		},
+
 
 		createBoard(board = {}) {
 			self.boards.set(board.id, board);

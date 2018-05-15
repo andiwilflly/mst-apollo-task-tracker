@@ -27,7 +27,7 @@ class HomePage extends React.Component {
 
 
     loadComponentLazy() {
-        import(/* webpackChunkName: "lazy" */ 'components/pages/HomePageContent.component').then(LazyComponent => {
+        import(/* webpackChunkName: "home" */ 'components/pages/lazyContent/HomePageContent.component').then(LazyComponent => {
             this.setState((prevState, props)=> ({ LazyComponent: LazyComponent.default }))
 		})
     };

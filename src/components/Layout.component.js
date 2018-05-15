@@ -6,7 +6,7 @@ import GET_USER_INFO_QUERY from "graphql/queries/getUserInfo.query";
 // Store
 import store from "store";
 // Components
-import Wrapper from "components/Wrapper.component";
+import QueryLoader from "components/QueryLoader.component";
 import Header from "components/Header.component";
 import Footer from "components/Footer.component";
 
@@ -32,10 +32,10 @@ class Layout extends React.Component {
 		return (
 			<div>
 				{ store.user ?
-					<Wrapper query={ GET_USER_INFO_QUERY }
-							 variables={{ id: store.user.id }}>
+					<QueryLoader query={ GET_USER_INFO_QUERY }
+								 variables={{ id: store.user.id }}>
 						{ this.renderContent() }
-					</Wrapper>
+					</QueryLoader>
 					:
 					this.renderContent()
 				}

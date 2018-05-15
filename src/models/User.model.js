@@ -13,7 +13,7 @@ const UserModel = {
 const actions = (self)=> {
 	return {
 		setInfo: (data)=> {
-			Object.keys(self).map((fieldName)=> {
+			Object.keys(self).forEach((fieldName)=> {
 				if(fieldName === "boards") {
 					data[fieldName].map((board)=> self.updateBoard(board));
 				} else {

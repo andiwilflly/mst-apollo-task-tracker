@@ -1,16 +1,3 @@
-type Post @model {
-    # Required system field
-    id: ID! @isUnique # read-only (managed by Graphcool)
-
-    # Optional system fields (remove if not needed)
-    createdAt: DateTime! # read-only (managed by Graphcool)
-    updatedAt: DateTime! # read-only (managed by Graphcool)
-
-    description: String!
-    imageUrl: String!
-}
-
-
 type User @model {
     # Required system field:
     id: ID! @isUnique # read-only (managed by Graphcool)
@@ -35,21 +22,25 @@ type Board @model {
     updatedAt: DateTime! # read-only (managed by Graphcool)
 
     name: String! @isUnique
+    description: String!
+
 
     author: User! @relation(name: "UserOnBoards")
-    description: String!
+    tasks: [Task!]! @relation(name: "BoardOnTasks")
 }
 
 
-#type Task @model {
-#    # Required system field:
-#    id: ID! @isUnique # read-only (managed by Graphcool)
-#
-#    # Optional system fields (remove if not needed):
-#    createdAt: DateTime! # read-only (managed by Graphcool)
-#    updatedAt: DateTime! # read-only (managed by Graphcool)
-#
-#    name: String!
-#    description: String!
-#}
+type Task @model {
+    # Required system field:
+    id: ID! @isUnique # read-only (managed by Graphcool)
+
+    # Optional system fields (remove if not needed):
+    createdAt: DateTime! # read-only (managed by Graphcool)
+    updatedAt: DateTime! # read-only (managed by Graphcool)
+
+    title: String!
+    description: String!
+
+    board: Board! @relation(name: "BoardOnTasks")
+}
 

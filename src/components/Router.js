@@ -5,6 +5,7 @@ import { observer } from 'mobx-react';
 // Pages
 import Layout from "components/Layout.component";
 import HomePage from "components/pages/HomePage.component";
+import BoardsPage from "components/pages/BoardsPage.component";
 import LoginPage from "components/pages/LoginPage.component";
 import RegistrationPage from "components/pages/RegistrationPage.component";
 import Page404 from "components/pages/Page404.component";
@@ -34,6 +35,7 @@ const Routes = ()=> {
 		<Router>
 			<Switch>
 				<RouteComponent exact path="/" component={HomePage} />
+				<RouteComponent exact path="/boards" component={BoardsPage} />
 				<RouteComponent exact path="/login" component={LoginPage} />
 				<RouteComponent exact path="/registration" component={RegistrationPage} />
 				<RouteComponent component={Page404} />

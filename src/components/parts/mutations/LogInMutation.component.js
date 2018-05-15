@@ -13,7 +13,7 @@ class LogInMutation extends React.Component {
 		await signInMutation({ variables: {
 			email: this.props.form.email,
 			password: this.props.form.password
-		}}).catch((e)=> {}).finally(()=> {});
+		}});
 		this.props.history.push("/");
 	};
 

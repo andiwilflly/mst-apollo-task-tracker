@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 // MobX
 import { observer } from "mobx-react";
 // Utils
@@ -34,6 +35,8 @@ class HomePage extends React.Component {
 					<div>hide!</div>
 				}
 				<button onClick={ ()=> this.setState({ show: !this.state.show }) }>toggle</button>
+
+				<Link to="/boards">boards</Link>
 			</div>
 		)
 	}

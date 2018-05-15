@@ -37,6 +37,7 @@ class LoginPage extends React.Component {
 					   onChange={ (e)=> this.form.password = e.currentTarget.value }/>
 				<hr/>
 				<Link to="/registration">Sign up</Link>
+
 				<LogInMutation form={ this.form } />
 			</div>
 		)

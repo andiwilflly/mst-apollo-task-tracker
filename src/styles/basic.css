@@ -16,6 +16,7 @@ a:hover {
 
 
 button {
+	outline: none;
 	padding: 5px 10px;
 	border: 1px solid lightgray;
 	cursor: pointer;

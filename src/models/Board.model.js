@@ -1,9 +1,9 @@
 import { types } from 'mobx-state-tree';
 
 
-const Query = {
+const Board = {
 	id: types.identifier(types.string)
 };
 
 
-export default types.model("Query", Query);
+export default types.model("Board", Board);

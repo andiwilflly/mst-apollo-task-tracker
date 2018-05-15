@@ -1,13 +1,10 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 // MobX
 import { observer } from "mobx-react";
 // Utils
 import permissions from "utils/permissions.utils";
-// Queries
-import ALL_POSTS_QUERY from "graphql/queries/allPosts.query";
 // Components
-import QueryLoader from "components/QueryLoader.component";
+import PreLoader from "components/parts/PreLoader.component";
 
 
 @observer
@@ -20,23 +17,31 @@ class HomePage extends React.Component {
 
 
 	state = {
-		show: false
+		LazyComponent: null
 	};
 
 
+	componentDidMount() {
+        this.loadComponentLazy();
+	}
+
+
+    loadComponentLazy() {
+        import(/* webpackChunkName: "lazy" */ 'components/pages/HomePageContent.component').then(LazyComponent => {
+            this.setState((prevState, props)=> ({ LazyComponent: LazyComponent.default }))
+		})
+    };
+
+
 	render() {
+		const { LazyComponent } = this.state;
+
 		return (
 			<div>
-				{ this.state.show ?
-					<QueryLoader query={ ALL_POSTS_QUERY }>
-						HomePage!
-					</QueryLoader>
+				{ LazyComponent ?
+					<LazyComponent />
 					:
-					<div>hide!</div>
-				}
-				<button onClick={ ()=> this.setState({ show: !this.state.show }) }>toggle</button>
-
-				<Link to="/boards">boards</Link>
+					<PreLoader /> }
 			</div>
 		)
 	}

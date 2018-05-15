@@ -5,6 +5,10 @@ export default gql`query getUserInfo($id: ID!) {
     User(id: $id) {
         id
         email
-        boards
+        boards {
+            id
+            name
+            description
+        }
     }
 }`

@@ -5,5 +5,7 @@ export default gql`mutation createBoard($name: String!, $description: String!, $
     createBoard(name: $name description: $description authorId:$authorId)
     {
 		id
+		name
+		description
     }
 }`

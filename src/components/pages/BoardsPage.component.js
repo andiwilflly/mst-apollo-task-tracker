@@ -1,7 +1,7 @@
 import React from 'react';
 // MobX
 import { observer } from "mobx-react";
-import { observable } from "mobx";
+import { observable, computed } from "mobx";
 // Utils
 import permissions from "utils/permissions.utils";
 // Store
@@ -26,9 +26,25 @@ class BoardsPage extends React.Component {
 	};
 
 
+	@computed get boards() { return store.user.boards.toJSON(); };
+
+
 	render() {
+		console.log(this.boards, 42);
 		return (
 			<div>
+				<ul>
+					{ Object.keys(this.boards).map((boardId)=> {
+						return (
+							<li key={boardId}>
+								Board: { boardId }
+								<button onClick={ ()=> store.user.deleteBoard(boardId) }>Delete</button>
+							</li>
+						);
+					}) }
+				</ul>
+				<hr/>
+
 				<h3>Create new board</h3>
 				<p>
 					name:

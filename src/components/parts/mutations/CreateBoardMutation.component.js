@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
+import store from "store";
 // Apollo
 import { Mutation } from 'react-apollo';
 // Mutations
@@ -10,12 +11,15 @@ import CREATE_BOARD_MUTATION from "graphql/mutations/createBoard.mutation";
 class CreateBoardMutation extends React.Component {
 
 
-	createBoard = (createBoardMutation)=> {
-		createBoardMutation({ variables: {
+	createBoard = async (createBoardMutation)=> {
+		const response = await createBoardMutation({ variables: {
 			authorId: this.props.form.authorId,
 			name: this.props.form.name,
 			description: this.props.form.description
 		}});
+
+		store.user.createBoard(response.data.createBoard);
+		console.log(response, 42);
 	};
 	
 	

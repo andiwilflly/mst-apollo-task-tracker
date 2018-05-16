@@ -1,12 +1,14 @@
 import { runInAction } from "mobx";
 import { types } from 'mobx-state-tree';
 import TaskModel from 'models/Task.model'
+import ListModel from 'models/List.model'
 
 const Board = {
 	id: types.identifier(types.string),
 	name: types.maybe(types.string),
 	description: types.maybe(types.string),
     tasks: types.optional(types.map(TaskModel), {}),
+	lists: types.optional(types.map(ListModel), {})
 };
 
 const actions = (self)=> {
@@ -17,6 +19,12 @@ const actions = (self)=> {
 				self.tasks.set(task.id, task);
 			});
 		},
+
+        createList(list = {}) {
+            runInAction(`BOARD-CREATE-LIST-SUCCESS`, ()=> {
+                self.lists.set(list.id, list);
+            });
+        },
 
 
         updateTask(task = {}) {

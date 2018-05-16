@@ -6,5 +6,8 @@ export default gql`query boardAllInfo($id: ID!) {
         id
         name
         description
+        tasks {
+            id
+        }
     }
 }`

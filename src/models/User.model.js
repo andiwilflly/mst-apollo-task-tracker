@@ -28,9 +28,12 @@ const actions = (self)=> {
 		},
 
 
-		updateBoard(board = {}) {
-			self.boards.set(board.id, { ...self.boards.get(board.id), ...board });
+		updateBoard({ id, title, description, tasks }) {
+            self.boards.set(id, { ...self.boards.get(id), id, title, description });
+
+            if(tasks) tasks.forEach((task)=> self.boards.get(id).updateTask(task));
 		},
+
 
 		deleteBoard(boardId) {
 			// TODO: graphQL!

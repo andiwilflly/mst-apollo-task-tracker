@@ -33,7 +33,10 @@ export default function (operation = {}, data = {}) {
 		case "Board":
 			store.user.updateBoard(data);
 			break;
+        case "Task":
+            store.user.boards.get(data.board.id).updateTask(data);
+            break;
 		default:
-			//console.log("dataName: ", operationName, dataName, data);
+			// console.log("dataName: ", operationName, dataName, data);
 	}
 }

@@ -1,0 +1,14 @@
+.breadcrumbs {
+	padding: 5px 10px;
+	background: lightgray;
+}
+
+.breadcrumbs > li {
+	display: inline-block;
+	margin: 5px;
+	padding: 1px;
+}
+
+.breadcrumbs > li a {
+	display: inline-block;
+}

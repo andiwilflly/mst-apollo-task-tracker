@@ -34,7 +34,7 @@ class BoardsPage extends React.Component {
 					{ Object.keys(this.boards).map((boardId)=> {
 						return (
 							<li key={boardId}>
-								<Link to={ `/board/${boardId}`}>{ boardId }</Link>
+								<Link to={ `/boards/${boardId}`}>{ boardId }</Link>
 								<button onClick={ ()=> store.user.deleteBoard(boardId) }>Delete</button>
 							</li>
 						);

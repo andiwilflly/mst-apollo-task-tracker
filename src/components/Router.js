@@ -37,7 +37,7 @@ const Routes = ()=> {
 			<Switch>
 				<RouteComponent exact path="/" component={HomePage} />
 				<RouteComponent exact path="/boards" component={BoardsPage} />
-				<RouteComponent exact path="/board/:boardId" component={BoardPage} />
+				<RouteComponent exact path="/boards/:boardId" component={BoardPage} />
 				<RouteComponent exact path="/login" component={LoginPage} />
 				<RouteComponent exact path="/registration" component={RegistrationPage} />
 				<RouteComponent component={Page404} />

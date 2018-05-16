@@ -20,6 +20,7 @@ class App extends React.Component {
 			<ApolloProvider client={client}>
 				<QueryLoader query={ LOGGED_IN_USER_QUERY }>
 					[TODO: next_path_name]
+					[TODO: breadcrumbs]
 					<Router />
 				</QueryLoader>
 			</ApolloProvider>

@@ -12,6 +12,8 @@ import store from "store";
 // Components
 import QueryLoader from "components/QueryLoader.component";
 import CreateTaskMutation from "components/parts/mutations/CreateTaskMutation.component";
+import CreateListMutation from "components/parts/mutations/CreateListMutation.component";
+
 
 @observer
 class BoardPage extends React.Component {
@@ -59,8 +61,10 @@ class BoardPage extends React.Component {
 						</QueryLoader>
 					);
 				}) }
-
-				<CreateTaskMutation boardId={this.boardId}/>
+				<hr/>
+				<CreateListMutation boardId={this.boardId} />
+				<hr/>
+				<CreateTaskMutation boardId={this.boardId} />
 			</QueryLoader>
 		)
 	}

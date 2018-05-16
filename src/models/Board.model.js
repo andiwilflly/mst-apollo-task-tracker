@@ -20,9 +20,9 @@ const actions = (self)=> {
 			});
 		},
 
-        createList(task = {}) {
+        createList(list = {}) {
             runInAction(`BOARD-CREATE-LIST-SUCCESS`, ()=> {
-                self.lists.set(task.id, task);
+                self.lists.set(list.id, list);
             });
         },
 

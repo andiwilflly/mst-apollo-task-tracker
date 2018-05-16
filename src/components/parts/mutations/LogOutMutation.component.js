@@ -15,9 +15,9 @@ class LogOutMutation extends React.Component {
 
 	render() {
 		return (
-			<div onClick={ this.logOut }>
+			<span onClick={ this.logOut }>
 				{ this.props.children }
-			</div>
+			</span>
 		)
 	}
 }

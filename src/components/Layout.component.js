@@ -11,6 +11,7 @@ import store from "store";
 import QueryLoader from "components/QueryLoader.component";
 import Header from "components/Header.component";
 import Breadcrumbs from "components/Breadcrumbs.component";
+import Sidebar from "components/Sidebar.component";
 import Footer from "components/Footer.component";
 
 
@@ -23,8 +24,11 @@ class Layout extends React.Component {
 			<div>
 				<Header />
 				<Breadcrumbs />
-				<div className="wrapper">
-					{ this.props.children }
+				<div className="wrapper cf">
+					<div style={{ float: "left", width: 'calc(100% - 300px)' }}>
+						{ this.props.children }
+					</div>
+					<Sidebar />
 				</div>
 				<Footer />
 			</div>

@@ -1,3 +1,17 @@
+.cf:before,
+.cf:after {
+	content: " "; /* 1 */
+	display: table; /* 2 */
+}
+
+.cf:after {
+	clear: both;
+}
+
+.cf {
+	*zoom: 1;
+}
+
 body {
 	font-family: Sathu;
 	font-size: 14px;

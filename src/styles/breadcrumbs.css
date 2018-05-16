@@ -1,6 +1,7 @@
 .breadcrumbs {
 	padding: 5px 10px;
-	background: lightgray;
+	border-bottom: 1px solid lightgray;
+	margin-bottom: 50px;
 }
 
 .breadcrumbs > li {

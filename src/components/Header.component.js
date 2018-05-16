@@ -2,40 +2,40 @@ import React from 'react';
 import { Link, withRouter } from "react-router-dom";
 // Styles
 import "styles/header.css";
+import "styles/logo.css";
+import "styles/main-menu.css";
 // MobX
 import { observer } from "mobx-react";
 // Store
 import store from "store";
 // Components
+import PreLoader from "components/parts/PreLoader.component";
 import LogOutMutation from "components/parts/mutations/LogOutMutation.component";
 
 
-@observer
 @withRouter
+@observer
 class Header extends React.Component {
 
 	render() {
 		return (
-			<div className="header">
-				<div className="wrapper">
-					Header
+			<div className="header cf">
+				<div className="logo">
+					<PreLoader />
+				</div>
+
+				<div className="main-menu">
 					{ store.user ?
-						<div>
-							logged in <br/>
-							email: { store.user.email } <br/>
-							<LogOutMutation>
-								<button>log out!</button>
-							</LogOutMutation>
-						</div>
+						<LogOutMutation>
+							<a href="#">log out</a>
+						</LogOutMutation>
 						:
-						<div>
-							{ this.props.location.pathname !== "/login" ?
-								<Link to="/login">Log in</Link>
-								: null }
-						</div>
+						this.props.location.pathname !== "/login" ?
+							<Link to="/login">Log in</Link>
+							: null
 					}
 
-					<Link to="/">Home</Link><br/>
+					<Link to="/">Home</Link>
 					<Link to="/boards">Boards</Link>
 				</div>
 			</div>

@@ -1,0 +1,12 @@
+.main-menu {
+	float: left;
+	margin: 26px;
+	background: lightgray;
+}
+
+.main-menu a,
+.main-menu span {
+	display: inline;
+	color: red;
+	margin: 5px;
+}

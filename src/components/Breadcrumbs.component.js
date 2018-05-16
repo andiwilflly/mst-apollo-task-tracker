@@ -23,10 +23,15 @@ class Breadcrumbs extends React.Component {
 	render() {
 		return (
 			<ul className="breadcrumbs">
-				{ this.breadcrumbs.map((url)=> {
+				{ this.breadcrumbs.map((url, index)=> {
 					return (
-						<li key={url} >
-							<Link to={url}>{url}</Link>
+						<li key={url}>
+							{ this.breadcrumbs.length-1 === index ?
+								<span>{ url }</span>
+								:
+								<Link to={url}>{url}</Link>
+							}
+
 						</li>
 					);
 				}) }

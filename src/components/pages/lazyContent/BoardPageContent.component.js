@@ -25,7 +25,7 @@ class BoardPage extends React.Component {
 
 	removeTask = async (taskId, removeTaskMutation)=> {
         const response = await removeTaskMutation({ variables: {
-            taskId: taskId+1
+            taskId: taskId
 		}});
         store.user.boards.get(this.boardId).deleteTask(taskId);
     };

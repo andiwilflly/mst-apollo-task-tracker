@@ -9,6 +9,7 @@ import { Mutation } from 'react-apollo';
 // Mutations
 import CREATE_TASK_MUTATION from "graphql/mutations/tasks/createTask.mutation";
 
+
 @withRouter
 @observer
 class CreateTaskMutation extends React.Component {

@@ -1,14 +1,17 @@
 import React from 'react';
 // MobX
 import { observer } from "mobx-react";
+// Apollo
+import { Mutation } from 'react-apollo';
 // GraphGL
 import BOARD_ALL_INFO_QUERY from "graphql/queries/boards/boardAllInfo.query";
 import BOARD_TASK_ALL_INFO_QUERY from "graphql/queries/tasks/boardTaskAllInfo.query";
+import DELETE_TASK_MUTATION from "graphql/mutations/tasks/deleteTask.mutation";
 // Store
 import store from "store";
 // Components
 import QueryLoader from "components/QueryLoader.component";
-
+import CreateTaskMutation from "components/parts/mutations/CreateTaskMutation.component";
 
 @observer
 class BoardPage extends React.Component {
@@ -18,6 +21,14 @@ class BoardPage extends React.Component {
 	get board() { return store.user.boards.get(this.boardId); };
 
 	get tasks() { return this.board.tasks.toJSON(); };
+
+
+	removeTask = async (taskId, removeTaskMutation)=> {
+        const response = await removeTaskMutation({ variables: {
+            taskId: taskId+1
+		}});
+        store.user.boards.get(this.boardId).deleteTask(taskId);
+    };
 
 
 	render() {
@@ -40,9 +51,16 @@ class BoardPage extends React.Component {
 							<p>taskId: { taskId }</p>
 							<p>title: { this.tasks[taskId].title }</p>
 							<p>description: { this.tasks[taskId].description }</p>
+							<Mutation mutation={DELETE_TASK_MUTATION}>
+                                {
+                                    (removeTaskMutation)=> <button onClick={ ()=> this.removeTask(taskId, removeTaskMutation) }>Remove</button>
+                                }
+							</Mutation>
 						</QueryLoader>
 					);
 				}) }
+
+				<CreateTaskMutation boardId={this.boardId}/>
 			</QueryLoader>
 		)
 	}

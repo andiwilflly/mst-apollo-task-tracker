@@ -15,6 +15,8 @@ spy((event)=> {
 			if(event.name.match('-ERROR')) return console.log('%c' + event.name, 'color: darkred');
 			if(event.name.match('-SUCCESS')) return console.log('%c' + event.name, 'color: green');
 			break;
+		default :
+			break;
 	}
 });
 

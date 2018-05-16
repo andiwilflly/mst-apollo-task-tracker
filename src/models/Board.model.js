@@ -1,3 +1,4 @@
+import { runInAction } from "mobx";
 import { types } from 'mobx-state-tree';
 import TaskModel from 'models/Task.model'
 
@@ -10,13 +11,30 @@ const Board = {
 
 const actions = (self)=> {
     return {
-        updateTask({id, title, description}) {
-            self.tasks.set(id, { ...self.tasks.get(id), id, title, description });
+
+		createTask(task = {}) {
+			runInAction(`BOARD-CREATE-TASK-SUCCESS`, ()=> {
+				self.tasks.set(task.id, task);
+			});
+		},
+
+
+        updateTask(task = {}) {
+    		if(!self.tasks.has(task.id)) return self.createTask(task);
+
+			runInAction(`BOARD-UPDATE-TASK-SUCCESS`, ()=> {
+				const oldTask = self.tasks.get(task.id);
+				Object.keys(oldTask).forEach((fieldName)=> {
+					if(task[fieldName] !== undefined) oldTask[fieldName] = task[fieldName];
+				});
+			});
         },
 
 
         deleteTask(taskId) {
-            self.tasks.delete(taskId);
+			runInAction(`BOARD-DELETE-TASK-SUCCESS`, ()=> {
+				self.tasks.delete(taskId);
+			});
         }
     };
 };

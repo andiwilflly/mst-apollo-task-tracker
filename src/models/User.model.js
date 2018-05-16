@@ -1,3 +1,4 @@
+import { runInAction } from "mobx";
 import { types } from "mobx-state-tree";
 // Models
 import BoardModel from "models/Board.model";
@@ -24,14 +25,24 @@ const actions = (self)=> {
 
 
 		createBoard(board = {}) {
-			self.boards.set(board.id, board);
+			runInAction(`USER-CREATE-BOARD-SUCCESS`, ()=> {
+				self.boards.set(board.id, board);
+			});
 		},
 
 
-		updateBoard({ id, title, description, tasks }) {
-            self.boards.set(id, { ...self.boards.get(id), id, title, description });
+		updateBoard(board) {
+			if(!self.boards.has(board.id)) return self.createBoard(board);
 
-            if(tasks) tasks.forEach((task)=> self.boards.get(id).updateTask(task));
+			runInAction(`USER-UPDATE-BOARD-SUCCESS`, ()=> {
+				const oldBoard = self.boards.get(board.id);
+				const fieldNames = Object.keys(oldBoard);
+				fieldNames.forEach((fieldName)=> {
+					if(board[fieldName] === undefined) return;
+					if(fieldName === "tasks") return board[fieldName].map((task)=> oldBoard.updateTask(task));
+					oldBoard[fieldName] = board[fieldName];
+				});
+			});
 		},
 
 

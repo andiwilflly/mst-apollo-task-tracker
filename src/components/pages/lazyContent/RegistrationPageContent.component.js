@@ -28,7 +28,7 @@ class LoginPage extends React.Component {
 		signUpMutation({ variables: {
 			email: this.form.email,
 			password: this.form.password
-		}}).catch((e)=> {});
+		}});
 	};
 
 

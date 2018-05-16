@@ -14,7 +14,7 @@ class LogInMutation extends React.Component {
 			email: this.props.form.email,
 			password: this.props.form.password
 		}});
-		this.props.history.push("/");
+		this.props.history.push("/boards");
 	};
 
 

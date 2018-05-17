@@ -12,19 +12,19 @@ const Tasks = {
 const actions = (self)=> {
     return {
 
-		createTask(task = {}) {
-			runInAction(`BOARD-CREATE-SUCCESS`, ()=> {
-				//self.boards.set(board.id, board);
+		create(task = {}) {
+			runInAction(`TASK-CREATE-SUCCESS`, ()=> {
+				self.tasks.set(task.id, task);
 			});
 		},
 
 
-		deleteTask(taskId) {
-			// TODO: graphQL!
-			runInAction(`BOARD-DELETE-SUCCESS`, ()=> {
-				//self.boards.delete(boardId);
+		delete(taskId) {
+			runInAction(`TASK-DELETE-SUCCESS`, ()=> {
+				self.tasks.delete(taskId);
 			});
 		}
+
     };
 };
 

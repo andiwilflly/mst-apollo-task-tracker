@@ -8,6 +8,10 @@ const List = {
 
 const actions = (self)=> {
     return {
+
+        update(list) {
+
+        }
     };
 };
 

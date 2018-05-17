@@ -12,14 +12,14 @@ const Boards = {
 const actions = (self)=> {
     return {
 
-		createBoard(board = {}) {
+		create(board = {}) {
 			runInAction(`BOARD-CREATE-SUCCESS`, ()=> {
 				self.boards.set(board.id, board);
 			});
 		},
 
 
-		deleteBoard(boardId) {
+		delete(boardId) {
 			// TODO: graphQL!
 			runInAction(`BOARD-DELETE-SUCCESS`, ()=> {
 				self.boards.delete(boardId);

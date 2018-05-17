@@ -12,14 +12,13 @@ const Lists = {
 const actions = (self)=> {
     return {
 
-		createList(list = {}) {
+		create(list = {}) {
 			runInAction(`LIST-CREATE-SUCCESS`, ()=> {
-				//self.boards.set(board.id, board);
+				self.lists.set(list.id, list);
 			});
 		},
 
-
-		deleteList(listId) {
+		delete(listId) {
 			// TODO: graphQL!
 			runInAction(`LIST-DELETE-SUCCESS`, ()=> {
 				//self.boards.delete(boardId);

@@ -2,19 +2,21 @@
 import store from "store";
 
 
-export default function (operation = {}, data = {}) {
+export default function (operation = {}, data = {}, errors = null) {
 
 	const operationName = operation.operationName;
 
 	const dataName = Object.keys(data)[0];
 	data = data[dataName];
-	const errors = null;
+	const errorMsg = errors ? errors[0].message : "";
 
 	console.groupCollapsed(`%c🕺 REQUEST ${operationName}`, "color: darkgreen");
 	console.log("operationName", operationName);
 	console.log("dataName", dataName);
 	console.log("data", data);
+	console.log("errors", errors);
 	console.groupEnd(`%c🕺 REQUEST`, "color: darkgreen");
+    if(errors) return console.log(errorMsg);
 
 	switch (dataName) {
 		case "loggedInUser":
@@ -22,10 +24,7 @@ export default function (operation = {}, data = {}) {
 			store.logIn('cjhab8inhns0g0160ivthcp3f');
 			break;
 		case "authenticateUser":
-			errors ?
-				console.log(`%c [${dataName}] ${errors[0].message}`, "color: red")
-				:
-				store.logIn(data.id);
+			store.logIn(data.id);
 			break;
 		case "User":
 			store.user.setInfo(data);
@@ -34,8 +33,11 @@ export default function (operation = {}, data = {}) {
 			store.boards.create(data);
 			break;
         case "List":
-        	store.lists.create(data);
+            store.lists.create(data);
             break;
+		case "deleteBoard":
+			store.board.delete(data.id);
+			break;
         case "Task":
             store.tasks.create(data);
             break;

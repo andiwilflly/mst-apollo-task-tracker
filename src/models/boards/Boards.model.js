@@ -3,6 +3,7 @@ import { types } from 'mobx-state-tree';
 // GraphQL
 import client from "graphql/client";
 import CREATE_BOARD_MUTATION from "graphql/mutations/boards/createBoard.mutation";
+import DELETE_BOARD_MUTATION from "graphql/mutations/boards/deleteBoard.mutation";
 // Models
 import BoardModel from "models/boards/Board.model";
 
@@ -22,9 +23,15 @@ const actions = (self)=> {
 			});
 			console.log("creteMutation mutation: ", response);
 			self.create(response.data.createBoard);
-			// TODO: Redirect?
 		},
 
+
+		deleteMutation: (boardId)=> {
+			client.mutate({
+				variables: { boardId },
+				mutation: DELETE_BOARD_MUTATION
+			});
+		},
 
 		create(board = {}) {
 			runInAction(`BOARD-CREATE-SUCCESS`, ()=> {

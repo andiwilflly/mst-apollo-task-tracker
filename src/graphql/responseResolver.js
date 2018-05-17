@@ -34,7 +34,7 @@ export default function (operation = {}, data = {}) {
 			store.boards.create(data);
 			break;
         case "Task":
-            store.tasks.all.get(data.id).update(data);
+        	store.tasks.create(data);
             break;
 		default:
 			console.log("dataName: ", operationName, dataName, data);

@@ -6,7 +6,13 @@ export default gql`query taskAllInfo($id: ID!) {
         id
         title
         description
+        author {
+            id
+        }
         board { 
+            id
+        }
+        list {
             id
         }
     }

@@ -14,14 +14,14 @@ const actions = (self)=> {
 
 		create(task = {}) {
 			runInAction(`TASK-CREATE-SUCCESS`, ()=> {
-				self.tasks.set(task.id, task);
+				self.all.set(task.id, task);
 			});
 		},
 
 
 		delete(taskId) {
 			runInAction(`TASK-DELETE-SUCCESS`, ()=> {
-				self.tasks.delete(taskId);
+				self.all.delete(taskId);
 			});
 		}
 

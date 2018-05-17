@@ -15,7 +15,15 @@ class Task extends React.Component {
 		console.log("render", this.task);
 		return (
 			<div>
+				<hr/>
 				Task!
+				<br/>
+				id: { this.task.id } <br/>
+				title: { this.task.title }<br/>
+				description: { this.task.description }<br/>
+				authorId: { this.task.authorId }<br/>
+				boardId: { this.task.boardId }<br/>
+				listId: { this.task.listId }<br/>
 			</div>
 		)
 	}

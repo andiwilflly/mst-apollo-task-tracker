@@ -17,10 +17,12 @@ class Board extends React.Component {
 
 
 	render() {
-		console.log("render", this.board);
 		return (
 			<div>
 				Board!
+				<br/>
+				<button onClick={ ()=> store.boards.deleteMutation(this.props.boardId) }>Delete board</button>
+				<hr/>
 				{ this.board.taskIds.map((taskId)=> {
 					return (
 						<QueryLoader query={ TASK_ALL_INFO_QUERY }

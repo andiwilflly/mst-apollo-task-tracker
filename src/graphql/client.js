@@ -8,8 +8,8 @@ import responseResolver from "graphql/responseResolver";
 
 
 const responseResolverLink = new ApolloLink((operation, forward)=> {
-	return forward(operation).map((data)=> {
-		responseResolver(operation, data.data);
+	return forward(operation).map((data, b , c)=> {
+		responseResolver(operation, data.data, data.errors);
 		return data;
 	})
 });

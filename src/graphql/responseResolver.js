@@ -19,7 +19,7 @@ export default function (operation = {}, data = {}) {
 	switch (dataName) {
 		case "loggedInUser":
 			// TESTING
-			store.loginUser('cjh63pscwblsf0120pb9drds8');
+			store.loginUser('cjhab8inhns0g0160ivthcp3f');
 			break;
 		case "authenticateUser":
 			errors ?

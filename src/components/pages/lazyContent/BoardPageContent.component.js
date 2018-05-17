@@ -5,7 +5,7 @@ import { observer } from "mobx-react";
 import { Mutation } from 'react-apollo';
 // GraphGL
 import BOARD_ALL_INFO_QUERY from "graphql/queries/boards/boardAllInfo.query";
-import BOARD_TASK_ALL_INFO_QUERY from "graphql/queries/tasks/boardTaskAllInfo.query";
+import TASK_ALL_INFO_QUERY from "graphql/queries/tasks/taskAllInfo.query";
 import DELETE_TASK_MUTATION from "graphql/mutations/tasks/deleteTask.mutation";
 // Store
 import store from "store";
@@ -46,7 +46,7 @@ class BoardPage extends React.Component {
 				<p>tasks:</p>
 				{ Object.keys(this.tasks).map((taskId)=> {
 					return (
-						<QueryLoader query={ BOARD_TASK_ALL_INFO_QUERY }
+						<QueryLoader query={ TASK_ALL_INFO_QUERY }
 									 key={taskId}
 									 variables={{ id: taskId }}>
 							<br/>

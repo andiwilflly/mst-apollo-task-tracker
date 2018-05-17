@@ -10,6 +10,7 @@ type User @model {
     password: String!
 
     boards: [Board!]! @relation(name: "UserOfBoards")
+    tasks: [Task!]! @relation(name: "UserOfTasks")
 }
 
 
@@ -27,6 +28,7 @@ type Board @model {
 
     author: User! @relation(name: "UserOfBoards")
     lists: [List!]! @relation(name: "BoardOfLists")
+    tasks: [Task!]! @relation(name: "BoardOfTasks")
 }
 
 
@@ -56,6 +58,8 @@ type Task @model {
     title: String!
     description: String!
 
+    author: User! @relation(name: "UserOfTasks")
     list: List! @relation(name: "ListOfTasks")
+    board: Board! @relation(name: "BoardOfTasks")
 }
 

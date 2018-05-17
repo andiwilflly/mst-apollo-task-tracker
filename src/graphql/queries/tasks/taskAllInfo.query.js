@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 
-export default gql`query boardTaskAllInfo($id: ID!) {
+export default gql`query taskAllInfo($id: ID!) {
     Task(id: $id) {
         id
         title

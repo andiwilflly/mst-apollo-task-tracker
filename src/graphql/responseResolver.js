@@ -12,11 +12,14 @@ export default function (operation = {}, data = {}, errors = null) {
 	data = data[dataName];
 	const errorMsg = errors ? errors[0].message : "";
 
-	console.groupCollapsed(`%c🕺 REQUEST ${operationName}`, "color: darkgreen");
+	console.groupCollapsed(`%c🕺 REQUEST ${operationName} (${errors ? "ERROR" : "SUCCESS"})`, "color: darkgreen");
 	console.log("operationName", operationName);
 	console.log("dataName", dataName);
 	console.log("data", data);
+	console.log("errors", errors);
 	console.groupEnd(`%c🕺 REQUEST`, "color: darkgreen");
+
+    if(errors) return console.log(errorMsg);
 
 	switch (dataName) {
 		case "loggedInUser":
@@ -33,13 +36,15 @@ export default function (operation = {}, data = {}, errors = null) {
 		case "Board":
 			store.boards.create(data);
 			break;
+        case "List":
+            store.lists.create(data);
+            break;
 		case "deleteBoard":
-			if(errors) return console.log(errorMsg);
 			history.push('/boards');
 			store.board.delete(data.id);
 			break;
         case "Task":
-        	store.tasks.create(data);
+            store.tasks.create(data);
             break;
 		default:
 			console.log("dataName: ", operationName, dataName, data);

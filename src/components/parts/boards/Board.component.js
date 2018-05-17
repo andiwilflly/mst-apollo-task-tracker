@@ -1,17 +1,22 @@
 import React from 'react';
 // MobX
 import { observer } from "mobx-react";
+import { observable, computed } from "mobx";
 // Store
 import store from "store";
-// GraphQL
-import TASK_ALL_INFO_QUERY from "graphql/queries/tasks/taskAllInfo.query";
 // Components
-import QueryLoader from "components/QueryLoader.component";
-import Task from "components/parts/tasks/Task.component";
+import Lists from 'components/parts/lists/Lists.component'
 
 
 @observer
 class Board extends React.Component {
+
+
+    @observable form = {
+        boardId: this.props.boardId,
+        name: ""
+    };
+
 
 	get board() { return store.boards.all.get(this.props.boardId); };
 
@@ -20,18 +25,22 @@ class Board extends React.Component {
 		return (
 			<div>
 				Board!
-				<br/>
-				<button onClick={ ()=> store.boards.deleteMutation(this.props.boardId) }>Delete board</button>
-				<hr/>
-				{ this.board.taskIds.map((taskId)=> {
-					return (
-						<QueryLoader query={ TASK_ALL_INFO_QUERY }
-									 key={taskId}
-									 variables={{ id: taskId }}>
-							<Task taskId={taskId} />
-						</QueryLoader>
-					);
-				}) }
+
+                <Lists boardId={this.props.boardId} />
+
+				<div>
+					<hr/>
+					<h3>Create new List</h3>
+					<p>
+						name:
+						<input type="text"
+							   value={ this.form.name }
+							   onChange={ (e)=> this.form.name = e.currentTarget.value }/>
+					</p>
+
+					<button onClick={ ()=> store.lists.createMutation(this.form) }>Create list</button>
+				</div>
+
 			</div>
 		)
 	}

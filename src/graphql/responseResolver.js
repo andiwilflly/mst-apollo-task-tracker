@@ -5,7 +5,7 @@ import store from "store";
 export default function (operation = {}, data = {}) {
 
 	const operationName = operation.operationName;
-	
+
 	const dataName = Object.keys(data)[0];
 	data = data[dataName];
 	const errors = null;
@@ -33,8 +33,11 @@ export default function (operation = {}, data = {}) {
 		case "Board":
 			store.boards.create(data);
 			break;
+        case "List":
+        	store.lists.create(data);
+            break;
         case "Task":
-        	store.tasks.create(data);
+            store.tasks.create(data);
             break;
 		default:
 			console.log("dataName: ", operationName, dataName, data);

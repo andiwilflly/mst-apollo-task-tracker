@@ -1,18 +1,23 @@
 import { runInAction } from "mobx";
 import { types } from "mobx-state-tree";
 // Models
-import BoardModel from "models/Board.model";
+import BoardModel from "models/boards/Board.model";
+import ListsModel from "models/lists/Lists.model";
+import TasksModel from "models/tasks/Tasks.model";
 
 
 const UserModel = {
 	id: types.maybe(types.string),
 	email: types.maybe(types.string),
 	boards: types.optional(types.map(BoardModel), {}),
+	lists: types.optional(types.map(ListsModel), {}),
+	tasks: types.optional(types.map(TasksModel), {}),
 };
 
 
 const actions = (self)=> {
 	return {
+
 		setInfo: (data)=> {
 			Object.keys(self).forEach((fieldName)=> {
 				if(fieldName === "boards") {
@@ -21,34 +26,6 @@ const actions = (self)=> {
 					self[fieldName] = data[fieldName];
 				}
 			});
-		},
-
-
-		createBoard(board = {}) {
-			runInAction(`USER-CREATE-BOARD-SUCCESS`, ()=> {
-				self.boards.set(board.id, board);
-			});
-		},
-
-
-		updateBoard(board) {
-			if(!self.boards.has(board.id)) return self.createBoard(board);
-
-			runInAction(`USER-UPDATE-BOARD-SUCCESS`, ()=> {
-				const oldBoard = self.boards.get(board.id);
-				const fieldNames = Object.keys(oldBoard);
-				fieldNames.forEach((fieldName)=> {
-					if(board[fieldName] === undefined) return;
-					if(fieldName === "tasks") return board[fieldName].map((task)=> oldBoard.updateTask(task));
-					oldBoard[fieldName] = board[fieldName];
-				});
-			});
-		},
-
-
-		deleteBoard(boardId) {
-			// TODO: graphQL!
-			self.boards.delete(boardId);
 		}
 	};
 };

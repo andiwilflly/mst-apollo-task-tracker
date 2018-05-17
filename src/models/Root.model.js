@@ -4,10 +4,16 @@ import client from "graphql/client";
 import LOG_IN_USER_MUTATION from "graphql/mutations/authenticateUser.mutation";
 // Models
 import UserModel from "models/User.model";
+import BoardsModel from "models/boards/Boards.model";
+import ListsModel from "models/lists/Lists.model";
+import TasksModel from "models/tasks/Tasks.model";
 
 
 const RootModel = {
-	user: types.optional(types.maybe(UserModel), null)
+	user: types.optional(types.maybe(UserModel), null),
+	boards: BoardsModel,
+	lists: ListsModel,
+	tasks: TasksModel
 };
 
 

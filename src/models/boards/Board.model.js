@@ -1,18 +1,32 @@
 import { runInAction } from "mobx";
 import { types } from 'mobx-state-tree';
-import TaskModel from 'models/Task.model'
-import ListModel from 'models/List.model'
+
 
 const Board = {
 	id: types.identifier(types.string),
 	name: types.maybe(types.string),
-	description: types.maybe(types.string),
-    tasks: types.optional(types.map(TaskModel), {}),
-	lists: types.optional(types.map(ListModel), {})
+	description: types.maybe(types.string)
 };
+
 
 const actions = (self)=> {
     return {
+
+		updateBoard(board) {
+			if(!self.boards.has(board.id)) return self.createBoard(board);
+
+			runInAction(`USER-UPDATE-BOARD-SUCCESS`, ()=> {
+				const oldBoard = self.boards.get(board.id);
+				const fieldNames = Object.keys(oldBoard);
+				fieldNames.forEach((fieldName)=> {
+					if(board[fieldName] === undefined) return;
+					if(fieldName === "tasks") return board[fieldName].map((task)=> oldBoard.updateTask(task));
+					oldBoard[fieldName] = board[fieldName];
+				});
+			});
+		},
+
+
 
 		createTask(task = {}) {
 			runInAction(`BOARD-CREATE-TASK-SUCCESS`, ()=> {

@@ -3,8 +3,12 @@ import { onPatch } from "mobx-state-tree";
 // Models
 import RootModel from "models/Root.model";
 
+
 const store = RootModel.create({
-	queries: {}
+	queries: {},
+	boards: {},
+	lists: {},
+	tasks: {}
 });
 
 // MobX spy goes here

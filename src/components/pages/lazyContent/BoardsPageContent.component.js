@@ -5,8 +5,6 @@ import { observer } from "mobx-react";
 import { observable, computed } from "mobx";
 // Store
 import store from "store";
-// Components
-import CreateBoardMutation from "components/parts/mutations/CreateBoardMutation.component";
 
 
 @observer
@@ -24,14 +22,11 @@ class BoardsPage extends React.Component {
 	};
 
 
-	@computed get boards() { return store.user.boards.toJSON(); };
-
-
 	render() {
 		return (
 			<div>
 				<ul>
-					{ Object.keys(this.boards).map((boardId)=> {
+					{ store.user.boards.map((boardId)=> {
 						return (
 							<li key={boardId}>
 								<Link to={ `/boards/${boardId}`}>{ boardId }</Link>
@@ -57,7 +52,7 @@ class BoardsPage extends React.Component {
 						   onChange={ (e)=> this.form.description = e.currentTarget.value }/>
 				</p>
 
-				<CreateBoardMutation form={ this.form } />
+				<button onClick={ ()=> store.boards.creteMutation(this.form) }>Create board</button>
 			</div>
 		)
 	}

@@ -19,7 +19,7 @@ export default function (operation = {}, data = {}) {
 	switch (dataName) {
 		case "loggedInUser":
 			// TESTING
-			//store.logIn('cjhab8inhns0g0160ivthcp3f');
+			store.logIn('cjhab8inhns0g0160ivthcp3f');
 			break;
 		case "authenticateUser":
 			errors ?
@@ -31,10 +31,10 @@ export default function (operation = {}, data = {}) {
 			store.user.setInfo(data);
 			break;
 		case "Board":
-			store.user.updateBoard(data);
+			store.boards.all.get(data.id).update(data);
 			break;
         case "Task":
-            store.user.boards.get(data.board.id).updateTask(data);
+            store.tasks.all.get(data.id).update(data);
             break;
 		default:
 			// console.log("dataName: ", operationName, dataName, data);

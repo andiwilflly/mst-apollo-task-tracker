@@ -1,5 +1,5 @@
 import { types } from "mobx-state-tree";
-// GraphQl
+// GraphQL
 import client from "graphql/client";
 import LOG_IN_USER_MUTATION from "graphql/mutations/authenticateUser.mutation";
 // Models
@@ -19,7 +19,7 @@ const RootModel = {
 
 const actions = (store)=> {
 	return {
-		// User
+
 		logInMutation: async ({ email, password })=> {
 			const response = await client.mutate({
 				variables: { email, password },

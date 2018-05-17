@@ -1,5 +1,8 @@
 import { runInAction } from "mobx";
 import { types } from 'mobx-state-tree';
+// GraphQL
+import client from "graphql/client";
+import CREATE_BOARD_MUTATION from "graphql/mutations/boards/createBoard.mutation";
 // Models
 import BoardModel from "models/boards/Board.model";
 
@@ -12,9 +15,20 @@ const Boards = {
 const actions = (self)=> {
     return {
 
+    	creteMutation: async ({ authorId, name, description })=> {
+			const response = await client.mutate({
+				variables: { authorId, name, description },
+				mutation: CREATE_BOARD_MUTATION
+			});
+			console.log("creteMutation mutation: ", response);
+			self.create(response.data.createBoard);
+			// TODO: Redirect?
+		},
+
+
 		create(board = {}) {
 			runInAction(`BOARD-CREATE-SUCCESS`, ()=> {
-				self.boards.set(board.id, board);
+				self.all.set(board.id, board);
 			});
 		},
 
@@ -22,7 +36,7 @@ const actions = (self)=> {
 		delete(boardId) {
 			// TODO: graphQL!
 			runInAction(`BOARD-DELETE-SUCCESS`, ()=> {
-				self.boards.delete(boardId);
+				self.all.delete(boardId);
 			});
 		}
     };

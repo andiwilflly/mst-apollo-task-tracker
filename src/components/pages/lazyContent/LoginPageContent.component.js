@@ -1,12 +1,15 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 // MobX
 import { observer } from "mobx-react";
 import { observable } from "mobx";
+// Store
+import store from "store";
 // Components
-import LogInMutation from "components/parts/mutations/LogInMutation.component";
+import PreLoader from "components/parts/PreLoader.component";
 
 
+@withRouter
 @observer
 class LoginPage extends React.Component {
 
@@ -22,6 +25,13 @@ class LoginPage extends React.Component {
 	};
 
 
+	logIn = async ()=> {
+		await store.logInMutation(this.form);
+		// TODO: move this to model?
+		this.props.history.push("/boards");
+	};
+
+
 	render() {
 		return (
 			<div>
@@ -34,7 +44,11 @@ class LoginPage extends React.Component {
 				<hr/>
 				<Link to="/registration">Sign up</Link>
 
-				<LogInMutation form={ this.form } />
+				{ this.isLoading ?
+					<PreLoader />
+					:
+					<button onClick={ this.logIn }>LogIn</button>
+				}
 			</div>
 		)
 	}

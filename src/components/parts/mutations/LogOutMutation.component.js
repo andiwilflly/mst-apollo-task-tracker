@@ -8,7 +8,7 @@ import store from "store";
 class LogOutMutation extends React.Component {
 
 	logOut = ()=> {
-		store.logOutUser();
+		store.logOut();
 		this.props.history.push("/login");
 	};
 

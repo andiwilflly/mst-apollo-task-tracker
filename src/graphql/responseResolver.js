@@ -19,13 +19,13 @@ export default function (operation = {}, data = {}) {
 	switch (dataName) {
 		case "loggedInUser":
 			// TESTING
-			store.loginUser('cjhab8inhns0g0160ivthcp3f');
+			//store.logIn('cjhab8inhns0g0160ivthcp3f');
 			break;
 		case "authenticateUser":
 			errors ?
 				console.log(`%c [${dataName}] ${errors[0].message}`, "color: red")
 				:
-				store.loginUser(data.id);
+				store.logIn(data.id);
 			break;
 		case "User":
 			store.user.setInfo(data);

@@ -1,7 +1,7 @@
 import React from 'react';
 // MobX
 import { observer } from "mobx-react";
-import { observable, computed } from "mobx";
+import { observable } from "mobx";
 // Store
 import store from "store";
 // Components

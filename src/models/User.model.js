@@ -1,4 +1,7 @@
 import { types } from "mobx-state-tree";
+// GraphQL
+import client from "graphql/client";
+import USER_UPDATE_MUTATION from "graphql/mutations/user/updateUser.mutation";
 
 
 const UserModel = {
@@ -15,6 +18,19 @@ const actions = (self)=> {
 			Object.keys(self).forEach((fieldName)=> {
 				self[fieldName] = data[fieldName];
 			});
+		},
+
+
+		updateMutation: ({ id, email })=> {
+			client.mutate({
+				variables: { email, id },
+				mutation: USER_UPDATE_MUTATION
+			});
+		},
+
+
+		update(user) {
+
 		}
 	};
 };

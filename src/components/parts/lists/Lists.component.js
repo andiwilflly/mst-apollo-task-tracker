@@ -3,23 +3,33 @@ import React from 'react';
 import { observer } from "mobx-react";
 // Store
 import store from "store";
+// GraphQL
+import LIST_ALL_INFO_QUERY from "graphql/queries/lists/listAllInfo.query";
+// Components
+import QueryLoader from "components/QueryLoader.component";
+// Components
+import List from 'components/parts/lists/List.component'
 
 
 @observer
 class Lists extends React.Component {
 
-    get lists() { return store.lists.all.get(this.props.listId); };
+
+    get board() { return store.boards.all.get(this.props.boardId); };
 
 
     render() {
-        console.log("render", this.list);
         return (
             <div>
-                <hr/>
-                <br/>
-                id: { this.list.id } <br/>
-                name: { this.list.name }<br/>
-
+                { this.board.listIds.map((listId)=> {
+                    return (
+                        <QueryLoader query={ LIST_ALL_INFO_QUERY }
+                                     key={listId}
+                                     variables={{ id: listId }}>
+                            <List listId={listId} />
+                        </QueryLoader>
+                    );
+                }) }
             </div>
         )
     }

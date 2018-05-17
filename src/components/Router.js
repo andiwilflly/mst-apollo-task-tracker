@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import history from 'utils/history.utils';
+import { Router, Route, Switch, Redirect } from "react-router-dom";
 // MobX
 import { observer } from 'mobx-react';
 // Pages
@@ -33,7 +34,7 @@ const RouteComponent = ({ component: Component, ...rest })=> {
 // TODO: https://reacttraining.com/react-router/web/example/auth-workflow
 const Routes = ()=> {
 	return (
-		<Router>
+		<Router history={history}>
 			<Switch>
 				<RouteComponent exact path="/" component={HomePage} />
 				<RouteComponent exact path="/boards" component={BoardsPage} />

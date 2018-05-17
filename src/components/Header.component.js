@@ -20,9 +20,9 @@ class Header extends React.Component {
 	render() {
 		return (
 			<div className="header cf">
-				<div className="logo">
+				<Link className="logo" to="/">
 					<PreLoader />
-				</div>
+				</Link>
 
 				<div className="main-menu">
 					{ store.user ?

@@ -1,3 +1,5 @@
+// Utils
+import history from "utils/history.utils";
 // Store
 import store from "store";
 
@@ -20,9 +22,11 @@ export default function (operation = {}, data = {}, errors = null) {
 		case "loggedInUser":
 			// TESTING
 			store.logIn('cjhab8inhns0g0160ivthcp3f');
+			if("'cjhab8inhns0g0160ivthcp3f'") history.push('/boards');
 			break;
 		case "authenticateUser":
 			store.logIn(data.id);
+			history.push('/boards');
 			break;
 		case "User":
 			store.user.setInfo(data);
@@ -32,6 +36,7 @@ export default function (operation = {}, data = {}, errors = null) {
 			break;
 		case "deleteBoard":
 			if(errors) return console.log(errorMsg);
+			history.push('/boards');
 			store.board.delete(data.id);
 			break;
         case "Task":

@@ -25,13 +25,6 @@ class LoginPage extends React.Component {
 	};
 
 
-	logIn = async ()=> {
-		await store.logInMutation(this.form);
-		// TODO: move this to model?
-		this.props.history.push("/boards");
-	};
-
-
 	render() {
 		return (
 			<div>
@@ -47,7 +40,7 @@ class LoginPage extends React.Component {
 				{ this.isLoading ?
 					<PreLoader />
 					:
-					<button onClick={ this.logIn }>LogIn</button>
+					<button onClick={ ()=> store.logInMutation(this.form) }>LogIn</button>
 				}
 			</div>
 		)

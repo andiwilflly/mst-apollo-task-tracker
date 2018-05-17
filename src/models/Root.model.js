@@ -25,8 +25,6 @@ const actions = (store)=> {
 				variables: { email, password },
 				mutation: LOG_IN_USER_MUTATION
 			});
-			console.log("logInMutation mutation: ", response);
-			// TODO: Redirect?
 		},
 
 		logOutMutation: ()=> {

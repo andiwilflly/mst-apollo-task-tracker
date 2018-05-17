@@ -22,14 +22,13 @@ export default function (operation = {}, data = {}, errors = null) {
 		case "loggedInUser":
 			// TESTING
 			store.logIn('cjhab8inhns0g0160ivthcp3f');
-			if("'cjhab8inhns0g0160ivthcp3f'") history.push('/boards');
 			break;
 		case "authenticateUser":
 			store.logIn(data.id);
-			history.push('/boards');
 			break;
 		case "User":
 			store.user.setInfo(data);
+			history.push(store.nextPathUrl || '/boards');
 			break;
 		case "Board":
 			store.boards.create(data);

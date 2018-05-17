@@ -10,6 +10,7 @@ import TasksModel from "models/tasks/Tasks.model";
 
 
 const RootModel = {
+	nextPathUrl: types.maybe(types.string),
 	user: types.optional(types.maybe(UserModel), null),
 	boards: BoardsModel,
 	lists: ListsModel,
@@ -20,8 +21,13 @@ const RootModel = {
 const actions = (store)=> {
 	return {
 
-		logInMutation: async ({ email, password })=> {
-			const response = await client.mutate({
+		setNextPathUrl(url = "") {
+			store.nextPathUrl = url;
+		},
+
+
+		logInMutation: ({ email, password })=> {
+			client.mutate({
 				variables: { email, password },
 				mutation: LOG_IN_USER_MUTATION
 			});

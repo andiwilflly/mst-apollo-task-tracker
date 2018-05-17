@@ -14,7 +14,6 @@ const actions = (self)=> {
 
 		setInfo: (data)=> {
 			Object.keys(self).forEach((fieldName)=> {
-				if(fieldName === "boards") return self[fieldName] = data[fieldName].map((board)=> board.id);
 				self[fieldName] = data[fieldName];
 			});
 		}
@@ -24,8 +23,9 @@ const actions = (self)=> {
 
 const views = (self)=> {
 	return {
+		get boardIds() { return self.boards.map((board)=> board.id) }
 	};
 };
 
 
-export default types.model('UserModel', UserModel).actions(actions);
+export default types.model('UserModel', UserModel).actions(actions).views(views);

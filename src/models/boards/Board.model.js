@@ -5,7 +5,9 @@ import { types } from 'mobx-state-tree';
 const Board = {
 	id: types.identifier(types.string),
 	name: types.maybe(types.string),
-	description: types.maybe(types.string)
+	description: types.maybe(types.string),
+	lists: types.frozen,
+	tasks: types.frozen
 };
 
 
@@ -29,4 +31,14 @@ const actions = (self)=> {
 };
 
 
-export default types.model('Board', Board).actions(actions);
+const views = (self)=> {
+	return {
+
+		get listIds() { return self.lists.map((list)=> list.id) },
+
+		get taskIds() { return self.tasks.map((task)=> task.id) }
+	};
+};
+
+
+export default types.model('Board', Board).actions(actions).views(views);

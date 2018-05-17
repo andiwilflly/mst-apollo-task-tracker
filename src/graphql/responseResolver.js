@@ -31,12 +31,12 @@ export default function (operation = {}, data = {}) {
 			store.user.setInfo(data);
 			break;
 		case "Board":
-			store.boards.all.get(data.id).update(data);
+			store.boards.create(data);
 			break;
         case "Task":
             store.tasks.all.get(data.id).update(data);
             break;
 		default:
-			// console.log("dataName: ", operationName, dataName, data);
+			console.log("dataName: ", operationName, dataName, data);
 	}
 }

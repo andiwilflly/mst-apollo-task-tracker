@@ -26,7 +26,7 @@ class BoardsPage extends React.Component {
 		return (
 			<div>
 				<ul>
-					{ store.user.boards.map((boardId)=> {
+					{ store.user.boardIds.map((boardId)=> {
 						return (
 							<li key={boardId}>
 								<Link to={ `/boards/${boardId}`}>{ boardId }</Link>

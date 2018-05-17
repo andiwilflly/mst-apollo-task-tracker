@@ -3,6 +3,7 @@ import React from 'react';
 import { observer } from "mobx-react";
 import { observable } from "mobx";
 import { withRouter } from "react-router-dom";
+// Store
 import store from "store";
 // Apollo
 import { Mutation } from 'react-apollo';
@@ -23,7 +24,9 @@ class CreateTaskMutation extends React.Component {
 
     createTask = async (createTaskMutation)=> {
         const response = await createTaskMutation({ variables: {
+            authorId: store.user.id,
             boardId: this.props.boardId,
+            listId: 'xxx',
             title: this.form.title,
             description: this.form.description
         }});

@@ -28,10 +28,10 @@ export default function (operation = {}, data = {}, errors = null) {
 			break;
 		case "authenticateUser":
 			store.logIn(data.id);
+			history.push(store.nextPathUrl || '/boards');
 			break;
 		case "User":
 			store.user.setInfo(data);
-			history.push(store.nextPathUrl || '/boards');
 			break;
 		case "Board":
 			store.boards.create(data);

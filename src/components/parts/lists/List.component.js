@@ -17,18 +17,21 @@ class List extends React.Component {
 
 
     render() {
+        if(!this.list) return <h3>No list { this.props.listId }</h3>;
+
         return (
-            <div>
-                <hr/>
+            <div style={{ border: "1px solid gray", padding: 20 }}>
                 <br/>
                 id: { this.list.id } <br/>
                 name: { this.list.name }<br/>
+                <br/>
 
                 { this.list.taskIds.map((taskId) => {
                     return (
                         <QueryLoader query={TASK_ALL_INFO_QUERY}
                                      key={taskId}
                                      variables={{id: taskId}}>
+                            <hr/>
                             <Task taskId={taskId}/>
                         </QueryLoader>
                     );

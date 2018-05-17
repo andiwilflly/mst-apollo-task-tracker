@@ -1,11 +1,10 @@
 import { types } from 'mobx-state-tree';
-// Models
-import TasksModel from "models/tasks/Tasks.model";
+
 
 const List = {
     id: types.identifier(types.string),
     name: types.maybe(types.string),
-    tasks: TasksModel
+    tasks: types.frozen
 };
 
 const actions = (self)=> {
@@ -18,4 +17,11 @@ const actions = (self)=> {
 };
 
 
-export default types.model('List', List).actions(actions);
+
+const views = (self)=> {
+	return {
+		get taskIds() { return self.tasks.map((task)=> task.id); }
+	};
+};
+
+export default types.model('List', List).actions(actions).views(views);

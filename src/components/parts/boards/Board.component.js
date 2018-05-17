@@ -40,7 +40,6 @@ class Board extends React.Component {
 
 					<button onClick={ ()=> store.lists.createMutation(this.form) }>Create list</button>
 				</div>
-
 			</div>
 		)
 	}

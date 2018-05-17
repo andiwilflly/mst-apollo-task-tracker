@@ -14,6 +14,7 @@ const Lists = {
 
 const actions = (self)=> {
     return {
+
         createMutation: async ({ boardId, name } = {})=> {
             const response = await client.mutate({
                 variables: { boardId, name },

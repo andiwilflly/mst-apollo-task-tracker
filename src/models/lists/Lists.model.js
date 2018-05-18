@@ -37,17 +37,23 @@ const actions = (self)=> {
 		},
 
 
-		delete: async (listId)=> {
+        deleteList: async (listId)=> {
             // const response = await client.mutate({
             //     variables: { listId },
             //     mutation: DELETE_LIST_MUTATION
             // });
 
-			runInAction(`LIST-DELETE-SUCCESS`, ()=> {
-				self.all.delete(listId);
-			});
+			// runInAction(`LIST-DELETE-SUCCESS`, ()=> {
+			// 	self.all.delete(listId);
+			// });
 		}
     };
+};
+
+const view = (self)=> {
+  return {
+      get lists() { return self.all; }
+  }
 };
 
 

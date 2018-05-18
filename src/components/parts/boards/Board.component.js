@@ -5,7 +5,8 @@ import { observable } from "mobx";
 // Store
 import store from "store";
 // Components
-import Lists from 'components/parts/lists/Lists.component'
+import Lists from 'components/pages/lazyContent/ListsPageContent.component'
+// import Lists from 'components/parts/lists/Lists.component'
 
 
 @observer

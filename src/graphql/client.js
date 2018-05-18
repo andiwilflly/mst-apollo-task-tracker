@@ -3,7 +3,6 @@ import { ApolloLink } from 'apollo-link';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { BatchHttpLink } from 'apollo-link-batch-http';
-import { withClientState } from 'apollo-link-state';
 // GraphQL
 import responseResolver from "graphql/responseResolver";
 
@@ -104,28 +103,9 @@ webSocket.onclose = (event)=> {
 
 
 const cache = new InMemoryCache();
-const stateLink = withClientState({
-	cache,
-	resolvers: {
-		Mutation: {
-			updateNetworkStatus: (_, { isConnected }, { cache }) => {
-				const data = {
-					networkStatus: {
-						__typename: 'NetworkStatus',
-						isConnected
-					},
-				};
-				console.log(data, cache, "=====>");
-				cache.writeData({ data });
-				return null
-			},
-		},
-	}
-});
-
 const responseResolverLink = new ApolloLink((operation, forward)=> {
 	return forward(operation).map((data, b , c)=> {
-		responseResolver(operation, data.data, data.errors);
+		responseResolver(operation, data.data, data.errors, cache);
 		return data;
 	})
 });
@@ -141,7 +121,6 @@ const httpLink = new BatchHttpLink({
 
 
 const link = ApolloLink.from([
-	stateLink,
 	responseResolverLink,
 	httpLink
 ]);

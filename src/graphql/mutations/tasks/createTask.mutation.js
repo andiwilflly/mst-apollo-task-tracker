@@ -7,5 +7,14 @@ export default gql`mutation createTask($title: String!, $description: String!, $
         id
         title
         description
+        author {
+            id
+        }
+        list {
+            id
+        }
+        board {
+            id
+        }
     }
 }`

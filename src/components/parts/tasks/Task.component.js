@@ -12,7 +12,6 @@ class Task extends React.Component {
 
 
 	render() {
-		console.log("render", this.task);
 		return (
 			<div>
 				Task!
@@ -22,6 +21,7 @@ class Task extends React.Component {
 				authorId: { this.task.authorId }<br/>
 				boardId: { this.task.boardId }<br/>
 				listId: { this.task.listId }<br/>
+				<button onClick={ ()=> store.tasks.deleteMutation(this.task.id) }>Delete task</button>
 			</div>
 		)
 	}

@@ -46,6 +46,13 @@ export default function (operation = {}, data = {}, errors = null) {
         case "Task":
             store.tasks.create(data);
             break;
+		case "createTask":
+			store.tasks.create(data);
+			break;
+		case "deleteTask":
+			history.push('/boards');
+			store.tasks.delete(data.id);
+			break;
 		default:
 			console.log("dataName: ", operationName, dataName, data);
 	}

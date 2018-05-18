@@ -1,52 +1,39 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 // MobX
 import { observer } from "mobx-react";
 // Store
 import store from "store";
+// GraphQL
+import LIST_ALL_INFO_QUERY from "graphql/queries/lists/listAllInfo.query";
 // Components
-import CreateList from "components/parts/lists/CreateList.component"
+import QueryLoader from "components/QueryLoader.component";
+// Components
+import List from 'components/parts/lists/List.component'
 
 
 @observer
-class ListsPage extends React.Component {
-
-    // static props = {
-    //   boardId: string
-    // };
+class ListsPageContent extends React.Component {
 
 
-    static permissions = {
-        needAuth: true
-    };
-
-
-    get board() {
-        return store.boards.all.get(this.props.boardId)
-    }
+    get board() { return store.boards.all.get(this.props.boardId); };
 
 
     render() {
         return (
             <div>
-                <ul>
-                    <p>lists</p>
-                    { this.board.lists.map(({ id:listId })=> {
-                        return (
-                            <li key={listId}>
-                                <Link to={ `/lists/${listId}`}>{ listId }</Link>
-                                <button onClick={ ()=> store.lists.deleteList(listId) }>Delete</button>
-                            </li>
-                        );
-                    }) }
-                </ul>
-
-                <hr/>
-                <CreateList boardId={ this.props.boardId } />
+                { this.board.listIds.map((listId)=> {
+                    return (
+                        <QueryLoader query={ LIST_ALL_INFO_QUERY }
+                                     key={listId}
+                                     variables={{ id: listId }}>
+                            <List listId={ listId } />
+                        </QueryLoader>
+                    );
+                }) }
             </div>
         )
     }
 }
 
 
-export default ListsPage;
+export default ListsPageContent;

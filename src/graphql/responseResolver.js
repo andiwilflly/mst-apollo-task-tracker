@@ -4,7 +4,7 @@ import history from "utils/history.utils";
 import store from "store";
 
 
-export default function (operation = {}, data = {}, errors = null) {
+export default function (operation = {}, data = {}, errors = null, cache) {
 
 	const operationName = operation.operationName;
 
@@ -50,6 +50,7 @@ export default function (operation = {}, data = {}, errors = null) {
 			store.tasks.create(data);
 			break;
 		case "deleteTask":
+			console.log(cache, 'delete');
 			history.push('/boards');
 			store.tasks.delete(data.id);
 			break;

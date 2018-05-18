@@ -1,0 +1,10 @@
+subscription {
+  removeTask(filter: {
+    mutation_in: [DELETE]
+  }) {
+    node {
+      id
+      name
+    }
+  }
+}

@@ -37,6 +37,12 @@ functions:
    handler:
      code: src/email-password/loggedInUser.ts
 
+  removeTaskWatcher:
+    type: subscription
+    schema: removeTaskWatcher.graphql
+    handler:
+      code: src/watchers/removeTaskWatcher.ts
+
   hello:
     handler:
       code: src/hello.js

@@ -39,7 +39,7 @@ functions:
 
   removeTaskWatcher:
     type: subscription
-    schema: removeTaskWatcher.graphql
+    schema: src/watchers/removeTaskWatcher.qraphql
     handler:
       code: src/watchers/removeTaskWatcher.ts
 

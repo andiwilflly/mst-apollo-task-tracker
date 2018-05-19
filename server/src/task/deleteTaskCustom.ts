@@ -15,7 +15,8 @@ export default async event => {
     return {
         data: {
             board: JSON.stringify(board),
-            user: JSON.stringify(user)
+            user: JSON.stringify(user),
+            list: JSON.stringify(list)
         }
     }
 }
@@ -28,9 +29,6 @@ async function getBoard(api, { boardId }) {
                 id
                 lists {
                     id
-                    tasks {
-                        id
-                    }
                 }
                 tasks {
                     id
@@ -65,9 +63,11 @@ async function getUser(api, { userId }) {
 
 async function getList(api, { listId }) {
     const query = `
-        query getList() {
+        query getList($id: ID!) {
             List(id: $id) {
-                
+                tasks {
+                    id
+                }
             }
         }
     `;

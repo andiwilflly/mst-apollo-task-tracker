@@ -1,6 +1,7 @@
 type DeleteTaskCustomPayload {
   board: String!
   user: String!
+  list: String!
 }
 
 extend type Query {

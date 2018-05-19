@@ -8,9 +8,7 @@ export default async event => {
 
     const { taskId, boardId, listId, userId } = event.data;
 
-    const deleteTaskResp = deleteTask(api, { taskId });
-    console.log('%%---> deleteTaskResp', deleteTaskResp);
-
+    await deleteTask(api, { taskId });
 
     const user = await getUser(api, { userId });
     const board = await getBoard(api, { boardId });

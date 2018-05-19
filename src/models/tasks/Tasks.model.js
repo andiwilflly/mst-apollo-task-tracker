@@ -2,9 +2,8 @@ import { runInAction } from "mobx";
 import { types } from 'mobx-state-tree';
 // GraphQL
 import client from "graphql/client";
-import USER_UPDATE_MUTATION from "graphql/mutations/user/updateUser.mutation";
 import CREATE_TASK_MUTATION from "graphql/mutations/tasks/createTask.mutation";
-import DELETE_TASK_MUTATION from "graphql/mutations/tasks/deleteTask.mutation";
+import DELETE_TASK_CUSTOM_MUTATION from "graphql/mutations/tasks/deleteTaskCustom.mutation";
 // Models
 import TaskModel from "models/tasks/Task.model";
 
@@ -27,15 +26,10 @@ const actions = (self)=> {
 		},
 
 
-		deleteMutation: (taskId)=> {
+		deleteMutation: ({ taskId, userId, boardId, listId })=> {
 			client.mutate({
-				variables: { taskId },
-				mutation: DELETE_TASK_MUTATION
-			});
-			// TESTING
-			client.mutate({
-				variables: { email: "wtf@i.ua", id: "cjhab8inhns0g0160ivthcp3f" },
-				mutation: USER_UPDATE_MUTATION
+				variables: { taskId, userId, boardId, listId },
+				mutation: DELETE_TASK_CUSTOM_MUTATION
 			});
 		},
 

@@ -4,6 +4,6 @@ type DeleteTaskCustomPayload {
   list: String!
 }
 
-extend type Query {
-  deleteTaskCustom(taskId: String, boardId: String, userId: String, listId: String): DeleteTaskCustomPayload
+extend type Mutation {
+  deleteTaskCustom(taskId: ID!, boardId: ID!, userId: ID!, listId: ID!): DeleteTaskCustomPayload
 }

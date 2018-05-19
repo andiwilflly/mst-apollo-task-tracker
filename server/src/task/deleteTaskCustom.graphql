@@ -1,0 +1,7 @@
+type DeleteTaskCustomPayload {
+  board: String!
+}
+
+extend type Query {
+  deleteTaskCustom(taskId: String, boardId: String, userId: String, listId: String): DeleteTaskCustomPayload
+}

@@ -18,13 +18,46 @@ export default async event => {
 
     return {
         data: {
-            board: JSON.stringify(board),
             user: JSON.stringify(user),
+            board: JSON.stringify(board),
             list: JSON.stringify(list)
         }
     }
 }
 
+
+async function deleteTask(api, { taskId }) {
+    const mutation = `
+        mutation deleteTask($id: ID!) {
+            deleteTask(id: $id) {
+                id
+            }
+        }
+    `;
+    const variables = {
+        id: taskId
+    };
+
+    return api.request(mutation, variables);
+}
+
+async function getUser(api, { userId }) {
+    const query = `
+        query getUser($id: ID!) {
+            User(id: $id) {
+                id
+                tasks {
+                    id
+                }
+            }
+        }
+    `;
+    const variables = {
+        id: userId
+    };
+
+    return api.request(query, variables);
+}
 
 async function getBoard(api, { boardId }) {
     const query = `
@@ -47,24 +80,6 @@ async function getBoard(api, { boardId }) {
     return api.request(query, variables);
 }
 
-async function getUser(api, { userId }) {
-    const query = `
-        query getUser($id: ID!) {
-            User(id: $id) {
-                id
-                tasks {
-                    id
-                }
-            }
-        }
-    `;
-    const variables = {
-        id: userId
-    };
-
-    return api.request(query, variables);
-}
-
 async function getList(api, { listId }) {
     const query = `
         query getList($id: ID!) {
@@ -80,21 +95,5 @@ async function getList(api, { listId }) {
     };
 
     return api.request(query, variables);
-}
-
-async function deleteTask(api, { taskId }) {
-    const mutation = `
-        mutation deleteTask($id: ID!) {
-            deleteTask(id: $id) {
-                id
-            }
-        }
-    `;
-
-    const variables = {
-        id: taskId
-    };
-
-    return api.request(mutation, variables);
 }
 

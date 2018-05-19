@@ -6,40 +6,39 @@ import { BatchHttpLink } from 'apollo-link-batch-http';
 // GraphQL
 import responseResolver from "graphql/responseResolver";
 
+
 let webSocket = new WebSocket('wss://subscriptions.graph.cool/v1/cjh1v6rdw1kmk0171da10ighp', 'graphql-subscriptions');
 
-console.log(webSocket, 42);
 
 webSocket.onopen = (event)=> {
 	const message = {
 		type: 'init'
 	};
-
 	webSocket.send(JSON.stringify(message));
+
 
 	const message2 = {
 		id: '1',
 		type: 'subscription_start',
 		query: `
-   		subscription User {
-		  User(filter: {
-				mutation_in: [CREATED, UPDATED, DELETED]
-			  }){
-			mutation
-			updatedFields
-			previousValues {
-				id
+			subscription User {
+			  User(filter: {
+					mutation_in: [CREATED, UPDATED, DELETED]
+				  }){
+				mutation
+				updatedFields
+				previousValues {
+					id
+				}
+				node {
+				  id
+				  tasks { id }
+				  boards { id }
+				}
+			  }
 			}
-			node {
-			  id
-			  tasks { id }
-			  boards { id }
-			}
-		  }
-		}
-  	`
+  		`
 	};
-
 	webSocket.send(JSON.stringify(message2));
 
 
@@ -47,23 +46,22 @@ webSocket.onopen = (event)=> {
 		id: '2',
 		type: 'subscription_start',
 		query: `
-   	subscription Task {
-		  Task(filter: {
-				mutation_in: [CREATED, UPDATED, DELETED]
-			  }){
-			mutation
-			updatedFields
-			previousValues {
-				id
-			}
-			node {
-			  	id
-			}
-		  }
-		}
-  	`
+			subscription Task {
+				  Task(filter: {
+						mutation_in: [CREATED, UPDATED, DELETED]
+					  }){
+					mutation
+					updatedFields
+					previousValues {
+						id
+					}
+					node {
+						id
+					}
+				  }
+				}
+			`
 	};
-
 	webSocket.send(JSON.stringify(message3));
 };
 
@@ -75,10 +73,11 @@ webSocket.onmessage = (event) => {
 			break
 		}
 		case 'init_fail': {
-			throw {
+            console.error({
 				message: 'init_fail returned from WebSocket server',
 				data
-			}
+			});
+            break;
 		}
 		case 'subscription_data': {
 			console.log('subscription data has been received', data)
@@ -89,11 +88,14 @@ webSocket.onmessage = (event) => {
 			break
 		}
 		case 'subscription_fail': {
-			throw {
-				message: 'subscription_fail returned from WebSocket server',
-				data
-			}
+            console.error({
+                message: 'subscription_fail returned from WebSocket server',
+                data
+            });
+            break;
 		}
+		default:
+			break;
 	}
 };
 

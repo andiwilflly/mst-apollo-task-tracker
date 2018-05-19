@@ -50,11 +50,5 @@ const actions = (self)=> {
     };
 };
 
-const view = (self)=> {
-  return {
-      get lists() { return self.all; }
-  }
-};
-
 
 export default types.model('Lists', Lists).actions(actions);

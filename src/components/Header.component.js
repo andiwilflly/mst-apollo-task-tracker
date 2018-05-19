@@ -27,7 +27,7 @@ class Header extends React.Component {
 				<div className="main-menu">
 					{ store.user ?
 						<LogOutMutation>
-							<a href="#">log out</a>
+							<a href="/">log out</a>
 						</LogOutMutation>
 						:
 						this.props.location.pathname !== "/login" ?

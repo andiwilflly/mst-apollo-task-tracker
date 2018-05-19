@@ -36,17 +36,18 @@ class List extends React.Component {
                 name: { this.list.name }<br/>
                 <button onClick={ this.creteTask }>Crete task</button>
                 <br/>
-
-                { this.list.taskIds.map((taskId)=> {
-                    return (
-                        <QueryLoader query={TASK_ALL_INFO_QUERY}
-                                     key={taskId}
-                                     variables={{id: taskId}}>
-                            <hr/>
-                            <Task taskId={taskId}/>
-                        </QueryLoader>
-                    );
-                })}
+                <div style={{marginLeft: 20}}>
+                    { this.list.taskIds.map((taskId)=> {
+                        return (
+                            <QueryLoader query={TASK_ALL_INFO_QUERY}
+                                         key={taskId}
+                                         variables={{id: taskId}}>
+                                <hr/>
+                                <Task taskId={taskId}/>
+                            </QueryLoader>
+                        );
+                    })}
+                </div>
             </div>
         )
     }

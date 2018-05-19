@@ -8,42 +8,62 @@ export default async event => {
 
     const { taskId, boardId, listId, userId } = event.data;
 
-    const board = await getBoard(api, { taskId, boardId, listId, userId });
+    const user = await getUser(api, { userId });
+    const board = await getBoard(api, { boardId });
 
-    // const user = await getUsers(client);
     // const list = await getLists(client);
 
     return {
         data: {
-            board: JSON.stringify(board)
+            board: JSON.stringify(board),
+            user: JSON.stringify(user)
         }
     }
 }
 
 
-async function getBoard(api, { taskId, boardId, listId, userId }) {
+async function getBoard(api, { boardId }) {
     const query = `
         query getBoard($id: ID!) {
-          Board(id: $id) {
-            id
-            name
-            description
-            lists {
+            Board(id: $id) {
                 id
+                name
+                description
+                lists {
+                    id
+                }
+                tasks {
+                    id
+                }
             }
-            tasks {
-                id
-            }
-          }
         }
-  `;
-
+    `;
     const variables = {
         id: boardId
     };
 
     return api.request(query, variables)
 }
+
+async function getUser(api, { userId }) {
+    const query = `
+        query getUser($id: ID!) {
+            User(id: $id) {
+                id
+                tasks {
+                    id
+                }
+            }
+        }
+    `;
+    const variables = {
+        id: userId
+    };
+
+    return api.request(query, variables)
+}
+
+
 
 // async function getLists(client) {
 //     const query = `
@@ -54,11 +74,3 @@ async function getBoard(api, { taskId, boardId, listId, userId }) {
 //     return client.request(query)
 // }
 //
-// async function getUsers(client) {
-//     const query = `
-//         query allUsers() {
-//             id
-//         }
-//   `;
-//     return client.request(query)
-// }

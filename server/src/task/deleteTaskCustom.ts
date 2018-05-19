@@ -10,8 +10,7 @@ export default async event => {
 
     const user = await getUser(api, { userId });
     const board = await getBoard(api, { boardId });
-
-    // const list = await getLists(client);
+    const list = await getList(api, { listId });
 
     return {
         data: {
@@ -27,10 +26,11 @@ async function getBoard(api, { boardId }) {
         query getBoard($id: ID!) {
             Board(id: $id) {
                 id
-                name
-                description
                 lists {
                     id
+                    tasks {
+                        id
+                    }
                 }
                 tasks {
                     id
@@ -42,7 +42,7 @@ async function getBoard(api, { boardId }) {
         id: boardId
     };
 
-    return api.request(query, variables)
+    return api.request(query, variables);
 }
 
 async function getUser(api, { userId }) {
@@ -60,17 +60,21 @@ async function getUser(api, { userId }) {
         id: userId
     };
 
-    return api.request(query, variables)
+    return api.request(query, variables);
 }
 
+async function getList(api, { listId }) {
+    const query = `
+        query getList() {
+            List(id: $id) {
+                
+            }
+        }
+    `;
+    const variables = {
+        id: listId
+    };
 
+    return api.request(query, variables);
+}
 
-// async function getLists(client) {
-//     const query = `
-//         query allBoards() {
-//             id
-//         }
-//   `;
-//     return client.request(query)
-// }
-//

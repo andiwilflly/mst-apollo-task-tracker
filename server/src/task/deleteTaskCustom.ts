@@ -8,6 +8,10 @@ export default async event => {
 
     const { taskId, boardId, listId, userId } = event.data;
 
+    const deleteTaskResp = deleteTask(api, { taskId });
+    console.log('%%---> deleteTaskResp', deleteTaskResp);
+
+
     const user = await getUser(api, { userId });
     const board = await getBoard(api, { boardId });
     const list = await getList(api, { listId });
@@ -76,5 +80,21 @@ async function getList(api, { listId }) {
     };
 
     return api.request(query, variables);
+}
+
+async function deleteTask(api, { taskId }) {
+    const mutation = `
+        mutation deleteTask($id: ID!) {
+            deleteTask(id: $id) {
+                id
+            }
+        }
+    `;
+
+    const variables = {
+        id: taskId
+    };
+
+    return api.request(mutation, variables);
 }
 

@@ -54,6 +54,24 @@ export default function (operation = {}, data = {}, errors = null, cache) {
 			history.push('/boards');
 			store.tasks.delete(data.id);
 			break;
+		case "deleteTaskCustom":
+			console.log(data, 'data');
+			for (let key in data) {
+                if(data.hasOwnProperty(key)) {
+                    try {
+                        data[key] = JSON.parse(data[key]);
+                    } catch (e) {}
+				}
+			}
+			console.log('%%---> data', data)
+			
+			// const { board, user, list, deletedTaskId } = data;
+
+			// store.tasks.delete(deletedTaskId);
+			// store.boards.delete(board.Board.id);
+			// store.lists.delete(list.List.id);
+			// store.user.update(user.User.id, );
+			break;
 		default:
 			console.log("dataName: ", operationName, dataName, data);
 	}

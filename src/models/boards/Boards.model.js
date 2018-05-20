@@ -41,7 +41,6 @@ const actions = (self)=> {
 
 
 		delete(boardId) {
-			// TODO: graphQL!
 			runInAction(`BOARD-DELETE-SUCCESS`, ()=> {
 				self.all.delete(boardId);
 			});

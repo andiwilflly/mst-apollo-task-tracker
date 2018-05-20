@@ -5,5 +5,6 @@ export default gql`mutation deleteTaskCustom($taskId: ID!, $userId: ID!, $boardI
         user
         board
         list
+        deletedTaskId
     }
 }`

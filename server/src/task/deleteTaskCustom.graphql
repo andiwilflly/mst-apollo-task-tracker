@@ -1,4 +1,5 @@
 type DeleteTaskCustomPayload {
+  deletedTaskId: String!
   board: String!
   user: String!
   list: String!

@@ -24,7 +24,8 @@ class Board extends React.Component {
 	render() {
 		return (
 			<div>
-				Board!
+				<p>Board!</p>
+				<p>name: {this.board.name}</p>
 
                 <Lists boardId={this.props.boardId} />
 

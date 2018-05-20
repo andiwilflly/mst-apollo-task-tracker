@@ -16,7 +16,7 @@ class Task extends React.Component {
 
 		return (
 			<div>
-				Task!
+				<p>Task!</p>
 				id: { this.task.id } <br/>
 				title: { this.task.title }<br/>
 				description: { this.task.description }<br/>

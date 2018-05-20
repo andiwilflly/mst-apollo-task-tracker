@@ -37,16 +37,11 @@ const actions = (self)=> {
 		},
 
 
-        deleteList: async (listId)=> {
-            // const response = await client.mutate({
-            //     variables: { listId },
-            //     mutation: DELETE_LIST_MUTATION
-            // });
-
-			// runInAction(`LIST-DELETE-SUCCESS`, ()=> {
-			// 	self.all.delete(listId);
-			// });
-		}
+        delete(listId) {
+            runInAction(`LISTS-DELETE-SUCCESS`, ()=> {
+                self.all.delete(listId);
+            });
+        }
     };
 };
 

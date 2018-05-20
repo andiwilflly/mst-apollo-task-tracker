@@ -46,28 +46,33 @@ export default function (operation = {}, data = {}, errors = null, cache) {
         case "Task":
             store.tasks.create(data);
             break;
-		case "createTask":
-			store.tasks.create(data);
-            break;
-		case "deleteTask":
-			console.log(cache, 'delete');
-			history.push('/boards');
-			store.tasks.delete(data.id);
-			break;
-		case "deleteTaskCustom":
-			Object.keys(data).forEach(key => {
-			   try {
-				   data[key] = JSON.parse(data[key]);
-			   } catch (e) { }
-			});
+		case "createTaskCustom":
+            data = parse(data);
 
-			const { board, user, list, deletedTaskId } = data;
-			store.lists.update(list);
-			store.user.update(user);
-			store.boards.update(board);
-            store.tasks.delete(deletedTaskId);
+            store.lists.update(data.list);
+            store.user.update(data.user);
+            store.boards.update(data.board);
+            store.tasks.create(data.task);
+            break;
+		case "deleteTaskCustom":
+            data = parse(data);
+
+            store.lists.update(data.list);
+			store.user.update(data.user);
+			store.boards.update(data.board);
+            store.tasks.delete(data.deletedTaskId);
             break;
 		default:
 			console.log("dataName: ", operationName, dataName, data);
 	}
+}
+
+function parse(data) {
+	const result = {};
+    Object.keys(data).forEach(key => {
+        try {
+            result[key] = JSON.parse(data[key]);
+        } catch (e) { }
+    });
+	return result;
 }

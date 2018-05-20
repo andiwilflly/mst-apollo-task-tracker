@@ -37,6 +37,12 @@ functions:
    handler:
      code: src/email-password/loggedInUser.ts
 
+  createTaskCustom:
+    type: resolver
+    schema: src/task/createTaskCustom.graphql
+    handler:
+      code: src/task/createTaskCustom.ts
+
   deleteTaskCustom:
     type: resolver
     schema: src/task/deleteTaskCustom.graphql

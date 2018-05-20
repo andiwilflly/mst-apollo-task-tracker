@@ -2,7 +2,7 @@ import { runInAction } from "mobx";
 import { types } from 'mobx-state-tree';
 // GraphQL
 import client from "graphql/client";
-import CREATE_TASK_MUTATION from "graphql/mutations/tasks/createTask.mutation";
+import CREATE_TASK_CUSTOM_MUTATION from "graphql/mutations/tasks/createTaskCustom.mutation";
 import DELETE_TASK_CUSTOM_MUTATION from "graphql/mutations/tasks/deleteTaskCustom.mutation";
 // Models
 import TaskModel from "models/tasks/Task.model";
@@ -19,10 +19,11 @@ const actions = (self)=> {
 		createMutation: async ({ authorId, boardId, listId, title, description })=> {
 			const response = await client.mutate({
 				variables: { authorId, boardId, listId, title, description },
-				mutation: CREATE_TASK_MUTATION
+				mutation: CREATE_TASK_CUSTOM_MUTATION
 			});
-			console.log("createTask mutation: ", response);
-			self.create(response.data.createTask);
+			return response;
+			// console.log("createTask mutation: ", response);
+			// self.create(response.data.createTask);
 		},
 
 

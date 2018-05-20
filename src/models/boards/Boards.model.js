@@ -39,6 +39,13 @@ const actions = (self)=> {
 			});
 		},
 
+        update: (newBoard)=> {
+            runInAction(`BOARDS-UPDATE-SUCCESS`, ()=> {
+                const oldBoard = self.all.get(newBoard.id);
+                const updatedBoard = Object.assign(oldBoard, newBoard);
+                self.all.set(updatedBoard.id, updatedBoard);
+            });
+        },
 
 		delete(boardId) {
 			runInAction(`BOARD-DELETE-SUCCESS`, ()=> {

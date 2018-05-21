@@ -16,8 +16,6 @@ const actions = (self)=> {
     return {
 
 		update(task = {}) {
-			if(!self.tasks.has(task.id)) return console.log("Task ERRO!@");
-
 			runInAction(`TASK-UPDATE-SUCCESS`, ()=> {
 				const oldTask = self.tasks.get(task.id);
 				Object.keys(oldTask).forEach((fieldName)=> {

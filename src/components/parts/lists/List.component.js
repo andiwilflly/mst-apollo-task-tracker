@@ -55,14 +55,19 @@ class List extends React.Component {
 
         return (
             <div className="list">
-<<<<<<< HEAD
 				<DropTarget targetKey="task"
 							onHit={ this.handleDrop }>
 					<div>
 						<p>List!</p>
 						id: { this.list.id } <br/>
 						name: { this.list.name }<br/>
-						<button onClick={ this.creteTask }>Crete task</button>
+						<button onClick={ e => this.creteTask(e) }
+								disabled={ this.isLoading }>{
+							this.isLoading ?
+								<PreLoader/>
+								:
+								'Create task'
+						}</button>
 
 						<br/>
 						{ this.list.taskIds.map((taskId)=> {
@@ -76,29 +81,6 @@ class List extends React.Component {
 						}) }
 					</div>
 				</DropTarget>
-=======
-                <p>List!</p>
-                id: { this.list.id } <br/>
-                name: { this.list.name }<br/>
-                <button onClick={ e => this.creteTask(e) }
-                        disabled={ this.isLoading }>{
-                    this.isLoading ?
-                        <PreLoader/>
-                        :
-                        'Create task'
-                }</button>
-                <br/>
-				{ this.list.taskIds.map((taskId)=> {
-					return (
-						<QueryLoader query={TASK_ALL_INFO_QUERY}
-									 key={taskId}
-									 variables={{id: taskId}}>
-							<hr/>
-							<Task taskId={taskId}/>
-						</QueryLoader>
-					);
-				}) }
->>>>>>> 1e5776a5a1beaa798ffd6169f94b96dc52d006a1
             </div>
         )
     }

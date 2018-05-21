@@ -1,4 +1,7 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+// Styles
+import "styles/tasks/task.css";
 // MobX
 import { observer } from "mobx-react";
 // Store
@@ -15,15 +18,13 @@ class Task extends React.Component {
 		const { id:taskId, authorId:userId, boardId, listId } = this.task;
 
 		return (
-			<div>
-				<p>Task!</p>
-				id: { this.task.id } <br/>
-				title: { this.task.title }<br/>
-				description: { this.task.description }<br/>
-				authorId: { this.task.authorId }<br/>
-				boardId: { this.task.boardId }<br/>
-				listId: { this.task.listId }<br/>
-				<button onClick={ ()=> store.tasks.deleteMutation({ taskId, userId, boardId, listId }) }>Delete task</button>
+			<div className="task cf">
+				<Link className="task_title" to={`/boards/${this.task.boardId}/tasks/${this.task.id}`}>{  this.task.title }</Link>
+				{ this.task.description }<br/>
+				<button className="task_delete_button"
+						onClick={ ()=> store.tasks.deleteMutation({ taskId, userId, boardId, listId }) }>
+					Delete task
+				</button>
 			</div>
 		)
 	}

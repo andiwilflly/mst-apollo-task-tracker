@@ -1,7 +1,8 @@
 import React from 'react';
+// Styles
+import "styles/lists/list.css";
 // MobX
 import { observer } from "mobx-react";
-import { observable } from "mobx";
 // Store
 import store from "store";
 // GraphQL
@@ -30,25 +31,24 @@ class List extends React.Component {
 
     render() {
         if(!this.list) return <h3>No list { this.props.listId }</h3>;
+
         return (
-            <div style={{ border: "1px solid gray", padding: 20 }}>
+            <div className="list">
                 <p>List!</p>
                 id: { this.list.id } <br/>
                 name: { this.list.name }<br/>
                 <button onClick={ this.creteTask }>Crete task</button>
                 <br/>
-                <div style={{marginLeft: 20}}>
-                    { this.list.taskIds.map((taskId)=> {
-                        return (
-                            <QueryLoader query={TASK_ALL_INFO_QUERY}
-                                         key={taskId}
-                                         variables={{id: taskId}}>
-                                <hr/>
-                                <Task taskId={taskId}/>
-                            </QueryLoader>
-                        );
-                    })}
-                </div>
+				{ this.list.taskIds.map((taskId)=> {
+					return (
+						<QueryLoader query={TASK_ALL_INFO_QUERY}
+									 key={taskId}
+									 variables={{id: taskId}}>
+							<hr/>
+							<Task taskId={taskId}/>
+						</QueryLoader>
+					);
+				}) }
             </div>
         )
     }

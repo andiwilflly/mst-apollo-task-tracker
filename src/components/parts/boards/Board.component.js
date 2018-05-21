@@ -4,8 +4,11 @@ import { observer } from "mobx-react";
 import { observable } from "mobx";
 // Store
 import store from "store";
+// GraphQL
+import LIST_ALL_INFO_QUERY from "graphql/queries/lists/listAllInfo.query";
 // Components
-import Lists from 'components/pages/ListsPage.component'
+import QueryLoader from "components/QueryLoader.component";
+import List from "components/parts/lists/List.component";
 
 
 @observer
@@ -27,7 +30,17 @@ class Board extends React.Component {
 				<p>Board!</p>
 				<p>name: {this.board.name}</p>
 
-                <Lists boardId={this.props.boardId} />
+				<div style={{ width: '100%' }} className="cf">
+					{ this.board.listIds.map((listId)=> {
+						return (
+							<QueryLoader query={ LIST_ALL_INFO_QUERY }
+										 key={listId}
+										 variables={{ id: listId }}>
+								<List listId={ listId } />
+							</QueryLoader>
+						);
+					}) }
+				</div>
 
 				<div>
 					<hr/>

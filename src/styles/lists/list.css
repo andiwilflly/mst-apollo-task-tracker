@@ -1,0 +1,7 @@
+.list {
+	float: left;
+	border: 1px solid black;
+	padding: 5px;
+	background: lightgray;
+	margin: 5px;
+}

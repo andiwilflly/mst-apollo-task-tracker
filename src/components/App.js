@@ -10,6 +10,7 @@ import { ApolloProvider } from 'react-apollo';
 import client from "graphql/client";
 import LOGGED_IN_USER_QUERY from "graphql/queries/loggedInUser.query";
 // Components
+import AlertContainer from "components/AlertContainer.component";
 import QueryLoader from "components/QueryLoader.component";
 
 
@@ -20,6 +21,7 @@ class App extends React.Component {
 			<ApolloProvider client={client}>
 				<QueryLoader query={ LOGGED_IN_USER_QUERY }>
 					<Router />
+					<AlertContainer />
 				</QueryLoader>
 			</ApolloProvider>
 		)

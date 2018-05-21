@@ -20,7 +20,6 @@ const actions = (self)=> {
 
 
     	updateMutation: async (task={})=> {
-    		console.log("task", task);
 			return await client.mutate({
 				variables: task,
 				mutation: UPDATE_TASK_MUTATION
@@ -30,9 +29,8 @@ const actions = (self)=> {
 
 		update(task={}) {
 			runInAction(`TASK-UPDATE-SUCCESS`, ()=> {
-				const oldTask = self.tasks.get(task.id);
-				Object.keys(oldTask).forEach((fieldName)=> {
-					if(task[fieldName] !== undefined) oldTask[fieldName] = task[fieldName];
+				Object.keys(self).forEach((fieldName)=> {
+					if(task[fieldName] !== undefined) self[fieldName] = task[fieldName];
 				});
 			});
 		}

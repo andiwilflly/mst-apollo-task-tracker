@@ -1,4 +1,6 @@
 import React from 'react';
+// Styles
+import "styles/boards/board.css";
 // MobX
 import { observer } from "mobx-react";
 import { observable } from "mobx";
@@ -30,7 +32,7 @@ class Board extends React.Component {
 				<p>Board!</p>
 				<p>name: {this.board.name}</p>
 
-				<div style={{ width: '100%' }} className="cf">
+				<div className="board">
 					{ this.board.listIds.map((listId)=> {
 						return (
 							<QueryLoader query={ LIST_ALL_INFO_QUERY }

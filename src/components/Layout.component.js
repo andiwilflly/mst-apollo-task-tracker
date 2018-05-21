@@ -24,11 +24,9 @@ class Layout extends React.Component {
 			<div>
 				<Header />
 				<Breadcrumbs />
-				<div className="wrapper cf">
-					<div style={{ float: "left", width: 'calc(100% - 200px)' }}>
-						{ this.props.children }
-					</div>
-					<Sidebar />
+				<div className="wrapper">
+					{ this.props.children }
+					{/*<Sidebar />*/}
 				</div>
 				<Footer />
 			</div>

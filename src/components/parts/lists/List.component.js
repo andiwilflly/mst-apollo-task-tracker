@@ -40,13 +40,14 @@ class List extends React.Component {
 
 	handleDrop = (e)=> {
 		const dragFromList = store.lists.all.get(e.dragData.listId);
+
 		dragFromList.removeTaskId(e.dragData.taskId);
 		this.list.addTaskId(e.dragData.taskId);
+
 		store.tasks.all.get(e.dragData.taskId).updateMutation({
 			id: e.dragData.taskId,
 			listId: this.list.id
 		});
-		//e.sourceElem.style.visibility="hidden";
 	};
 
 
@@ -75,7 +76,7 @@ class List extends React.Component {
 								<QueryLoader query={TASK_ALL_INFO_QUERY}
 											 key={taskId}
 											 variables={{id: taskId}}>
-									<Task taskId={taskId}/>
+									<Task taskId={taskId} />
 								</QueryLoader>
 							);
 						}) }

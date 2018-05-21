@@ -21,15 +21,9 @@ class Task extends React.Component {
 			<DragDropContainer targetKey="task"
 							   returnToBase={true}
 							   dragData={{
-							   	taskId: this.task.id,
-								listId: this.task.listId
-							   }}
-							   customDragElement={this.props.customDragElement}
-							   onDragStart={()=>(console.log('start'))}
-							   onDrag={()=>(console.log('dragging'))}
-							   onDragEnd={()=>(console.log('end'))}
-							   // onDrop={(e)=>(console.log("DRop", e))}
-			>
+							   	  taskId: this.task.id,
+								  listId: this.task.listId
+							   }}>
 				<div className="task cf">
 					<h3 className="task_title">{  this.task.title }</h3>
 					{ this.task.description }<br/>

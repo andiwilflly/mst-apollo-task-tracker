@@ -32,11 +32,6 @@ const actions = (self)=> {
 				variables: { taskId },
 				mutation: DELETE_TASK_MUTATION
 			});
-			// TESTING
-			client.mutate({
-				variables: { email: "wtf@i.ua", id: "cjhab8inhns0g0160ivthcp3f" },
-				mutation: USER_UPDATE_MUTATION
-			});
 		},
 
 

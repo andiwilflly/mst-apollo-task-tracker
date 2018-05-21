@@ -1,17 +1,4 @@
-import React from 'react';
-// MobX
-import { observable } from "mobx";
-import {observer} from "mobx-react";
-
-
-const fetchComponent = (WrappedComponent)=> {
-    const Wrapper = class extends WrappedComponent {
-        @observable isLoading = false;
-    };
-    return observer(Wrapper);
-};
-
-const fetchFunction = (target, key, descriptor) => {
+const isLoading = (target, key, descriptor) => {
     const original = descriptor.value;
 
     descriptor.value = async function(...args) {
@@ -28,4 +15,4 @@ const fetchFunction = (target, key, descriptor) => {
 };
 
 
-export { fetchComponent, fetchFunction };
+export default isLoading;

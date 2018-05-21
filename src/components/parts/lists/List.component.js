@@ -20,8 +20,8 @@ class List extends React.Component {
 
     @observable isLoading = false;
 
-
     get list() { return store.lists.all.get(this.props.listId); };
+
 
     @isLoading
     async creteTask() {
@@ -37,8 +37,6 @@ class List extends React.Component {
 
     render() {
         if(!this.list) return <h3>No list { this.props.listId }</h3>;
-
-        console.log('%%---> this.isLoading', this.isLoading);
 
         return (
             <div className="list">

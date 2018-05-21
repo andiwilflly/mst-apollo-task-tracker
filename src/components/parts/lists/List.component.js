@@ -31,10 +31,15 @@ class List extends React.Component {
 
 
 	handleDrop = (e)=> {
-		console.log("handleDrop", e, e.dragData.taskId);
-		e.sourceElem.style.visibility="hidden";
+		const dragFromList = store.lists.all.get(e.dragData.listId);
+		dragFromList.removeTaskId(e.dragData.taskId);
+		this.list.addTaskId(e.dragData.taskId);
+		store.tasks.all.get(e.dragData.taskId).updateMutation({
+			id: e.dragData.taskId,
+			listId: this.list.id
+		});
+		//e.sourceElem.style.visibility="hidden";
 	};
-
 
 
     render() {

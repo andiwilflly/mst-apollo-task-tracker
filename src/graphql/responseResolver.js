@@ -47,6 +47,10 @@ export default function (operation = {}, data = {}, errors = null, cache) {
         case "Task":
             store.tasks.create(data);
             break;
+		case "updateTask":
+			const task = store.tasks.all.get(data.id);
+			if(task) task.update(data);
+			break;
 		case "createTaskCustom":
             data = parse(data);
 

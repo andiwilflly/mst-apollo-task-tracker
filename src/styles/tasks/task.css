@@ -1,0 +1,17 @@
+.task {
+	background: white;
+	padding: 5px;
+	margin: 5px;
+	cursor: move;
+}
+
+.task_title {
+	font-size: 14px;
+	font-weight: bold;
+	margin: 10px 10px 10px 0;
+}
+
+.task_delete_button {
+	float: right;
+	margin: 10px 0 0 0;
+}

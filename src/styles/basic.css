@@ -35,11 +35,13 @@ button {
 	border: 1px solid lightgray;
 	cursor: pointer;
 	transition: 0.5s background;
-	background: lightgray;
+	background: black;
+	color: white;
 }
 
 button:hover {
 	background: white;
+	color: black;
 }
 
 

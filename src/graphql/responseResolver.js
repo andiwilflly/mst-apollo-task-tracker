@@ -1,3 +1,4 @@
+import Alert from 'react-s-alert';
 // Utils
 import history from "utils/history.utils";
 // Store
@@ -19,8 +20,7 @@ export default function (operation = {}, data = {}, errors = null, cache) {
 	console.log("errors", errors);
 	console.groupEnd(`%c🕺 REQUEST`, "color: darkgreen");
 
-    if(errors) return console.log(errorMsg);
-
+    if(errors) return Alert.error(errorMsg);
 	switch (dataName) {
 		case "loggedInUser":
 			// TESTING
@@ -42,6 +42,7 @@ export default function (operation = {}, data = {}, errors = null, cache) {
 		case "deleteBoard":
 			history.push('/boards');
 			store.board.delete(data.id);
+			Alert.success("Board was deleted successfully!");
 			break;
         case "Task":
             store.tasks.create(data);
@@ -53,6 +54,7 @@ export default function (operation = {}, data = {}, errors = null, cache) {
             store.user.update(data.user);
             store.boards.update(data.board);
             store.tasks.create(data.task);
+			Alert.success("Task was created successfully!");
             break;
 		case "deleteTaskCustom":
             data = parse(data);
@@ -61,6 +63,7 @@ export default function (operation = {}, data = {}, errors = null, cache) {
 			store.user.update(data.user);
 			store.boards.update(data.board);
             store.tasks.delete(data.deletedTaskId);
+			Alert.success("Task was deleted successfully!");
             break;
 		default:
 			console.log("dataName: ", operationName, dataName, data);

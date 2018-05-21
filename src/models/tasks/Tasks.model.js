@@ -17,13 +17,10 @@ const actions = (self)=> {
     return {
 
 		createMutation: async ({ authorId, boardId, listId, title, description })=> {
-			const response = await client.mutate({
+			return await client.mutate({
 				variables: { authorId, boardId, listId, title, description },
 				mutation: CREATE_TASK_CUSTOM_MUTATION
 			});
-			return response;
-			// console.log("createTask mutation: ", response);
-			// self.create(response.data.createTask);
 		},
 
 
@@ -36,6 +33,7 @@ const actions = (self)=> {
 
 
 		create(task = {}) {
+			if(self.all.has(task.id)) return self.all.get(task.id).update(task);
 			runInAction(`TASK-CREATE-SUCCESS`, ()=> {
 				self.all.set(task.id, task);
 			});

@@ -33,7 +33,7 @@ webSocket.onmessage = (event) => {
 	const data = JSON.parse(event.data);
 	switch (data.type) {
 		case 'init_success': {
-			console.log('init_success, the handshake is complete')
+            console.log(`%c Subscription init success`, 'color: darkPink');
 			break
 		}
 		case 'init_fail': {
@@ -55,14 +55,14 @@ webSocket.onmessage = (event) => {
                     break;
 
                 default:
-                    console.log('subscription data has been received', data)
+                    console.log(`%c subscription data has been received`, 'color: darkPink', data);
                     break;
             }
 			break
 		}
 		case 'subscription_success': {
-			console.log('subscription_success')
-			break
+            console.log(`%c Subscription success`, 'color: darkPink');
+            break
 		}
 		case 'subscription_fail': {
             console.error({

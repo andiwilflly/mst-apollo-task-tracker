@@ -9,12 +9,12 @@ import { observer } from "mobx-react";
 import store from "store";
 // GraphQL
 import TASK_ALL_INFO_QUERY from "graphql/queries/tasks/taskAllInfo.query";
+// Utils
+import isLoading from 'utils/fetchMixin.util';
 // Components
 import QueryLoader from "components/QueryLoader.component";
 import PreLoader from 'components/parts/PreLoader.component';
 import Task from 'components/parts/tasks/Task.component';
-// Utils
-import isLoading from 'utils/fetchMixin.util';
 
 
 // @fetchComponent
@@ -39,6 +39,7 @@ class List extends React.Component {
 
 
 	handleDrop = (e)=> {
+		this.findAncestor(e.target, "list").style.background = "white";
 		const dragFromList = store.lists.all.get(e.dragData.listId);
 
 		dragFromList.removeTaskId(e.dragData.taskId);
@@ -51,12 +52,20 @@ class List extends React.Component {
 	};
 
 
+	findAncestor(el, cls) {
+		while ((el = el.parentElement) && !el.classList.contains(cls));
+		return el;
+	}
+
+
     render() {
         if(!this.list) return <h3>No list { this.props.listId }</h3>;
 
         return (
             <div className="list">
 				<DropTarget targetKey="task"
+							onDragEnter={ (e)=> this.findAncestor(e.target, "list").style.background = "lightgreen" }
+							onDragLeave={ (e)=> Array.prototype.map.call(document.getElementsByClassName('list'), (el)=> el.style.background = "white") }
 							onHit={ this.handleDrop }>
 					<div>
 						<p>List!</p>

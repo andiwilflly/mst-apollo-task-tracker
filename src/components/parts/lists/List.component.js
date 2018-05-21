@@ -1,4 +1,7 @@
 import React from 'react';
+import { DragDropContainer, DropTarget } from 'react-drag-drop-container';
+// Styles
+import "styles/lists/list.css";
 // MobX
 import { observable } from "mobx";
 import { observer } from "mobx-react";
@@ -6,12 +9,12 @@ import { observer } from "mobx-react";
 import store from "store";
 // GraphQL
 import TASK_ALL_INFO_QUERY from "graphql/queries/tasks/taskAllInfo.query";
+// Utils
+import isLoading from 'utils/fetchMixin.util';
 // Components
 import QueryLoader from "components/QueryLoader.component";
 import PreLoader from 'components/parts/PreLoader.component';
 import Task from 'components/parts/tasks/Task.component';
-// Utils
-import isLoading from 'utils/fetchMixin.util';
 
 
 @observer
@@ -34,32 +37,59 @@ class List extends React.Component {
 	};
 
 
+	handleDrop = (e)=> {
+		this.findAncestor(e.target, "list").style.background = "white";
+		const dragFromList = store.lists.all.get(e.dragData.listId);
+
+		dragFromList.removeTaskId(e.dragData.taskId);
+		this.list.addTaskId(e.dragData.taskId);
+
+		store.tasks.all.get(e.dragData.taskId).updateMutation({
+			id: e.dragData.taskId,
+			listId: this.list.id
+		});
+	};
+
+
+	findAncestor(el, cls) {
+		while ((el = el.parentElement) && !el.classList.contains(cls));
+		return el;
+	}
+
+
     render() {
         if(!this.list) return <h3>No list { this.props.listId }</h3>;
 
         return (
             <div className="list">
-                <p>List!</p>
-                id: { this.list.id } <br/>
-                name: { this.list.name }<br/>
-                <button onClick={ e => this.creteTask(e) }
-                        disabled={ this.isLoading }>{
-                    this.isLoading ?
-                        <PreLoader/>
-                        :
-                        'Create task'
-                }</button>
-                <br/>
-				{ this.list.taskIds.map((taskId)=> {
-					return (
-						<QueryLoader query={TASK_ALL_INFO_QUERY}
-									 key={taskId}
-									 variables={{id: taskId}}>
-							<hr/>
-							<Task taskId={taskId}/>
-						</QueryLoader>
-					);
-				}) }
+				<DropTarget targetKey="task"
+							onDragEnter={ (e)=> this.findAncestor(e.target, "list").style.background = "lightgreen" }
+							onDragLeave={ (e)=> Array.prototype.map.call(document.getElementsByClassName('list'), (el)=> el.style.background = "white") }
+							onHit={ this.handleDrop }>
+					<div>
+						<p>List!</p>
+						id: { this.list.id } <br/>
+						name: { this.list.name }<br/>
+						<button onClick={ e => this.creteTask(e) }
+								disabled={ this.isLoading }>{
+							this.isLoading ?
+								<PreLoader/>
+								:
+								'Create task'
+						}</button>
+
+						<br/>
+						{ this.list.taskIds.map((taskId)=> {
+							return (
+								<QueryLoader query={TASK_ALL_INFO_QUERY}
+											 key={taskId}
+											 variables={{id: taskId}}>
+									<Task taskId={taskId} />
+								</QueryLoader>
+							);
+						}) }
+					</div>
+				</DropTarget>
             </div>
         )
     }

@@ -1,8 +1,11 @@
 .task {
 	background: white;
 	padding: 5px;
-	margin: 5px;
+	margin: 5px 0;
 	cursor: move;
+	width: 198px;
+	height: 198px;
+	border: 1px solid lightgray;
 }
 
 .task_title {

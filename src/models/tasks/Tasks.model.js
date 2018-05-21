@@ -16,8 +16,8 @@ const Tasks = {
 const actions = (self)=> {
     return {
 
-		createMutation: async ({ authorId, boardId, listId, title, description })=> {
-			return await client.mutate({
+		createMutation: ({ authorId, boardId, listId, title, description })=> {
+			return client.mutate({
 				variables: { authorId, boardId, listId, title, description },
 				mutation: CREATE_TASK_CUSTOM_MUTATION
 			});

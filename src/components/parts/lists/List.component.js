@@ -3,6 +3,7 @@ import { DragDropContainer, DropTarget } from 'react-drag-drop-container';
 // Styles
 import "styles/lists/list.css";
 // MobX
+import { observable } from "mobx";
 import { observer } from "mobx-react";
 // Store
 import store from "store";
@@ -10,16 +11,23 @@ import store from "store";
 import TASK_ALL_INFO_QUERY from "graphql/queries/tasks/taskAllInfo.query";
 // Components
 import QueryLoader from "components/QueryLoader.component";
+import PreLoader from 'components/parts/PreLoader.component';
 import Task from 'components/parts/tasks/Task.component';
+// Utils
+import isLoading from 'utils/fetchMixin.util';
 
 
+// @fetchComponent
 @observer
 class List extends React.Component {
+
+    @observable isLoading = false;
 
     get list() { return store.lists.all.get(this.props.listId); };
 
 
-	 creteTask = async ()=> {
+    @isLoading
+    async creteTask() {
         await store.tasks.createMutation({
 			authorId: store.user.id,
 			boardId: this.list.boardId,
@@ -47,6 +55,7 @@ class List extends React.Component {
 
         return (
             <div className="list">
+<<<<<<< HEAD
 				<DropTarget targetKey="task"
 							onHit={ this.handleDrop }>
 					<div>
@@ -67,6 +76,29 @@ class List extends React.Component {
 						}) }
 					</div>
 				</DropTarget>
+=======
+                <p>List!</p>
+                id: { this.list.id } <br/>
+                name: { this.list.name }<br/>
+                <button onClick={ e => this.creteTask(e) }
+                        disabled={ this.isLoading }>{
+                    this.isLoading ?
+                        <PreLoader/>
+                        :
+                        'Create task'
+                }</button>
+                <br/>
+				{ this.list.taskIds.map((taskId)=> {
+					return (
+						<QueryLoader query={TASK_ALL_INFO_QUERY}
+									 key={taskId}
+									 variables={{id: taskId}}>
+							<hr/>
+							<Task taskId={taskId}/>
+						</QueryLoader>
+					);
+				}) }
+>>>>>>> 1e5776a5a1beaa798ffd6169f94b96dc52d006a1
             </div>
         )
     }

@@ -8,7 +8,7 @@ export default async event => {
 
     const { taskId, boardId, listId, userId } = event.data;
 
-    const deletedTaskId = await delTask(api, { taskId });
+    await delTask(api, { taskId });
 
     const { User } = await getUser(api, { userId });
     const { Board } = await getBoard(api, { boardId });
@@ -16,7 +16,7 @@ export default async event => {
 
     return {
         data: {
-            deletedTaskId: deletedTaskId,
+            deletedTaskId: taskId,
             user: JSON.stringify(User),
             board: JSON.stringify(Board),
             list: JSON.stringify(List)
@@ -37,7 +37,7 @@ async function delTask(api, { taskId }) {
         id: taskId
     };
 
-    return api.request(mutation, variables).then(r => r.deleteTask.id);
+    return api.request(mutation, variables);
 }
 
 async function getUser(api, { userId }) {

@@ -8,6 +8,7 @@
 		"bcryptjs": "^2.4.3",
 		"graphcool-lib": "^0.1.0",
 		"graphql-request": "^1.4.0",
+		"react-s-alert": "^1.4.1",
 		"validator": "^9.0.0"
 	},
 	"devDependencies": {

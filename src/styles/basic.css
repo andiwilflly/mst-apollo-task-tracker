@@ -30,13 +30,20 @@ a:hover {
 
 
 button {
+	height: 25px;
 	outline: none;
-	padding: 5px 10px;
+	padding: 5px 20px;
 	border: 1px solid lightgray;
 	cursor: pointer;
 	transition: 0.5s background;
 	background: black;
 	color: white;
+}
+
+button:disabled {
+	background: white;
+	border: 1px solid black;
+	cursor: not-allowed;
 }
 
 button:hover {

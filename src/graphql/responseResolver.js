@@ -53,7 +53,6 @@ export default function (operation = {}, data = {}, errors = null, cache) {
             store.lists.update(data.list);
             store.user.update(data.user);
             store.boards.update(data.board);
-            store.tasks.create(data.task);
 			Alert.success("Task was created successfully!");
             break;
 		case "deleteTaskCustom":

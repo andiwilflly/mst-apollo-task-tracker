@@ -25,7 +25,7 @@ const actions = (self)=> {
 
 
 		deleteMutation: ({ taskId, userId, boardId, listId })=> {
-			client.mutate({
+			return client.mutate({
 				variables: { taskId, userId, boardId, listId },
 				mutation: DELETE_TASK_CUSTOM_MUTATION
 			});

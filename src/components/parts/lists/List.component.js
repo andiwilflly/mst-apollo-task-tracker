@@ -14,7 +14,6 @@ import Task from 'components/parts/tasks/Task.component';
 import isLoading from 'utils/fetchMixin.util';
 
 
-// @fetchComponent
 @observer
 class List extends React.Component {
 

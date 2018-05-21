@@ -37,7 +37,7 @@ async function delTask(api, { taskId }) {
         id: taskId
     };
 
-    return api.request(mutation, variables);
+    return api.request(mutation, variables).catch(r => r);
 }
 
 async function getUser(api, { userId }) {

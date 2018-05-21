@@ -12,16 +12,18 @@ class Task extends React.Component {
 
 
 	render() {
+		const { id:taskId, authorId:userId, boardId, listId } = this.task;
+
 		return (
 			<div>
-				Task!
+				<p>Task!</p>
 				id: { this.task.id } <br/>
 				title: { this.task.title }<br/>
 				description: { this.task.description }<br/>
 				authorId: { this.task.authorId }<br/>
 				boardId: { this.task.boardId }<br/>
 				listId: { this.task.listId }<br/>
-				<button onClick={ ()=> store.tasks.deleteMutation(this.task.id) }>Delete task</button>
+				<button onClick={ ()=> store.tasks.deleteMutation({ taskId, userId, boardId, listId }) }>Delete task</button>
 			</div>
 		)
 	}

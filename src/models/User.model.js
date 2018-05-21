@@ -1,3 +1,4 @@
+import { runInAction } from "mobx";
 import { types } from "mobx-state-tree";
 // GraphQL
 import client from "graphql/client";
@@ -7,7 +8,8 @@ import USER_UPDATE_MUTATION from "graphql/mutations/user/updateUser.mutation";
 const UserModel = {
 	id: types.maybe(types.string),
 	email: types.maybe(types.string),
-	boards: types.frozen
+	boards: types.frozen,
+	tasks: types.frozen
 };
 
 
@@ -15,9 +17,10 @@ const actions = (self)=> {
 	return {
 
 		setInfo: (data)=> {
-			Object.keys(self).forEach((fieldName)=> {
-				self[fieldName] = data[fieldName];
-			});
+            runInAction(`USER-SET-INFO-SUCCESS`, ()=>
+				Object.keys(self).forEach(fieldName => {
+                    self[fieldName] = data[fieldName]
+				}))
 		},
 
 
@@ -29,8 +32,14 @@ const actions = (self)=> {
 		},
 
 
-		update(user) {
-
+		update(newUser) {
+            runInAction(`USER-UPDATE-SUCCESS`, ()=> {
+                Object.keys(newUser).forEach((fieldName)=> {
+                    if(fieldName === 'tasks' || fieldName === 'boards') {
+                        self[fieldName] = newUser[fieldName];
+                    }
+                });
+            });
 		}
 	};
 };

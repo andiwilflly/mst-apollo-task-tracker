@@ -37,11 +37,17 @@ functions:
    handler:
      code: src/email-password/loggedInUser.ts
 
-  removeTaskWatcher:
-    type: subscription
-    query: src/watchers/removeTaskWatcher.qraphql
+  createTaskCustom:
+    type: resolver
+    schema: src/task/createTaskCustom.graphql
     handler:
-      code: src/watchers/removeTaskWatcher.ts
+      code: src/task/createTaskCustom.ts
+
+  deleteTaskCustom:
+    type: resolver
+    schema: src/task/deleteTaskCustom.graphql
+    handler:
+      code: src/task/deleteTaskCustom.ts
 
   hello:
     handler:

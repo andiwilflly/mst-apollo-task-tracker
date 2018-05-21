@@ -30,6 +30,15 @@ const actions = (self)=> {
 		},
 
 
+        update: (newList)=> {
+            runInAction(`LIST-UPDATE-SUCCESS`, ()=> {
+                const oldList = self.all.get(newList.id);
+                const updatedList = Object.assign(oldList, newList);
+                self.all.set(updatedList.id, updatedList);
+            });
+        },
+
+
 		create(list) {
             runInAction(`LIST-CREATE-SUCCESS`, ()=> {
                 self.all.set(list.id, list);
@@ -37,16 +46,11 @@ const actions = (self)=> {
 		},
 
 
-        deleteList: async (listId)=> {
-            // const response = await client.mutate({
-            //     variables: { listId },
-            //     mutation: DELETE_LIST_MUTATION
-            // });
-
-			// runInAction(`LIST-DELETE-SUCCESS`, ()=> {
-			// 	self.all.delete(listId);
-			// });
-		}
+        delete(listId) {
+            runInAction(`LISTS-DELETE-SUCCESS`, ()=> {
+                self.all.delete(listId);
+            });
+        }
     };
 };
 

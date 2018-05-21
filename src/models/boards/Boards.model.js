@@ -39,9 +39,15 @@ const actions = (self)=> {
 			});
 		},
 
+        update: (newBoard)=> {
+            runInAction(`BOARDS-UPDATE-SUCCESS`, ()=> {
+                const oldBoard = self.all.get(newBoard.id);
+                const updatedBoard = Object.assign(oldBoard, newBoard);
+                self.all.set(updatedBoard.id, updatedBoard);
+            });
+        },
 
 		delete(boardId) {
-			// TODO: graphQL!
 			runInAction(`BOARD-DELETE-SUCCESS`, ()=> {
 				self.all.delete(boardId);
 			});

@@ -72,7 +72,9 @@ function parse(data) {
     Object.keys(data).forEach(key => {
         try {
             result[key] = JSON.parse(data[key]);
-        } catch (e) { }
+        } catch (e) {
+			result[key] = data[key]; // For string case
+		}
     });
 	return result;
 }

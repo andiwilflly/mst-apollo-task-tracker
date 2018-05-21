@@ -36,6 +36,7 @@ const actions = (self)=> {
 		create(board = {}) {
 			runInAction(`BOARD-CREATE-SUCCESS`, ()=> {
 				self.all.set(board.id, board);
+				// TODO: Subscribe to tasks [CREATE, UPDATE, DELETE]
 			});
 		},
 

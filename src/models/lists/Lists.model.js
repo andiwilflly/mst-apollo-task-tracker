@@ -30,9 +30,11 @@ const actions = (self)=> {
 		},
 
 
-        update: (newList)=> {
+        update: (newList = {})=> {
+			const oldList = self.all.get(newList.id);
+			if(!oldList) return self.create(newList);
+
             runInAction(`LIST-UPDATE-SUCCESS`, ()=> {
-                const oldList = self.all.get(newList.id);
                 const updatedList = Object.assign(oldList, newList);
                 self.all.set(updatedList.id, updatedList);
             });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { DragDropContainer, DropTarget } from 'react-drag-drop-container';
+import { DropTarget } from 'react-drag-drop-container';
 // Styles
 import "styles/lists/list.css";
 // MobX
@@ -25,7 +25,13 @@ class List extends React.Component {
 
 
 	creteTask = async ()=> {
-    	console.log(store.modal, 42);
+		store.modal.open("CreateTask", {
+			authorId: store.user.id,
+			boardId: this.list.boardId,
+			listId: this.props.listId
+		});
+		return;
+
     	this.isLoading = true;
         await store.tasks.createMutation({
 			authorId: store.user.id,

@@ -14,9 +14,10 @@ const actions = (self)=> {
     return {
 
         update(list) {
-			console.log("update List", list);
 			runInAction(`LIST-UPDATE-SUCCESS`, ()=> {
-
+				Object.keys(self).forEach((fieldName)=> {
+					if(list[fieldName] !== undefined) self[fieldName] = list[fieldName];
+				});
 			});
         },
 

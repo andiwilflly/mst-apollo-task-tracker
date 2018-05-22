@@ -61,7 +61,8 @@ function applyData(operationName, dataName, data) {
 
 		case "createTaskCustom":
 			data = parse(data);
-            store.lists.update(data.list);
+
+            if(store.lists.all.has(data.list.id)) store.lists.all.get(data.list.id).update(data.list);
             store.user.update(data.user);
             store.boards.update(data.board);
 			Alert.success("Task was created successfully!");
@@ -75,7 +76,7 @@ function applyData(operationName, dataName, data) {
 		case "deleteTaskCustom":
 			data = parse(data);
 
-			store.lists.update(data.list);
+			if(store.lists.all.has(data.list.id)) store.lists.all.get(data.list.id).update(data.list);
 			store.user.update(data.user);
 			store.boards.update(data.board);
 			store.tasks.delete(data.deletedTaskId);

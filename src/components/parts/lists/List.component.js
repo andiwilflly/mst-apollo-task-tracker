@@ -9,8 +9,6 @@ import { observer } from "mobx-react";
 import store from "store";
 // GraphQL
 import TASK_ALL_INFO_QUERY from "graphql/queries/tasks/taskAllInfo.query";
-// Utils
-import isLoading from 'utils/fetchMixin.util';
 // Components
 import QueryLoader from "components/QueryLoader.component";
 import PreLoader from 'components/parts/PreLoader.component';
@@ -22,11 +20,13 @@ class List extends React.Component {
 
     @observable isLoading = false;
 
+
     get list() { return store.lists.all.get(this.props.listId); };
 
 
-    @isLoading
-    async creteTask() {
+	creteTask = async ()=> {
+    	console.log(store.modal, 42);
+    	this.isLoading = true;
         await store.tasks.createMutation({
 			authorId: store.user.id,
 			boardId: this.list.boardId,
@@ -34,6 +34,7 @@ class List extends React.Component {
 			title: "Test Task title",
 			description: "decription of the task"
 		});
+		this.isLoading = false;
 	};
 
 
@@ -56,7 +57,7 @@ class List extends React.Component {
 
 
 	findAncestor(el, cls) {
-		while ((el = el.parentElement) && !el.classList.contains(cls));
+		while ((el = el.parentElement) && !el.classList.contains(cls)) {}
 		return el;
 	}
 
@@ -72,7 +73,7 @@ class List extends React.Component {
 							onHit={ this.handleDrop }>
 					<div>
 						<h3>{ this.list.name }</h3>
-						<button onClick={ e => this.creteTask(e) }
+						<button onClick={ this.creteTask }
 								disabled={ this.isLoading }>{
 							this.isLoading ?
 								<PreLoader/>

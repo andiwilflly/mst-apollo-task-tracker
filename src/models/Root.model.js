@@ -4,12 +4,14 @@ import client from "graphql/client";
 import LOG_IN_USER_MUTATION from "graphql/mutations/authenticateUser.mutation";
 // Models
 import UserModel from "models/User.model";
+import ModalModel from "models/Modal.model";
 import BoardsModel from "models/boards/Boards.model";
 import ListsModel from "models/lists/Lists.model";
 import TasksModel from "models/tasks/Tasks.model";
 
 
 const RootModel = {
+	modal: ModalModel,
 	nextPathUrl: types.maybe(types.string),
 	user: types.optional(types.maybe(UserModel), null),
 	boards: BoardsModel,

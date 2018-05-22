@@ -10,6 +10,7 @@ import store from "store";
 import LIST_ALL_INFO_QUERY from "graphql/queries/lists/listAllInfo.query";
 // Components
 import QueryLoader from "components/QueryLoader.component";
+import PreLoader from "components/parts/PreLoader.component";
 import List from "components/parts/lists/List.component";
 
 
@@ -37,6 +38,7 @@ class Board extends React.Component {
 						return (
 							<QueryLoader query={ LIST_ALL_INFO_QUERY }
 										 key={listId}
+										 preLoader={ <div className="list"><PreLoader/></div>}
 										 variables={{ id: listId }}>
 								<List listId={ listId } />
 							</QueryLoader>

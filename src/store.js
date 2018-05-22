@@ -5,6 +5,9 @@ import RootModel from "models/Root.model";
 
 
 const store = RootModel.create({
+	modal: {
+		isOpen: false
+	},
 	queries: {},
 	boards: {},
 	lists: {},

@@ -29,7 +29,6 @@ const actions = (self)=> {
 
 		removeTaskId(taskId) {
         	const removeTaskId = self.tasks.find((task)=> task.id === taskId);
-			console.log(removeTaskId, "424242");
 			self.tasks.remove(removeTaskId);
 		}
     };

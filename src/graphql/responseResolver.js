@@ -21,6 +21,12 @@ export default function (operation = {}, data = {}, errors = null, cache) {
 	console.groupEnd(`%c🕺 REQUEST`, "color: darkgreen");
 
     if(errors) return Alert.error(errorMsg);
+	applyData(operationName, dataName, data);
+}
+
+
+function applyData(operationName, dataName, data) {
+
 	switch (dataName) {
 		case "loggedInUser":
 			// TESTING
@@ -36,43 +42,51 @@ export default function (operation = {}, data = {}, errors = null, cache) {
 		case "Board":
 			store.boards.create(data);
 			break;
-        case "List":
-            store.lists.create(data);
-            break;
+		case "List":
+			store.lists.create(data);
+			break;
 		case "deleteBoard":
 			history.push('/boards');
 			store.board.delete(data.id);
 			Alert.success("Board was deleted successfully!");
 			break;
-        case "Task":
-            store.tasks.create(data);
-            break;
+		case "Task":
+			store.tasks.create(data);
+			break;
+
 		case "updateTask":
 			const task = store.tasks.all.get(data.id);
 			if(task) task.update(data);
 			break;
+
 		case "createTaskCustom":
-            data = parse(data);
-
-            store.lists.update(data.list);
-            store.user.update(data.user);
-            store.boards.update(data.board);
-            store.tasks.create(data.task);
-			Alert.success("Task was created successfully!");
-            break;
-		case "deleteTaskCustom":
-            data = parse(data);
-
-            store.lists.update(data.list);
+			data = parse(data);
+			store.lists.update(data.list);
 			store.user.update(data.user);
 			store.boards.update(data.board);
-            store.tasks.delete(data.deletedTaskId);
+			store.tasks.create(data.task);
+			Alert.success("Task was created successfully!");
+			break;
+
+		case "updateTaskCustom":
+			data = parse(data).response;
+			data.map((data)=> applyData(operationName, Object.keys(data)[0], data[Object.keys(data)[0]]));
+			break;
+
+		case "deleteTaskCustom":
+			data = parse(data);
+
+			store.lists.update(data.list);
+			store.user.update(data.user);
+			store.boards.update(data.board);
+			store.tasks.delete(data.deletedTaskId);
 			Alert.success("Task was deleted successfully!");
-            break;
+			break;
 		default:
 			console.log("dataName: ", operationName, dataName, data);
 	}
 }
+
 
 function parse(data) {
 	const result = {};

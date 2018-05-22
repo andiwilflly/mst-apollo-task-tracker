@@ -3,7 +3,7 @@ import { types } from 'mobx-state-tree';
 import { runInAction } from "mobx";
 // GraphQL
 import client from "graphql/client";
-import UPDATE_TASK_MUTATION from "graphql/mutations/tasks/updateTask.mutation";
+import UPDATE_TASK_CUSTOM_MUTATION from "graphql/mutations/tasks/updateTaskCustom.mutation";
 
 
 const Task = {
@@ -22,7 +22,7 @@ const actions = (self)=> {
     	updateMutation: async (task={})=> {
 			return await client.mutate({
 				variables: task,
-				mutation: UPDATE_TASK_MUTATION
+				mutation: UPDATE_TASK_CUSTOM_MUTATION
 			});
 		},
 

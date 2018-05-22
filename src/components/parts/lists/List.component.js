@@ -40,8 +40,12 @@ class List extends React.Component {
 
 	handleDrop = (e)=> {
 		this.findAncestor(e.target, "list").style.background = "white";
+
+		if(e.dragData.listId === this.list.id) return;
+
 		const dragFromList = store.lists.all.get(e.dragData.listId);
 
+		// Optimistic updates
 		dragFromList.removeTaskId(e.dragData.taskId);
 		this.list.addTaskId(e.dragData.taskId);
 
@@ -68,9 +72,7 @@ class List extends React.Component {
 							onDragLeave={ (e)=> Array.prototype.map.call(document.getElementsByClassName('list'), (el)=> el.style.background = "white") }
 							onHit={ this.handleDrop }>
 					<div>
-						<p>List!</p>
-						id: { this.list.id } <br/>
-						name: { this.list.name }<br/>
+						<h3>{ this.list.name }</h3>
 						<button onClick={ e => this.creteTask(e) }
 								disabled={ this.isLoading }>{
 							this.isLoading ?
@@ -84,6 +86,7 @@ class List extends React.Component {
 							return (
 								<QueryLoader query={TASK_ALL_INFO_QUERY}
 											 key={taskId}
+											 preLoader={<div className="task"><PreLoader/></div>}
 											 variables={{id: taskId}}>
 									<Task taskId={taskId} />
 								</QueryLoader>

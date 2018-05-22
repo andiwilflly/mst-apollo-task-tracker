@@ -7,8 +7,6 @@ import { observable } from "mobx";
 import { observer } from "mobx-react";
 // Store
 import store from "store";
-// Utils
-import isLoading from 'utils/fetchMixin.util';
 // Components
 import PreLoader from 'components/parts/PreLoader.component';
 
@@ -22,14 +20,15 @@ class Task extends React.Component {
 	get task() { return store.tasks.all.get(this.props.taskId); };
 
 
-	@isLoading
 	deleteTask = async ()=> {
-		return store.tasks.deleteMutation({
+		this.isLoading = true;
+		await store.tasks.deleteMutation({
 			taskId: this.task.id,
 			userId: this.task.authorId,
 			boardId: this.task.boardId,
 			listId: this.task.listId
 		});
+		this.isLoading = false;
 	};
 
 
@@ -47,10 +46,15 @@ class Task extends React.Component {
 					<h3 className="task_title">{  this.task.title }</h3>
 					{ this.task.description }<br/>
 					<p style={{ fontSize: 10 }}>listId: { this.task.listId }</p>
+
 					<button className="task_delete_button"
-							onClick={ this.deleteTask }>
-						Delete task
-					</button>
+							onClick={ this.deleteTask }
+							disabled={ this.isLoading }>{
+						this.isLoading ?
+							<PreLoader/>
+							:
+							'Delete task'
+					}</button>
 				</div>
 			</DragDropContainer>
 		)

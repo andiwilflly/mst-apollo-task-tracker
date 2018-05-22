@@ -11,7 +11,7 @@ class QueryLoader extends React.Component {
 		return (
 			<Query { ...this.props }>
 				{({ loading, error, data })=> {
-					if(loading) return <PreLoader />;
+					if(loading) return this.props.preLoader || <PreLoader />;
 					return this.props.children;
 				}}
 			</Query>

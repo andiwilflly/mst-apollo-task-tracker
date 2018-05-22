@@ -17,7 +17,6 @@ import PreLoader from 'components/parts/PreLoader.component';
 import Task from 'components/parts/tasks/Task.component';
 
 
-// @fetchComponent
 @observer
 class List extends React.Component {
 

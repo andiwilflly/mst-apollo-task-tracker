@@ -61,10 +61,9 @@ function applyData(operationName, dataName, data) {
 
 		case "createTaskCustom":
 			data = parse(data);
-			store.lists.update(data.list);
-			store.user.update(data.user);
-			store.boards.update(data.board);
-			store.tasks.create(data.task);
+            store.lists.update(data.list);
+            store.user.update(data.user);
+            store.boards.update(data.board);
 			Alert.success("Task was created successfully!");
 			break;
 

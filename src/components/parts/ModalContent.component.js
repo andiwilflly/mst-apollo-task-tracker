@@ -22,7 +22,7 @@ class ModalContent extends React.Component {
 				<Modal open={ store.modal.isOpen }
 					   onClose={ store.modal.close }
 					   center>
-					{ this.content[store.modal.content] }
+					{ this.content[store.modal.contentName] }
 				</Modal>
 			</div>
 		)

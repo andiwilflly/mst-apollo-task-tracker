@@ -3,7 +3,7 @@ import { types } from "mobx-state-tree";
 
 const ModalModel = {
 	isOpen: types.boolean,
-	content: types.optional(types.maybe(types.string), null),
+	contentName: types.optional(types.maybe(types.string), ''),
 	props: types.optional(types.frozen, {})
 };
 
@@ -13,13 +13,13 @@ const actions = (self)=> {
 
 		open(contentName = '', props = {}) {
 			self.isOpen = true;
-			self.content = contentName;
+			self.contentName = contentName;
 			self.props = props;
 		},
 
 		close() {
 			self.isOpen = false;
-			self.content = null;
+			self.contentName = '';
 			self.props = {};
 		}
 	};

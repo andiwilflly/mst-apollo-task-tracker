@@ -11,6 +11,7 @@ import store from "store";
 // Components
 import PreLoader from "components/parts/PreLoader.component";
 import LogOutMutation from "components/parts/mutations/LogOutMutation.component";
+import Search from "components/parts/Search.component";
 
 
 @withRouter
@@ -39,6 +40,8 @@ class Header extends React.Component {
 					<Link to="/profile">Profile</Link>
 					<Link to="/boards">Boards</Link>
 				</div>
+
+				<Search />
 			</div>
 		)
 	}

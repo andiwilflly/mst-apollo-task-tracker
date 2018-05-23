@@ -1,0 +1,50 @@
+.search {
+	right: 26px;
+	position: absolute;
+	border: 1px solid lightgray;
+	z-index: 2;
+}
+
+.search_input {
+	width: 210px;
+	border: 1px solid white;
+	float: right;
+}
+
+.search > input {
+	border: 1px solid white;
+	width: calc(100% - 12px);
+}
+
+
+.search_checkbox {
+	font-size: 10px;
+	line-height: 18px;
+}
+
+.search_checkbox input {
+	float: left;
+}
+
+.search_results {
+	bottom: 0;
+	width: auto;
+	right: -1px;
+	background: white;
+	clear: both;
+	box-shadow: 2px 3px 1em lightgrey;
+}
+
+
+.search_results_item:nth-child(1) {
+	padding: 10px;
+}
+
+.search_results_item {
+	padding: 10px 10px 10px 0;
+	float: left;
+}
+
+.search_results .search_results_item .task {
+	cursor: default;
+}

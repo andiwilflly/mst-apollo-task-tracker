@@ -84,7 +84,6 @@ function applyData(operationName, dataName, data) {
 			store.user.update(data.user);
 			store.boards.update(data.board);
 			store.tasks.delete(data.deletedTaskId);
-			Alert.success("Task was deleted successfully!");
 			break;
 
 		case "allLabels":

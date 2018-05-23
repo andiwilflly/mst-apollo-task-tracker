@@ -8,6 +8,7 @@ import UPDATE_TASK_CUSTOM_MUTATION from "graphql/mutations/tasks/updateTaskCusto
 
 const Task = {
 	id: types.identifier(types.string),
+	__type: types.maybe(types.string),
 	title: types.maybe(types.string),
 	description: types.maybe(types.string),
 	author: types.frozen,

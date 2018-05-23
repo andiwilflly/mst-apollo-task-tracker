@@ -1,4 +1,8 @@
-import { runInAction } from "mobx";
+import Alert from 'react-s-alert';
+// @SOURCE: http://fusejs.io
+import Fuse from 'fuse.js';
+// MobX
+import { runInAction, values } from "mobx";
 import { types } from 'mobx-state-tree';
 // GraphQL
 import client from "graphql/client";
@@ -12,6 +16,22 @@ const Tasks = {
 	all: types.optional(types.map(TaskModel), {})
 };
 
+
+let fuse = null;
+const fuseOptions = {
+	shouldSort: true,
+	includeScore: true,
+	threshold: 0.3,
+	location: 0,
+	distance: 100,
+	maxPatternLength: 32,
+	minMatchCharLength: 2,
+	keys: [
+		"id",
+		"title",
+		"description"
+	]
+};
 
 const actions = (self)=> {
     return {
@@ -35,17 +55,29 @@ const actions = (self)=> {
 		create(task = {}) {
 			if(self.all.has(task.id)) return self.all.get(task.id).update(task);
 			runInAction(`TASK-CREATE-SUCCESS`, ()=> {
-				self.all.set(task.id, task);
+				self.all.set(task.id, { ...task, __type: "Task" } );
 			});
 		},
 
 
 		delete(taskId) {
+			if(!self.all.has(taskId)) return runInAction(`TASK-DELETE-WARNING (no such task ${taskId})`, ()=> {});
 			runInAction(`TASK-DELETE-SUCCESS`, ()=> {
 				self.all.delete(taskId);
+				Alert.success("Task was deleted successfully!");
 			});
-		}
+		},
 
+
+		search(text= "") {
+			return fuse.search(text).map((result)=> result.item);
+		},
+
+
+		// Hooks
+		postProcessSnapshot(snapshot) {
+			fuse = new Fuse(values(self.all), fuseOptions); // "list" is the item array
+		}
     };
 };
 

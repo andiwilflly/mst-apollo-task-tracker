@@ -12,7 +12,6 @@ import store from "store";
 // Components
 import PreLoader from 'components/parts/PreLoader.component';
 import Label from 'components/parts/labels/Label.component';
-// Components
 import QueryLoader from "components/QueryLoader.component";
 
 @observer

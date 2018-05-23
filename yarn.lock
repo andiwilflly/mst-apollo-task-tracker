@@ -2969,6 +2969,10 @@ functional-red-black-tree@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
 
+"fuse.js@git+https://github.com/krisk/fuse/":
+  version "3.2.0"
+  resolved "git+https://github.com/krisk/fuse/#0e331ef3ae41a4b676c1823e2b18bac7578b2604"
+
 gauge@~2.7.3:
   version "2.7.4"
   resolved "https://registry.yarnpkg.com/gauge/-/gauge-2.7.4.tgz#2c03405c7538c39d7eb37b317022e325fb018bf7"

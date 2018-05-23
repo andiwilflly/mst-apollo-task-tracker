@@ -12,7 +12,8 @@ const Task = {
 	description: types.maybe(types.string),
 	author: types.frozen,
 	board: types.frozen,
-	list: types.frozen
+	list: types.frozen,
+	labels: types.array(types.frozen)
 };
 
 const actions = (self)=> {
@@ -42,7 +43,8 @@ const views = (self)=> {
 	return {
 		get authorId() { return self.author.id },
 		get boardId() { return self.board.id },
-		get listId() { return self.list.id }
+		get listId() { return self.list.id },
+		get labelsIds() { return self.labels.map((label)=> label.id); }
 	};
 };
 

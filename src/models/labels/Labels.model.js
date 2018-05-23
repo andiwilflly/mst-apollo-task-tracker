@@ -27,6 +27,7 @@ const actions = (self)=> {
 
 
 		create(label) {
+			console.log("42");
 			if(self.all.has(label.id)) return self.all.get(label.id).update(label);
 
 			runInAction(`LABEL-CREATE-SUCCESS`, ()=> {

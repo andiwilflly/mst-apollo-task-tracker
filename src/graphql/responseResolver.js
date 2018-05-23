@@ -65,6 +65,8 @@ function applyData(operationName, dataName, data) {
 			data = parse(data);
 
             if(store.lists.all.has(data.list.id)) store.lists.all.get(data.list.id).update(data.list);
+			data.labels.map((label)=> store.labels.all.has(label.id) && store.labels.all.get(label.id).update(label));
+
             store.user.update(data.user);
             store.boards.update(data.board);
 			Alert.success("Task was created successfully!");
@@ -89,6 +91,9 @@ function applyData(operationName, dataName, data) {
 			runInAction('LABELS-CREATE-ALL', ()=> {
 				data.map((label)=> store.labels.create(label));
 			});
+			break;
+		case "Label":
+			store.labels.create(data);
 			break;
 
 		default:

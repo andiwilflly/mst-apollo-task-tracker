@@ -3,8 +3,9 @@ type CreateTaskCustomPayload {
     user: String!
     board: String!
     list: String!
+    labels: String!
 }
 
 extend type Mutation {
-    createTaskCustom(title: String!, description: String!, boardId: ID!, authorId: ID!, listId: ID!): CreateTaskCustomPayload
+    createTaskCustom(title: String!, description: String!, boardId: ID!, authorId: ID!, listId: ID!, labelsIds: [ID!]!): CreateTaskCustomPayload
 }

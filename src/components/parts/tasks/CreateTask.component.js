@@ -1,4 +1,6 @@
 import React from 'react';
+// Styles
+import "styles/tasks/create_task.css";
 // MobX
 import { observer } from "mobx-react";
 import { observable } from "mobx";
@@ -6,6 +8,7 @@ import { observable } from "mobx";
 import store from "store";
 // Components
 import PreLoader from 'components/parts/PreLoader.component';
+import LabelsList from 'components/parts/labels/LabelsList.component';
 
 
 @observer
@@ -36,29 +39,37 @@ class CreateList extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="create_task cf">
 				<h3>Create new task</h3>
-				<p>
-					name:
-					<input type="text"
-						   value={ this.form.title }
-						   onChange={ (e)=> this.form.title = e.currentTarget.value }/>
-				</p>
+				<div className="create_task_form">
+					<p>
+						name:
+						<input type="text"
+							   value={ this.form.title }
+							   onChange={ (e)=> this.form.title = e.currentTarget.value }/>
+					</p>
 
-				<p>
-					description:
-					<input type="text"
-						   value={ this.form.description }
-						   onChange={ (e)=> this.form.description = e.currentTarget.value }/>
-				</p>
+					<br/>
+					<p>
+						description:
+						<textarea type="text"
+								  value={ this.form.description }
+								  onChange={ (e)=> this.form.description = e.currentTarget.value }/>
+					</p>
 
-				<button onClick={ this.creteTask }
-						disabled={ this.isLoading }>{
-					this.isLoading ?
-						<PreLoader/>
-						:
-						'Create task'
-				}</button>
+					<br/>
+					<button onClick={ this.creteTask }
+							disabled={ this.isLoading }>{
+						this.isLoading ?
+							<PreLoader/>
+							:
+							'Create task'
+					}</button>
+				</div>
+				<div className="create_task_sidebar">
+					<h4>Labels:</h4>
+					<LabelsList />
+				</div>
 			</div>
 		)
 	}

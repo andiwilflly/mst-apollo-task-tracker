@@ -1,4 +1,6 @@
 import Alert from 'react-s-alert';
+// MobX
+import { runInAction } from "mobx";
 // Utils
 import history from "utils/history.utils";
 // Store
@@ -82,6 +84,13 @@ function applyData(operationName, dataName, data) {
 			store.tasks.delete(data.deletedTaskId);
 			Alert.success("Task was deleted successfully!");
 			break;
+
+		case "allLabels":
+			runInAction('LABELS-CREATE-ALL', ()=> {
+				data.map((label)=> store.labels.create(label));
+			});
+			break;
+
 		default:
 			console.log("dataName: ", operationName, dataName, data);
 	}

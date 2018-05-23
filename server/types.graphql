@@ -61,5 +61,18 @@ type Task @model {
     author: User! @relation(name: "UserOfTasks")
     list: List! @relation(name: "ListOfTasks")
     board: Board! @relation(name: "BoardOfTasks")
+    labels: [Label!]! @relation(name: "TasksAndLabels")
 }
 
+
+type Label @model {
+    # Required system field:
+    id: ID! @isUnique # read-only (managed by Graphcool)
+
+    # Optional system fields (remove if not needed):
+    createdAt: DateTime! # read-only (managed by Graphcool)
+    updatedAt: DateTime! # read-only (managed by Graphcool)
+
+    tasks: [Task!]! @relation(name: "TasksAndLabels")
+    color: String!
+}

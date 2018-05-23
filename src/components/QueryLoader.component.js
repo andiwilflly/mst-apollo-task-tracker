@@ -1,5 +1,4 @@
 import React from 'react';
-// MobX
 import { Query } from "react-apollo";
 // Components
 import PreLoader from "components/parts/PreLoader.component";

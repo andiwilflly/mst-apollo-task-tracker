@@ -8,6 +8,7 @@ import ModalModel from "models/Modal.model";
 import BoardsModel from "models/boards/Boards.model";
 import ListsModel from "models/lists/Lists.model";
 import TasksModel from "models/tasks/Tasks.model";
+import LabelsModel from "models/labels/Labels.model";
 
 
 const RootModel = {
@@ -16,7 +17,8 @@ const RootModel = {
 	user: types.optional(types.maybe(UserModel), null),
 	boards: BoardsModel,
 	lists: ListsModel,
-	tasks: TasksModel
+	tasks: TasksModel,
+	labels: LabelsModel
 };
 
 

@@ -1,0 +1,28 @@
+.create_task {
+	width: 600px;
+	min-height: 300px;
+}
+
+.create_task h3 {
+	font-size: 20px;
+	margin: 10px 0;
+	font-weight: bold;
+}
+
+.create_task_form {
+	margin: 20px 0;
+	float: left;
+	width: calc(100% - 260px);
+}
+
+.create_task_sidebar {
+	margin: 20px 0;
+	float: right;
+	width: 250px;
+}
+
+.create_task_sidebar H4 {
+	font-weight: bold;
+	font-size: 18px;
+	margin: 0 0 10px 0;
+}

@@ -1,0 +1,17 @@
+.labels_list {
+
+}
+
+.labels_list_label {
+	border-radius: 50%;
+	margin: 5px;
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	cursor: pointer;
+	border: 1px solid lightgray;
+}
+
+.labels_list_label:hover {
+	opacity: 0.6;
+}

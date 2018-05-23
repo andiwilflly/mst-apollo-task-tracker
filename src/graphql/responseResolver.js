@@ -1,4 +1,6 @@
 import Alert from 'react-s-alert';
+// MobX
+import { runInAction } from "mobx";
 // Utils
 import history from "utils/history.utils";
 // Store
@@ -7,25 +9,22 @@ import store from "store";
 
 export default function (operation = {}, data = {}, errors = null, cache) {
 
-	const operationName = operation.operationName;
-
 	const dataName = Object.keys(data)[0];
 	data = data[dataName];
 	const errorMsg = errors ? errors[0].message : "";
 
-	console.groupCollapsed(`%c🕺 REQUEST ${operationName} (${errors ? "ERROR" : "SUCCESS"})`, "color: darkgreen");
-	console.log("operationName", operationName);
+	console.groupCollapsed(`%c🕺 REQUEST (${errors ? "ERROR" : "SUCCESS"})`, "color: darkgreen");
 	console.log("dataName", dataName);
 	console.log("data", data);
 	console.log("errors", errors);
 	console.groupEnd(`%c🕺 REQUEST`, "color: darkgreen");
 
     if(errors) return Alert.error(errorMsg);
-	applyData(operationName, dataName, data);
+	applyData(dataName, data);
 }
 
 
-function applyData(operationName, dataName, data) {
+function applyData(dataName, data) {
 
 	switch (dataName) {
 		case "loggedInUser":
@@ -63,6 +62,8 @@ function applyData(operationName, dataName, data) {
 			data = parse(data);
 
             if(store.lists.all.has(data.list.id)) store.lists.all.get(data.list.id).update(data.list);
+			data.labels.map((label)=> store.labels.all.has(label.id) && store.labels.all.get(label.id).update(label));
+
             store.user.update(data.user);
             store.boards.update(data.board);
 			Alert.success("Task was created successfully!");
@@ -70,18 +71,28 @@ function applyData(operationName, dataName, data) {
 
 		case "updateTaskCustom":
 			data = parse(data).response;
-			data.map((data)=> applyData(operationName, Object.keys(data)[0], data[Object.keys(data)[0]]));
+			data.map((data)=> applyData(Object.keys(data)[0], data[Object.keys(data)[0]]));
 			break;
 
 		case "deleteTaskCustom":
 			data = parse(data);
 
-			if(store.lists.all.has(data.list.id)) store.lists.all.get(data.list.id).update(data.list);
-			store.user.update(data.user);
-			store.boards.update(data.board);
-			store.tasks.delete(data.deletedTaskId);
-			Alert.success("Task was deleted successfully!");
+			// if(store.lists.all.has(data.list.id)) store.lists.all.get(data.list.id).update(data.list);
+			// store.user.update(data.user);
+			// store.boards.update(data.board);
+			// store.tasks.delete(data.deletedTaskId);
+			// Alert.success("Task was deleted successfully!");
 			break;
+
+		case "allLabels":
+			runInAction('LABELS-CREATE-ALL', ()=> {
+				data.map((label)=> store.labels.create(label));
+			});
+			break;
+		case "Label":
+			store.labels.create(data);
+			break;
+
 		default:
 			console.log("dataName: ", operationName, dataName, data);
 	}

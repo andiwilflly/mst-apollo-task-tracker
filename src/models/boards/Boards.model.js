@@ -69,6 +69,9 @@ const actions = (self)=> {
 								list {
 									id
 								}
+								labels {
+									id
+								}
 							}
 						}
             }

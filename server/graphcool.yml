@@ -41,7 +41,7 @@ functions:
     type: resolver
     schema: src/task/createTaskCustom.graphql
     handler:
-      code: src/task/createTaskCustom.ts
+      code: src/task/createTaskCustom.js
 
   updateTaskCustom:
       type: resolver

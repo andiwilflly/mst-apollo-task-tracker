@@ -16,9 +16,9 @@ const Tasks = {
 const actions = (self)=> {
     return {
 
-		createMutation: ({ authorId, boardId, listId, title, description })=> {
+		createMutation: ({ authorId, boardId, listId, title, description, labelsIds })=> {
 			return client.mutate({
-				variables: { authorId, boardId, listId, title, description },
+				variables: { authorId, boardId, listId, title, description, labelsIds },
 				mutation: CREATE_TASK_CUSTOM_MUTATION
 			});
 		},

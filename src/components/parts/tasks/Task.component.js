@@ -55,6 +55,7 @@ class Task extends React.Component {
 						{ this.task.labelsIds.map((labelId)=> {
 							return (
 								<QueryLoader key={labelId}
+											 preLoader={ <div className="labels_list_label"><PreLoader/></div>}
 											 query={ LABEL_ALL_INFO_QUERY }
 											 variables={{ id: labelId }}>
 									<Label labelId={ labelId } />

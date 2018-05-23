@@ -35,7 +35,7 @@ class Search extends React.Component {
 	};
 
 
-	runSearch() {
+	runSearch = ()=> {
 		let results = [];
 		this.search.showResults = true;
 		if(this.search.by.tasks) results = [ ...results, ...store.tasks.search(this.search.text)];
@@ -48,7 +48,6 @@ class Search extends React.Component {
 		switch(result.__type) {
 			case "Task":
 				return this.renderTask(result);
-				break;
 			default:
 				return (
 					<p>default result</p>
@@ -76,8 +75,9 @@ class Search extends React.Component {
 						   placeholder="search..."
 						   value={ this.search.text }
 						   onBlur={ ()=> this.search.showResults = false }
-						   onFocus={ ()=> this.search.showResults = true }
+						   onFocus={ this.runSearch }
 						   onChange={ this.setSearchText } />
+
 					<label className="search_checkbox cf">
 						<input type="checkbox"
 							   checked={ this.search.by.tasks }

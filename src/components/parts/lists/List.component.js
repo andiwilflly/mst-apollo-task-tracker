@@ -3,7 +3,7 @@ import { DropTarget } from 'react-drag-drop-container';
 // Styles
 import "styles/lists/list.css";
 // MobX
-import { observable } from "mobx";
+import { observable, computed } from "mobx";
 import { observer } from "mobx-react";
 // Store
 import store from "store";
@@ -21,7 +21,7 @@ class List extends React.Component {
     @observable isLoading = false;
 
 
-    get list() { return store.lists.all.get(this.props.listId); };
+    @computed get list() { return store.lists.all.get(this.props.listId); };
 
 
 	creteTask = async ()=> {

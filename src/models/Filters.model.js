@@ -1,4 +1,5 @@
 import { types } from "mobx-state-tree";
+import { runInAction } from "mobx";
 
 
 const FiltersModel = {
@@ -9,11 +10,16 @@ const FiltersModel = {
 const actions = (self)=> {
 	return {
 		setFilter(filterName, filterValue) {
-			if(!self[filterName].includes(filterValue)) self[filterName].push(filterValue);
+			if(self[filterName].includes(filterValue)) return;
+			runInAction(`FILTERS-SET-FILTER-SUCCESS [${filterName}: ${filterValue}]`, ()=> {
+				self[filterName].push(filterValue);
+			});
 		},
 
 		resetFilter(filterName, filterValue) {
-			self[filterName].remove(filterValue);
+			runInAction(`FILTERS-UNSET-FILTER-SUCCESS [${filterName}: ${filterValue}]`, ()=> {
+				self[filterName].remove(filterValue);
+			});
 		}
 	};
 };

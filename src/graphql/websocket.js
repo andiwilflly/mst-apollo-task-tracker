@@ -8,9 +8,43 @@ webSocket.onopen = (event)=> {
 	const message = {
 		type: 'init'
 	};
-	webSocket.send(JSON.stringify(message));
+    webSocket.send(JSON.stringify(message));
 
-    const taskSubscriptionMessage = {
+    // const taskCreateSubscriptionMessage = {
+    //     id: 'TASK_CREATE',
+    //     type: 'subscription_start',
+    //     query: `
+    //         subscription Task {
+    //             Task(filter: {
+    //                 mutation_in: [CREATED]
+    //                 node: {
+    //                 	board: {
+    //                 		id: "cjhaftp0del4f0101mity9v5b"
+    //                 	}
+    //                 }
+    //             }){
+    //                 mutation
+    //                 node {
+    //                     id
+		// 				title
+		// 				description
+		// 				author {
+		// 					id
+		// 				}
+		// 				board {
+		// 					id
+		// 				}
+		// 				list {
+		// 					id
+		// 				}
+    //                 }
+    //             }
+    //         }
+		// 	`
+    // };
+    // webSocket.send(JSON.stringify(taskCreateSubscriptionMessage));
+
+    const taskDeleteSubscriptionMessage = {
 		id: 'TASK_DELETED',
 		type: 'subscription_start',
 		query: `
@@ -26,7 +60,7 @@ webSocket.onopen = (event)=> {
             }
 			`
 	};
-	webSocket.send(JSON.stringify(taskSubscriptionMessage));
+	webSocket.send(JSON.stringify(taskDeleteSubscriptionMessage));
 };
 
 webSocket.onmessage = (event) => {
@@ -53,6 +87,14 @@ webSocket.onmessage = (event) => {
                     const { id:taskId, authorId:userId, boardId, listId } = task;
                     store.tasks.deleteMutation({ taskId, userId, boardId, listId }).catch(console.log);
                     break;
+
+				case 'TASK_CREATE':
+                    const { id:createdTaskId, title, description, author, board, list } = data.payload.data.Task.node;
+                    const createdTask = store.tasks.all.get(createdTaskId);
+                    if(createdTask) return;
+                    console.log('%%---> createdTaskId, title, description, author, board, list', createdTaskId, title, description, author, board, list)
+                    // store.tasks.createMutation({ title, description, authorId: author.id, boardId: board.id, listId:list.id })
+					break;
 
                 default:
                     console.log(`%c subscription data has been received`, 'color: darkPink', data);

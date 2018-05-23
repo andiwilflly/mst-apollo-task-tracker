@@ -6,7 +6,7 @@ import CREATE_BOARD_MUTATION from "graphql/mutations/boards/createBoard.mutation
 import DELETE_BOARD_MUTATION from "graphql/mutations/boards/deleteBoard.mutation";
 // Models
 import BoardModel from "models/boards/Board.model";
-
+import webSocket from 'graphql/websocket'
 
 const Boards = {
 	all: types.optional(types.map(BoardModel), {})
@@ -36,8 +36,45 @@ const actions = (self)=> {
 		create(board = {}) {
 			runInAction(`BOARD-CREATE-SUCCESS`, ()=> {
 				self.all.set(board.id, board);
+                self.subscribeTask(board.id);
 				// TODO: Subscribe to tasks [CREATE, UPDATE, DELETE]
 			});
+		},
+
+		subscribeTask(boardId) {
+            const taskCreateSubscriptionMessage = {
+                id: 'TASK_CREATE',
+                type: 'subscription_start',
+                query: `
+					subscription Task {
+						Task(filter: {
+							mutation_in: [CREATED]
+							node: {
+								board: {
+									id: "${boardId}"
+								}
+							}
+						}){
+							mutation
+							node {
+								id
+								title
+								description
+								author {
+									id
+								}
+								board { 
+									id
+								}
+								list {
+									id
+								}
+							}
+						}
+            }
+			`
+            };
+            webSocket.send(JSON.stringify(taskCreateSubscriptionMessage));
 		},
 
         update: (newBoard)=> {

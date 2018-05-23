@@ -17,15 +17,26 @@ class BoardFilters extends React.Component {
 
 
 	onLabelClick = (label)=> {
-		console.log(this.board, "label", label);
+		store.filters.setFilter("byLabels", label.color);
 	};
 
 
 	render() {
 		return (
 			<div>
-				<p>Filter by labels:</p>
+				<p>All labels:</p>
 				<AllLabels onLabelClick={ this.onLabelClick } />
+				<p>Filtered by labels:</p>
+				<div className="labels_list">
+					{ store.filters.byLabels.map((labelColor)=> {
+						return (
+							<div key={labelColor}
+								 className="labels_list_label"
+								 onClick={ ()=> store.filters.resetFilter("byLabels", labelColor) }
+								 style={{ background: labelColor }} />
+						);
+					}) }
+				</div>
 				<hr/>
 				<br/>
 				<br/>

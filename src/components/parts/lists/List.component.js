@@ -58,8 +58,6 @@ class List extends React.Component {
 
 
     render() {
-        if(!this.list) return <h3>No list { this.props.listId }</h3>;
-
         return (
             <div className="list">
 				<DropTarget targetKey="task"

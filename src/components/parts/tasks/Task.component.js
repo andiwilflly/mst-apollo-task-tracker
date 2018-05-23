@@ -3,7 +3,7 @@ import { DragDropContainer } from 'react-drag-drop-container';
 // Styles
 import "styles/tasks/task.css";
 // MobX
-import { observable } from "mobx";
+import { observable, values } from "mobx";
 import { observer } from "mobx-react";
 // GraphQL
 import LABEL_ALL_INFO_QUERY from "graphql/queries/labels/labelAllInfo.query";
@@ -23,6 +23,15 @@ class Task extends React.Component {
 
 	get task() { return store.tasks.all.get(this.props.taskId); };
 
+	get taskLabels() { return values(store.labels.all).filter((label)=> label.tasks.map((task)=> task.id).includes(this.task.id)); };
+
+	get taskLabelsColors() { return this.taskLabels.map((label)=> label.color); };
+
+	get isHideTask() {
+		if(!store.filters.byLabels.length) return false;
+		return !store.filters.byLabels.filter((color)=> this.taskLabelsColors.includes(color)).length;
+
+	};
 
 	deleteTask = async ()=> {
 		this.isLoading = true;
@@ -38,6 +47,7 @@ class Task extends React.Component {
 
 	render() {
 		if(!this.task) return <div className="task"><PreLoader /></div>;
+		if(this.isHideTask) return null;
 
 		return (
 			<DragDropContainer targetKey="task"

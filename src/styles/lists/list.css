@@ -5,4 +5,15 @@
 	background: lightgray;
 	margin: 5px;
 	width: 210px;
+	min-height: 100px;
+}
+
+/* Drag drop element style */
+.list > span {
+	display: block;
+	min-height: 100px;
+}
+
+.list > .cssload-loader {
+	height: 200px;
 }

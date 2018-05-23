@@ -94,7 +94,7 @@ function applyData(dataName, data) {
 			break;
 
 		default:
-			console.log("dataName: ", operationName, dataName, data);
+			console.log("dataName: ", dataName, data);
 	}
 }
 

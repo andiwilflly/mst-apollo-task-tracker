@@ -14,8 +14,12 @@ class Search extends React.Component {
 
 	@observable search = {
 		text: "",
-		byTasks: true,
-		byLists: false,
+		by: {
+			tasks: true,
+			users: false,
+			comments: false
+		},
+		showResults: false,
 		results: []
 	};
 
@@ -26,14 +30,15 @@ class Search extends React.Component {
 	};
 
 	setSearchBy = (type)=> {
-		this.search[type] = !this.search[type];
+		this.search.by[type] = !this.search.by[type];
 		this.runSearch();
 	};
 
 
 	runSearch() {
 		let results = [];
-		if(this.search.byTasks) results = [ ...results, ...store.tasks.search(this.search.text)];
+		this.search.showResults = true;
+		if(this.search.by.tasks) results = [ ...results, ...store.tasks.search(this.search.text)];
 
 		this.search.results = results;
 	};
@@ -68,23 +73,32 @@ class Search extends React.Component {
 			<div className="search cf">
 				<div className="search_input">
 					<input type="text"
+						   placeholder="search..."
 						   value={ this.search.text }
+						   onBlur={ ()=> this.search.showResults = false }
+						   onFocus={ ()=> this.search.showResults = true }
 						   onChange={ this.setSearchText } />
 					<label className="search_checkbox cf">
 						<input type="checkbox"
-							   checked={ this.search.byTasks }
-							   onChange={ ()=> this.setSearchBy('byTasks') } />
+							   checked={ this.search.by.tasks }
+							   onChange={ ()=> this.setSearchBy('tasks') } />
 						<span>search by tasks</span>
 					</label>
 					<label className="search_checkbox cf">
 						<input type="checkbox"
-							   checked={ this.search.byLists }
-							   onChange={ ()=> this.setSearchBy('byLists') } />
-						<span>search by lists</span>
+							   checked={ this.search.by.users }
+							   onChange={ ()=> this.setSearchBy('users') } />
+						<span>search by users</span>
+					</label>
+					<label className="search_checkbox cf">
+						<input type="checkbox"
+							   checked={ this.search.by.comments }
+							   onChange={ ()=> this.setSearchBy('comments') } />
+						<span>search by comments</span>
 					</label>
 				</div>
 
-				{ this.search.results.length ?
+				{ this.search.showResults && this.search.results.length ?
 					<div className="search_results cf">
 						{ this.search.results.map((result)=> {
 							return (

@@ -5,44 +5,9 @@ const webSocket = new WebSocket('wss://subscriptions.graph.cool/v1/cjh1v6rdw1kmk
 
 
 webSocket.onopen = (event)=> {
-	const message = {
-		type: 'init'
-	};
-    webSocket.send(JSON.stringify(message));
 
-    // const taskCreateSubscriptionMessage = {
-    //     id: 'TASK_CREATE',
-    //     type: 'subscription_start',
-    //     query: `
-    //         subscription Task {
-    //             Task(filter: {
-    //                 mutation_in: [CREATED]
-    //                 node: {
-    //                 	board: {
-    //                 		id: "cjhaftp0del4f0101mity9v5b"
-    //                 	}
-    //                 }
-    //             }){
-    //                 mutation
-    //                 node {
-    //                     id
-		// 				title
-		// 				description
-		// 				author {
-		// 					id
-		// 				}
-		// 				board {
-		// 					id
-		// 				}
-		// 				list {
-		// 					id
-		// 				}
-    //                 }
-    //             }
-    //         }
-		// 	`
-    // };
-    // webSocket.send(JSON.stringify(taskCreateSubscriptionMessage));
+
+    webSocket.send(JSON.stringify({ type: 'init' }));
 
     const taskDeleteSubscriptionMessage = {
 		id: 'TASK_DELETED',
@@ -65,19 +30,19 @@ webSocket.onopen = (event)=> {
 
 webSocket.onmessage = (event) => {
 	const data = JSON.parse(event.data);
+	const styles = 'color: white; background: #82afdc; padding: 2px';
+
 	switch (data.type) {
 		case 'init_success': {
-            console.log(`%c Subscription init success`, 'color: darkPink');
+            console.log(`%c SOCKET-INIT-SUCCESS`, styles);
 			break
 		}
 		case 'init_fail': {
-            console.error({
-				message: 'init_fail returned from WebSocket server',
-				data
-			});
+			console.log(`%c SOCKET-INIT-FAILED`, styles, data);
             break;
 		}
 		case 'subscription_data': {
+			console.log(`%c SOCKET-SUBSCRIPTION-DATA-ARRIVED [event: ${data.id}]`, styles, data);
             switch(data.id) {
 				case 'TASK_DELETED':
                     const deletedTaskId = data.payload.data.Task.previousValues.id;
@@ -106,14 +71,11 @@ webSocket.onmessage = (event) => {
 			break
 		}
 		case 'subscription_success': {
-            console.log(`%c Subscription success`, 'color: darkPink');
+			console.log(`%c SOCKET-SUBSCRIPTION-SUCCESS [event: ${data.id}]`, styles, data);
             break
 		}
 		case 'subscription_fail': {
-            console.error({
-                message: 'subscription_fail returned from WebSocket server',
-                data
-            });
+			console.log(`%c SOCKET-SUBSCRIPTION-FAILED [event: ${data.id}]`, styles, data);
             break;
 		}
 		default:

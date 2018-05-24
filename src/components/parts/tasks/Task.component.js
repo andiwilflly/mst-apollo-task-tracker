@@ -6,7 +6,6 @@ import "styles/tasks/task.css";
 import { observable, computed, values } from "mobx";
 import { observer } from "mobx-react";
 // GraphQL
-import LABEL_ALL_INFO_QUERY from "graphql/queries/labels/labelAllInfo.query";
 import TASK_ALL_INFO_QUERY from "graphql/queries/tasks/taskAllInfo.query";
 // Store
 import store from "store";
@@ -47,6 +46,11 @@ class Task extends React.Component {
 	};
 
 
+	editTask = ()=> {
+		store.modal.open("EditTask", { task: this.task });
+	};
+
+
 	renderTask() {
 		if(this.isHideTask) return null;
 
@@ -64,14 +68,7 @@ class Task extends React.Component {
 
 					<ul className="labels_list">
 						{ this.task.labelsIds.map((labelId)=> {
-							return (
-								<QueryLoader key={labelId}
-											 preLoader={ <div className="labels_list_label"><PreLoader/></div>}
-											 query={ LABEL_ALL_INFO_QUERY }
-											 variables={{ id: labelId }}>
-									<Label labelId={ labelId } />
-								</QueryLoader>
-							)
+							return <Label key={labelId} labelId={ labelId } />;
 						}) }
 					</ul>
 
@@ -83,6 +80,8 @@ class Task extends React.Component {
 							:
 							'Delete task'
 					}</button>
+
+					<div className="task_edit" onDoubleClick={ this.editTask }>✎</div>
 				</div>
 			</DragDropContainer>
 		);

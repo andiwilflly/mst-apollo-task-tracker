@@ -71,6 +71,7 @@ function applyData(dataName, data) {
 
 		case "updateTaskCustom":
 			data = parse(data).response;
+			console.log(data, "UP");
 			data.map((data)=> applyData(Object.keys(data)[0], data[Object.keys(data)[0]]));
 			break;
 

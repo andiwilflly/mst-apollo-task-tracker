@@ -71,11 +71,11 @@ webSocket.onmessage = (event) => {
 			break
 		}
 		case 'subscription_success': {
-			console.log(`%c SOCKET-SUBSCRIPTION-SUCCESS [event: ${data.id}]`, styles, data);
+			console.log(`%c SOCKET-SUBSCRIPTION-SUCCESS [event: ${data.id}]`, styles);
             break
 		}
 		case 'subscription_fail': {
-			console.log(`%c SOCKET-SUBSCRIPTION-FAILED [event: ${data.id}]`, styles, data);
+			console.log(`%c SOCKET-SUBSCRIPTION-FAILED [event: ${data.id}]`, styles);
             break;
 		}
 		default:

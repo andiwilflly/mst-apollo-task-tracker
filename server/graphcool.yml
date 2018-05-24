@@ -44,16 +44,22 @@ functions:
       code: src/task/createTaskCustom.js
 
   updateTaskCustom:
-      type: resolver
-      schema: src/task/updateTaskCustom.graphql
-      handler:
-        code: src/task/updateTaskCustom.js
+    type: resolver
+    schema: src/task/updateTaskCustom.graphql
+    handler:
+      code: src/task/updateTaskCustom.js
+
+  updateTaskRelations:
+    type: resolver
+    schema: src/task/updateTaskRelations.graphql
+    handler:
+      code: src/task/updateTaskRelations.js
 
   deleteTaskCustom:
     type: resolver
     schema: src/task/deleteTaskCustom.graphql
     handler:
-      code: src/task/deleteTaskCustom.ts
+      code: src/task/deleteTaskCustom.js
 
 
 # Model/Relation permissions are used to limit the API access

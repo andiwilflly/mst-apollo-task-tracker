@@ -4,6 +4,7 @@ import { types } from 'mobx-state-tree';
 import client from "graphql/client";
 import CREATE_TASK_CUSTOM_MUTATION from "graphql/mutations/tasks/createTaskCustom.mutation";
 import DELETE_TASK_CUSTOM_MUTATION from "graphql/mutations/tasks/deleteTaskCustom.mutation";
+import UPDATE_TASK_RELATIONS_QUERY from "graphql/queries/tasks/updateTaskRelations.query";
 // Models
 import TaskModel from "models/tasks/Task.model";
 
@@ -31,8 +32,15 @@ const actions = (self)=> {
 			});
 		},
 
+        updateTaskRelations: ({ authorId, boardId, listId })=> {
+            return client.query({
+                variables: { authorId, boardId, listId },
+                query: UPDATE_TASK_RELATIONS_QUERY
+            });
+		},
 
-		create(task = {}) {
+
+        create(task = {}) {
 			if(self.all.has(task.id)) return self.all.get(task.id).update(task);
 			runInAction(`TASK-CREATE-SUCCESS`, ()=> {
 				self.all.set(task.id, task);

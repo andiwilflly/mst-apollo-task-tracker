@@ -84,19 +84,17 @@ webSocket.onmessage = (event) => {
                     const task = store.tasks.all.get(deletedTaskId);
                     if(!task) return;
 
-                    const { id:taskId, authorId:userId, boardId, listId } = task;
-                    // TODO: write [updateTaskRelations] function on server
-                   // store.tasks.deleteMutation({ taskId, userId, boardId, listId }).catch(console.log);
+                    store.tasks.updateTaskRelations({authorId: task.author.id, boardId: task.board.id, listId: task.list.id });
                     break;
 
 				case 'TASK_CREATE':
-					console.log('%%---> data', data)
 
                     const { id:createdTaskId, title, description, author, board, list, labels } = data.payload.data.Task.node;
                     const createdTask = store.tasks.all.get(createdTaskId);
                     if(createdTask) return;
+                    store.tasks.updateTaskRelations({authorId: author.id, boardId: board.id, listId:list.id });
                     // console.log('%%---> ', createdTaskId, title, description, author, board, list, labels)
-                   // store.tasks.createMutation({ title, description, authorId: author.id, boardId: board.id, listId:list.id, labelsIds: labels.map(label => label.id) });
+                    // store.tasks.createMutation({ title, description, authorId: author.id, boardId: board.id, listId:list.id, labelsIds: labels.map(label => label.id) });
 					break;
 
                 default:

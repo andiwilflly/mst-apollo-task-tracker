@@ -69,8 +69,9 @@ function applyData(dataName, data) {
 			Alert.success("Task was created successfully!");
 			break;
 
+        case "updateTaskRelations":
 		case "updateTaskCustom":
-			data = parse(data).response;
+            data = parse(data).response;
 			data.map((data)=> applyData(Object.keys(data)[0], data[Object.keys(data)[0]]));
 			break;
 

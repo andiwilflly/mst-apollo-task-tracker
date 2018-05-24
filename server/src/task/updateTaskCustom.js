@@ -20,12 +20,12 @@ export default async (event)=> {
 
     // Here we change [relation] of task [list]
     // In this case we need to refetch both of lists (previous and new one)
-    if(event.data.listId) {
+    if(event.data.listId && (task.Task.list.id !== event.data.listId)) {
         response.push(await getList(api, { listId: task.Task.list.id }));
 		response.push(await getList(api, { listId: event.data.listId }));
     }
 
-	if(event.data.boardId) {
+	if(event.data.boardId && (task.Task.board.id !== event.data.boardId)) {
 		response.push(await getBoard(api, { boardId: task.Task.board.id }));
 		response.push(await getBoard(api, { boardId: event.data.boardId }));
 	}

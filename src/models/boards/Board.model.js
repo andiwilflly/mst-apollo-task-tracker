@@ -15,15 +15,9 @@ const actions = (self)=> {
     return {
 
 		update(board) {
-			if(!self.boards.has(board.id)) return console.log("ERROR!, board update");
-
-			runInAction(`USER-UPDATE-BOARD-SUCCESS`, ()=> {
-				const oldBoard = self.boards.get(board.id);
-				const fieldNames = Object.keys(oldBoard);
-				fieldNames.forEach((fieldName)=> {
-					if(board[fieldName] === undefined) return;
-					if(fieldName === "tasks") return board[fieldName].map((task)=> oldBoard.updateTask(task));
-					oldBoard[fieldName] = board[fieldName];
+			runInAction(`BOARD-UPDATE-SUCCESS ${board.id}`, ()=> {
+				Object.keys(self).forEach((fieldName)=> {
+					if(board[fieldName] !== undefined) self[fieldName] = board[fieldName];
 				});
 			});
 		}

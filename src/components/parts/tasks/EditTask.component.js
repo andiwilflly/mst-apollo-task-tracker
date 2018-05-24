@@ -48,9 +48,6 @@ class CreateList extends React.Component {
 		this.isLoading = true;
 		await this.props.task.updateMutation({
 			id: this.props.task.id,
-			authorId:  this.props.task.authorId,
-			boardId: this.props.task.boardId,
-			listId: this.props.task.listId,
 			labelsIds: this.form.labels,
 			title: this.form.title,
 			description: this.form.description

@@ -33,13 +33,16 @@ const actions = (self)=> {
 			});
 		},
 
+
 		create(board = {}) {
-			runInAction(`BOARD-CREATE-SUCCESS`, ()=> {
+			if(self.all.has(board.id)) return self.all.get(board.id).update(board);
+			runInAction(`BOARD-CREATE-SUCCESS ${board.id}`, ()=> {
 				self.all.set(board.id, board);
                 self.subscribeTaskCreate(board.id);
                 self.subscribeTaskDelete(board.id);
             });
 		},
+
 
         subscribeTaskCreate(boardId) {
             const taskCreateSubscriptionMessage = {

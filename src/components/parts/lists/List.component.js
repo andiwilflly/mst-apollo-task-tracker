@@ -7,11 +7,7 @@ import { observable, computed } from "mobx";
 import { observer } from "mobx-react";
 // Store
 import store from "store";
-// GraphQL
-import TASK_ALL_INFO_QUERY from "graphql/queries/tasks/taskAllInfo.query";
-// Components
-import QueryLoader from "components/QueryLoader.component";
-import PreLoader from 'components/parts/PreLoader.component';
+
 import Task from 'components/parts/tasks/Task.component';
 
 
@@ -71,16 +67,7 @@ class List extends React.Component {
 						</button>
 
 						<br/>
-						{ this.list.taskIds.map((taskId)=> {
-							return (
-								<QueryLoader query={TASK_ALL_INFO_QUERY}
-											 key={taskId}
-											 preLoader={<div className="task"><PreLoader/></div>}
-											 variables={{id: taskId}}>
-									<Task taskId={taskId} />
-								</QueryLoader>
-							);
-						}) }
+						{ this.list.taskIds.map((taskId)=> <Task key={taskId} taskId={taskId} />) }
 					</div>
 				</DropTarget>
             </div>

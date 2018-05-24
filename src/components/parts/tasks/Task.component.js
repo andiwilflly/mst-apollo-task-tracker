@@ -7,12 +7,14 @@ import { observable, computed, values } from "mobx";
 import { observer } from "mobx-react";
 // GraphQL
 import LABEL_ALL_INFO_QUERY from "graphql/queries/labels/labelAllInfo.query";
+import TASK_ALL_INFO_QUERY from "graphql/queries/tasks/taskAllInfo.query";
 // Store
 import store from "store";
 // Components
 import PreLoader from 'components/parts/PreLoader.component';
 import Label from 'components/parts/labels/Label.component';
 import QueryLoader from "components/QueryLoader.component";
+
 
 @observer
 class Task extends React.Component {
@@ -32,6 +34,7 @@ class Task extends React.Component {
 
 	};
 
+
 	deleteTask = async ()=> {
 		this.isLoading = true;
 		await store.tasks.deleteMutation({
@@ -44,16 +47,15 @@ class Task extends React.Component {
 	};
 
 
-	render() {
-		if(!this.task) return <div className="task"><PreLoader /></div>;
+	renderTask() {
 		if(this.isHideTask) return null;
 
 		return (
 			<DragDropContainer targetKey="task"
 							   returnToBase={true}
 							   dragData={{
-							   	  taskId: this.task.id,
-								  listId: this.task.listId
+								   taskId: this.task.id,
+								   listId: this.task.listId
 							   }}>
 				<div className="task cf">
 					<h3 className="task_title">{  this.task.title }</h3>
@@ -83,6 +85,21 @@ class Task extends React.Component {
 					}</button>
 				</div>
 			</DragDropContainer>
+		);
+	}
+
+
+	render() {
+		return (
+			<QueryLoader query={TASK_ALL_INFO_QUERY}
+						 preLoader={<div className="task"><PreLoader/></div>}
+						 variables={{ id: this.props.taskId }}>
+				{ this.task ?
+					this.renderTask()
+					:
+					<div className="task"><PreLoader /></div>
+				}
+			</QueryLoader>
 		)
 	}
 }

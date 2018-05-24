@@ -69,9 +69,9 @@ function applyData(dataName, data) {
 			Alert.success("Task was created successfully!");
 			break;
 
+        case "updateTaskRelations":
 		case "updateTaskCustom":
-			data = parse(data).response;
-			console.log(data, "UP");
+            data = parse(data).response;
 			data.map((data)=> applyData(Object.keys(data)[0], data[Object.keys(data)[0]]));
 			break;
 
@@ -86,7 +86,7 @@ function applyData(dataName, data) {
 
 		case "allLabels":
 			runInAction('LABELS-CREATE-ALL', ()=> {
-				data.map((label)=> store.labels.create(label));
+				data.forEach((label)=> store.labels.create(label));
 			});
 			break;
 		case "Label":

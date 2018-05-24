@@ -36,12 +36,12 @@ const actions = (self)=> {
 		create(board = {}) {
 			runInAction(`BOARD-CREATE-SUCCESS`, ()=> {
 				self.all.set(board.id, board);
-                self.subscribeTask(board.id);
-				// TODO: Subscribe to tasks [CREATE, UPDATE, DELETE]
-			});
+                self.subscribeTaskCreate(board.id);
+                self.subscribeTaskDelete(board.id);
+            });
 		},
 
-		subscribeTask(boardId) {
+        subscribeTaskCreate(boardId) {
             const taskCreateSubscriptionMessage = {
                 id: 'TASK_CREATE',
                 type: 'subscription_start',
@@ -56,6 +56,9 @@ const actions = (self)=> {
 							}
 						}){
 							mutation
+							previousValues {
+								id
+							}
 							node {
 								id
 								title
@@ -80,6 +83,31 @@ const actions = (self)=> {
             webSocket.send(JSON.stringify(taskCreateSubscriptionMessage));
 		},
 
+        subscribeTaskDelete(boardId) {
+            const taskDeleteSubscriptionMessage = {
+                id: 'TASK_DELETED',
+                type: 'subscription_start',
+                query: `
+					subscription Task {
+						Task(filter: {
+							mutation_in: [DELETED]
+							node: {
+								board: {
+									id: "${boardId}"
+								}
+							}
+						}){
+							mutation
+							previousValues {
+								id
+							}
+						}
+					}
+				`
+            };
+            webSocket.send(JSON.stringify(taskDeleteSubscriptionMessage));
+        },
+
         update: (newBoard)=> {
             runInAction(`BOARDS-UPDATE-SUCCESS`, ()=> {
                 const oldBoard = self.all.get(newBoard.id);
@@ -88,11 +116,12 @@ const actions = (self)=> {
             });
         },
 
-		delete(boardId) {
+        delete(boardId) {
 			runInAction(`BOARD-DELETE-SUCCESS`, ()=> {
 				self.all.delete(boardId);
 			});
 		}
+
     };
 };
 

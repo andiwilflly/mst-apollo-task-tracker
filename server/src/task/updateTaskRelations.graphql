@@ -1,0 +1,11 @@
+type UpdateTaskRelationsPayload {
+    response: String!
+}
+
+extend type Query {
+    updateTaskRelations(
+        boardId: ID,
+        listId: ID,
+        authorId: ID
+    ): UpdateTaskRelationsPayload
+}

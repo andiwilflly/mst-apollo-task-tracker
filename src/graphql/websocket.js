@@ -5,27 +5,7 @@ const webSocket = new WebSocket('wss://subscriptions.graph.cool/v1/cjh1v6rdw1kmk
 
 
 webSocket.onopen = (event)=> {
-
-
     webSocket.send(JSON.stringify({ type: 'init' }));
-
-    const taskDeleteSubscriptionMessage = {
-		id: 'TASK_DELETED',
-		type: 'subscription_start',
-		query: `
-            subscription Task {
-                Task(filter: {
-                    mutation_in: [DELETED]
-                }){
-                    mutation
-                    previousValues {
-                        id
-                    }
-                }
-            }
-			`
-	};
-	webSocket.send(JSON.stringify(taskDeleteSubscriptionMessage));
 };
 
 webSocket.onmessage = (event) => {
@@ -45,23 +25,25 @@ webSocket.onmessage = (event) => {
 			console.log(`%c SOCKET-SUBSCRIPTION-DATA-ARRIVED [event: ${data.id}]`, styles, data);
             switch(data.id) {
 				case 'TASK_DELETED':
-                    const deletedTaskId = data.payload.data.Task.previousValues.id;
-                    const task = store.tasks.all.get(deletedTaskId);
-                    if(!task) return;
+                    const deletedTask = data.payload.data.Task.previousValues;
+                    const taskFromStore = store.tasks.all.get(deletedTask.id);
+                    if(!taskFromStore) return;
 
-                    const { id:taskId, authorId:userId, boardId, listId } = task;
-                    // TODO: write [updateTaskRelations] function on server
-                   // store.tasks.deleteMutation({ taskId, userId, boardId, listId }).catch(console.log);
+                    store.tasks.updateTaskRelations({
+						authorId: taskFromStore.author.id,
+						boardId: taskFromStore.board.id,
+						listId: taskFromStore.list.id
+                    });
                     break;
 
 				case 'TASK_CREATE':
-					console.log('%%---> data', data)
+                    const createdTask = data.payload.data.Task.node;
+                    if(store.tasks.all.has(createdTask.id)) return;
 
-                    const { id:createdTaskId, title, description, author, board, list, labels } = data.payload.data.Task.node;
-                    const createdTask = store.tasks.all.get(createdTaskId);
-                    if(createdTask) return;
-                    // console.log('%%---> ', createdTaskId, title, description, author, board, list, labels)
-                   // store.tasks.createMutation({ title, description, authorId: author.id, boardId: board.id, listId:list.id, labelsIds: labels.map(label => label.id) });
+                    store.tasks.updateTaskRelations({
+						authorId: createdTask.author.id,
+						boardId: createdTask.board.id,
+						listId: createdTask.list.id });
 					break;
 
                 default:

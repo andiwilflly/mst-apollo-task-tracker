@@ -21,7 +21,16 @@ const httpLink = new BatchHttpLink({
 	uri: 'https://api.graph.cool/simple/v1/cjh1v6rdw1kmk0171da10ighp',
 	batchInterval: 200,
 	batchKey: str => {
-		return str.operationName;
+		switch(str.operationName) {
+			case "boardAllInfo":
+			case "allLabels":
+			case "taskAllInfo":
+			case "listAllInfo":
+			case "labelAllInfo":
+				return "root";
+			default:
+				return str.operationName;
+		}
 	}
 });
 

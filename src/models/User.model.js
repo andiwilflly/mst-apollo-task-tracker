@@ -19,7 +19,7 @@ const actions = (self)=> {
 		setInfo: (data)=> {
             runInAction(`USER-SET-INFO-SUCCESS`, ()=>
 				Object.keys(self).forEach(fieldName => {
-                    self[fieldName] = data[fieldName]
+                    if(data[fieldName] !== undefined) self[fieldName] = data[fieldName];
 				}))
 		},
 
@@ -36,7 +36,7 @@ const actions = (self)=> {
             runInAction(`USER-UPDATE-SUCCESS`, ()=> {
                 Object.keys(newUser).forEach((fieldName)=> {
                     if(fieldName === 'tasks' || fieldName === 'boards') {
-                        self[fieldName] = newUser[fieldName];
+                        if(newUser[fieldName] !== undefined) self[fieldName] = newUser[fieldName];
                     }
                 });
             });

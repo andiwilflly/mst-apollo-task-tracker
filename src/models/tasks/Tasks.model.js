@@ -37,7 +37,7 @@ const actions = (self)=> {
                 variables: { authorId, boardId, listId },
                 query: UPDATE_TASK_RELATIONS_QUERY
             });
-		},
+        },
 
 
         create(task = {}) {

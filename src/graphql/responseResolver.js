@@ -72,7 +72,10 @@ function applyData(dataName, data) {
         case "updateTaskRelations":
 		case "updateTaskCustom":
             data = parse(data).response;
+            console.log('%%---> data', data)
+
 			data.map((data)=> applyData(Object.keys(data)[0], data[Object.keys(data)[0]]));
+
 			break;
 
 		case "deleteTaskCustom":
@@ -87,7 +90,7 @@ function applyData(dataName, data) {
 
 		case "allLabels":
 			runInAction('LABELS-CREATE-ALL', ()=> {
-				data.map((label)=> store.labels.create(label));
+				data.forEach((label)=> store.labels.create(label));
 			});
 			break;
 		case "Label":

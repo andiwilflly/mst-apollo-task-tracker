@@ -9,58 +9,6 @@ webSocket.onopen = (event)=> {
 		type: 'init'
 	};
     webSocket.send(JSON.stringify(message));
-
-    // const taskCreateSubscriptionMessage = {
-    //     id: 'TASK_CREATE',
-    //     type: 'subscription_start',
-    //     query: `
-    //         subscription Task {
-    //             Task(filter: {
-    //                 mutation_in: [CREATED]
-    //                 node: {
-    //                 	board: {
-    //                 		id: "cjhaftp0del4f0101mity9v5b"
-    //                 	}
-    //                 }
-    //             }){
-    //                 mutation
-    //                 node {
-    //                     id
-		// 				title
-		// 				description
-		// 				author {
-		// 					id
-		// 				}
-		// 				board {
-		// 					id
-		// 				}
-		// 				list {
-		// 					id
-		// 				}
-    //                 }
-    //             }
-    //         }
-		// 	`
-    // };
-    // webSocket.send(JSON.stringify(taskCreateSubscriptionMessage));
-
-    const taskDeleteSubscriptionMessage = {
-		id: 'TASK_DELETED',
-		type: 'subscription_start',
-		query: `
-            subscription Task {
-                Task(filter: {
-                    mutation_in: [DELETED]
-                }){
-                    mutation
-                    previousValues {
-                        id
-                    }
-                }
-            }
-			`
-	};
-	webSocket.send(JSON.stringify(taskDeleteSubscriptionMessage));
 };
 
 webSocket.onmessage = (event) => {
@@ -80,21 +28,25 @@ webSocket.onmessage = (event) => {
 		case 'subscription_data': {
             switch(data.id) {
 				case 'TASK_DELETED':
-                    const deletedTaskId = data.payload.data.Task.previousValues.id;
-                    const task = store.tasks.all.get(deletedTaskId);
-                    if(!task) return;
+                    const deletedTask = data.payload.data.Task.previousValues;
+                    const taskFromStore = store.tasks.all.get(deletedTask.id);
+                    if(!taskFromStore) return;
 
-                    store.tasks.updateTaskRelations({authorId: task.author.id, boardId: task.board.id, listId: task.list.id });
+                    store.tasks.updateTaskRelations({
+						authorId: taskFromStore.author.id,
+						boardId: taskFromStore.board.id,
+						listId: taskFromStore.list.id
+                    });
                     break;
 
 				case 'TASK_CREATE':
+                    const createdTask = data.payload.data.Task.node;
+                    if(store.tasks.all.has(createdTask.id)) return;
 
-                    const { id:createdTaskId, title, description, author, board, list, labels } = data.payload.data.Task.node;
-                    const createdTask = store.tasks.all.get(createdTaskId);
-                    if(createdTask) return;
-                    store.tasks.updateTaskRelations({authorId: author.id, boardId: board.id, listId:list.id });
-                    // console.log('%%---> ', createdTaskId, title, description, author, board, list, labels)
-                    // store.tasks.createMutation({ title, description, authorId: author.id, boardId: board.id, listId:list.id, labelsIds: labels.map(label => label.id) });
+                    store.tasks.updateTaskRelations({
+						authorId: createdTask.author.id,
+						boardId: createdTask.board.id,
+						listId: createdTask.list.id });
 					break;
 
                 default:

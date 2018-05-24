@@ -9,25 +9,22 @@ import store from "store";
 
 export default function (operation = {}, data = {}, errors = null, cache) {
 
-	const operationName = operation.operationName;
-
 	const dataName = Object.keys(data)[0];
 	data = data[dataName];
 	const errorMsg = errors ? errors[0].message : "";
 
-	console.groupCollapsed(`%c🕺 REQUEST ${operationName} (${errors ? "ERROR" : "SUCCESS"})`, "color: darkgreen");
-	console.log("operationName", operationName);
+	console.groupCollapsed(`%c🕺 REQUEST (${errors ? "ERROR" : "SUCCESS"})`, "color: darkgreen");
 	console.log("dataName", dataName);
 	console.log("data", data);
 	console.log("errors", errors);
 	console.groupEnd(`%c🕺 REQUEST`, "color: darkgreen");
 
     if(errors) return Alert.error(errorMsg);
-	applyData(operationName, dataName, data);
+	applyData(dataName, data);
 }
 
 
-function applyData(operationName, dataName, data) {
+function applyData(dataName, data) {
 
 	switch (dataName) {
 		case "loggedInUser":
@@ -74,7 +71,7 @@ function applyData(operationName, dataName, data) {
 
 		case "updateTaskCustom":
 			data = parse(data).response;
-			data.map((data)=> applyData(operationName, Object.keys(data)[0], data[Object.keys(data)[0]]));
+			data.map((data)=> applyData(Object.keys(data)[0], data[Object.keys(data)[0]]));
 			break;
 
 		case "deleteTaskCustom":
@@ -96,7 +93,7 @@ function applyData(operationName, dataName, data) {
 			break;
 
 		default:
-			console.log("dataName: ", operationName, dataName, data);
+			console.log("dataName: ", dataName, data);
 	}
 }
 

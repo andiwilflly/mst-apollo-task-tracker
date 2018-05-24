@@ -49,8 +49,12 @@ function applyData(dataName, data) {
 			store.board.delete(data.id);
 			Alert.success("Board was deleted successfully!");
 			break;
+
 		case "Task":
 			store.tasks.create(data);
+			break;
+		case "deleteTaskCustom":
+			store.tasks.delete(data.id);
 			break;
 
 		case "updateTask":
@@ -58,30 +62,11 @@ function applyData(dataName, data) {
 			if(task) task.update(data);
 			break;
 
-		case "createTaskCustom":
-			data = parse(data);
-
-            if(store.lists.all.has(data.list.id)) store.lists.all.get(data.list.id).update(data.list);
-			data.labels.map((label)=> store.labels.all.has(label.id) && store.labels.all.get(label.id).update(label));
-
-            store.user.update(data.user);
-            store.boards.update(data.board);
-			Alert.success("Task was created successfully!");
-			break;
-
         case "updateTaskRelations":
 		case "updateTaskCustom":
             data = parse(data).response;
+            console.log(data, 4242);
 			data.map((data)=> applyData(Object.keys(data)[0], data[Object.keys(data)[0]]));
-			break;
-
-		case "deleteTaskCustom":
-			data = parse(data);
-
-			if(store.lists.all.has(data.list.id)) store.lists.all.get(data.list.id).update(data.list);
-			store.user.update(data.user);
-			store.boards.update(data.board);
-			store.tasks.delete(data.deletedTaskId);
 			break;
 
 		case "allLabels":

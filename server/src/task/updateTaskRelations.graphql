@@ -4,6 +4,7 @@ type UpdateTaskRelationsPayload {
 
 extend type Query {
     updateTaskRelations(
+        id: ID,
         boardId: ID,
         listId: ID,
         authorId: ID

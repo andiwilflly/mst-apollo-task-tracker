@@ -42,7 +42,6 @@ class Task extends React.Component {
 			boardId: this.task.boardId,
 			listId: this.task.listId
 		});
-		this.isLoading = false;
 	};
 
 

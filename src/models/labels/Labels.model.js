@@ -2,6 +2,9 @@ import { runInAction } from "mobx";
 import { types } from 'mobx-state-tree';
 // Models
 import LabelModel from "models/labels/Label.model";
+// GraphQL
+import client from "graphql/client";
+import CREATE_LABEL_MUTATION from "graphql/mutations/labels/createLabel.mutation";
 
 
 const Labels = {
@@ -11,18 +14,11 @@ const Labels = {
 const actions = (self)=> {
 	return {
 
-		createMutation: async ({ boardId, name } = {})=> {
-			// const response = await client.mutate({
-			// 	variables: { boardId, name },
-			// 	mutation: CREATE_LIST_MUTATION
-			// });
-			//
-			// runInAction(`LIST-CREATE-SUCCESS`, ()=>
-			// 	self.all.set(response.id, {
-			// 		id: response.id,
-			// 		name: response.name
-			// 	})
-			// );
+		createMutation: ({ color } = {})=> {
+			client.mutate({
+				variables: { color },
+				mutation: CREATE_LABEL_MUTATION
+			});
 		},
 
 

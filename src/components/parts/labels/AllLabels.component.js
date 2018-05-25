@@ -10,11 +10,14 @@ import store from "store";
 import ALL_LABELS_QUERY from "graphql/queries/labels/allLabels.query";
 // Components
 import QueryLoader from "components/QueryLoader.component";
+import PreLoader from 'components/parts/PreLoader.component';
 
 
 @observer
 class AllLabels extends React.Component {
 
+
+	@observable isLoading = false;
 
 	@observable newLabel = {
 		color: ""
@@ -22,6 +25,14 @@ class AllLabels extends React.Component {
 
 
 	get labels() { return values(store.labels.all); };
+
+
+	createLabel = async ()=> {
+		if(this.labels.map(label=> label.color).includes(this.newLabel.color)) return false;
+		this.isLoading = true;
+		await store.labels.createMutation(this.newLabel);
+		this.isLoading = false;
+	};
 
 
 	onLabelClick = (label)=> {
@@ -41,7 +52,13 @@ class AllLabels extends React.Component {
 							   placeholder="Label color"/>
 						<div className="labels_list_label" style={{ background: this.newLabel.color }}/>
 					</div>
-					<button onClick={ ()=> {} }>Crete new label</button>
+					<button onClick={ this.createLabel }
+							disabled={ this.isLoading }>{
+						this.isLoading ?
+							<PreLoader/>
+							:
+							'Crete new label'
+					}</button>
 				</div>
 
 				<ul className="labels_list">

@@ -22,7 +22,7 @@ webSocket.onmessage = (event) => {
             break;
 		}
 		case 'subscription_data': {
-			console.log(`%c SOCKET-SUBSCRIPTION-DATA-ARRIVED [event: ${data.id}]`, styles, data);
+			console.log(`%c SOCKET-SUBSCRIPTION-DATA-ARRIVED [event: ${data.id}]`, styles);
             switch(data.id) {
 				case 'TASK_DELETED':
                     const deletedTask = data.payload.data.Task.previousValues;

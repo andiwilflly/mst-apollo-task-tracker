@@ -23,7 +23,12 @@ class Invites extends React.Component {
 						<div key={invite.boardId}>
 							<p>from user: { invite.fromUser }</p>
 							<p>boardId: { invite.boardId }</p>
-							<button onClick={ ()=> {}}>Accept invitation</button>
+							<button onClick={ ()=> store.authorizedUser.acceptInviteMutation({
+								userId: store.authorizedUser.id,
+								inviteId: invite.id,
+								inviteBoardId: invite.boardId,
+								boardsIds: []
+							}) }>Accept invitation</button>
 						</div>
 					);
 				}) }

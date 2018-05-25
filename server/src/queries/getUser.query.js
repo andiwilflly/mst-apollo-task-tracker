@@ -3,11 +3,23 @@ async function getUser(api, { authorId }) {
         query getUser($id: ID!) {
             User(id: $id) {
                 id
-                tasks {
-                    id
-                }
-            }
-        }
+				email
+				
+				tasks {
+					id
+				}
+				myBoards {
+					id
+				}
+				boards {
+					id
+				}
+				invites {
+					boardId
+					fromUser
+				}
+			}
+		}
     `;
 	const variables = {
 		id: authorId

@@ -92,10 +92,13 @@ function applyData(dataName, data) {
 			break;
 
 		// Custom Functions
+		case "acceptInvite":
 		case "updateListRelations":
 		case "updateTaskRelations":
 		case "updateTaskCustom":
 			data = parse(data).response;
+			console.log(data, 42);
+
 			data.map((data)=> applyData(Object.keys(data)[0], data[Object.keys(data)[0]]));
 			break;
 

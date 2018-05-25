@@ -4,6 +4,8 @@ import { observable, computed } from "mobx";
 import { observer } from "mobx-react";
 // Store
 import store from "store";
+// Components
+import Invites from "components/parts/Invites.component";
 
 
 @observer
@@ -42,6 +44,8 @@ class Profile extends React.Component {
 		return (
 			<div>
 				Profile (onKey press)
+
+				<Invites />
 
 				<div onDoubleClick={ this.emailOnDoubleClick } style={{ width: 200 }}>
 					email:

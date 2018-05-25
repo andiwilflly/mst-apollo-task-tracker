@@ -15,7 +15,7 @@ const actions = (self)=> {
     return {
 
         createMutation: ({ boardId, name } = {})=> {
-			client.mutate({
+			return client.mutate({
                 variables: { boardId, name },
                 mutation: CREATE_LIST_MUTATION
             });

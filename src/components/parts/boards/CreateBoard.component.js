@@ -36,7 +36,7 @@ class CreateBoard extends React.Component {
 						   onChange={ (e)=> this.form.description = e.currentTarget.value }/>
 				</p>
 
-				<button onClick={ ()=> store.boards.creteMutation(this.form) }>Create board</button>
+				<button onClick={ ()=> store.boards.createMutation(this.form) }>Create board</button>
 			</div>
 		)
 	}

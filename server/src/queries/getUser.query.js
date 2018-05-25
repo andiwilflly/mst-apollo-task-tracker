@@ -1,4 +1,4 @@
-async function getUser(api, { authorId }) {
+async function getUser(api, { userId }) {
 	const query = `
         query getUser($id: ID!) {
             User(id: $id) {
@@ -22,7 +22,7 @@ async function getUser(api, { authorId }) {
 		}
     `;
 	const variables = {
-		id: authorId
+		id: userId
 	};
 
 	return api.request(query, variables);

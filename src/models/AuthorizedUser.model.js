@@ -2,7 +2,8 @@ import { runInAction } from "mobx";
 import { types } from "mobx-state-tree";
 // GraphQl
 import client from "graphql/client";
-import ACCEPT_INVITE_MUTATION from "graphql/mutations/user/acceptInvite.mutation";
+import CREATE_INVITE_MUTATION from "graphql/mutations/invites/createInvite.mutation";
+import ACCEPT_INVITE_MUTATION from "graphql/mutations/invites/acceptInvite.mutation";
 
 
 const AuthorizedUserModel = {
@@ -13,9 +14,17 @@ const AuthorizedUserModel = {
 const actions = (self)=> {
 	return {
 
-		acceptInviteMutation({ userId, inviteId, inviteBoardId, boardsIds = [] }) {
+		createInviteMutation({ userId, boardId, fromUser }) {
 			client.mutate({
-				variables: { userId, inviteId, inviteBoardId, boardsIds },
+				variables: { userId, boardId, fromUser },
+				mutation: CREATE_INVITE_MUTATION
+			});
+		},
+
+
+		acceptInviteMutation({ userId, inviteId, boardsIds = [] }) {
+			client.mutate({
+				variables: { userId, inviteId, boardsIds },
 				mutation: ACCEPT_INVITE_MUTATION
 			});
 		}

@@ -18,6 +18,8 @@ class Invites extends React.Component {
 	render() {
 		return (
 			<div>
+				<hr/>
+				<h3>Invites:</h3>
 				{ this.user.invites.map((invite)=> {
 					return (
 						<div key={invite.boardId}>
@@ -26,12 +28,27 @@ class Invites extends React.Component {
 							<button onClick={ ()=> store.authorizedUser.acceptInviteMutation({
 								userId: store.authorizedUser.id,
 								inviteId: invite.id,
-								inviteBoardId: invite.boardId,
-								boardsIds: []
+								boardsIds: [...this.user.boardsIds, invite.boardId]
 							}) }>Accept invitation</button>
 						</div>
 					);
 				}) }
+
+				<br/>
+				<br/>
+				{ this.user.myBoardsIds.map((boardId)=> {
+					return (
+						<button key={ boardId }
+								onClick={ ()=> store.authorizedUser.createInviteMutation({
+									userId: this.user.id,
+									boardId: boardId,
+									fromUser: this.user.id
+						}) }>
+							Crete invite for board { boardId }
+							</button>
+					);
+				}) }
+				<hr/>
 			</div>
 		)
 	}

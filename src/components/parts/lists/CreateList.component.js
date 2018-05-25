@@ -4,15 +4,26 @@ import { observer } from "mobx-react";
 import { observable } from "mobx";
 // Store
 import store from "store";
+// Components
+import PreLoader from 'components/parts/PreLoader.component';
 
 
 @observer
 class CreateList extends React.Component {
 
+	@observable isLoading = false;
+
 
 	@observable form = {
 		name: "",
 		boardId: this.props.boardId
+	};
+
+
+	createList = async ()=> {
+		this.isLoading = true;
+		await store.lists.createMutation(this.form);
+		this.isLoading = false;
 	};
 
 
@@ -28,8 +39,13 @@ class CreateList extends React.Component {
 						   onChange={ (e)=> this.form.name = e.currentTarget.value }/>
 				</p>
 
-
-				<button onClick={ ()=> store.lists.createMutation(this.form) }>Create list</button>
+				<button onClick={ this.createList }
+						disabled={ this.isLoading }>{
+					this.isLoading ?
+						<PreLoader/>
+						:
+						'Create list'
+				}</button>
 			</div>
 		)
 	}

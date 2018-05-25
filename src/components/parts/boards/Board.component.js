@@ -13,6 +13,7 @@ import QueryLoader from "components/QueryLoader.component";
 import PreLoader from "components/parts/PreLoader.component";
 import List from "components/parts/lists/List.component";
 import BoardFilters from "components/parts/boards/BoardFilters.component";
+import CreateList from "components/parts/lists/CreateList.component";
 
 
 @observer
@@ -52,18 +53,7 @@ class Board extends React.Component {
 					</div>
 				</div>
 
-				<div>
-					<hr/>
-					<h3>Create new List</h3>
-					<p>
-						name:
-						<input type="text"
-							   value={ this.form.name }
-							   onChange={ (e)=> this.form.name = e.currentTarget.value }/>
-					</p>
-
-					<button onClick={ ()=> store.lists.createMutation(this.form) }>Create list</button>
-				</div>
+				<CreateList boardId={ this.props.boardId } />
 			</div>
 		)
 	}

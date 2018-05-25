@@ -59,7 +59,7 @@ exports.default = function (event) { return __awaiter(_this, void 0, void 0, fun
                 user = _b.sent();
                 // no user with this email
                 if (!user) {
-                    return [2 /*return*/, { error: 'Invalid credentials!' }];
+                    return [2 /*return*/, { error: 'Wrong login or password!' }];
                 }
                 return [4 /*yield*/, bcrypt.compare(password, user.password)];
             case 3:

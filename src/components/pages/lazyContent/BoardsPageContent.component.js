@@ -37,7 +37,7 @@ class BoardsPage extends React.Component {
 
 				<p>Boards where I was invited</p>
 				<ul>
-					{ this.user.boardIds.map((boardId)=> {
+					{ this.user.boardsIds.map((boardId)=> {
 						return (
 							<li key={boardId}>
 								<Link to={ `/boards/${boardId}`}>{ boardId }</Link>

@@ -5,7 +5,6 @@ type AcceptInvitePayload {
 extend type Mutation {
     acceptInvite(
         inviteId: ID!,
-        inviteBoardId: String!,
         userId: ID!,
         boardsIds: [ID!]!
     ): AcceptInvitePayload

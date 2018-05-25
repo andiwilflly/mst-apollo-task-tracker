@@ -1,4 +1,4 @@
-async function updateBoard(api, { userId, boardsIds }) {
+async function updateUser(api, { userId, boardsIds }) {
 	const query = `
         mutation updateUser($id:ID!, $boardsIds: [ID!]!) {
 			updateUser(id: $id, boardsIds: $boardsIds) {
@@ -15,4 +15,4 @@ async function updateBoard(api, { userId, boardsIds }) {
 }
 
 
-export default updateBoard;
+export default updateUser;

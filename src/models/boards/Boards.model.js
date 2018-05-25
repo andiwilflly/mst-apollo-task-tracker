@@ -16,13 +16,11 @@ const Boards = {
 const actions = (self)=> {
     return {
 
-    	creteMutation: async ({ authorId, name, description })=> {
-			const response = await client.mutate({
+    	createMutation: async ({ authorId, name, description })=> {
+			client.mutate({
 				variables: { authorId, name, description },
 				mutation: CREATE_BOARD_MUTATION
 			});
-			console.log("creteMutation mutation: ", response);
-			self.create(response.data.createBoard);
 		},
 
 

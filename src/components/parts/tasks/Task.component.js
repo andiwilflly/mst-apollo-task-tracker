@@ -65,6 +65,7 @@ class Task extends React.Component {
 					{ this.task.description }<br/>
 					<p style={{ fontSize: 10 }}>taskId: { this.task.id }</p>
 					<p style={{ fontSize: 10 }}>listId: { this.task.listId }</p>
+					<p style={{ fontSize: 10 }}>authorId: { this.task.authorId }</p>
 
 					<ul className="labels_list">
 						{ this.task.labelsIds.map((labelId)=> {

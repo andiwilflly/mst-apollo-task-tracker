@@ -65,6 +65,9 @@ function applyData(dataName, data) {
 			const task = store.tasks.all.get(data.id);
 			if(task) task.update(data);
 			break;
+		case "deleteTask":
+			store.tasks.delete(data.id);
+			break;
 		case "allLabels":
 			runInAction('LABELS-CREATE-ALL', ()=> {
 				data.forEach((label)=> store.labels.create(label));

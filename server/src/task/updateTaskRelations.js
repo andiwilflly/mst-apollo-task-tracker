@@ -21,7 +21,7 @@ export default async (event)=> {
     response.push(await getLabels(api));
 
     // Case when our Task was deleted, we need to delete Task on client store
-	if(!task.Task) response.push({ deleteTaskCustom: { id: event.data.id }});
+	if(!task.Task) response.push({ deleteTask: { id: event.data.id }});
 
     return {
         data: {

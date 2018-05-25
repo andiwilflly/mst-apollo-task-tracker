@@ -1,0 +1,12 @@
+type AcceptInvitePayload {
+    response: String!
+}
+
+extend type Mutation {
+    acceptInvite(
+        inviteId: ID!,
+        inviteBoardId: String!,
+        userId: ID!,
+        boardsIds: [ID!]!
+    ): AcceptInvitePayload
+}

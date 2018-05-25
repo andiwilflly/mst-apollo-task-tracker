@@ -57,6 +57,13 @@ functions:
     handler:
       code: src/list/updateListRelations.js
 
+  # Invite
+  acceptInvite:
+    type: resolver
+    schema: src/invite/acceptInvite.graphql
+    handler:
+      code: src/invite/acceptInvite.js
+
 
 # Model/Relation permissions are used to limit the API access
 # To take the burden of thinking about those while development, we

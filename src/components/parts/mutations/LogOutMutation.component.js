@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import store from "store";
 
 
+// TODO: Get rid of this file
 @withRouter
 class LogOutMutation extends React.Component {
 

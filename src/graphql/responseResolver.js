@@ -31,12 +31,15 @@ function applyData(dataName, data) {
 			// TESTING
 			store.logIn('cjhab8inhns0g0160ivthcp3f');
 			break;
+		case "signupUser":
+			console.log("ccs", data);
+			break;
 		case "authenticateUser":
 			store.logIn(data.id);
 			history.push(store.nextPathUrl || '/boards');
 			break;
 		case "User":
-			store.user.setInfo(data);
+			store.users.create(data);
 			break;
 		case "Board":
 			store.boards.create(data);

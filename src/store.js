@@ -11,6 +11,7 @@ const store = RootModel.create({
 	filters: {
 		byLabels: []
 	},
+	users: {},
 	queries: {},
 	boards: {},
 	lists: {},

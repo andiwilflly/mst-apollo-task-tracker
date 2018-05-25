@@ -8,6 +8,8 @@ import USER_UPDATE_MUTATION from "graphql/mutations/user/updateUser.mutation";
 const UserModel = {
 	id: types.maybe(types.string),
 	email: types.maybe(types.string),
+	avatar: types.maybe(types.string),
+	phone: types.maybe(types.string),
 	boards: types.frozen,
 	tasks: types.frozen
 };
@@ -15,14 +17,6 @@ const UserModel = {
 
 const actions = (self)=> {
 	return {
-
-		setInfo: (data)=> {
-            runInAction(`USER-SET-INFO-SUCCESS`, ()=>
-				Object.keys(self).forEach(fieldName => {
-                    if(data[fieldName] !== undefined) self[fieldName] = data[fieldName];
-				}))
-		},
-
 
 		updateMutation: ({ id, email })=> {
 			client.mutate({
@@ -32,14 +26,12 @@ const actions = (self)=> {
 		},
 
 
-		update(newUser) {
-            runInAction(`USER-UPDATE-SUCCESS`, ()=> {
-                Object.keys(newUser).forEach((fieldName)=> {
-                    if(fieldName === 'tasks' || fieldName === 'boards') {
-                        if(newUser[fieldName] !== undefined) self[fieldName] = newUser[fieldName];
-                    }
-                });
-            });
+		update(user) {
+			runInAction(`USER-UPDATE-SUCCESS ${user.id}`, ()=> {
+				Object.keys(self).forEach((fieldName)=> {
+					if(user[fieldName] !== undefined) self[fieldName] = user[fieldName];
+				});
+			});
 		}
 	};
 };

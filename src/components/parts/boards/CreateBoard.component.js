@@ -13,7 +13,7 @@ class CreateBoard extends React.Component {
 	@observable form = {
 		name: "",
 		description: "",
-		authorId: store.user.id
+		authorId: store.authorizedUser.id
 	};
 
 

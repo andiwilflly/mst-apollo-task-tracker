@@ -18,10 +18,10 @@ import Page404 from "components/pages/Page404.component";
 
 const RouteComponent = ({ component: Component, ...rest })=> {
 	// Need needAuth case
-	if(Component.permissions.needAuth === true && !store.user) store.setNextPathUrl(rest.path);
-	if(Component.permissions.needAuth === true && !store.user) return <Redirect to={{ pathname: Component.permissions.redirectPath }} />;
+	if(Component.permissions.needAuth === true && !store.authorizedUser) store.setNextPathUrl(rest.path);
+	if(Component.permissions.needAuth === true && !store.authorizedUser) return <Redirect to={{ pathname: Component.permissions.redirectPath }} />;
 
-	if(Component.permissions.notForAuth === true && store.user) return <Redirect to={{ pathname: Component.permissions.redirectPath }} />;
+	if(Component.permissions.notForAuth === true && store.authorizedUser) return <Redirect to={{ pathname: Component.permissions.redirectPath }} />;
 
 	// Default case
 	return (

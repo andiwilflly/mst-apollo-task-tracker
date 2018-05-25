@@ -3,7 +3,8 @@ import { types } from "mobx-state-tree";
 import client from "graphql/client";
 import LOG_IN_USER_MUTATION from "graphql/mutations/authenticateUser.mutation";
 // Models
-import UserModel from "models/User.model";
+import AuthorizedUserModel from "models/AuthorizedUser.model";
+import UsersModel from "models/users/Users.model";
 import FiltersModel from "models/Filters.model";
 import ModalModel from "models/Modal.model";
 import BoardsModel from "models/boards/Boards.model";
@@ -17,7 +18,8 @@ const RootModel = {
 	nextPathUrl: types.maybe(types.string),
 	filters: FiltersModel,
 
-	user: types.optional(types.maybe(UserModel), null),
+	authorizedUser: types.optional(types.maybe(AuthorizedUserModel), null),
+	users: UsersModel,
 	boards: BoardsModel,
 	lists: ListsModel,
 	tasks: TasksModel,
@@ -40,14 +42,8 @@ const actions = (store)=> {
 			});
 		},
 
-		logOutMutation: ()=> {
-			store.logOut();
-			console.log("logOutMutation mutation: ");
-			// TODO: Redirect?
-		},
-
-		logIn: (userId)=> { store.user = { id: userId } },
-		logOut: ()=> { store.user = null }
+		logIn: (userId)=> { store.authorizedUser = { id: userId } },
+		logOut: ()=> { store.authorizedUser = null }
 	};
 };
 

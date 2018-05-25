@@ -38,10 +38,10 @@ class Layout extends React.Component {
 	render() {
 		return (
 			<div>
-				{ store.user ?
+				{ store.authorizedUser ?
 					<QueryLoader query={ GET_USER_INFO_QUERY }
 								 fetchPolicy="network-only"
-								 variables={{ id: store.user.id }}>
+								 variables={{ id: store.authorizedUser.id }}>
 						{ this.renderContent() }
 					</QueryLoader>
 					:

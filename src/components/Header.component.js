@@ -26,7 +26,7 @@ class Header extends React.Component {
 				</Link>
 
 				<div className="main-menu">
-					{ store.user ?
+					{ store.authorizedUser ?
 						<LogOutMutation>
 							<a href="/">log out</a>
 						</LogOutMutation>

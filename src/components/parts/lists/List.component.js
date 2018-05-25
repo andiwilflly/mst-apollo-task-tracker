@@ -22,7 +22,7 @@ class List extends React.Component {
 
 	creteTask = async ()=> {
 		store.modal.open("CreateTask", {
-			authorId: store.user.id,
+			authorId: store.authorizedUser.id,
 			boardId: this.list.boardId,
 			listId: this.props.listId
 		});

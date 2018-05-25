@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 // MobX
+import { computed } from "mobx";
 import { observer } from "mobx-react";
 // Store
 import store from "store";
@@ -16,15 +17,18 @@ class BoardsPage extends React.Component {
 	};
 
 
+	@computed get user() { return store.users.all.get(store.authorizedUser.id); };
+
+
 	render() {
 		return (
 			<div>
 				<ul>
-					{ store.user.boardIds.map((boardId)=> {
+					{ this.user.boardIds.map((boardId)=> {
 						return (
 							<li key={boardId}>
 								<Link to={ `/boards/${boardId}`}>{ boardId }</Link>
-								<button onClick={ ()=> store.user.deleteBoard(boardId) }>Delete</button>
+								<button onClick={ ()=> {}}>Delete board?</button>
 							</li>
 						);
 					}) }

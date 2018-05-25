@@ -14,7 +14,7 @@ const actions = (self)=> {
     return {
 
         update(list) {
-			runInAction(`LIST-UPDATE-SUCCESS [${list.id}]`, ()=> {
+			runInAction(`LIST-UPDATE-SUCCESS ${list.id}`, ()=> {
 				Object.keys(self).forEach((fieldName)=> {
 					if(list[fieldName] !== undefined) self[fieldName] = list[fieldName];
 				});

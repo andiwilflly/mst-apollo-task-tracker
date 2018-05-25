@@ -1,6 +1,6 @@
 import React from 'react';
 // MobX
-import { observable } from "mobx";
+import { observable, computed } from "mobx";
 import { observer } from "mobx-react";
 // Store
 import store from "store";
@@ -12,10 +12,13 @@ class Profile extends React.Component {
 
 	@observable form = {
 		email: {
-			value: store.user.email,
+			value: this.user.email,
 			isEdit: false
 		}
 	};
+
+
+	@computed get user() { return store.users.all.get(store.authorizedUser.id); };
 
 
 	emailOnDoubleClick = ()=> {
@@ -26,7 +29,7 @@ class Profile extends React.Component {
 
 	onEmailBlur = ()=> {
 		this.form.email.isEdit = false;
-		store.user.updateMutation({ ...store.user, email: this.form.email.value });
+		this.user.updateMutation({ ...this.user, email: this.form.email.value });
 	};
 
 

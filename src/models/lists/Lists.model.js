@@ -1,10 +1,9 @@
 import { runInAction } from "mobx";
 import { types } from 'mobx-state-tree';
-// GraphQL
-import client from "graphql/client";
 // Models
 import ListModel from "models/lists/List.model";
 // GraphQL
+import client from "graphql/client";
 import CREATE_LIST_MUTATION from "graphql/mutations/lists/createList.mutation";
 
 
@@ -15,8 +14,8 @@ const Lists = {
 const actions = (self)=> {
     return {
 
-        createMutation: async ({ boardId, name } = {})=> {
-            await client.mutate({
+        createMutation: ({ boardId, name } = {})=> {
+			client.mutate({
                 variables: { boardId, name },
                 mutation: CREATE_LIST_MUTATION
             });

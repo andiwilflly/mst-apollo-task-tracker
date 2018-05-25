@@ -78,6 +78,9 @@ function applyData(dataName, data) {
 		case "Label":
 			store.labels.create(data);
 			break;
+		case "createLabel":
+			store.labels.create(data);
+			break;
 
 		case "updateListRelations":
 		case "updateTaskRelations":

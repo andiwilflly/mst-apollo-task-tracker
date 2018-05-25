@@ -11,7 +11,7 @@ export default function (operation = {}, data = {}, errors = null, cache) {
 
 	const dataName = Object.keys(data)[0];
 	data = data[dataName];
-	const errorMsg = errors ? errors[0].message : "";
+	const errorMsg = errors ? errors[0].functionError || errors[0].massege : "";
 
 	console.groupCollapsed(`%c🕺 REQUEST (${errors ? "ERROR" : "SUCCESS"})`, "color: darkgreen");
 	console.log("dataName", dataName);
@@ -30,13 +30,15 @@ function applyData(dataName, data) {
 
 		// Users
 		case "loggedInUser":
-			// TESTING
-			store.logIn('cjhlwhft4tz0y0142y67pqsss'); // sobaka@i.ua
+			if(!data) return;
+			store.logIn(data.id); // sobaka@i.ua
 			break;
 		case "signupUser":
 		case "authenticateUser":
-			store.logIn(data.id);
-			history.push(store.nextPathUrl || '/boards');
+			if(!data) return;
+            localStorage.setItem('token', data.token);
+            store.logIn(data.id);
+            history.push(store.nextPathUrl || '/boards');
 			break;
 		case "User":
 			store.users.create(data);

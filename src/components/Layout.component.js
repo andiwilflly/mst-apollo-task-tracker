@@ -24,7 +24,7 @@ class Layout extends React.Component {
 		return (
 			<div>
 				<Header />
-				<Invites />
+				{store.authorizedUser && <Invites /> }
 				<Breadcrumbs />
 				<div className="wrapper">
 					{ this.props.children }

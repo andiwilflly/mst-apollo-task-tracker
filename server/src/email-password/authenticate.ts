@@ -29,7 +29,7 @@ export default async (event: FunctionEvent<EventData>) => {
 
     // no user with this email
     if (!user) {
-      return { error: 'Invalid credentials!' }
+      return { error: 'Wrong login or password!' }
     }
 
     // check password

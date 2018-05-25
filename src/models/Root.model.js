@@ -43,7 +43,10 @@ const actions = (store)=> {
 		},
 
 		logIn: (userId)=> { store.authorizedUser = { id: userId } },
-		logOut: ()=> { store.authorizedUser = null }
+		logOut: ()=> {
+			localStorage.removeItem('token');
+			store.authorizedUser = null;
+		}
 	};
 };
 

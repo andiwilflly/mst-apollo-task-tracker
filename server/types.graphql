@@ -12,6 +12,7 @@ type User @model {
     myBoards: [Board!]! @relation(name: "UserAuthorOfBoards")
     boards: [Board!]! @relation(name: "UsersAndBoards")
     tasks: [Task!]! @relation(name: "UserOfTasks")
+    invites: [Invite!]! @relation(name: "UserOfInvites")
 }
 
 
@@ -80,15 +81,16 @@ type Label @model {
 }
 
 
-#type Invite @model {
-#    # Required system field:
-#    id: ID! @isUnique # read-only (managed by Graphcool)
-#
-#    createdAt: DateTime! # read-only (managed by Graphcool)
-#    updatedAt: DateTime! # read-only (managed by Graphcool)
-#
-#    user: User! @relation(name: "UserOfInvite")
-#
-#    color: String!
-#}
+type Invite @model {
+    # Required system field:
+    id: ID! @isUnique # read-only (managed by Graphcool)
+
+    createdAt: DateTime! # read-only (managed by Graphcool)
+    updatedAt: DateTime! # read-only (managed by Graphcool)
+
+    user: User! @relation(name: "UserOfInvites")
+
+    fromUser: String! @migrationValue(value: "42")
+    boardId: String!
+}
 

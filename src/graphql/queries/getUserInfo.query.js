@@ -15,5 +15,9 @@ export default gql`query getUserInfo($id: ID!) {
         boards {
             id
         }
+        invites {
+            boardId
+            fromUser
+        }
     }
 }`

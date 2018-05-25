@@ -12,7 +12,8 @@ const UserModel = {
 	phone: types.maybe(types.string),
 	boards: types.frozen,
 	myBoards: types.frozen,
-	tasks: types.frozen
+	tasks: types.frozen,
+	invites: types.frozen
 };
 
 

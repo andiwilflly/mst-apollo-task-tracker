@@ -10,6 +10,7 @@ import store from "store";
 // Components
 import QueryLoader from "components/QueryLoader.component";
 import Header from "components/Header.component";
+import Invites from "components/parts/Invites.component";
 import Breadcrumbs from "components/Breadcrumbs.component";
 import ModalContent from "components/parts/ModalContent.component";
 import Footer from "components/Footer.component";
@@ -23,6 +24,7 @@ class Layout extends React.Component {
 		return (
 			<div>
 				<Header />
+				<Invites />
 				<Breadcrumbs />
 				<div className="wrapper">
 					{ this.props.children }

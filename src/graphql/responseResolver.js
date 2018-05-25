@@ -31,7 +31,7 @@ function applyData(dataName, data) {
 		// Users
 		case "loggedInUser":
 			// TESTING
-			store.logIn('cjhlr8q9vclx40118tluevtqm');
+			store.logIn('cjhlwhft4tz0y0142y67pqsss'); // sobaka@i.ua
 			break;
 		case "signupUser":
 		case "authenticateUser":

@@ -29,6 +29,8 @@ class Board extends React.Component {
 
 
 	render() {
+		if(!this.board) return <div className="board">No such board ${this.props.boardId}</div>
+
 		return (
 			<div>
 				<BoardFilters boardId={ this.board.id } />

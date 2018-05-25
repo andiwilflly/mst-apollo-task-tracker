@@ -31,21 +31,23 @@ class Board extends React.Component {
 	render() {
 		return (
 			<div>
-				<h1>{ this.board.name }</h1>
-
 				<BoardFilters boardId={ this.board.id } />
 
 				<div className="board">
-					{ this.board.listIds.map((listId)=> {
-						return (
-							<QueryLoader query={ LIST_ALL_INFO_QUERY }
-										 key={listId}
-										 preLoader={ <div className="list"><PreLoader/></div>}
-										 variables={{ id: listId }}>
-								<List listId={ listId } />
-							</QueryLoader>
-						);
-					}) }
+					<h1>{ this.board.name }</h1>
+
+					<div className="board_lists">
+						{ this.board.listIds.map((listId)=> {
+							return (
+								<QueryLoader query={ LIST_ALL_INFO_QUERY }
+											 key={listId}
+											 preLoader={ <div className="list"><PreLoader/></div>}
+											 variables={{ id: listId }}>
+									<List listId={ listId } />
+								</QueryLoader>
+							);
+						}) }
+					</div>
 				</div>
 
 				<div>

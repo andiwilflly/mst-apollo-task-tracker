@@ -6,5 +6,7 @@ export default gql`mutation createList($name: String!, $boardId: ID!) {
     {
         id
         name
+        board { id }
+        tasks { id }
     }
 }`

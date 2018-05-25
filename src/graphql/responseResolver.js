@@ -29,11 +29,9 @@ function applyData(dataName, data) {
 	switch (dataName) {
 		case "loggedInUser":
 			// TESTING
-			store.logIn('cjhab8inhns0g0160ivthcp3f');
+			store.logIn('cjhlr8q9vclx40118tluevtqm');
 			break;
 		case "signupUser":
-			console.log("ccs", data);
-			break;
 		case "authenticateUser":
 			store.logIn(data.id);
 			history.push(store.nextPathUrl || '/boards');
@@ -46,6 +44,13 @@ function applyData(dataName, data) {
 			break;
 		case "List":
 			store.lists.create(data);
+			break;
+		case "createList":
+			store.lists.create(data);
+			store.lists.all.get(data.id).updateListRelations({
+				id: data.id,
+				boardId: store.lists.all.get(data.id).boardId
+			});
 			break;
 		case "deleteBoard":
 			history.push('/boards');
@@ -65,12 +70,6 @@ function applyData(dataName, data) {
 			if(task) task.update(data);
 			break;
 
-        case "updateTaskRelations":
-		case "updateTaskCustom":
-            data = parse(data).response;
-			data.map((data)=> applyData(Object.keys(data)[0], data[Object.keys(data)[0]]));
-			break;
-
 		case "allLabels":
 			runInAction('LABELS-CREATE-ALL', ()=> {
 				data.forEach((label)=> store.labels.create(label));
@@ -80,8 +79,15 @@ function applyData(dataName, data) {
 			store.labels.create(data);
 			break;
 
+		case "updateListRelations":
+		case "updateTaskRelations":
+		case "updateTaskCustom":
+			data = parse(data).response;
+			data.map((data)=> applyData(Object.keys(data)[0], data[Object.keys(data)[0]]));
+			break;
+
 		default:
-			console.log("dataName: ", dataName, data);
+			console.log("UNHANDLED: dataName: ", dataName, data);
 	}
 }
 

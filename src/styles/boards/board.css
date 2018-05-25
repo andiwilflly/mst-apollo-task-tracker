@@ -1,4 +1,10 @@
-.board {
+.board h1 {
+	font-weight: bold;
+	font-size: 25px;
+	margin: 20px 0;
+}
+
+.board_lists {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;

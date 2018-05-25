@@ -9,7 +9,8 @@ type User @model {
     email: String! @isUnique
     password: String!
 
-    boards: [Board!]! @relation(name: "UserOfBoards")
+    myBoards: [Board!]! @relation(name: "UserAuthorOfBoards")
+    boards: [Board!]! @relation(name: "UsersAndBoards")
     tasks: [Task!]! @relation(name: "UserOfTasks")
 }
 
@@ -26,7 +27,8 @@ type Board @model {
     description: String!
 
 
-    author: User! @relation(name: "UserOfBoards")
+    users: [User!]! @relation(name: "UsersAndBoards")
+    author: User! @relation(name: "UserAuthorOfBoards")
     lists: [List!]! @relation(name: "BoardOfLists")
     tasks: [Task!]! @relation(name: "BoardOfTasks")
 }

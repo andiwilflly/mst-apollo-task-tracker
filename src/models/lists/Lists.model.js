@@ -4,6 +4,7 @@ import { types } from 'mobx-state-tree';
 import client from "graphql/client";
 // Models
 import ListModel from "models/lists/List.model";
+// GraphQL
 import CREATE_LIST_MUTATION from "graphql/mutations/lists/createList.mutation";
 
 
@@ -15,17 +16,10 @@ const actions = (self)=> {
     return {
 
         createMutation: async ({ boardId, name } = {})=> {
-            const response = await client.mutate({
+            await client.mutate({
                 variables: { boardId, name },
                 mutation: CREATE_LIST_MUTATION
             });
-
-			runInAction(`LIST-CREATE-SUCCESS`, ()=>
-                self.all.set(response.id, {
-                    id: response.id,
-                    name: response.name
-                })
-			);
 		},
 
 
@@ -33,7 +27,7 @@ const actions = (self)=> {
 			if(self.all.has(list.id)) return self.all.get(list.id).update(list);
 
             runInAction(`LIST-CREATE-SUCCESS`, ()=> {
-                self.all.set(list.id, list);
+               self.all.set(list.id, list);
             });
 		},
 

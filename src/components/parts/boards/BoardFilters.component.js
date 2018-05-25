@@ -26,7 +26,11 @@ class BoardFilters extends React.Component {
 			<div>
 				<p>All labels:</p>
 				<AllLabels onLabelClick={ this.onLabelClick } />
-				<p>Filtered by labels:</p>
+				{ store.filters.byLabels.length ?
+					<p>Filtered by labels:</p>
+					:
+					null
+				}
 				<div className="labels_list">
 					{ store.filters.byLabels.map((labelColor)=> {
 						return (

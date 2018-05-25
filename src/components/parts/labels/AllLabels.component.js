@@ -2,7 +2,7 @@ import React from 'react';
 // Styles
 import "styles/labels/labels_list.css";
 // MobX
-import { values } from "mobx";
+import { values, observable } from "mobx";
 import { observer } from "mobx-react";
 // Store
 import store from "store";
@@ -16,6 +16,11 @@ import QueryLoader from "components/QueryLoader.component";
 class AllLabels extends React.Component {
 
 
+	@observable newLabel = {
+		color: ""
+	};
+
+
 	get labels() { return values(store.labels.all); };
 
 
@@ -27,6 +32,18 @@ class AllLabels extends React.Component {
 	render() {
 		return (
 			<QueryLoader query={ ALL_LABELS_QUERY }>
+
+				<div style={{ margin: "10px 0" }}>
+					<div className="cf" style={{ marginBottom: "5px" }}>
+						<input type="text" value={ this.newLabel.color}
+							   style={{ width: 100, minWidth: 100, float: "left" }}
+							   onChange={ (e)=> this.newLabel.color = e.currentTarget.value }
+							   placeholder="Label color"/>
+						<div className="labels_list_label" style={{ background: this.newLabel.color }}/>
+					</div>
+					<button onClick={ ()=> {} }>Crete new label</button>
+				</div>
+
 				<ul className="labels_list">
 					{ this.labels.map((label)=> {
 						return (

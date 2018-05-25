@@ -1,25 +1,14 @@
-async function getBoard(api, { boardId }) {
+async function getBoards(api) {
 	const query = `
-        query getBoard($id: ID!) {
-            Board(id: $id) {
-                id
-				name
-				description
-				lists {
-					id
-				}
-				tasks {
-					id
-				}
-            }
-        }
+        {
+			allBoards { id }
+		}
     `;
 	const variables = {
-		id: boardId
 	};
 
 	return api.request(query, variables);
 }
 
 
-export default getBoard;
+export default getBoards;

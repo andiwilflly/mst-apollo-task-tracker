@@ -12,10 +12,15 @@ class Profile extends React.Component {
 
 	@observable form = {
 		email: {
-			value: this.user.email,
+			value: '',
 			isEdit: false
 		}
 	};
+
+
+	componentDidMount() {
+		this.form.email.value = this.user.email;
+	}
 
 
 	@computed get user() { return store.users.all.get(store.authorizedUser.id); };

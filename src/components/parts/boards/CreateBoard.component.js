@@ -26,7 +26,7 @@ class CreateBoard extends React.Component {
 					name:
 					<input type="text"
 						   value={ this.form.name }
-						   onChange={ (e)=> this.form.name = e.currentTarget.value }/>
+						   onChange={ (e)=> this.form.name = e.currentTarget.value } />
 				</p>
 
 				<p>

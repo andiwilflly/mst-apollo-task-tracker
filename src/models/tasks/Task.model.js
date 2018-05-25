@@ -20,7 +20,6 @@ const Task = {
 const actions = (self)=> {
     return {
 
-
     	updateMutation: async (task={})=> {
 			return await client.mutate({
 				variables: task,

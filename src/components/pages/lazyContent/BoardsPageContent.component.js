@@ -23,6 +23,19 @@ class BoardsPage extends React.Component {
 	render() {
 		return (
 			<div>
+				<p>My boards</p>
+				<ul>
+					{ this.user.myBoardsIds.map((boardId)=> {
+						return (
+							<li key={boardId}>
+								<Link to={ `/boards/${boardId}`}>{ boardId }</Link>
+								<button onClick={ ()=> {}}>Delete board?</button>
+							</li>
+						);
+					}) }
+				</ul>
+
+				<p>Boards where I was invited</p>
 				<ul>
 					{ this.user.boardIds.map((boardId)=> {
 						return (

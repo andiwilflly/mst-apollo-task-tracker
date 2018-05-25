@@ -37,6 +37,7 @@ functions:
    handler:
      code: src/email-password/loggedInUser.ts
 
+  # Task
   createTaskCustom:
     type: resolver
     schema: src/task/createTaskCustom.graphql
@@ -60,6 +61,13 @@ functions:
     schema: src/task/deleteTaskCustom.graphql
     handler:
       code: src/task/deleteTaskCustom.js
+
+  # List
+  updateListRelations:
+    type: resolver
+    schema: src/list/updateListRelations.graphql
+    handler:
+      code: src/list/updateListRelations.js
 
 
 # Model/Relation permissions are used to limit the API access

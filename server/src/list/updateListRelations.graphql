@@ -1,0 +1,10 @@
+type UpdateListRelationsPayload {
+    response: String!
+}
+
+extend type Query {
+    updateListRelations(
+        id: ID,
+        boardId: ID
+    ): UpdateListRelationsPayload
+}

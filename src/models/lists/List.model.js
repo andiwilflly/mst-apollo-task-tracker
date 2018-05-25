@@ -1,6 +1,9 @@
 import { types } from 'mobx-state-tree';
 // MobX
 import { runInAction } from "mobx";
+// GraphQL
+import client from "graphql/client";
+import UPDATE_LIST_RELATIONS_QUERY from "graphql/queries/lists/updateListRelations.query";
 
 
 const List = {
@@ -12,6 +15,14 @@ const List = {
 
 const actions = (self)=> {
     return {
+
+		updateListRelations: ({ id, boardId })=> {
+			return client.query({
+				variables: { id, boardId },
+				query: UPDATE_LIST_RELATIONS_QUERY
+			});
+		},
+
 
         update(list) {
 			runInAction(`LIST-UPDATE-SUCCESS ${list.id}`, ()=> {

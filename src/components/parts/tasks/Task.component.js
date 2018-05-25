@@ -63,6 +63,7 @@ class Task extends React.Component {
 				<div className="task cf">
 					<h3 className="task_title">{  this.task.title }</h3>
 					{ this.task.description }<br/>
+					<p style={{ fontSize: 10 }}>taskId: { this.task.id }</p>
 					<p style={{ fontSize: 10 }}>listId: { this.task.listId }</p>
 
 					<ul className="labels_list">

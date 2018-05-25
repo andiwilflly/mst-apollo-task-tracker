@@ -30,14 +30,14 @@ webSocket.onmessage = (event) => {
                     if(!taskFromStore) return;
 
                     store.tasks.updateTaskRelations({
-						id: taskFromStore.id,
-						authorId: taskFromStore.author.id,
-						boardId: taskFromStore.board.id,
-						listId: taskFromStore.list.id
+                        id: taskFromStore.id,
+                        authorId: taskFromStore.author.id,
+                        boardId: taskFromStore.board.id,
+                        listId: taskFromStore.list.id
                     });
                     break;
 
-				case 'TASK_CREATE':
+				case 'TASK_CREATED':
                     const createdTask = data.payload.data.Task.node;
                     if(store.tasks.all.has(createdTask.id)) return;
 

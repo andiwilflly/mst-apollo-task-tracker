@@ -46,7 +46,7 @@ const actions = (self)=> {
 
         subscribeTaskCreate(boardId) {
             const taskCreateSubscriptionMessage = {
-                id: 'TASK_CREATE',
+                id: 'TASK_CREATED',
                 type: 'subscription_start',
                 query: `
 					subscription Task {

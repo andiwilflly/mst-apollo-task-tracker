@@ -57,19 +57,14 @@ function applyData(dataName, data) {
 			store.board.delete(data.id);
 			Alert.success("Board was deleted successfully!");
 			break;
-
 		case "Task":
-			store.tasks.create(data);
+        case 'createTask':
+            store.tasks.create(data);
 			break;
-		case "deleteTaskCustom":
-			store.tasks.delete(data.id);
-			break;
-
 		case "updateTask":
 			const task = store.tasks.all.get(data.id);
 			if(task) task.update(data);
 			break;
-
 		case "allLabels":
 			runInAction('LABELS-CREATE-ALL', ()=> {
 				data.forEach((label)=> store.labels.create(label));
@@ -78,7 +73,6 @@ function applyData(dataName, data) {
 		case "Label":
 			store.labels.create(data);
 			break;
-
 		case "updateListRelations":
 		case "updateTaskRelations":
 		case "updateTaskCustom":

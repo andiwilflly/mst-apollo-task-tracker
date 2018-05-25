@@ -27,6 +27,8 @@ export default function (operation = {}, data = {}, errors = null, cache) {
 function applyData(dataName, data) {
 
 	switch (dataName) {
+
+		// Users
 		case "loggedInUser":
 			// TESTING
 			store.logIn('cjhlr8q9vclx40118tluevtqm');
@@ -39,9 +41,8 @@ function applyData(dataName, data) {
 		case "User":
 			store.users.create(data);
 			break;
-		case "Board":
-			store.boards.create(data);
-			break;
+
+		// Lists
 		case "List":
 			store.lists.create(data);
 			break;
@@ -52,22 +53,30 @@ function applyData(dataName, data) {
 				boardId: store.lists.all.get(data.id).boardId
 			});
 			break;
+
+		// Boards
+		case "Board":
+			store.boards.create(data);
+			break;
 		case "deleteBoard":
 			history.push('/boards');
 			store.board.delete(data.id);
 			Alert.success("Board was deleted successfully!");
 			break;
+
+		// Tasks
 		case "Task":
-        case 'createTask':
-            store.tasks.create(data);
+			store.tasks.create(data);
 			break;
 		case "updateTask":
 			const task = store.tasks.all.get(data.id);
 			if(task) task.update(data);
 			break;
-		case "deleteTask":
+		case "deleteTaskCustom":
 			store.tasks.delete(data.id);
 			break;
+
+		// Labels
 		case "allLabels":
 			runInAction('LABELS-CREATE-ALL', ()=> {
 				data.forEach((label)=> store.labels.create(label));
@@ -80,6 +89,7 @@ function applyData(dataName, data) {
 			store.labels.create(data);
 			break;
 
+		// Custom Functions
 		case "updateListRelations":
 		case "updateTaskRelations":
 		case "updateTaskCustom":

@@ -27,7 +27,7 @@ webSocket.onmessage = (event) => {
 				case 'TASK_DELETED':
                     const deletedTask = data.payload.data.Task.previousValues;
                     const taskFromStore = store.tasks.all.get(deletedTask.id);
-                    if(!taskFromStore) return;
+                    if(!taskFromStore) return console.log("ERROR IN TASK_DELETED");
 
                     store.tasks.updateTaskRelations({
                         id: taskFromStore.id,
@@ -39,13 +39,14 @@ webSocket.onmessage = (event) => {
 
 				case 'TASK_CREATED':
                     const createdTask = data.payload.data.Task.node;
-                    if(store.tasks.all.has(createdTask.id)) return;
+                    if(store.tasks.all.has(createdTask.id)) return console.log("ERROR IN TASK_CREATED");
 
                     store.tasks.updateTaskRelations({
 						id: createdTask.id,
 						authorId: createdTask.author.id,
 						boardId: createdTask.board.id,
-						listId: createdTask.list.id });
+						listId: createdTask.list.id
+                    });
 					break;
 
                 default:

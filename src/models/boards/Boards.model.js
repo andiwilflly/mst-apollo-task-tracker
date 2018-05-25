@@ -58,10 +58,7 @@ const actions = (self)=> {
 								}
 							}
 						}){
-							mutation
-							previousValues {
-								id
-							}
+							mutation				
 							node {
 								id
 								title
@@ -102,7 +99,7 @@ const actions = (self)=> {
 						}){
 							mutation
 							previousValues {
-								id
+								id												
 							}
 						}
 					}

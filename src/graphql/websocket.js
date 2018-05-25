@@ -25,13 +25,10 @@ webSocket.onmessage = (event) => {
 			console.log(`%c SOCKET-SUBSCRIPTION-DATA-ARRIVED [event: ${data.id}]`, styles, data);
             switch(data.id) {
 				case 'TASK_DELETED':
-					console.log("1====>", data.payload.data);
                     const deletedTask = data.payload.data.Task.previousValues;
                     const taskFromStore = store.tasks.all.get(deletedTask.id);
-                    console.log("2====>", taskFromStore);
                     if(!taskFromStore) return;
 
-                    console.log("==> 3");
                     store.tasks.updateTaskRelations({
 						id: taskFromStore.id,
 						authorId: taskFromStore.author.id,

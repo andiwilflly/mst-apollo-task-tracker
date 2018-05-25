@@ -53,7 +53,6 @@ const actions = (self)=> {
 		},
 
         updateTaskRelations: ({ id, authorId, boardId, listId })=> {
-			console.log("==> 4");
             return client.query({
                 variables: { id, authorId, boardId, listId },
                 query: UPDATE_TASK_RELATIONS_QUERY

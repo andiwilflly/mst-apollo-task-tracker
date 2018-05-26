@@ -2,7 +2,7 @@ import React from 'react';
 // Styles
 import "styles/invites.css";
 // MobX
-import { computed } from 'mobx';
+import { computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
 // Sore
 import store from "store";
@@ -13,6 +13,9 @@ class Invites extends React.Component {
 
 
 	@computed get user() { return store.users.all.get(store.authorizedUser.id); };
+
+
+	emailForInvite = observable.box('');
 
 
 	render() {
@@ -36,14 +39,22 @@ class Invites extends React.Component {
 
 				<br/>
 				<br/>
-				{ this.user.myBoardsIds.map((boardId)=> {
+
+				Write email for invite:
+				<input type="text"
+					   value={ this.emailForInvite.get() }
+					   onChange={ e =>  this.emailForInvite.set(e.target.value) } />
+
+					{ this.user.myBoardsIds.map((boardId)=> {
 					return (
 						<button key={ boardId }
-								onClick={ ()=> store.authorizedUser.createInviteMutation({
-									userId: this.user.id,
-									boardId: boardId,
-									fromUser: this.user.id
-						}) }>
+								onClick={ ()=> {
+                                    if(!this.emailForInvite) return;
+                                    store.authorizedUser.createInviteMutation({
+                                        boardId: boardId,
+                                        email: this.emailForInvite
+                                    });
+                                } }>
 							Crete invite for board { boardId }
 							</button>
 					);

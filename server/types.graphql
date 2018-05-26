@@ -90,7 +90,7 @@ type Invite @model {
 
     user: User! @relation(name: "UserOfInvites")
 
-    fromUser: String! @migrationValue(value: "42")
     boardId: String!
+    emailInviteReceiver: String!
 }
 

@@ -64,6 +64,12 @@ functions:
     handler:
       code: src/invite/acceptInvite.js
 
+  createInviteCustom:
+      type: resolver
+      schema: src/invite/createInviteCustom.graphql
+      handler:
+        code: src/invite/createInviteCustom.js
+
 
 # Model/Relation permissions are used to limit the API access
 # To take the burden of thinking about those while development, we

@@ -42,7 +42,7 @@ const actions = (self)=> {
 const views = (self)=> {
 	return {
 		get boardsIds() { return self.boards.map((board)=> board.id) },
-		get myBoardsIds() { return self.myBoards.map((board)=> board.id) }
+		get myBoardsIds() { console.log('self.myBoards', self.myBoards);return self.myBoards.map((board)=> board.id) }
 	};
 };
 

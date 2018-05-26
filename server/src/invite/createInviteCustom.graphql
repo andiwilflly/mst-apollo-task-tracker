@@ -1,0 +1,10 @@
+type CreateInvitePayload {
+    response: String!
+}
+
+extend type Mutation {
+    createInviteCustom(
+        boardId: String!,
+        emailInviteReceiver: String!,
+    ): CreateInvitePayload
+}

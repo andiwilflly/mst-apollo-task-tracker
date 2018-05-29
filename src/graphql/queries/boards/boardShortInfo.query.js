@@ -6,5 +6,8 @@ export default gql`query boardShortInfo($id: ID!) {
         id
         name
         description
+        author {
+            id
+        }
     }
 }`

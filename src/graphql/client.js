@@ -10,8 +10,8 @@ import 'graphql/websocket';
 
 const cache = new InMemoryCache();
 const responseResolverLink = new ApolloLink((operation, forward)=> {
-	return forward(operation).map((data, b , c)=> {
-		responseResolver(operation, data.data, data.errors, cache);
+	return forward(operation).map((data)=> {
+		responseResolver(data.data, data.errors, cache);
 		return data;
 	})
 });

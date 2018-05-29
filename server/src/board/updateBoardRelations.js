@@ -10,7 +10,9 @@ export default async (event)=> {
 
 	const response = [];
 
-	response.push(await getUser(api, { userId: event.data.authorId }));
+	const User = await getUser(api, { userId: event.data.authorId });
+
+	if(User !== null) response.push(User);
 
 	return {
 		data: {

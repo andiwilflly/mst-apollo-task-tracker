@@ -24,7 +24,7 @@ const actions = (self)=> {
 			client.mutate({
 				variables: { email, id },
 				mutation: USER_UPDATE_MUTATION
-			});
+			}).catch((e)=> console.log("USER_UPDATE_MUTATION", e));
 		},
 
 

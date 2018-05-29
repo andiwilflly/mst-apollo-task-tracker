@@ -1,4 +1,3 @@
-import { runInAction } from "mobx";
 import { types } from "mobx-state-tree";
 // GraphQl
 import client from "graphql/client";
@@ -18,7 +17,7 @@ const actions = (self)=> {
 			client.mutate({
 				variables: { emailForInvite, boardId },
 				mutation: CREATE_INVITE_CUSTOM_MUTATION
-			});
+			}).catch((e)=> console.log("CREATE_INVITE_CUSTOM_MUTATION", e));
 		},
 
 
@@ -26,7 +25,7 @@ const actions = (self)=> {
 			client.mutate({
 				variables: { userId, inviteId, boardsIds },
 				mutation: ACCEPT_INVITE_MUTATION
-			});
+			}).catch((e)=> console.log("ACCEPT_INVITE_MUTATION", e));
 		}
 
 	};

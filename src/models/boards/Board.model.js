@@ -2,11 +2,12 @@ import { runInAction } from "mobx";
 import { types } from 'mobx-state-tree';
 // GraphQL
 import client from "graphql/client";
-import UPDATE_BOARD_RELATIONS_QUERY from "graphql/queries/boards/updateBoardRelations.query";
+import UPDATE_BOARD_RELATIONS_MUTATION from "graphql/mutations/boards/updateBoardRelations.mutation";
 
 
 const Board = {
 	id: types.identifier(types.string),
+	__type: types.maybe(types.string),
 	name: types.maybe(types.string),
 	description: types.maybe(types.string),
 	author: types.frozen,
@@ -19,10 +20,10 @@ const actions = (self)=> {
     return {
 
 		updateBoardRelations: ({ authorId })=> {
-			return client.query({
+			return client.mutate({
 				variables: { authorId },
-				query: UPDATE_BOARD_RELATIONS_QUERY
-			});
+				mutation: UPDATE_BOARD_RELATIONS_MUTATION
+			}).catch((e)=> console.log("UPDATE_BOARD_RELATIONS_MUTATION", e));
 		},
 
 

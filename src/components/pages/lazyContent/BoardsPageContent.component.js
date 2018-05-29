@@ -6,7 +6,7 @@ import { observer } from "mobx-react";
 import store from "store";
 // Components
 import CreateBoard from "components/parts/boards/CreateBoard.component";
-import BoardsList from "components/parts/boards/BoardsList.component";
+import BoardsShortInfoList from "components/parts/boards/BoardsShortInfoList.component";
 
 
 @observer
@@ -24,10 +24,10 @@ class BoardsPage extends React.Component {
 		return (
 			<div>
 				<p>My boards</p>
-				<BoardsList boardsIds={ this.user.myBoardsIds } />
+				<BoardsShortInfoList boardsIds={ this.user.myBoardsIds } />
 
 				<p>Boards where I was invited</p>
-				<BoardsList boardsIds={ this.user.boardsIds } />
+				<BoardsShortInfoList boardsIds={ this.user.boardsIds } />
 
 				<hr/>
 				<CreateBoard />

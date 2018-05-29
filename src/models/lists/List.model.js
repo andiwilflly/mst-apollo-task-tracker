@@ -20,7 +20,7 @@ const actions = (self)=> {
 			return client.query({
 				variables: { boardId },
 				query: UPDATE_LIST_RELATIONS_QUERY
-			});
+			}).catch((e)=> console.log("UPDATE_LIST_RELATIONS_QUERY", e));
 		},
 
 

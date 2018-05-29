@@ -18,7 +18,7 @@ const actions = (self)=> {
 			client.mutate({
 				variables: { color },
 				mutation: CREATE_LABEL_MUTATION
-			});
+			}).catch((e)=> console.log("CREATE_LABEL_MUTATION", e));
 		},
 
 

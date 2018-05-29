@@ -2,7 +2,7 @@ type UpdateBoardRelationsPayload {
     response: String!
 }
 
-extend type Query {
+extend type Mutation {
     updateBoardRelations(
         authorId: ID
     ): UpdateBoardRelationsPayload

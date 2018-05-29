@@ -7,11 +7,11 @@ import history from "utils/history.utils";
 import store from "store";
 
 
-export default function (operation = {}, data = {}, errors = null, cache) {
+export default function (data = {}, errors = null, cache) {
 
 	const dataName = Object.keys(data)[0];
 	data = data[dataName];
-	const errorMsg = errors ? errors[0].functionError || errors[0].massege : "";
+	const errorMsg = errors ? errors[0].functionError || errors[0].message : "";
 
 	console.groupCollapsed(`%c🕺 RESOLVER [${dataName}] (${errors ? "ERROR" : "SUCCESS"})`, "color: darkgreen");
 	console.log("dataName", dataName);
@@ -70,7 +70,10 @@ function applyData(dataName, data) {
 			break;
 		case "deleteBoard":
 			history.push('/boards');
-			store.board.delete(data.id);
+			store.boards.all.get(data.id).updateBoardRelations({
+				authorId: store.boards.all.get(data.id).authorId
+			});
+			store.boards.delete(data.id);
 			Alert.success("Board was deleted successfully!");
 			break;
 

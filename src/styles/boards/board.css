@@ -36,7 +36,7 @@
 }
 
 
-.boards_list_item .cssload-loader {
+.boards_list_item > .cssload-loader {
 	height: 100px;
 }
 

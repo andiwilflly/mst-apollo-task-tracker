@@ -4,7 +4,7 @@ import "styles/tasks/create_task.css";
 import "styles/labels/labels_list.css";
 // MobX
 import { observer } from "mobx-react";
-import { observable, values } from "mobx";
+import { observable } from "mobx";
 // Store
 import store from "store";
 // Components

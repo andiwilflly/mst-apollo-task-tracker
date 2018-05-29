@@ -41,7 +41,7 @@ const actions = (self)=> {
 			return client.mutate({
 				variables: { authorId, boardId, listId, title, description, labelsIds },
 				mutation: CREATE_TASK_MUTATION
-			});
+			}).catch((e)=> console.log("CREATE_TASK_MUTATION", e));
 		},
 
 
@@ -49,14 +49,14 @@ const actions = (self)=> {
 			return client.mutate({
 				variables: { taskId, userId, boardId, listId },
 				mutation: DELETE_TASK_MUTATION
-			});
+			}).catch((e)=> console.log("DELETE_TASK_MUTATION", e));
 		},
 
         updateTaskRelations: ({ id, authorId, boardId, listId })=> {
             return client.query({
                 variables: { id, authorId, boardId, listId },
                 query: UPDATE_TASK_RELATIONS_QUERY
-            });
+			}).catch((e)=> console.log("UPDATE_TASK_RELATIONS_QUERY", e));
         },
 
 

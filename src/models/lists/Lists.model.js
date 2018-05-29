@@ -18,7 +18,7 @@ const actions = (self)=> {
 			return client.mutate({
                 variables: { boardId, name },
                 mutation: CREATE_LIST_MUTATION
-            });
+			}).catch((e)=> console.log("CREATE_LIST_MUTATION", e));
 		},
 
 

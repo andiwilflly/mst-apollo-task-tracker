@@ -1,3 +1,5 @@
+import Alert from 'react-s-alert';
+// MobX
 import { runInAction } from "mobx";
 import { types } from 'mobx-state-tree';
 // GraphQL
@@ -6,7 +8,8 @@ import CREATE_BOARD_MUTATION from "graphql/mutations/boards/createBoard.mutation
 import DELETE_BOARD_MUTATION from "graphql/mutations/boards/deleteBoard.mutation";
 // Models
 import BoardModel from "models/boards/Board.model";
-import webSocket from 'graphql/websocket'
+import webSocket from 'graphql/websocket';
+
 
 const Boards = {
 	all: types.optional(types.map(BoardModel), {})
@@ -20,7 +23,7 @@ const actions = (self)=> {
 			return client.mutate({
 				variables: { authorId, name, description },
 				mutation: CREATE_BOARD_MUTATION
-			});
+			}).catch((e)=> console.log("CREATE_BOARD_MUTATION", e));
 		},
 
 
@@ -28,17 +31,26 @@ const actions = (self)=> {
 			return client.mutate({
 				variables: { boardId },
 				mutation: DELETE_BOARD_MUTATION
-			});
+			}).catch((e)=> console.log("DELETE_BOARD_MUTATION", e));
 		},
 
 
 		create(board = {}) {
 			if(self.all.has(board.id)) return self.all.get(board.id).update(board);
 			runInAction(`BOARD-CREATE-SUCCESS ${board.id}`, ()=> {
-				self.all.set(board.id, board);
+				self.all.set(board.id,  { ...board, __type: "Board" });
                 self.subscribeTaskCreate(board.id);
                 self.subscribeTaskDelete(board.id);
             });
+		},
+
+
+		delete(boardId) {
+			if(!self.all.has(boardId)) return runInAction(`BOARD-DELETE-WARNING (no such board ${boardId})`, ()=> {});
+			runInAction(`BOARD-DELETE-SUCCESS ${boardId}`, ()=> {
+				self.all.delete(boardId);
+				Alert.success("Board was deleted successfully!");
+			});
 		},
 
 

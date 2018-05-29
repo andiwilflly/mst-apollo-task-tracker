@@ -24,7 +24,7 @@ const actions = (self)=> {
 			return await client.mutate({
 				variables: task,
 				mutation: UPDATE_TASK_CUSTOM_MUTATION
-			});
+			}).catch((e)=> console.log("UPDATE_TASK_CUSTOM_MUTATION", e));
 		},
 
 

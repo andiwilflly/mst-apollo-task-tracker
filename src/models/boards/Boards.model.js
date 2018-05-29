@@ -17,7 +17,7 @@ const actions = (self)=> {
     return {
 
     	createMutation: async ({ authorId, name, description })=> {
-			client.mutate({
+			return client.mutate({
 				variables: { authorId, name, description },
 				mutation: CREATE_BOARD_MUTATION
 			});
@@ -25,7 +25,7 @@ const actions = (self)=> {
 
 
 		deleteMutation: (boardId)=> {
-			client.mutate({
+			return client.mutate({
 				variables: { boardId },
 				mutation: DELETE_BOARD_MUTATION
 			});

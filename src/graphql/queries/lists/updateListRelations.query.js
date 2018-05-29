@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 
-export default gql`query updateListRelations($id: ID!, $boardId: ID!) {
-    updateListRelations(id: $id, boardId: $boardId) {
+export default gql`query updateListRelations($boardId: ID!) {
+    updateListRelations(boardId: $boardId) {
         response
     }
 }`

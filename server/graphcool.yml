@@ -37,6 +37,20 @@ functions:
    handler:
      code: src/email-password/loggedInUser.ts
 
+  # Board
+  updateBoardRelations:
+      type: resolver
+      schema: src/board/updateBoardRelations.graphql
+      handler:
+        code: src/board/updateBoardRelations.js
+
+  # List
+  updateListRelations:
+      type: resolver
+      schema: src/list/updateListRelations.graphql
+      handler:
+        code: src/list/updateListRelations.js
+
   # Task
   updateTaskCustom:
     type: resolver
@@ -49,13 +63,6 @@ functions:
     schema: src/task/updateTaskRelations.graphql
     handler:
       code: src/task/updateTaskRelations.js
-
-  # List
-  updateListRelations:
-    type: resolver
-    schema: src/list/updateListRelations.graphql
-    handler:
-      code: src/list/updateListRelations.js
 
   # Invite
   acceptInvite:

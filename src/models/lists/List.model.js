@@ -16,9 +16,9 @@ const List = {
 const actions = (self)=> {
     return {
 
-		updateListRelations: ({ id, boardId })=> {
+		updateListRelations: ({ boardId })=> {
 			return client.query({
-				variables: { id, boardId },
+				variables: { boardId },
 				query: UPDATE_LIST_RELATIONS_QUERY
 			});
 		},

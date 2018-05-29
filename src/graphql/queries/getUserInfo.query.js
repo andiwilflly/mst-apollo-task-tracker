@@ -1,11 +1,11 @@
 import gql from 'graphql-tag';
 
 
-    export default gql`query getUserInfo($id: ID!) {
+export default gql`query getUserInfo($id: ID!) {
     User(id: $id) {
         id
         email
-        
+
         tasks {
             id
         }
@@ -16,10 +16,12 @@ import gql from 'graphql-tag';
             id
         }
         invites {
-            id
             boardId
             emailInviteReceiver
-            user {id}
+            authorId
+            user {
+                id
+            }
         }
     }
 }`

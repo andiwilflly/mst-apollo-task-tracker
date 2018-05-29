@@ -4,16 +4,30 @@ import { observer } from "mobx-react";
 import { observable } from "mobx";
 // Store
 import store from "store";
+// Components
+import PreLoader from 'components/parts/PreLoader.component';
 
 
 @observer
 class CreateBoard extends React.Component {
+
+	@observable isLoading = false;
 
 
 	@observable form = {
 		name: "",
 		description: "",
 		authorId: store.authorizedUser.id
+	};
+
+
+	creteBoard = async ()=> {
+		if(this.form.name === '') return;
+		if(this.form.description === '') return;
+
+		this.isLoading = true;
+		await store.boards.createMutation(this.form);
+		this.isLoading = false;
 	};
 
 
@@ -36,7 +50,13 @@ class CreateBoard extends React.Component {
 						   onChange={ (e)=> this.form.description = e.currentTarget.value }/>
 				</p>
 
-				<button onClick={ ()=> store.boards.createMutation(this.form) }>Create board</button>
+				<button onClick={ this.creteBoard }
+						disabled={ this.isLoading }>{
+					this.isLoading ?
+						<PreLoader/>
+						:
+						'Create board'
+				}</button>
 			</div>
 		)
 	}

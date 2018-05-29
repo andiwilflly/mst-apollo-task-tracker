@@ -4,6 +4,7 @@ import getTask from "../queries/getTask.query";
 import getUser from "../queries/getUser.query";
 import getList from "../queries/getList.query";
 import getBoards from "../queries/getBoards.query";
+import getLabels from "../queries/getLabels.query";
 
 
 export default async (event)=> {
@@ -21,29 +22,11 @@ export default async (event)=> {
     response.push(await getLabels(api));
 
     // Case when our Task was deleted, we need to delete Task on client store
-	task.Task ?
-		response.push(task)
-		:
-		response.push({ deleteTaskCustom: { id: event.data.id }});
+	if(!task.Task) response.push({ deleteTaskCustom: { id: event.data.id }});
 
     return {
         data: {
             response: JSON.stringify(response)
         }
     }
-}
-
-
-async function getLabels(api) {
-    const query = `
-        query allLabels {
-            allLabels {
-            	id
-                tasks { 
-                	id
-                }             
-            }
-        }
-    `;
-    return api.request(query);
 }

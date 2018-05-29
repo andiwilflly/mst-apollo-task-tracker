@@ -1,0 +1,27 @@
+.profile {
+
+}
+
+.profile h2 {
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.profile_cards {
+	display: flex;
+	background: lightgray;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	padding: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.profile_card {
+	padding: 20px;
+	background: white;
+	min-width: 300px;
+	flex-direction: row;
+	margin: 10px;
+}

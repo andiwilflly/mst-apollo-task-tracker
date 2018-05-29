@@ -4,7 +4,6 @@ type UpdateListRelationsPayload {
 
 extend type Query {
     updateListRelations(
-        id: ID,
         boardId: ID
     ): UpdateListRelationsPayload
 }

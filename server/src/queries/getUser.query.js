@@ -2,9 +2,9 @@ async function getUser(api, { userId }) {
 	const query = `
         query getUser($id: ID!) {
             User(id: $id) {
-                id
+				id
 				email
-				
+		
 				tasks {
 					id
 				}
@@ -16,7 +16,11 @@ async function getUser(api, { userId }) {
 				}
 				invites {
 					boardId
-					fromUser
+					emailInviteReceiver
+					authorId
+					user {
+						id
+					}
 				}
 			}
 		}

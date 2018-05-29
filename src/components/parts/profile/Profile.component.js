@@ -1,4 +1,6 @@
 import React from 'react';
+// Styles
+import "styles/profile.css";
 // MobX
 import { observable, computed } from "mobx";
 import { observer } from "mobx-react";
@@ -6,6 +8,8 @@ import { observer } from "mobx-react";
 import store from "store";
 // Components
 import Invites from "components/parts/Invites.component";
+// Components
+import AllLabels from "components/parts/labels/AllLabels.component";
 
 
 @observer
@@ -42,10 +46,8 @@ class Profile extends React.Component {
 
 	render() {
 		return (
-			<div>
-				Profile (onKey press)
-
-				<Invites />
+			<div className="profile cf">
+				<h2>Profile (onKey press)</h2>
 
 				<div onDoubleClick={ this.emailOnDoubleClick } style={{ width: 200 }}>
 					email:
@@ -58,6 +60,16 @@ class Profile extends React.Component {
 						:
 						<p className="input">{ this.form.email.value }</p>
 					}
+				</div>
+
+				<div className="profile_cards">
+					<div className="profile_card">
+						<Invites />
+					</div>
+
+					<div className="profile_card">
+						<AllLabels onLabelClick={ this.onLabelClick } />
+					</div>
 				</div>
 			</div>
 		)

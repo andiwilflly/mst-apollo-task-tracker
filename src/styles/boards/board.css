@@ -1,3 +1,7 @@
+.board {
+	margin: 20px 0;
+}
+
 .board h1 {
 	font-weight: bold;
 	font-size: 25px;

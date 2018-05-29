@@ -5,8 +5,6 @@ import "styles/boards/board.css";
 import { observer } from "mobx-react";
 // Store
 import store from "store";
-// Components
-import AllLabels from "components/parts/labels/AllLabels.component";
 
 
 @observer
@@ -24,8 +22,6 @@ class BoardFilters extends React.Component {
 	render() {
 		return (
 			<div>
-				<p>All labels:</p>
-				<AllLabels onLabelClick={ this.onLabelClick } />
 				{ store.filters.byLabels.length ?
 					<p>Filtered by labels:</p>
 					:

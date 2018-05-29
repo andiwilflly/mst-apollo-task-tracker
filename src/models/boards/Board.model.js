@@ -1,11 +1,15 @@
 import { runInAction } from "mobx";
 import { types } from 'mobx-state-tree';
+// GraphQL
+import client from "graphql/client";
+import UPDATE_BOARD_RELATIONS_QUERY from "graphql/queries/boards/updateBoardRelations.query";
 
 
 const Board = {
 	id: types.identifier(types.string),
 	name: types.maybe(types.string),
 	description: types.maybe(types.string),
+	author: types.frozen,
 	lists: types.frozen,
 	tasks: types.frozen
 };
@@ -13,6 +17,14 @@ const Board = {
 
 const actions = (self)=> {
     return {
+
+		updateBoardRelations: ({ authorId })=> {
+			return client.query({
+				variables: { authorId },
+				query: UPDATE_BOARD_RELATIONS_QUERY
+			});
+		},
+
 
 		update(board) {
 			runInAction(`BOARD-UPDATE-SUCCESS ${board.id}`, ()=> {
@@ -27,6 +39,8 @@ const actions = (self)=> {
 
 const views = (self)=> {
 	return {
+
+		get authorId() { return self.author.id },
 
 		get listIds() { return self.lists.map((list)=> list.id) },
 

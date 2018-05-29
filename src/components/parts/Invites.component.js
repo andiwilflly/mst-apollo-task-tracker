@@ -21,7 +21,6 @@ class Invites extends React.Component {
 	render() {
 		return (
 			<div>
-				<hr/>
 				<h3>Invites:</h3>
 				{ this.user.invites.map((invite)=> {
 					return (
@@ -36,9 +35,6 @@ class Invites extends React.Component {
 						</div>
 					);
 				}) }
-
-				<br/>
-				<br/>
 
 				Write email for invite:
 				<input type="text"
@@ -59,7 +55,6 @@ class Invites extends React.Component {
 							</button>
 					);
 				}) }
-				<hr/>
 			</div>
 		)
 	}

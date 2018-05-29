@@ -13,7 +13,7 @@ export default function (operation = {}, data = {}, errors = null, cache) {
 	data = data[dataName];
 	const errorMsg = errors ? errors[0].functionError || errors[0].massege : "";
 
-	console.groupCollapsed(`%c🕺 REQUEST (${errors ? "ERROR" : "SUCCESS"})`, "color: darkgreen");
+	console.groupCollapsed(`%c🕺 RESOLVER [${dataName}] (${errors ? "ERROR" : "SUCCESS"})`, "color: darkgreen");
 	console.log("dataName", dataName);
 	console.log("data", data);
 	console.log("errors", errors);
@@ -51,14 +51,22 @@ function applyData(dataName, data) {
 		case "createList":
 			store.lists.create(data);
 			store.lists.all.get(data.id).updateListRelations({
-				id: data.id,
 				boardId: store.lists.all.get(data.id).boardId
 			});
 			break;
 
 		// Boards
+		case "allBoards":
+			data.map((board)=> store.boards.create(board));
+			break;
 		case "Board":
 			store.boards.create(data);
+			break;
+		case "createBoard":
+			store.boards.create(data);
+			store.boards.all.get(data.id).updateBoardRelations({
+				authorId: store.boards.all.get(data.id).authorId
+			});
 			break;
 		case "deleteBoard":
 			history.push('/boards');
@@ -73,6 +81,10 @@ function applyData(dataName, data) {
 		case "updateTask":
 			const task = store.tasks.all.get(data.id);
 			if(task) task.update(data);
+			break;
+		// TODO: WTF??
+		case "deleteTask":
+			// Resolved in [webSocket:TASK_DELETED]
 			break;
 		case "deleteTaskCustom":
 			store.tasks.delete(data.id);
@@ -93,12 +105,11 @@ function applyData(dataName, data) {
 
 		// Custom Functions
 		case "acceptInvite":
+		case "updateBoardRelations":
 		case "updateListRelations":
 		case "updateTaskRelations":
 		case "updateTaskCustom":
 			data = parse(data).response;
-			console.log(data, 42);
-
 			data.map((data)=> applyData(Object.keys(data)[0], data[Object.keys(data)[0]]));
 			break;
 

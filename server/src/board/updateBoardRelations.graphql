@@ -1,0 +1,9 @@
+type UpdateBoardRelationsPayload {
+    response: String!
+}
+
+extend type Query {
+    updateBoardRelations(
+        authorId: ID
+    ): UpdateBoardRelationsPayload
+}

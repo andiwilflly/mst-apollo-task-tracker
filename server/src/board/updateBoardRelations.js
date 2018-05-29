@@ -1,6 +1,6 @@
 import { fromEvent } from 'graphcool-lib';
 // Queries
-import getBoard from "../queries/getBoard.query";
+import getUser from "../queries/getUser.query";
 
 
 export default async (event)=> {
@@ -10,8 +10,7 @@ export default async (event)=> {
 
 	const response = [];
 
-	// TODO: Update user because of [user has_many lists] relation
-	response.push(await getBoard(api, { boardId: event.data.boardId }));
+	response.push(await getUser(api, { userId: event.data.authorId }));
 
 	return {
 		data: {

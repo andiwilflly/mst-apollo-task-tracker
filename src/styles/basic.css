@@ -63,7 +63,7 @@ textarea,
 	border-bottom: 1px solid lightgray;
 	display: block;
 	font-size: 12px;
-	min-width: 200px;
+	min-width: 210px;
 	line-height: 20px;
 }
 
@@ -74,4 +74,11 @@ textarea {
 textarea:focus,
 input:focus {
 	background-color: white !important;
+}
+
+
+h3 {
+	font-size: 20px;
+	margin: 0 0 20px 0;
+	font-weight: bold;
 }

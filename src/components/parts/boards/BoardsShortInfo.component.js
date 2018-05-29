@@ -40,13 +40,18 @@ class BoardsShortInfoList extends React.Component {
 					<div className="boards_list_item">
 						<Link to={ `/boards/${this.props.boardId}`}>{ this.board.name }</Link>
 						<p>{ this.board.description }</p>
-						<button onClick={ this.deleteBoard }
-								disabled={ this.isLoading }>{
-							this.isLoading ?
-								<PreLoader />
-								:
-								'Delete board'
-						}</button>
+
+						{ this.props.children ?
+							this.props.children
+							:
+							<button onClick={ this.deleteBoard }
+									disabled={ this.isLoading }>{
+								this.isLoading ?
+									<PreLoader />
+									:
+									'Delete board'
+							}</button>
+						}
 
 						<div className="boards_list_item_progress"
 							 style={{ width: (store.boards.deletionProgress) + '%' }} />

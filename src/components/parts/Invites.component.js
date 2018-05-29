@@ -1,11 +1,13 @@
 import React from 'react';
 // Styles
-import "styles/invites.css";
+import "styles/invites/invites.css";
 // MobX
 import { computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
 // Sore
 import store from "store";
+// Components
+import BoardsShortInfo from "components/parts/boards/BoardsShortInfo.component";
 
 
 @observer
@@ -15,13 +17,23 @@ class Invites extends React.Component {
 	@computed get user() { return store.users.all.get(store.authorizedUser.id); };
 
 
-	emailForInvite = observable.box('');
+	@observable invite = {
+		emailInviteReceiver: "",
+		boardId: "",
+		authorId: ""
+	};
+
+
+	componentDidMount() {
+		this.invite.authorId = store.authorizedUser.id;
+	}
 
 
 	render() {
 		return (
-			<div>
-				<h3>Invites:</h3>
+			<div className="invites">
+				<h3>Invites</h3>
+
 				{ this.user.invites.map((invite)=> {
 					return (
 						<div key={invite.boardId}>
@@ -36,25 +48,25 @@ class Invites extends React.Component {
 					);
 				}) }
 
-				Write email for invite:
 				<input type="text"
-					   value={ this.emailForInvite.get() }
-					   onChange={ e =>  this.emailForInvite.set(e.target.value) } />
+					   placeholder="email"
+					   value={ this.invite.emailInviteReceiver }
+					   onChange={ e => this.invite.emailInviteReceiver = e.target.value } />
 
-					{ this.user.myBoardsIds.map((boardId)=> {
+
+				{ this.user.myBoardsIds.map((boardId)=> {
 					return (
-						<button key={ boardId }
-								onClick={ ()=> {
-                                    if(!this.emailForInvite) return;
-                                    store.authorizedUser.createInviteMutation({
-                                        boardId: boardId,
-                                        email: this.emailForInvite
-                                    });
-                                } }>
-							Crete invite for board { boardId }
-							</button>
+						<BoardsShortInfo boardId={ boardId } key={boardId}>
+							<input type="radio"
+								   name="board"
+								   value={ boardId }
+								   checked={ this.invite.boardId === boardId }
+								   onChange={ (e)=> this.invite.boardId = e.currentTarget.value } />
+						</BoardsShortInfo>
 					);
 				}) }
+
+				<button>Send invite</button>
 			</div>
 		)
 	}

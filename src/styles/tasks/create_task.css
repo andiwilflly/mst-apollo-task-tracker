@@ -3,12 +3,6 @@
 	min-height: 300px;
 }
 
-.create_task h3 {
-	font-size: 20px;
-	margin: 10px 0;
-	font-weight: bold;
-}
-
 .create_task_form {
 	margin: 20px 0;
 	float: left;

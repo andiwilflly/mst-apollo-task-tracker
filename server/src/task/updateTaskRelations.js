@@ -3,7 +3,7 @@ import { fromEvent } from 'graphcool-lib';
 import getTask from "../queries/getTask.query";
 import getUser from "../queries/getUser.query";
 import getList from "../queries/getList.query";
-import getBoards from "../queries/getBoards.query";
+import getBoard from "../queries/getBoard.query";
 import getLabels from "../queries/getLabels.query";
 
 
@@ -16,7 +16,7 @@ export default async (event)=> {
 
 	const task = await getTask(api, { taskId: event.data.id });
 
-    response.push(await getBoards(api));
+    response.push(await getBoard(api, { boardId: event.data.boardId }));
     response.push(await getList(api, { listId: event.data.listId }));
     response.push(await getUser(api, { userId: event.data.authorId }));
     response.push(await getLabels(api));

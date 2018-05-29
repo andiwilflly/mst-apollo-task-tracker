@@ -28,6 +28,8 @@ class CreateBoard extends React.Component {
 		this.isLoading = true;
 		await store.boards.createMutation(this.form);
 		this.isLoading = false;
+		this.form.name = "";
+		this.form.description = "";
 	};
 
 

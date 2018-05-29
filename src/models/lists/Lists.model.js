@@ -4,7 +4,8 @@ import { types } from 'mobx-state-tree';
 import ListModel from "models/lists/List.model";
 // GraphQL
 import client from "graphql/client";
-import CREATE_LIST_MUTATION from "graphql/mutations/lists/createList.mutation";
+import LIST_CREATE_MUTATION from "graphql/mutations/lists/createList.mutation";
+import LIST_DELETE_MUTATION from "graphql/mutations/lists/deleteList.mutation";
 
 
 const Lists = {
@@ -17,8 +18,16 @@ const actions = (self)=> {
         createMutation: ({ boardId, name } = {})=> {
 			return client.mutate({
                 variables: { boardId, name },
-                mutation: CREATE_LIST_MUTATION
-			}).catch((e)=> console.log("CREATE_LIST_MUTATION", e));
+                mutation: LIST_CREATE_MUTATION
+			}).catch((e)=> console.log("LIST_CREATE_MUTATION", e));
+		},
+
+
+		deleteMutation: ({ listId })=> {
+			return client.mutate({
+				variables: { listId },
+				mutation: LIST_DELETE_MUTATION
+			}).catch((e)=> console.log("LIST_DELETE_MUTATION", e));
 		},
 
 

@@ -8,7 +8,7 @@ import { observer } from "mobx-react";
 // Store
 import store from "store";
 // GraphQL
-import BOARD_SHORT_INFO_QUERY from "graphql/queries/boards/boardShortInfo.query";
+import BOARD_ALL_INFO_QUERY from "graphql/queries/boards/boardAllInfo.query";
 // Components
 import QueryLoader from "components/QueryLoader.component";
 import PreLoader from "components/parts/PreLoader.component";
@@ -33,7 +33,7 @@ class BoardsShortInfoList extends React.Component {
 
 	render() {
 		return (
-			<QueryLoader query={ BOARD_SHORT_INFO_QUERY }
+			<QueryLoader query={ BOARD_ALL_INFO_QUERY }
 						 preLoader={ <div className="boards_list_item"><PreLoader /></div>}
 						 variables={{ id: this.props.boardId }}>
 				{ this.board ?
@@ -41,12 +41,15 @@ class BoardsShortInfoList extends React.Component {
 						<Link to={ `/boards/${this.props.boardId}`}>{ this.board.name }</Link>
 						<p>{ this.board.description }</p>
 						<button onClick={ this.deleteBoard }
-								disabled={ true || this.isLoading }>{
+								disabled={ this.isLoading }>{
 							this.isLoading ?
-								<PreLoader/>
+								<PreLoader />
 								:
 								'Delete board'
 						}</button>
+
+						<div className="boards_list_item_progress"
+							 style={{ width: (store.boards.deletionProgress) + '%' }} />
 					</div>
 					:
 					<div className="boards_list_item"><PreLoader /></div>

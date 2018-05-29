@@ -15,7 +15,8 @@ class BoardsShortInfoList extends React.Component {
 			<div className="boards_list">
 				{ this.props.boardsIds.map((boardId)=> {
 					return (
-						<BoardsShortInfo boardId={ boardId } key={boardId} />
+						<BoardsShortInfo boardId={ boardId }
+										 key={boardId} />
 					);
 				}) }
 			</div>

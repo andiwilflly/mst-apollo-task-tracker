@@ -6,9 +6,9 @@ import { runInAction, values } from "mobx";
 import { types } from 'mobx-state-tree';
 // GraphQL
 import client from "graphql/client";
-import CREATE_TASK_MUTATION from "graphql/mutations/tasks/createTask.mutation";
-import DELETE_TASK_MUTATION from "graphql/mutations/tasks/deleteTask.mutation";
-import UPDATE_TASK_RELATIONS_QUERY from "graphql/queries/tasks/updateTaskRelations.query";
+import TASK_CREATE_MUTATION from "graphql/mutations/tasks/createTask.mutation";
+import TASK_DELETE_MUTATION from "graphql/mutations/tasks/deleteTask.mutation";
+import TASK_UPDATE_RELATIONS_QUERY from "graphql/queries/tasks/updateTaskRelations.query";
 // Models
 import TaskModel from "models/tasks/Task.model";
 
@@ -40,23 +40,24 @@ const actions = (self)=> {
 		createMutation: ({ authorId, boardId, listId, title, description, labelsIds })=> {
 			return client.mutate({
 				variables: { authorId, boardId, listId, title, description, labelsIds },
-				mutation: CREATE_TASK_MUTATION
-			}).catch((e)=> console.log("CREATE_TASK_MUTATION", e));
+				mutation: TASK_CREATE_MUTATION
+			}).catch((e)=> console.log("TASK_CREATE_MUTATION", e));
 		},
 
 
-		deleteMutation: ({ taskId, userId, boardId, listId })=> {
+		deleteMutation: ({ taskId })=> {
 			return client.mutate({
-				variables: { taskId, userId, boardId, listId },
-				mutation: DELETE_TASK_MUTATION
-			}).catch((e)=> console.log("DELETE_TASK_MUTATION", e));
+				variables: { taskId },
+				mutation: TASK_DELETE_MUTATION
+			}).catch((e)=> console.log("TASK_DELETE_MUTATION", e));
 		},
+
 
         updateTaskRelations: ({ id, authorId, boardId, listId })=> {
             return client.query({
                 variables: { id, authorId, boardId, listId },
-                query: UPDATE_TASK_RELATIONS_QUERY
-			}).catch((e)=> console.log("UPDATE_TASK_RELATIONS_QUERY", e));
+                query: TASK_UPDATE_RELATIONS_QUERY
+			}).catch((e)=> console.log("TASK_UPDATE_RELATIONS_QUERY", e));
         },
 
 

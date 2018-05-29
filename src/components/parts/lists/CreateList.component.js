@@ -24,6 +24,7 @@ class CreateList extends React.Component {
 		this.isLoading = true;
 		await store.lists.createMutation(this.form);
 		this.isLoading = false;
+		this.form.name = "";
 	};
 
 

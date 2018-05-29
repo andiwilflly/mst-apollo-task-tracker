@@ -2,9 +2,8 @@ import { fromEvent } from 'graphcool-lib';
 // Queries
 import createInvite from "../mutations/createInvite.mutation";
 
-export default async (event)=> {
 
-    console.log("-===> ", event.data);
+export default async (event)=> {
 
     const graphcool = fromEvent(event);
     const api = graphcool.api('simple/v1');
@@ -12,14 +11,14 @@ export default async (event)=> {
     const response = [];
 
     const User = await findUserByEmail(api, { email: event.data.emailInviteReceiver });
-console.log('%%---> User', User)
 
-    if(!User) {
-        return { error: "User with this email doesn't exist!" }
+    if(!User.User) {
+        return { error: "User with this email doesn't exist!" };
     }
 
     response.push(await createInvite(api, {
-        userId: User.id, // userInviteReceiver
+        authorId: event.data.authorId,
+        userId: User.User.id, // userInviteReceiver
         boardId: event.data.boardId,
         emailInviteReceiver: event.data.emailInviteReceiver
     }));
@@ -34,16 +33,34 @@ console.log('%%---> User', User)
 async function findUserByEmail(api, { email }) {
 
     const query = `
-        query findUserByEmail($email: String!) {
-            allUsers(filter: {
-                email: $email
-            }) {
+        query getUserInfo($email: String!) {
+             User(email: $email) {
                 id
-            }
+                email
+                
+                tasks {
+                    id
+                }
+                myBoards {
+                    id
+                }
+                boards {
+                    id
+                }
+                invites {
+                    id
+                    authorId
+                    boardId
+                    emailInviteReceiver
+                    user {
+                        id
+                    }
+                }
+             }
         }
     `;
     const variables = {
-        email
+		email: email
     };
 
     return api.request(query, variables);

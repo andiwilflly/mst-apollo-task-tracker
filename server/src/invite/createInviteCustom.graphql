@@ -4,6 +4,7 @@ type CreateInvitePayload {
 
 extend type Mutation {
     createInviteCustom(
+        authorId: String!,
         boardId: String!,
         emailInviteReceiver: String!,
     ): CreateInvitePayload

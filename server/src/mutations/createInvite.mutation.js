@@ -1,8 +1,9 @@
-async function createInvite(api, { userId, boardId, emailInviteReceiver }) {
+async function createInvite(api, { authorId, userId, boardId, emailInviteReceiver }) {
     const query = `
-        mutation createInvite($userId: ID!, $boardId: String!, $emailInviteReceiver: String!) {
-			createInvite(userId :$userId, boardId: $boardId, emailInviteReceiver: $emailInviteReceiver) {
+        mutation createInvite($authorId: String!, $userId: ID!, $boardId: String!, $emailInviteReceiver: String!) {
+			createInvite(authorId: $authorId, userId :$userId, boardId: $boardId, emailInviteReceiver: $emailInviteReceiver) {
 				id
+				authorId
 				user {id}
 				boardId
 				emailInviteReceiver
@@ -10,6 +11,7 @@ async function createInvite(api, { userId, boardId, emailInviteReceiver }) {
 		}
     `;
     const variables = {
+        authorId,
         userId,
         boardId,
         emailInviteReceiver

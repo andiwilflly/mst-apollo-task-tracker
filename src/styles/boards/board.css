@@ -8,6 +8,39 @@
 	margin: 20px 0;
 }
 
+
+.boards_list {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+
+.boards_list_item {
+	width: 200px;
+	min-height: 60px;
+	background: lightgray;
+	margin: 10px 0;
+	padding: 10px;
+}
+
+.boards_list_item > a {
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+
+.boards_list_item > p {
+	font-size: 12px;
+}
+
+
+.boards_list_item .cssload-loader {
+	height: 100px;
+}
+
+
 .board_lists {
 	display: flex;
 	flex-direction: row;

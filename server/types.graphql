@@ -28,10 +28,10 @@ type Board @model {
     description: String!
 
 
-    users: [User!]! @relation(name: "UsersAndBoards")
-    author: User! @relation(name: "UserAuthorOfBoards")
-    lists: [List!]! @relation(name: "BoardOfLists")
-    tasks: [Task!]! @relation(name: "BoardOfTasks")
+    users: [User!]! @relation(name: "UsersAndBoards", onDelete: CASCADE)
+    author: User! @relation(name: "UserAuthorOfBoards", onDelete: CASCADE)
+    lists: [List!]! @relation(name: "BoardOfLists", onDelete: CASCADE)
+    tasks: [Task!]! @relation(name: "BoardOfTasks", onDelete: CASCADE)
 }
 
 
@@ -45,8 +45,8 @@ type List @model {
 
     name: String!
 
-    board: Board! @relation(name: "BoardOfLists")
-    tasks: [Task!]! @relation(name: "ListOfTasks")
+    board: Board! @relation(name: "BoardOfLists", onDelete: CASCADE)
+    tasks: [Task!]! @relation(name: "ListOfTasks", onDelete: CASCADE)
 }
 
 
@@ -61,10 +61,10 @@ type Task @model {
     title: String!
     description: String!
 
-    author: User! @relation(name: "UserOfTasks")
-    list: List! @relation(name: "ListOfTasks")
-    board: Board! @relation(name: "BoardOfTasks")
-    labels: [Label!]! @relation(name: "TasksAndLabels")
+    author: User! @relation(name: "UserOfTasks", onDelete: CASCADE)
+    list: List! @relation(name: "ListOfTasks", onDelete: CASCADE)
+    board: Board! @relation(name: "BoardOfTasks", onDelete: CASCADE)
+    labels: [Label!]! @relation(name: "TasksAndLabels", onDelete: CASCADE)
 }
 
 
@@ -75,7 +75,7 @@ type Label @model {
     createdAt: DateTime! # read-only (managed by Graphcool)
     updatedAt: DateTime! # read-only (managed by Graphcool)
 
-    tasks: [Task!]! @relation(name: "TasksAndLabels")
+    tasks: [Task!]! @relation(name: "TasksAndLabels", onDelete: CASCADE)
 
     color: String!
 }
@@ -88,7 +88,7 @@ type Invite @model {
     createdAt: DateTime! # read-only (managed by Graphcool)
     updatedAt: DateTime! # read-only (managed by Graphcool)
 
-    user: User! @relation(name: "UserOfInvites")
+    user: User! @relation(name: "UserOfInvites", onDelete: CASCADE)
 
     authorId: String! @migrationValue(value: "catch22")
     boardId: String!

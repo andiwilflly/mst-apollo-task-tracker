@@ -41,7 +41,7 @@ class BoardsShortInfoList extends React.Component {
 						<Link to={ `/boards/${this.props.boardId}`}>{ this.board.name }</Link>
 						<p>{ this.board.description }</p>
 						<button onClick={ this.deleteBoard }
-								disabled={ this.isLoading }>{
+								disabled={ true || this.isLoading }>{
 							this.isLoading ?
 								<PreLoader/>
 								:

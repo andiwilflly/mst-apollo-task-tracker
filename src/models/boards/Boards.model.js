@@ -57,6 +57,9 @@ const actions = (self)=> {
 				counter +=1;
 			}
 
+
+			setTimeout(()=> self.setDeletionProgress(100), 1000);
+
 			return client.mutate({
 				variables: { boardId },
 				mutation: DELETE_BOARD_MUTATION

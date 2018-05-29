@@ -13,7 +13,7 @@ import AllLabels from "components/parts/labels/AllLabels.component";
 
 
 @observer
-class CreateList extends React.Component {
+class CreateTask extends React.Component {
 
 
 	@observable isLoading = false;
@@ -88,4 +88,4 @@ class CreateList extends React.Component {
 }
 
 
-export default CreateList;
+export default CreateTask;

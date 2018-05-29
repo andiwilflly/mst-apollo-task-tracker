@@ -3,7 +3,7 @@ import { types } from 'mobx-state-tree';
 import { runInAction } from "mobx";
 // GraphQL
 import client from "graphql/client";
-import UPDATE_LIST_RELATIONS_QUERY from "graphql/queries/lists/updateListRelations.query";
+import UPDATE_LIST_RELATIONS_MUTATION from "graphql/mutations/lists/updateListRelations.mutation";
 
 
 const List = {
@@ -17,10 +17,10 @@ const actions = (self)=> {
     return {
 
 		updateListRelations: ({ boardId })=> {
-			return client.query({
+			return client.mutate({
 				variables: { boardId },
-				query: UPDATE_LIST_RELATIONS_QUERY
-			}).catch((e)=> console.log("UPDATE_LIST_RELATIONS_QUERY", e));
+				mutation: UPDATE_LIST_RELATIONS_MUTATION
+			}).catch((e)=> console.log("UPDATE_LIST_RELATIONS_MUTATION", e));
 		},
 
 

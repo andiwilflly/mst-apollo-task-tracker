@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 
-export default gql`query updateListRelations($boardId: ID!) {
+export default gql`mutation updateListRelations($boardId: ID!) {
     updateListRelations(boardId: $boardId) {
         response
     }

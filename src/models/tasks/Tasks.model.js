@@ -8,7 +8,7 @@ import { types } from 'mobx-state-tree';
 import client from "graphql/client";
 import TASK_CREATE_MUTATION from "graphql/mutations/tasks/createTask.mutation";
 import TASK_DELETE_MUTATION from "graphql/mutations/tasks/deleteTask.mutation";
-import TASK_UPDATE_RELATIONS_QUERY from "graphql/queries/tasks/updateTaskRelations.query";
+import TASK_UPDATE_RELATIONS_MUTATION from "graphql/mutations/tasks/updateTaskRelations.mutation";
 // Models
 import TaskModel from "models/tasks/Task.model";
 
@@ -54,10 +54,10 @@ const actions = (self)=> {
 
 
         updateTaskRelations: ({ id, authorId, boardId, listId })=> {
-            return client.query({
+            return client.mutate({
                 variables: { id, authorId, boardId, listId },
-                query: TASK_UPDATE_RELATIONS_QUERY
-			}).catch((e)=> console.log("TASK_UPDATE_RELATIONS_QUERY", e));
+                mutation: TASK_UPDATE_RELATIONS_MUTATION
+			}).catch((e)=> console.log("TASK_UPDATE_RELATIONS_MUTATION", e));
         },
 
 

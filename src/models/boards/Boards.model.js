@@ -56,7 +56,7 @@ const actions = (self)=> {
 
         subscribeTaskCreate(boardId) {
             const taskCreateSubscriptionMessage = {
-                id: 'TASK_CREATED',
+                id: `TASK_CREATED__${boardId}`,
                 type: 'subscription_start',
                 query: `
 					subscription Task {
@@ -87,15 +87,15 @@ const actions = (self)=> {
 								}
 							}
 						}
-            }
-			`
+            		}
+				`
             };
             webSocket.send(JSON.stringify(taskCreateSubscriptionMessage));
 		},
 
         subscribeTaskDelete(boardId) {
             const taskDeleteSubscriptionMessage = {
-                id: 'TASK_DELETED',
+                id: `TASK_DELETED__${boardId}`,
                 type: 'subscription_start',
                 query: `
 					subscription Task {

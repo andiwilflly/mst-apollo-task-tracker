@@ -22,8 +22,10 @@ webSocket.onmessage = (event) => {
             break;
 		}
 		case 'subscription_data': {
-			console.log(`%c SOCKET-SUBSCRIPTION-DATA-ARRIVED [event: ${data.id}]`, styles);
-            switch(data.id) {
+			const dataName = data.id.split('__')[0];
+
+			console.log(`%c SOCKET-SUBSCRIPTION-DATA-ARRIVED [event: ${dataName}]`, styles);
+            switch(dataName) {
 				case 'TASK_DELETED':
                     const deletedTask = data.payload.data.Task.previousValues;
                     const taskFromStore = store.tasks.all.get(deletedTask.id);

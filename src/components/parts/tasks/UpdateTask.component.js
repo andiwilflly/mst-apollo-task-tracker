@@ -87,8 +87,6 @@ class UpdateList extends React.Component {
 					}</button>
 				</div>
 				<div className="create_task_sidebar">
-					<h4>Labels:</h4>
-
 					<AllLabels onLabelClick={ (label)=> this.addLabelToTask(label) } />
 
 					<p>Selected labels:</p>

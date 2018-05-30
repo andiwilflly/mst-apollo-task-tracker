@@ -1,5 +1,7 @@
 import { fromEvent } from 'graphcool-lib';
 // Queries
+import getUser from "../queries/getUser.query";
+// Mutations
 import createInvite from "../mutations/createInvite.mutation";
 
 
@@ -17,6 +19,9 @@ export default async (event)=> {
 
     // Validate email
     if(!isValidEmail(event.data.emailInviteReceiver)) return { error: `Invite error: ${event.data.emailInviteReceiver} is not a valid email address` };
+    // Is [invite author] and [invite receiver] are same
+    const InviteAuthor = await getUser(api, { userId: event.data.authorId });
+    if(InviteAuthor.User && InviteAuthor.User.email === event.data.emailInviteReceiver) return { error: `You can't give an invite for yourself` };
 
     const duplicatedInvites = await findDuplicatedInvites(api, { boardId: event.data.boardId, emailInviteReceiver: event.data.emailInviteReceiver });
 

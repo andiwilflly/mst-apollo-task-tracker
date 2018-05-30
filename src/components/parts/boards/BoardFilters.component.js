@@ -27,6 +27,7 @@ class BoardFilters extends React.Component {
 					:
 					null
 				}
+
 				<div className="labels_list">
 					{ store.filters.byLabels.map((labelColor)=> {
 						return (

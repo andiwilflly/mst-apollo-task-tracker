@@ -20,7 +20,7 @@ const responseResolverLink = new ApolloLink((operation, forward)=> {
 const httpLink = new BatchHttpLink({
 	uri: 'https://api.graph.cool/simple/v1/cjh1v6rdw1kmk0171da10ighp',
 	headers: {
-		...localStorage.getItem('token') && { Authorization: `Bearer ${ localStorage.getItem('token') }`}
+		...sessionStorage.getItem('token') && { Authorization: `Bearer ${ sessionStorage.getItem('token') }`}
 	},
 	batchInterval: 200,
 	batchKey: str => {

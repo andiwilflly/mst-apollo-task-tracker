@@ -7,7 +7,7 @@ import { observer } from "mobx-react";
 // Store
 import store from "store";
 // Components
-import Invites from "components/parts/Invites.component";
+import Invites from "components/parts/invites/Invites.component";
 // Components
 import AllLabels from "components/parts/labels/AllLabels.component";
 

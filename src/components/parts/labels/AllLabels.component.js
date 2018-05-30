@@ -37,7 +37,7 @@ class AllLabels extends React.Component {
 
 
 	onLabelClick = (label)=> {
-		this.props.onLabelClick(label);
+		this.props.onLabelClick && this.props.onLabelClick(label);
 	};
 
 

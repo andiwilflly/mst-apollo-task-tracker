@@ -5,6 +5,7 @@ import "styles/header.css";
 import "styles/logo.css";
 import "styles/main-menu.css";
 // MobX
+import { computed } from "mobx";
 import { observer } from "mobx-react";
 // Store
 import store from "store";
@@ -18,6 +19,9 @@ import Search from "components/parts/Search.component";
 @observer
 class Header extends React.Component {
 
+	@computed get user() { return store.users.all.get(store.authorizedUser.id); };
+
+
 	render() {
 		return (
 			<div className="header cf">
@@ -26,6 +30,12 @@ class Header extends React.Component {
 				</Link>
 
 				<div className="main-menu">
+					{ store.authorizedUser ?
+						<h3>Welcome, { this.user.email }</h3>
+						:
+						null
+					}
+
 					{ store.authorizedUser ?
 						<LogOutMutation>
 							<a href="/">log out</a>

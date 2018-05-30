@@ -42,8 +42,13 @@ button {
 
 button:disabled {
 	background: white;
-	border: 1px solid black;
+	color: lightgray;
+	border: 1px solid lightgray;
 	cursor: not-allowed;
+}
+
+button:disabled:hover {
+	color: lightgray;
 }
 
 button:hover {

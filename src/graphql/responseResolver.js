@@ -36,7 +36,7 @@ function applyData(dataName, data) {
 		case "signupUser":
 		case "authenticateUser":
 			if(!data) return;
-            localStorage.setItem('token', data.token);
+            sessionStorage.setItem('token', data.token);
             store.logIn(data.id);
             history.push(store.nextPathUrl || '/boards');
 			break;
@@ -104,6 +104,12 @@ function applyData(dataName, data) {
 			break;
 		case "createLabel":
 			store.labels.create(data);
+			break;
+
+		case "createInviteCustom":
+			data = parse(data).response;
+			console.log("createInviteCustom", data);
+			Alert.success("Invite was send successfully!");
 			break;
 
 		// Custom Functions

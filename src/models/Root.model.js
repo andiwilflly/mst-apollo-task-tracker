@@ -44,7 +44,7 @@ const actions = (store)=> {
 
 		logIn: (userId)=> { store.authorizedUser = { id: userId } },
 		logOut: ()=> {
-			localStorage.removeItem('token');
+			sessionStorage.removeItem('token');
 			store.authorizedUser = null;
 		}
 	};

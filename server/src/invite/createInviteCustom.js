@@ -22,12 +22,12 @@ export default async (event)=> {
         return { error: "User with this email doesn't exist!" };
     }
 
-    response.push(await createInvite(api, {
-        authorId: event.data.authorId,
-        userId: User.User.id, // userInviteReceiver
-        boardId: event.data.boardId,
-        emailInviteReceiver: event.data.emailInviteReceiver
-    }));
+	await createInvite(api, {
+		authorId: event.data.authorId,
+		userId: User.User.id, // userInviteReceiver
+		boardId: event.data.boardId,
+		emailInviteReceiver: event.data.emailInviteReceiver
+	});
 
     return {
         data: {

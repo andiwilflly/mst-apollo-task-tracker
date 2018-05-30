@@ -1,10 +1,9 @@
 import gql from 'graphql-tag';
 
 
-export default gql`mutation createInviteCustom($emailForInvite: String!, $boardId: String!) {
-    createInviteCustom(emailForInvite: $emailForInvite, boardId: $boardId)
+export default gql`mutation createInviteCustom($emailInviteReceiver: String!, $authorId: String!, $boardId: String!) {
+    createInviteCustom(emailInviteReceiver: $emailInviteReceiver, authorId: $authorId, boardId: $boardId)
     {
-        emailForInvite
-        boardId
+        response
     }
 }`

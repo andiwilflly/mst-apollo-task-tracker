@@ -23,6 +23,8 @@ class BoardsShortInfoList extends React.Component {
 
 	@computed get board() { return store.boards.all.get(this.props.boardId); };
 
+	@computed get isYourBoard() { return this.board.authorId === store.authorizedUser.id; };
+
 
 	deleteBoard = async ()=> {
 		this.isLoading = true;
@@ -44,13 +46,15 @@ class BoardsShortInfoList extends React.Component {
 						{ this.props.children ?
 							this.props.children
 							:
-							<button onClick={ this.deleteBoard }
-									disabled={ this.isLoading }>{
-								this.isLoading ?
-									<PreLoader />
-									:
-									'Delete board'
-							}</button>
+							this.isYourBoard ?
+								<button onClick={ this.deleteBoard }
+										disabled={ this.isLoading }>{
+									this.isLoading ?
+										<PreLoader />
+										:
+										'Delete board'
+								}</button>
+								: null
 						}
 
 						<div className="boards_list_item_progress"

@@ -5,6 +5,7 @@ async function getBoard(api, { boardId }) {
                 id
 				name
 				description
+				background
 				lists {
 					id
 				}

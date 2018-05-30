@@ -26,7 +26,7 @@ type Board @model {
 
     name: String! @isUnique
     description: String!
-
+    background: String
 
     users: [User!]! @relation(name: "UsersAndBoards", onDelete: CASCADE)
     author: User! @relation(name: "UserAuthorOfBoards", onDelete: CASCADE)

@@ -31,9 +31,9 @@ const actions = (self)=> {
 		},
 
 
-    	createMutation: async ({ authorId, name, description })=> {
+    	createMutation: async ({ authorId, name, description, background })=> {
 			return client.mutate({
-				variables: { authorId, name, description },
+				variables: { authorId, name, description, background },
 				mutation: CREATE_BOARD_MUTATION
 			}).catch((e)=> console.log("CREATE_BOARD_MUTATION", e));
 		},

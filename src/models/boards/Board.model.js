@@ -10,6 +10,7 @@ const Board = {
 	__type: types.maybe(types.string),
 	name: types.maybe(types.string),
 	description: types.maybe(types.string),
+	background: types.maybe(types.string),
 	author: types.frozen,
 	lists: types.frozen,
 	tasks: types.frozen

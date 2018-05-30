@@ -17,6 +17,7 @@ class CreateBoard extends React.Component {
 	@observable form = {
 		name: "",
 		description: "",
+		background: "",
 		authorId: store.authorizedUser.id
 	};
 
@@ -30,13 +31,14 @@ class CreateBoard extends React.Component {
 		this.isLoading = false;
 		this.form.name = "";
 		this.form.description = "";
+		this.form.background = "";
 	};
 
 
 	render() {
 
 		return (
-			<div>
+			<div style={{ background: `url(${this.form.background}) no-repeat` }}>
 				<h3>Create new board</h3>
 				<p>
 					name:
@@ -50,6 +52,13 @@ class CreateBoard extends React.Component {
 					<input type="text"
 						   value={ this.form.description }
 						   onChange={ (e)=> this.form.description = e.currentTarget.value }/>
+				</p>
+
+				<p>
+					background:
+					<input type="text"
+						   value={ this.form.background }
+						   onChange={ (e)=> this.form.background = e.currentTarget.value }/>
 				</p>
 
 				<button onClick={ this.creteBoard }

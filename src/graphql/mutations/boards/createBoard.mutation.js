@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 
-export default gql`mutation createBoard($name: String!, $description: String!, $authorId: ID!) {
-    createBoard(name: $name description: $description authorId:$authorId)
+export default gql`mutation createBoard($name: String!, $description: String!, $authorId: ID!, $background: String) {
+    createBoard(name: $name description: $description authorId:$authorId background: $background)
     {
         id
         name

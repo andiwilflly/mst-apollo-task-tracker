@@ -54,6 +54,7 @@ const actions = (self)=> {
 
 
         updateTaskRelations: ({ id, authorId, boardId, listId })=> {
+			console.log( id, authorId, boardId, listId, 4242);
             return client.mutate({
                 variables: { id, authorId, boardId, listId },
                 mutation: TASK_UPDATE_RELATIONS_MUTATION

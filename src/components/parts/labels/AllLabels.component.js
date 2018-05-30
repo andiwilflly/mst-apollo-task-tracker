@@ -32,6 +32,7 @@ class AllLabels extends React.Component {
 		this.isLoading = true;
 		await store.labels.createMutation(this.newLabel);
 		this.isLoading = false;
+		this.newLabel.color = "";
 	};
 
 

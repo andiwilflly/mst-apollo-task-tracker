@@ -2,6 +2,7 @@ import Alert from 'react-s-alert';
 // MobX
 import { runInAction } from "mobx";
 import { types } from 'mobx-state-tree';
+// Store
 import store from "store";
 // GraphQL
 import client from "graphql/client";
@@ -36,19 +37,11 @@ const actions = (self)=> {
 
 
 		deleteMutation: async (boardId)=> {
-
     		const board = self.all.get(boardId);
 
-    		let progressLength = board.lists.length + board.tasks.length;
+    		let progressLength = board.lists.length;
     		let counter = 1;
 			self.setDeletionProgress(100);
-
-			// Need to remove all [Tasks] of Board
-			for(const taskInfo of board.tasks) {
-				await store.tasks.deleteMutation({ taskId: taskInfo.id });
-				self.setDeletionProgress(100 * (progressLength - counter) / progressLength);
-				counter +=1;
-			}
 
 			// Need to remove all [Lists] of Board
     		for(const listInfo of board.lists) {
@@ -56,7 +49,6 @@ const actions = (self)=> {
 				self.setDeletionProgress(100 * (progressLength - counter) / progressLength);
 				counter +=1;
 			}
-
 
 			setTimeout(()=> self.setDeletionProgress(100), 1000);
 

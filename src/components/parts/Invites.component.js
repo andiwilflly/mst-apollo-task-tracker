@@ -53,7 +53,6 @@ class Invites extends React.Component {
 					   value={ this.invite.emailInviteReceiver }
 					   onChange={ e => this.invite.emailInviteReceiver = e.target.value } />
 
-
 				{ this.user.myBoardsIds.map((boardId)=> {
 					return (
 						<BoardsShortInfo boardId={ boardId } key={boardId}>

@@ -46,7 +46,7 @@ function applyData(dataName, data) {
 
 		// Lists
 		case "List":
-			store.lists.create(data);
+			if(data) store.lists.create(data);
 			break;
 		case "createList":
 			store.lists.create(data);

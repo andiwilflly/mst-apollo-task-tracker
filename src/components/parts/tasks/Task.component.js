@@ -46,7 +46,7 @@ class Task extends React.Component {
 
 
 	editTask = ()=> {
-		store.modal.open("EditTask", { task: this.task });
+		store.modal.open("UpdateTask", { task: this.task });
 	};
 
 

@@ -69,7 +69,7 @@ const actions = (self)=> {
 			runInAction(`BOARD-CREATE-SUCCESS ${board.id}`, ()=> {
 				self.all.set(board.id,  { ...board, __type: "Board" });
                 self.subscribeTaskCreate(board.id);
-                // self.subscribeTaskUpdate(board.id);
+                self.subscribeTaskUpdate(board.id);
                 self.subscribeTaskDelete(board.id);
             });
 		},

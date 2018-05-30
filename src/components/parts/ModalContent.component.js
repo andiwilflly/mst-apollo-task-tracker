@@ -6,7 +6,7 @@ import { observer } from 'mobx-react';
 import store from "store";
 // Component
 import CreateTask from "components/parts/tasks/CreateTask.component";
-import EditTask from "components/parts/tasks/EditTask.component";
+import UpdateTask from "components/parts/tasks/UpdateTask.component";
 
 
 @observer
@@ -14,7 +14,7 @@ class ModalContent extends React.Component {
 
 	content = {
 		get CreateTask() { return <CreateTask { ...store.modal.props } /> },
-		get EditTask() { return <EditTask { ...store.modal.props } /> }
+		get UpdateTask() { return <UpdateTask { ...store.modal.props } /> }
 	};
 
 

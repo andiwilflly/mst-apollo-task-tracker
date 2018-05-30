@@ -15,7 +15,7 @@ export default async (event)=> {
 
     let response = [];
 
-    await updateTask(api, event.data);
+    //await updateTask(api, { ...event.data, changedAt: "" + Date.now() });
 
 	// Put updated [task] to [response]
 	response.push(await getTask(api, { taskId: event.data.id }));
@@ -32,7 +32,7 @@ export default async (event)=> {
 		response.push(await getBoard(api, { boardId: event.data.boardId }));
 	}
 
-	if(event.data.labelsIds.length) {
+	if(event.data.labelsIds) {
 		response.push(await getLabels(api));
 	}
 
@@ -45,8 +45,8 @@ export default async (event)=> {
 
 
 async function updateTask(api, task={}) {
-    const mutation = `mutation updateTask($id: ID!, $title: String, $description: String, $boardId: ID, $authorId: ID, $listId: ID, $labelsIds: [ID!]) {
-        updateTask(id: $id, title: $title description: $description boardId: $boardId authorId: $authorId listId: $listId labelsIds: $labelsIds)
+    const mutation = `mutation updateTask($id: ID!, $title: String, $description: String, $boardId: ID, $authorId: ID, $listId: ID, $labelsIds: [ID!] $changedAt: String) {
+        updateTask(id: $id, title: $title description: $description boardId: $boardId authorId: $authorId listId: $listId labelsIds: $labelsIds changedAt: $changedAt)
         {
             id
 			title

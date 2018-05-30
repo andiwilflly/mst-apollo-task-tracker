@@ -41,9 +41,9 @@ webSocket.onmessage = (event) => {
 				case "TASK_UPDATED":
 					const taskFromEvent = data.payload.data.Task.node;
 					const task = store.tasks.all.get(taskFromEvent.id);
-					if(!task) return  console.log("ERROR IN TASK_UPDATED");
+					if(!task) return console.log("ERROR IN TASK_UPDATED");
 
-					//task.updateTaskCustom(taskFromEvent);
+					// TODO: Recheck this
 
 					console.log("TASK_UPDATED!", data, task);
 					break;

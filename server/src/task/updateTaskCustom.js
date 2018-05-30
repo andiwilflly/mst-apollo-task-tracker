@@ -3,6 +3,7 @@ import { fromEvent } from 'graphcool-lib';
 import getTask from "../queries/getTask.query";
 import getList from "../queries/getList.query";
 import getBoard from "../queries/getBoard.query";
+import getLabels from "../queries/getLabels.query";
 
 
 export default async (event)=> {
@@ -13,6 +14,7 @@ export default async (event)=> {
     const task = await getTask(api, { taskId: event.data.id });
 
     let response = [];
+
     await updateTask(api, event.data);
 
 	// Put updated [task] to [response]
@@ -30,6 +32,10 @@ export default async (event)=> {
 		response.push(await getBoard(api, { boardId: event.data.boardId }));
 	}
 
+	if(event.data.labelsIds.length) {
+		response.push(await getLabels(api));
+	}
+
     return {
         data: {
             response: JSON.stringify(response)
@@ -39,22 +45,25 @@ export default async (event)=> {
 
 
 async function updateTask(api, task={}) {
-    const mutation = `mutation updateTask($id: ID!, $title: String, $description: String, $boardId: ID, $authorId: ID, $listId: ID) {
-        updateTask(id: $id, title: $title description: $description boardId: $boardId authorId: $authorId listId: $listId)
+    const mutation = `mutation updateTask($id: ID!, $title: String, $description: String, $boardId: ID, $authorId: ID, $listId: ID, $labelsIds: [ID!]) {
+        updateTask(id: $id, title: $title description: $description boardId: $boardId authorId: $authorId listId: $listId labelsIds: $labelsIds)
         {
             id
-            title
-            description
-            author {
-                id
-            }
-            list {
-                id
-            }
-            board {
-                id
-            }
-        }
+			title
+			description
+			author {
+				id
+			}
+			board { 
+				id
+			}
+			list {
+				id
+			}
+			labels {
+				id
+			}
+		}
     }`;
     const variables = task;
 

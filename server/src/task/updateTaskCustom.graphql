@@ -9,6 +9,7 @@ extend type Mutation {
         description: String,
         boardId: ID,
         authorId: ID,
-        listId: ID
+        listId: ID,
+        labelsIds: [ID!],
     ): UpdateTaskCustomPayload
 }

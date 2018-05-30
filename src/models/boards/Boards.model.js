@@ -52,6 +52,8 @@ const actions = (self)=> {
 
 			setTimeout(()=> self.setDeletionProgress(100), 1000);
 
+    		// TODO: re fetch labels -> tasks ?
+
 			return client.mutate({
 				variables: { boardId },
 				mutation: DELETE_BOARD_MUTATION

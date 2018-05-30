@@ -9,14 +9,14 @@ import { observer } from 'mobx-react';
 import store from "store";
 // Components
 import BoardsShortInfo from "components/parts/boards/BoardsShortInfo.component";
+import PreLoader from 'components/parts/PreLoader.component';
 
 
 @observer
 class Invites extends React.Component {
 
 
-	@computed get user() { return store.users.all.get(store.authorizedUser.id); };
-
+	@observable isLoading = false;
 
 	@observable invite = {
 		emailInviteReceiver: "",
@@ -30,8 +30,16 @@ class Invites extends React.Component {
 	}
 
 
-	sendInvite = ()=> {
-		store.authorizedUser.createInviteMutation(this.invite);
+	@computed get user() { return store.users.all.get(store.authorizedUser.id); };
+
+	@computed get isDisabledSendInviteButton() { return this.isLoading || !this.user.myBoardsIds.length || !this.invite.emailInviteReceiver || !this.invite.boardId };
+
+
+	sendInvite = async ()=> {
+		this.isLoading = true;
+		await store.authorizedUser.createInviteMutation(this.invite);
+		this.isLoading = false;
+		this.invite.boardId = "";
 	};
 
 
@@ -91,7 +99,13 @@ class Invites extends React.Component {
 				{ this.renderBoards() }
 
 				<button onClick={ this.sendInvite }
-						disabled={ !this.user.myBoardsIds.length }>Send invite</button>
+						disabled={ this.isDisabledSendInviteButton }>
+					{ this.isLoading ?
+						<PreLoader />
+						:
+						'Send invite'
+					}
+				</button>
 			</div>
 		)
 	}

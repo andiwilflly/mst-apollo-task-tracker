@@ -3,6 +3,11 @@ import { fromEvent } from 'graphcool-lib';
 import createInvite from "../mutations/createInvite.mutation";
 
 
+function isValidEmail(email) {
+	const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	return re.test(email);
+}
+
 export default async (event)=> {
 
     const graphcool = fromEvent(event);
@@ -10,17 +15,18 @@ export default async (event)=> {
 
     const response = [];
 
+    // Validate email
+    if(!isValidEmail(event.data.emailInviteReceiver)) return { error: `Invite error: ${event.data.emailInviteReceiver} is not a valid email address` };
+
     const duplicatedInvites = await findDuplicatedInvites(api, { boardId: event.data.boardId, emailInviteReceiver: event.data.emailInviteReceiver });
 
-    if(duplicatedInvites.allInvites.length) {
-		return { error: `Invite to board ${event.data.boardId} for ${event.data.emailInviteReceiver} already exists` };
-    }
+    // Validate duplicated invites
+    if(duplicatedInvites.allInvites.length) return { error: `Invite error: Invite to board ${event.data.boardId} for ${event.data.emailInviteReceiver} already exists` };
 
     const User = await findUserByEmail(api, { email: event.data.emailInviteReceiver });
 
-    if(!User.User) {
-        return { error: "User with this email doesn't exist!" };
-    }
+    // Validate user
+    if(!User.User) return { error: "Invite error: User with this email doesn't exist!" };
 
 	await createInvite(api, {
 		authorId: event.data.authorId,

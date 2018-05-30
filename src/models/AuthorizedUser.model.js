@@ -14,18 +14,18 @@ const actions = (self)=> {
 	return {
 
 		createInviteMutation({ emailInviteReceiver, boardId, authorId }) {
-			client.mutate({
+			return client.mutate({
 				variables: { emailInviteReceiver, boardId, authorId },
 				mutation: INVITE_CREATE_CUSTOM_MUTATION
-			}).catch((e)=> console.log("INVITE_CREATE_CUSTOM_MUTATION", e));
+			}).catch((e)=> console.log("INVITE_CREATE_CUSTOM_MUTATION " + e));
 		},
 
 
 		acceptInviteMutation({ userId, inviteId, boardsIds = [] }) {
-			client.mutate({
+			return client.mutate({
 				variables: { userId, inviteId, boardsIds },
 				mutation: ACCEPT_INVITE_MUTATION
-			}).catch((e)=> console.log("ACCEPT_INVITE_MUTATION", e));
+			}).catch((e)=> console.log("ACCEPT_INVITE_MUTATION " + e));
 		}
 	};
 };

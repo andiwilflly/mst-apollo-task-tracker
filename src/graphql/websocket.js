@@ -44,7 +44,12 @@ webSocket.onmessage = (event) => {
 					if(!task) return console.log("ERROR IN TASK_UPDATED");
 
 					// TODO: Recheck this
-					task.updateTaskCustom(taskFromEvent);
+					task.updateTaskCustomRelations({
+						id: task.id,
+						listId: task.list.id,
+						boardId: task.board.id,
+						labelsIds: task.labels.map((label)=> label.id)
+					});
 					break;
 
 				case 'TASK_DELETED':

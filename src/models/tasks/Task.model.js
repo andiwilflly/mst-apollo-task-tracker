@@ -3,8 +3,8 @@ import { types } from 'mobx-state-tree';
 import { runInAction } from "mobx";
 // GraphQL
 import client from "graphql/client";
-import UPDATE_TASK_MUTATION from "graphql/mutations/tasks/updateTask.mutation";
 import UPDATE_TASK_CUSTOM_MUTATION from "graphql/mutations/tasks/updateTaskCustom.mutation";
+import UPDATE_TASK_CUSTOM_RELATIONS_MUTATION from "graphql/mutations/tasks/updateTaskCustomRelations.mutation";
 
 
 const Task = {
@@ -23,17 +23,17 @@ const actions = (self)=> {
 
     	updateMutation: (task={})=> {
 			return client.mutate({
-				variables: { ...task, changedAt: ""  +Date.now() },
-				mutation: UPDATE_TASK_MUTATION
-			}).catch((e)=> console.log("UPDATE_TASK_MUTATION", e));
-		},
-
-
-		updateTaskCustom: (task={})=> {
-			return client.mutate({
 				variables: task,
 				mutation: UPDATE_TASK_CUSTOM_MUTATION
 			}).catch((e)=> console.log("UPDATE_TASK_CUSTOM_MUTATION", e));
+		},
+
+
+		updateTaskCustomRelations: (task={})=> {
+			return client.mutate({
+				variables: task,
+				mutation: UPDATE_TASK_CUSTOM_RELATIONS_MUTATION
+			}).catch((e)=> console.log("UPDATE_TASK_CUSTOM_RELATIONS_MUTATION", e));
 		},
 
 

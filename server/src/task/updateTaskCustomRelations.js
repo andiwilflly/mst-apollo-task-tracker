@@ -15,8 +15,6 @@ export default async (event)=> {
 
     let response = [];
 
-    await updateTask(api, { ...event.data, changedAt: "" + Date.now() });
-
 	// Put updated [task] to [response]
 	response.push(await getTask(api, { taskId: event.data.id }));
 
@@ -41,32 +39,5 @@ export default async (event)=> {
             response: JSON.stringify(response)
         }
     }
-}
-
-
-async function updateTask(api, task={}) {
-    const mutation = `mutation updateTask($id: ID!, $title: String, $description: String, $boardId: ID, $authorId: ID, $listId: ID, $labelsIds: [ID!] $changedAt: String) {
-        updateTask(id: $id, title: $title description: $description boardId: $boardId authorId: $authorId listId: $listId labelsIds: $labelsIds changedAt: $changedAt)
-        {
-            id
-			title
-			description
-			author {
-				id
-			}
-			board { 
-				id
-			}
-			list {
-				id
-			}
-			labels {
-				id
-			}
-		}
-    }`;
-    const variables = task;
-
-    return api.request(mutation, variables);
 }
 

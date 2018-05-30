@@ -58,6 +58,12 @@ functions:
     handler:
       code: src/task/updateTaskCustom.js
 
+  updateTaskCustomRelations:
+    type: resolver
+    schema: src/task/updateTaskCustomRelations.graphql
+    handler:
+      code: src/task/updateTaskCustomRelations.js
+
   updateTaskRelations:
     type: resolver
     schema: src/task/updateTaskRelations.graphql

@@ -1,0 +1,15 @@
+type UpdateTaskCustomRelationsPayload {
+    response: String!
+}
+
+extend type Mutation {
+    updateTaskCustomRelations(
+        id: ID!,
+        title: String,
+        description: String,
+        boardId: ID,
+        authorId: ID,
+        listId: ID,
+        labelsIds: [ID!],
+    ): UpdateTaskCustomRelationsPayload
+}

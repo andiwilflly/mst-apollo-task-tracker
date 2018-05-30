@@ -81,14 +81,18 @@ function applyData(dataName, data) {
 		case "Task":
 			store.tasks.create(data);
 			break;
+		case "createTask":
+			// TODO: Optimistic updates??
+			// Resolved in [webSocket:TASK_CREATE]
+			break;
 		case "updateTask":
 			// Optimistic updates
 			const task = store.tasks.all.get(data.id);
 			if(task) task.update(data);
 			break;
-		// TODO: WTF??
 		case "deleteTask":
-			// Resolved in [webSocket:TASK_DELETED]
+			// TODO: Optimistic updates??
+			// Resolved in [webSocket:TASK_DELETE]
 			break;
 		case "deleteTaskCustom":
 			store.tasks.delete(data.id);
@@ -119,6 +123,7 @@ function applyData(dataName, data) {
 		case "updateListRelations":
 		case "updateTaskRelations":
 		case "updateTaskCustom":
+		case "updateTaskCustomRelations":
 			data = parse(data).response;
 
 			console.log("data", data);

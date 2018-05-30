@@ -58,7 +58,7 @@ type Task @model {
     createdAt: DateTime! # read-only (managed by Graphcool)
     updatedAt: DateTime! # read-only (managed by Graphcool)
 
-    changedAt: String! @migrationValue(value: "0") # Need to trigger Task change event when changed only Task relations
+    changedAt: String @migrationValue(value: "0") # Need to trigger Task change event when changed only Task relations
 
     title: String!
     description: String!

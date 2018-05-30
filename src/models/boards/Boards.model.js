@@ -9,6 +9,7 @@ import client from "graphql/client";
 import CREATE_BOARD_MUTATION from "graphql/mutations/boards/createBoard.mutation";
 import DELETE_BOARD_MUTATION from "graphql/mutations/boards/deleteBoard.mutation";
 import BOARD_SUBSCRIBE_ON_TASK_CREATE from "graphql/subscriptions/boards/boardSubscribeOnTaskCreate.subscription";
+import BOARD_SUBSCRIBE_ON_TASK_UPDATE from "graphql/subscriptions/boards/boardSubscribeOnTaskUpdate.subscription";
 import BOARD_SUBSCRIBE_ON_TASK_DELETE from "graphql/subscriptions/boards/boardSubscribeOnTaskDelete.subscription";
 // Models
 import BoardModel from "models/boards/Board.model";
@@ -68,6 +69,7 @@ const actions = (self)=> {
 			runInAction(`BOARD-CREATE-SUCCESS ${board.id}`, ()=> {
 				self.all.set(board.id,  { ...board, __type: "Board" });
                 self.subscribeTaskCreate(board.id);
+                // self.subscribeTaskUpdate(board.id);
                 self.subscribeTaskDelete(board.id);
             });
 		},
@@ -93,6 +95,11 @@ const actions = (self)=> {
 
         subscribeTaskCreate(boardId) {
             webSocket.send(BOARD_SUBSCRIBE_ON_TASK_CREATE({ boardId }));
+		},
+
+
+		subscribeTaskUpdate(boardId) {
+			webSocket.send(BOARD_SUBSCRIBE_ON_TASK_UPDATE({ boardId }));
 		},
 
 

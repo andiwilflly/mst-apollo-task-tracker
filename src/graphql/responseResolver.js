@@ -81,11 +81,8 @@ function applyData(dataName, data) {
 		case "Task":
 			store.tasks.create(data);
 			break;
-		case "updateTask":
-			const task = store.tasks.all.get(data.id);
-			if(task) task.update(data);
-			break;
 		// TODO: WTF??
+		case "updateTask":
 		case "deleteTask":
 			// Resolved in [webSocket:TASK_DELETED]
 			break;

@@ -26,6 +26,28 @@ webSocket.onmessage = (event) => {
 
 			console.log(`%c SOCKET-SUBSCRIPTION-DATA-ARRIVED [event: ${dataName}]`, styles);
             switch(dataName) {
+				case 'TASK_CREATED':
+					const createdTask = data.payload.data.Task.node;
+					if(store.tasks.all.has(createdTask.id)) return console.log("ERROR IN TASK_CREATED");
+
+					store.tasks.updateTaskRelations({
+						id: createdTask.id,
+						authorId: createdTask.author.id,
+						boardId: createdTask.board.id,
+						listId: createdTask.list.id
+					});
+					break;
+
+				case "TASK_UPDATED":
+					const taskFromEvent = data.payload.data.Task.node;
+					const task = store.tasks.all.get(taskFromEvent.id);
+					if(!task) return  console.log("ERROR IN TASK_UPDATED");
+
+					//task.updateTaskCustom(taskFromEvent);
+
+					console.log("TASK_UPDATED!", data, task);
+					break;
+
 				case 'TASK_DELETED':
                     const deletedTask = data.payload.data.Task.previousValues;
                     const taskFromStore = store.tasks.all.get(deletedTask.id);
@@ -39,17 +61,6 @@ webSocket.onmessage = (event) => {
                     });
                     break;
 
-				case 'TASK_CREATED':
-                    const createdTask = data.payload.data.Task.node;
-                    if(store.tasks.all.has(createdTask.id)) return console.log("ERROR IN TASK_CREATED");
-
-                    store.tasks.updateTaskRelations({
-						id: createdTask.id,
-						authorId: createdTask.author.id,
-						boardId: createdTask.board.id,
-						listId: createdTask.list.id
-                    });
-					break;
 
                 default:
                     console.log(`%c subscription data has been received`, 'color: darkPink', data);
@@ -72,6 +83,7 @@ webSocket.onmessage = (event) => {
 
 webSocket.onclose = (event)=> {
 	console.log("SOCKET CLOSE", event);
+	webSocket.send(JSON.stringify({ type: 'init' }));
 };
 
 

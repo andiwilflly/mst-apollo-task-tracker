@@ -8,6 +8,8 @@ import store from "store";
 import client from "graphql/client";
 import CREATE_BOARD_MUTATION from "graphql/mutations/boards/createBoard.mutation";
 import DELETE_BOARD_MUTATION from "graphql/mutations/boards/deleteBoard.mutation";
+import BOARD_SUBSCRIBE_ON_TASK_CREATE from "graphql/subscriptions/boards/boardSubscribeOnTaskCreate.subscription";
+import BOARD_SUBSCRIBE_ON_TASK_DELETE from "graphql/subscriptions/boards/boardSubscribeOnTaskDelete.subscription";
 // Models
 import BoardModel from "models/boards/Board.model";
 import webSocket from 'graphql/websocket';
@@ -90,67 +92,12 @@ const actions = (self)=> {
 
 
         subscribeTaskCreate(boardId) {
-            const taskCreateSubscriptionMessage = {
-                id: `TASK_CREATED__${boardId}`,
-                type: 'subscription_start',
-                query: `
-					subscription Task {
-						Task(filter: {
-							mutation_in: [CREATED]
-							node: {
-								board: {
-									id: "${boardId}"
-								}
-							}
-						}){
-							mutation				
-							node {
-								id
-								title
-								description
-								author {
-									id
-								}
-								board { 
-									id
-								}
-								list {
-									id
-								}
-								labels {
-									id
-								}
-							}
-						}
-            		}
-				`
-            };
-            webSocket.send(JSON.stringify(taskCreateSubscriptionMessage));
+            webSocket.send(BOARD_SUBSCRIBE_ON_TASK_CREATE({ boardId }));
 		},
 
+
         subscribeTaskDelete(boardId) {
-            const taskDeleteSubscriptionMessage = {
-                id: `TASK_DELETED__${boardId}`,
-                type: 'subscription_start',
-                query: `
-					subscription Task {
-						Task(filter: {
-							mutation_in: [DELETED]
-							node: {
-								board: {
-									id: "${boardId}"
-								}
-							}
-						}){
-							mutation
-							previousValues {
-								id												
-							}
-						}
-					}
-				`
-            };
-            webSocket.send(JSON.stringify(taskDeleteSubscriptionMessage));
+            webSocket.send(BOARD_SUBSCRIBE_ON_TASK_DELETE({ boardId }));
         }
     };
 };

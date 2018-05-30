@@ -28,7 +28,7 @@ const lazy = (loadLazyComponent)=> {
 
 				return (
 					<div>
-						{ LazyComponent ? <LazyComponent { ...this.props } /> : <PreLoader /> }
+						{ LazyComponent ? <LazyComponent { ...this.props } /> : <div className="cssload-loader-big"><PreLoader/></div> }
 					</div>
 				)
 			}

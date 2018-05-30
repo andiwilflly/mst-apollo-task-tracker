@@ -1,3 +1,12 @@
+.cssload-loader-big > .cssload-loader {
+	margin: calc(50% - 300px) auto;
+	width: 200px;
+	height: 200px;
+	max-width: 200px;
+	max-height: 200px;
+}
+
+
 .wrapper {
 	width: 1200px;
 	margin: 0 auto 50px auto;

@@ -1,4 +1,6 @@
 import React from 'react';
+// Styles
+import "styles/boards/board-create.css";
 // MobX
 import { observer } from "mobx-react";
 import { observable } from "mobx";
@@ -22,12 +24,15 @@ class CreateBoard extends React.Component {
 	};
 
 
+	get background() { return this.form.background.match("http") ? `url(${this.form.background}) no-repeat 0 0 / cover` : this.form.background };
+
+
 	creteBoard = async ()=> {
 		if(this.form.name === '') return;
 		if(this.form.description === '') return;
 
 		this.isLoading = true;
-		await store.boards.createMutation(this.form);
+		await store.boards.createMutation({ ...this.form, background: this.background });
 		this.isLoading = false;
 		this.form.name = "";
 		this.form.description = "";
@@ -36,9 +41,8 @@ class CreateBoard extends React.Component {
 
 
 	render() {
-
 		return (
-			<div style={{ background: `url(${this.form.background}) no-repeat` }}>
+			<div className="board_create" style={{ background: `${this.background}` }}>
 				<h3>Create new board</h3>
 				<p>
 					name:

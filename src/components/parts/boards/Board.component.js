@@ -33,11 +33,11 @@ class Board extends React.Component {
 		if(!this.board) return <div className="board">No such board ${this.props.boardId}</div>;
 
 		return (
-			<div>
-				<BoardFilters boardId={ this.board.id } />
+			<div className="board" style={{ background: this.board.background }}>
+				<div>
+					<BoardFilters boardId={ this.board.id } />
 
-				<div className="board">
-					<h1>{ this.board.name }</h1>
+					<h3>{ this.board.name }</h3>
 
 					<div className="board_lists">
 						{ this.board.listIds.map((listId)=> {
@@ -51,9 +51,9 @@ class Board extends React.Component {
 							);
 						}) }
 					</div>
-				</div>
 
-				<CreateList boardId={ this.props.boardId } />
+					<CreateList boardId={ this.props.boardId } />
+				</div>
 			</div>
 		)
 	}

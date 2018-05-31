@@ -86,8 +86,8 @@ webSocket.onmessage = (event) => {
 };
 
 webSocket.onclose = (event)=> {
+	// TODO: Reopen
 	console.log("SOCKET CLOSE", event);
-	webSocket.send(JSON.stringify({ type: 'init' }));
 };
 
 

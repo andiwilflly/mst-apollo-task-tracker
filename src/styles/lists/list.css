@@ -8,6 +8,10 @@
 	margin: 10px;
 }
 
+.list:nth-child(1) {
+	margin: 10px 10px 10px 0;
+}
+
 /* Drag drop element style */
 .list > span {
 	display: block;

@@ -29,7 +29,6 @@ class BoardsPage extends React.Component {
 				<p>Boards where I was invited</p>
 				<BoardsShortInfoList boardsIds={ this.user.boardsIds } />
 
-				<hr/>
 				<CreateBoard />
 			</div>
 		)

@@ -39,7 +39,7 @@ class BoardsShortInfoList extends React.Component {
 						 preLoader={ <div className="boards_list_item"><PreLoader /></div>}
 						 variables={{ id: this.props.boardId }}>
 				{ this.board ?
-					<div className="boards_list_item">
+					<div className="boards_list_item" style={{ background: this.board.background }}>
 						<Link to={ `/boards/${this.props.boardId}`}>{ this.board.name }</Link>
 						<p>{ this.board.description }</p>
 

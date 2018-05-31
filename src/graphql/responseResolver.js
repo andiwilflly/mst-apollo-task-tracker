@@ -74,7 +74,6 @@ function applyData(dataName, data) {
 				authorId: store.boards.all.get(data.id).authorId
 			});
 			store.boards.delete(data.id);
-			Alert.success("Board was deleted successfully!");
 			break;
 
 		// Tasks

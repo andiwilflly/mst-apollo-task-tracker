@@ -29,9 +29,9 @@ class CreateList extends React.Component {
 
 
 	render() {
-
 		return (
-			<div>
+			<div className="board_create"
+				 style={{ background: "lightgray", margin: '30px 0', padding: '20px 10px', border: '1px solid lightgray' }}>
 				<h3>Create new list</h3>
 				<p>
 					name:

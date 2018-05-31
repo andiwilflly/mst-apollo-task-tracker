@@ -38,9 +38,6 @@ class BoardFilters extends React.Component {
 						);
 					}) }
 				</div>
-				<hr/>
-				<br/>
-				<br/>
 			</div>
 		)
 	}

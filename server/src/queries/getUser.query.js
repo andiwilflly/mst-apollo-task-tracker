@@ -5,6 +5,8 @@ async function getUser(api, { userId }) {
 				id
 				email
 				avatar
+				name
+        		phone
 		
 				tasks {
 					id

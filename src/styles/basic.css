@@ -71,6 +71,7 @@ textarea,
 	font-size: 12px;
 	min-width: 210px;
 	line-height: 20px;
+	height: 20px;
 }
 
 textarea {

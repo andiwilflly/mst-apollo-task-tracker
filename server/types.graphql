@@ -8,6 +8,8 @@ type User @model {
 
     email: String! @isUnique
     password: String!
+    name: String
+    phone: String
     avatar: String @migrationValue(value: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsi92xgrp_lnmShpMaKusX6f0r6WqDJlY3tk9uGZX_M34-rQrMCQ")
 
     myBoards: [Board!]! @relation(name: "UserAuthorOfBoards")

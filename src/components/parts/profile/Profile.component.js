@@ -24,79 +24,71 @@ class Profile extends React.Component {
 		avatar: {
 			value: '',
 			isEdit: false
+		},
+		name: {
+			value: '',
+			isEdit: false
+		},
+		phone: {
+			value: '',
+			isEdit: false
 		}
 	};
 
 
 	componentDidMount() {
-		this.form.email.value = this.user.email;
-		this.form.avatar.value = this.user.avatar;
+		this.form.email.value = this.user.email || "";
+		this.form.avatar.value = this.user.avatar  || "";
+		this.form.name.value = this.user.name  || "";
+		this.form.phone.value = this.user.phone  || "";
 	}
 
 
 	@computed get user() { return store.users.all.get(store.authorizedUser.id); };
 
 
-	emailOnDoubleClick = ()=> {
-		this.form.email.isEdit = true;
+	onDoubleClick(fieldName) {
+		this.form[fieldName].isEdit = true;
 		setTimeout(()=> {
-			this.refs.email.focus();
-			this.refs.email.select();
+			this.refs[fieldName].focus();
+			this.refs[fieldName].select();
 		}, 0);
 	};
 
 
-	onEmailBlur = ()=> {
-		this.form.email.isEdit = false;
-		this.user.updateMutation({ ...this.user, email: this.form.email.value });
+	onBlur(fieldName) {
+		this.form[fieldName].isEdit = false;
+		this.user.updateMutation({ ...this.user, [fieldName]: this.form[fieldName].value });
 	};
 
 
-	avatarOnDoubleClick = ()=> {
-		this.form.avatar.isEdit = true;
-		setTimeout(()=> {
-			this.refs.avatar.focus();
-			this.refs.avatar.select();
-		}, 0);
-	};
-
-
-	onAvatarBlur = ()=> {
-		this.form.avatar.isEdit = false;
-		this.user.updateMutation({ ...this.user, avatar: this.form.avatar.value });
-	};
+	renderInput(filedName) {
+		return (
+			<div onDoubleClick={ ()=> this.onDoubleClick(filedName) }>
+				{ filedName }:
+				{ this.form[filedName].isEdit ?
+					<input type="text"
+						   ref={ filedName }
+						   value={ this.form[filedName].value }
+						   onBlur={ ()=> this.onBlur(filedName) }
+						   onChange={ (e)=> this.form[filedName].value = e.currentTarget.value }/>
+					:
+					<p className="input">{ this.form[filedName].value }</p>
+				}
+			</div>
+		);
+	}
 
 
 	render() {
 		return (
 			<div className="profile cf">
-				<h2>Profile (onKey press)</h2>
+				<h3>Profile</h3>
 
-				<div onDoubleClick={ this.emailOnDoubleClick }>
-					email:
-					{ this.form.email.isEdit ?
-						<input type="text"
-							   ref="email"
-							   value={ this.form.email.value }
-							   onBlur={ this.onEmailBlur }
-							   onChange={ (e)=> this.form.email.value = e.currentTarget.value }/>
-						:
-						<p className="input">{ this.form.email.value }</p>
-					}
-				</div>
-
-				<div onDoubleClick={ this.avatarOnDoubleClick }>
-					avatar:
-					{ this.form.avatar.isEdit ?
-						<input type="text"
-							   ref="avatar"
-							   value={ this.form.avatar.value }
-							   onBlur={ this.onAvatarBlur }
-							   onChange={ (e)=> this.form.avatar.value = e.currentTarget.value }/>
-						:
-						<p className="input">{ this.form.avatar.value }</p>
-					}
-				</div>
+				{ this.renderInput("email") }
+				{ this.renderInput("avatar") }
+				{ this.renderInput("name") }
+				{ this.renderInput("phone") }
 
 				<div className="profile_cards">
 					<div className="profile_card">

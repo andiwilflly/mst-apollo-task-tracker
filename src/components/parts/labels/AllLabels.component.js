@@ -56,7 +56,7 @@ class AllLabels extends React.Component {
 						<div className="labels_list_label" style={{ background: this.newLabel.color }}/>
 					</div>
 					<button onClick={ this.createLabel }
-							disabled={ this.isLoading }>{
+							disabled={ this.isLoading || !this.newLabel.color }>{
 						this.isLoading ?
 							<PreLoader/>
 							:

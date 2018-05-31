@@ -6,6 +6,8 @@ export default gql`query getUserInfo($id: ID!) {
         id
         email
         avatar
+        name
+        phone
         
         tasks {
             id

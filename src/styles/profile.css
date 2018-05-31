@@ -2,12 +2,6 @@
 
 }
 
-.profile h2 {
-	font-size: 18px;
-	font-weight: bold;
-	margin-bottom: 20px;
-}
-
 .profile input {
 	max-width: unset;
 	width: calc(100% - 10px);

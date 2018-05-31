@@ -31,7 +31,7 @@ class CreateList extends React.Component {
 	render() {
 		return (
 			<div className="board_create"
-				 style={{ background: "lightgray", margin: '30px 0', padding: '20px 10px', border: '1px solid lightgray' }}>
+				 style={{ background: "white", margin: '30px 0', padding: '20px 10px', border: '1px solid lightgray' }}>
 				<h3>Create new list</h3>
 				<p>
 					name:
@@ -41,7 +41,7 @@ class CreateList extends React.Component {
 				</p>
 
 				<button onClick={ this.createList }
-						disabled={ this.isLoading }>{
+						disabled={ this.isLoading || !this.form.name }>{
 					this.isLoading ?
 						<PreLoader/>
 						:

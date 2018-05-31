@@ -1,11 +1,11 @@
 .list {
 	align-self: auto;
 	border: 1px solid black;
-	padding: 5px;
+	padding: 10px 10px 45px 10px;
 	background: lightgray;
 	width: 220px;
-	min-height: 100px;
 	margin: 10px;
+	position: relative;
 }
 
 .list:nth-child(1) {
@@ -15,9 +15,16 @@
 /* Drag drop element style */
 .list > span {
 	display: block;
-	min-height: 100px;
+	height: 100%;
 }
 
 .list > .cssload-loader {
 	height: 200px;
+}
+
+
+.list button {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
 }

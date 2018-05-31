@@ -56,9 +56,6 @@ class BoardsShortInfoList extends React.Component {
 								}</button>
 								: null
 						}
-
-						<div className="boards_list_item_progress"
-							 style={{ width: (store.boards.deletionProgress) + '%' }} />
 					</div>
 					:
 					<div className="boards_list_item"><PreLoader /></div>

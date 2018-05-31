@@ -1,7 +1,5 @@
 import { runInAction } from "mobx";
 import { types } from 'mobx-state-tree';
-// Store
-import store from "store";
 // Models
 import ListModel from "models/lists/List.model";
 // GraphQL
@@ -26,13 +24,6 @@ const actions = (self)=> {
 
 
 		deleteMutation: async ({ listId })=> {
-			const list = self.all.get(listId);
-
-			// Need to remove all [Tasks] of List
-			for(const taskInfo of list.tasks) {
-				await store.tasks.deleteMutation({ taskId: taskInfo.id });
-			}
-
 			return client.mutate({
 				variables: { listId },
 				mutation: LIST_DELETE_MUTATION

@@ -23,10 +23,10 @@ class BoardsPage extends React.Component {
 	render() {
 		return (
 			<div>
-				<p>My boards</p>
+				<h4>My boards</h4>
 				<BoardsShortInfoList boardsIds={ this.user.myBoardsIds } />
 
-				<p>Boards where I was invited</p>
+				<h4>Boards where I was invited</h4>
 				<BoardsShortInfoList boardsIds={ this.user.boardsIds } />
 
 				<CreateBoard />

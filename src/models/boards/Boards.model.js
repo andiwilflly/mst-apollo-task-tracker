@@ -17,19 +17,12 @@ import webSocket from 'graphql/websocket';
 
 
 const Boards = {
-	all: types.optional(types.map(BoardModel), {}),
-	deletionProgress: types.maybe(types.number)
+	all: types.optional(types.map(BoardModel), {})
 };
 
 
 const actions = (self)=> {
     return {
-
-    	setDeletionProgress(progress = 0) {
-    		console.log("Progress: ", 100 - Math.round(progress));
-			self.deletionProgress = 100 - Math.round(progress);
-		},
-
 
     	createMutation: async ({ authorId, name, description, background })=> {
 			return client.mutate({
@@ -42,18 +35,15 @@ const actions = (self)=> {
 		deleteMutation: async (boardId)=> {
     		const board = self.all.get(boardId);
 
-    		let progressLength = board.lists.length;
-    		let counter = 1;
-			self.setDeletionProgress(100);
+			// Need to remove all [Tasks] of Board
+			for(const taskInfo of board.tasks) {
+				await store.tasks.deleteMutation({ taskId: taskInfo.id });
+			}
 
 			// Need to remove all [Lists] of Board
     		for(const listInfo of board.lists) {
     			await store.lists.deleteMutation({ listId: listInfo.id });
-				self.setDeletionProgress(100 * (progressLength - counter) / progressLength);
-				counter +=1;
 			}
-
-			setTimeout(()=> self.setDeletionProgress(100), 1000);
 
     		// TODO: re fetch labels -> tasks ?
 

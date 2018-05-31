@@ -24,7 +24,7 @@ class CreateBoard extends React.Component {
 	};
 
 
-	get background() { return this.form.background.match("http") ? `url(${this.form.background}) no-repeat 0 0 / cover` : this.form.background };
+	get background() { return (this.form.background.match("http") || this.form.background.match("data:image")) ? `url(${this.form.background}) no-repeat center / cover` : this.form.background };
 
 
 	creteBoard = async ()=> {
@@ -53,9 +53,8 @@ class CreateBoard extends React.Component {
 
 				<p>
 					description:
-					<input type="text"
-						   value={ this.form.description }
-						   onChange={ (e)=> this.form.description = e.currentTarget.value }/>
+					<textarea value={ this.form.description }
+							  onChange={ (e)=> this.form.description = e.currentTarget.value }/>
 				</p>
 
 				<p>

@@ -20,12 +20,17 @@ class Profile extends React.Component {
 		email: {
 			value: '',
 			isEdit: false
+		},
+		avatar: {
+			value: '',
+			isEdit: false
 		}
 	};
 
 
 	componentDidMount() {
 		this.form.email.value = this.user.email;
+		this.form.avatar.value = this.user.avatar;
 	}
 
 
@@ -34,7 +39,10 @@ class Profile extends React.Component {
 
 	emailOnDoubleClick = ()=> {
 		this.form.email.isEdit = true;
-		setTimeout(()=> this.refs.email.focus(), 0);
+		setTimeout(()=> {
+			this.refs.email.focus();
+			this.refs.email.select();
+		}, 0);
 	};
 
 
@@ -44,12 +52,27 @@ class Profile extends React.Component {
 	};
 
 
+	avatarOnDoubleClick = ()=> {
+		this.form.avatar.isEdit = true;
+		setTimeout(()=> {
+			this.refs.avatar.focus();
+			this.refs.avatar.select();
+		}, 0);
+	};
+
+
+	onAvatarBlur = ()=> {
+		this.form.avatar.isEdit = false;
+		this.user.updateMutation({ ...this.user, avatar: this.form.avatar.value });
+	};
+
+
 	render() {
 		return (
 			<div className="profile cf">
 				<h2>Profile (onKey press)</h2>
 
-				<div onDoubleClick={ this.emailOnDoubleClick } style={{ width: 200 }}>
+				<div onDoubleClick={ this.emailOnDoubleClick }>
 					email:
 					{ this.form.email.isEdit ?
 						<input type="text"
@@ -59,6 +82,19 @@ class Profile extends React.Component {
 							   onChange={ (e)=> this.form.email.value = e.currentTarget.value }/>
 						:
 						<p className="input">{ this.form.email.value }</p>
+					}
+				</div>
+
+				<div onDoubleClick={ this.avatarOnDoubleClick }>
+					avatar:
+					{ this.form.avatar.isEdit ?
+						<input type="text"
+							   ref="avatar"
+							   value={ this.form.avatar.value }
+							   onBlur={ this.onAvatarBlur }
+							   onChange={ (e)=> this.form.avatar.value = e.currentTarget.value }/>
+						:
+						<p className="input">{ this.form.avatar.value }</p>
 					}
 				</div>
 

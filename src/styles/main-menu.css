@@ -1,12 +1,18 @@
 .main-menu {
 	float: left;
-	margin: 26px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	margin: 0 0 0 15px;
 	background: lightgray;
 }
 
-.main-menu a,
-.main-menu span {
-	display: inline;
-	color: red;
-	margin: 5px;
+.main-menu > * {
+	line-height: 60px;
+	margin: 0 10px;
+}
+
+.main-menu > a,
+.main-menu > span {
+	color: #da301d;
 }

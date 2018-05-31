@@ -31,10 +31,15 @@ class Header extends React.Component {
 
 				<div className="main-menu">
 					{ store.authorizedUser ?
-						<h3>Welcome, { this.user.email }</h3>
+						<Link to="/profile" className="cf">
+							<div style={{ marginRight: '10px', width: 60, height: 60, background: `url(${this.user.avatar}) center / cover no-repeat`, overflow: 'hidden', borderRadius: "50%", float: "left" }} />
+							<h3 style={{ float: "left", lineHeight: "60px" }}>{ this.user.email }</h3>
+						</Link>
 						:
 						null
 					}
+
+					<Link to="/boards">Boards</Link>
 
 					{ store.authorizedUser ?
 						<LogOutMutation>
@@ -45,10 +50,6 @@ class Header extends React.Component {
 							<Link to="/login">Log in</Link>
 							: null
 					}
-
-					<Link to="/">Home</Link>
-					<Link to="/profile">Profile</Link>
-					<Link to="/boards">Boards</Link>
 				</div>
 
 				<Search />

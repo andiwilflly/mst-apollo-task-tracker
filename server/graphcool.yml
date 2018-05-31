@@ -88,8 +88,22 @@ functions:
 # To take the burden of thinking about those while development, we
 # preconfigured the wildcard ("*") permission that allows everything
 # Read more here:
+# https://www.graph.cool/docs/reference/service-definition/graphcool.yml-foatho8aip#permissions
 # https://www.graph.cool/docs/reference/auth/authorization/overview-iegoo0heez
 permissions:
+
+#  - operation: Task.create
+#    authenticated: true
+#
+#  - operation: Task.read
+#    authenticated: true
+#
+#  - operation: Task.update
+#    authenticated: true
+#
+#  - operation: Task.delete
+#    authenticated: true
+
   - operation: "*"
 
 

@@ -40,6 +40,11 @@ function applyData(dataName, data) {
             store.logIn(data.id);
             history.push(store.nextPathUrl || '/boards');
 			break;
+
+		// Users
+		case "updateUser":
+			if(store.users.all.has(data.id)) store.users.all.get(data.id).update(data);
+			break;
 		case "User":
 			store.users.create(data);
 			break;

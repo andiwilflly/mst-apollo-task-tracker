@@ -8,6 +8,15 @@
 	margin-bottom: 20px;
 }
 
+.profile input {
+	max-width: unset;
+	width: calc(100% - 10px);
+}
+
+.profile .input {
+	white-space: nowrap;
+}
+
 .profile_cards {
 	display: flex;
 	background: lightgray;

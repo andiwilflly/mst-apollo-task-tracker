@@ -20,9 +20,9 @@ const UserModel = {
 const actions = (self)=> {
 	return {
 
-		updateMutation: ({ id, email })=> {
+		updateMutation: ({ id, email, avatar })=> {
 			client.mutate({
-				variables: { email, id },
+				variables: { id, email, avatar },
 				mutation: USER_UPDATE_MUTATION
 			}).catch((e)=> console.log("USER_UPDATE_MUTATION", e));
 		},

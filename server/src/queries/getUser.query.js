@@ -4,6 +4,7 @@ async function getUser(api, { userId }) {
             User(id: $id) {
 				id
 				email
+				avatar
 		
 				tasks {
 					id

@@ -12,20 +12,10 @@
 	*zoom: 1;
 }
 
-html {
-	height: 100%;
-}
-
 body {
-	height: 100%;
 	font-family: Sathu;
 	font-size: 14px;
 	line-height: 120%;
-}
-
-
-#root {
-	height: 100%;
 }
 
 
@@ -74,6 +64,7 @@ textarea,
 	background-color: lightgray !important;
 	outline: none;
 	padding: 5px;
+	margin: 5px 0;
 	transition: 0.5s background;
 	border-bottom: 1px solid lightgray;
 	display: block;
@@ -95,5 +86,12 @@ input:focus {
 h3 {
 	font-size: 20px;
 	margin: 0 0 20px 0;
+	font-weight: bold;
+}
+
+
+h4 {
+	font-size: 15px;
+	margin: 15px 0 5px 0;
 	font-weight: bold;
 }

@@ -11,9 +11,8 @@
 	float: right;
 }
 
-.search > input {
-	border: 1px solid white;
-	width: calc(100% - 12px);
+.search_input > input {
+	margin: 0;
 }
 
 

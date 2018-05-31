@@ -91,12 +91,11 @@ class Invites extends React.Component {
 					}) }
 				</div>
 
+				<h4>Create new invite</h4>
 				<input type="text"
 					   placeholder="email"
 					   value={ this.invite.emailInviteReceiver }
 					   onChange={ e => this.invite.emailInviteReceiver = e.target.value } />
-
-				{ this.renderBoards() }
 
 				<button onClick={ this.sendInvite }
 						disabled={ this.isDisabledSendInviteButton }>
@@ -106,6 +105,9 @@ class Invites extends React.Component {
 						'Send invite'
 					}
 				</button>
+
+				<h4>Choose board</h4>
+				{ this.renderBoards() }
 			</div>
 		)
 	}

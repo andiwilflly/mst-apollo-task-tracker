@@ -7,8 +7,6 @@ import deleteInvite from "../mutations/deleteInvite.mutation";
 
 export default async (event)=> {
 
-	console.log("-===> ", event.data);
-
 	const graphcool = fromEvent(event);
 	const api = graphcool.api('simple/v1');
 

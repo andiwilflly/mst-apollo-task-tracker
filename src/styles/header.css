@@ -4,3 +4,13 @@
 	height: 90px;
 	background: lightgray;
 }
+
+
+.header_user_avatar {
+	margin-right: 10px;
+	width: 60px;
+	height: 60px;
+	overflow: hidden;
+	border-radius: 50%;
+	float: left;
+}

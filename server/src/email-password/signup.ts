@@ -15,7 +15,6 @@ interface EventData {
 const SALT_ROUNDS = 10
 
 export default async (event: FunctionEvent<EventData>) => {
-  console.log(event)
 
   try {
     const graphcool = fromEvent(event)
@@ -46,7 +45,6 @@ export default async (event: FunctionEvent<EventData>) => {
 
     return { data: { id: userId, token } }
   } catch (e) {
-    console.log(e)
     return { error: 'An unexpected error occured during signup.' }
   }
 }

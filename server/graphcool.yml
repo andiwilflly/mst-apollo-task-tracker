@@ -78,11 +78,25 @@ functions:
       code: src/invite/acceptInvite.js
 
   createInviteCustom:
-      type: resolver
-      schema: src/invite/createInviteCustom.graphql
-      handler:
-        code: src/invite/createInviteCustom.js
+    type: resolver
+    schema: src/invite/createInviteCustom.graphql
+    handler:
+      code: src/invite/createInviteCustom.js
 
+  # Operation-before hook to validate an email address
+#  onTaskCreate:
+#    type: operationAfter
+#    operation: Task.update
+#    handler:
+#      # Specify a managed function as a handler; since no environment variables
+#      # are specified, we don't need `src`
+#      code: ./hooks/test.hook.js
+
+  checkPostCount:
+    handler:
+      code: ./hooks/checkPostCount.js
+    type: operationBefore
+    operation: Task.create
 
 # Model/Relation permissions are used to limit the API access
 # To take the burden of thinking about those while development, we
@@ -92,19 +106,108 @@ functions:
 # https://www.graph.cool/docs/reference/auth/authorization/overview-iegoo0heez
 permissions:
 
-#  - operation: Task.create
-#    authenticated: true
-#
-#  - operation: Task.read
-#    authenticated: true
-#
-#  - operation: Task.update
-#    authenticated: true
-#
-#  - operation: Task.delete
-#    authenticated: true
+  # User
+  - operation: User.create
+    authenticated: true
+  - operation: User.read
+    authenticated: false
+  - operation: User.update
+    authenticated: true
+  - operation: User.delete
+    authenticated: true
 
-  - operation: "*"
+  # Board
+  - operation: Board.create
+    authenticated: true
+  - operation: Board.read
+    authenticated: false
+  - operation: Board.update
+    authenticated: true
+  - operation: Board.delete
+    authenticated: true
+
+  # List
+  - operation: List.create
+    authenticated: true
+  - operation: List.read
+    authenticated: false
+  - operation: List.update
+    authenticated: true
+  - operation: List.delete
+    authenticated: true
+
+  # Task
+  - operation: Task.create
+    authenticated: false
+  - operation: Task.read
+    authenticated: false
+  - operation: Task.update
+    authenticated: false
+  - operation: Task.delete
+    authenticated: false
+
+  # Label
+  - operation: Label.create
+    authenticated: true
+  - operation: Label.read
+    authenticated: false
+  - operation: Label.update
+    authenticated: true
+  - operation: Label.delete
+    authenticated: true
+
+  # Invite
+  - operation: Invite.create
+    authenticated: true
+  - operation: Invite.read
+    authenticated: false
+  - operation: Invite.update
+    authenticated: true
+  - operation: Invite.delete
+    authenticated: true
+
+  # Relations
+  - operation: UserAuthorOfBoards.connect
+    authenticated: false
+  - operation: UserAuthorOfBoards.disconnect
+    authenticated: false
+
+  - operation: UsersAndBoards.connect
+    authenticated: false
+  - operation: UsersAndBoards.disconnect
+    authenticated: false
+
+  - operation: UserOfTasks.connect
+    authenticated: false
+  - operation: UserOfTasks.disconnect
+    authenticated: false
+
+  - operation: UserOfInvites.connect
+    authenticated: false
+  - operation: UserOfInvites.disconnect
+    authenticated: false
+
+  - operation: BoardOfLists.connect
+    authenticated: false
+  - operation: BoardOfLists.disconnect
+    authenticated: false
+
+  - operation: BoardOfTasks.connect
+    authenticated: false
+  - operation: BoardOfTasks.disconnect
+    authenticated: false
+
+  - operation: ListOfTasks.connect
+    authenticated: false
+  - operation: ListOfTasks.disconnect
+    authenticated: false
+
+  - operation: TasksAndLabels.connect
+    authenticated: false
+  - operation: TasksAndLabels.disconnect
+    authenticated: false
+
+#  - operation: "*"
 
 
 # Your root tokens used for functions to get full access to the API

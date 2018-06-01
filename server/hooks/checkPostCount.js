@@ -1,8 +1,8 @@
 export default async event => {
 
-	console.log('------> ', event.data);
+	console.log('1 ------> ', event.data);
 
-	return {
-		data: event
-	}
+	event.data.title = "OTKUDA ETOT TITLE??";
+
+	return event
 }

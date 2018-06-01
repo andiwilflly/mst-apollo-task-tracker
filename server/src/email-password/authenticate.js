@@ -39,15 +39,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var graphcool_lib_1 = require("graphcool-lib");
 var bcrypt = require("bcryptjs");
 var SALT_ROUNDS = 10;
-exports.default = function (event) { return __awaiter(_this, void 0, void 0, function () {
+exports.default = (function (event) { return __awaiter(_this, void 0, void 0, function () {
     var graphcool, api, _a, email, password, user, passwordIsCorrect, token, e_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                console.log(event);
-                _b.label = 1;
-            case 1:
-                _b.trys.push([1, 5, , 6]);
+                _b.trys.push([0, 4, , 5]);
                 graphcool = graphcool_lib_1.fromEvent(event);
                 api = graphcool.api('simple/v1');
                 _a = event.data, email = _a.email, password = _a.password;
@@ -55,30 +52,30 @@ exports.default = function (event) { return __awaiter(_this, void 0, void 0, fun
                         .then(function (r) { return r.User; })
                     // no user with this email
                 ];
-            case 2:
+            case 1:
                 user = _b.sent();
                 // no user with this email
                 if (!user) {
                     return [2 /*return*/, { error: 'Wrong login or password!' }];
                 }
                 return [4 /*yield*/, bcrypt.compare(password, user.password)];
-            case 3:
+            case 2:
                 passwordIsCorrect = _b.sent();
                 if (!passwordIsCorrect) {
                     return [2 /*return*/, { error: 'Invalid credentials!' }];
                 }
                 return [4 /*yield*/, graphcool.generateNodeToken(user.id, 'User')];
-            case 4:
+            case 3:
                 token = _b.sent();
                 return [2 /*return*/, { data: { id: user.id, token: token } }];
-            case 5:
+            case 4:
                 e_1 = _b.sent();
                 console.log(e_1);
                 return [2 /*return*/, { error: 'An unexpected error occured during authentication.' }];
-            case 6: return [2 /*return*/];
+            case 5: return [2 /*return*/];
         }
     });
-}); };
+}); });
 function getUserByEmail(api, email) {
     return __awaiter(this, void 0, void 0, function () {
         var query, variables;

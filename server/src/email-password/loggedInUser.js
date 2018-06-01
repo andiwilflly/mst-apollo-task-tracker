@@ -37,73 +37,46 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var graphcool_lib_1 = require("graphcool-lib");
-var bcrypt = require("bcryptjs");
-var validator = require("validator");
-var SALT_ROUNDS = 10;
 exports.default = (function (event) { return __awaiter(_this, void 0, void 0, function () {
-    var graphcool, api, _a, email, password, userExists, salt, hash, userId, token, e_1;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
+    var userId, graphcool, api, user, e_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
             case 0:
-                _b.trys.push([0, 5, , 6]);
+                _a.trys.push([0, 2, , 3]);
+                // no logged in user
+                if (!event.context.auth || !event.context.auth.nodeId) {
+                    return [2 /*return*/, { data: null }];
+                }
+                userId = event.context.auth.nodeId;
                 graphcool = graphcool_lib_1.fromEvent(event);
                 api = graphcool.api('simple/v1');
-                _a = event.data, email = _a.email, password = _a.password;
-                if (!validator.isEmail(email)) {
-                    return [2 /*return*/, { error: 'Not a valid email' }];
-                }
-                return [4 /*yield*/, getUser(api, email)
-                        .then(function (r) { return r.User !== null; })];
+                return [4 /*yield*/, getUser(api, userId)
+                        .then(function (r) { return r.User; })
+                    // no logged in user
+                ];
             case 1:
-                userExists = _b.sent();
-                if (userExists) {
-                    return [2 /*return*/, { error: 'Email already in use' }];
+                user = _a.sent();
+                // no logged in user
+                if (!user || !user.id) {
+                    return [2 /*return*/, { data: null }];
                 }
-                salt = bcrypt.genSaltSync(SALT_ROUNDS);
-                return [4 /*yield*/, bcrypt.hash(password, salt)
-                    // create new user
-                ];
+                return [2 /*return*/, { data: { id: user.id } }];
             case 2:
-                hash = _b.sent();
-                return [4 /*yield*/, createGraphcoolUser(api, email, hash)
-                    // generate node token for new User node
-                ];
-            case 3:
-                userId = _b.sent();
-                return [4 /*yield*/, graphcool.generateNodeToken(userId, 'User')];
-            case 4:
-                token = _b.sent();
-                return [2 /*return*/, { data: { id: userId, token: token } }];
-            case 5:
-                e_1 = _b.sent();
-                return [2 /*return*/, { error: 'An unexpected error occured during signup.' }];
-            case 6: return [2 /*return*/];
+                e_1 = _a.sent();
+                return [2 /*return*/, { error: 'An unexpected error occured during authentication.' }];
+            case 3: return [2 /*return*/];
         }
     });
 }); });
-function getUser(api, email) {
+function getUser(api, id) {
     return __awaiter(this, void 0, void 0, function () {
         var query, variables;
         return __generator(this, function (_a) {
-            query = "\n    query getUser($email: String!) {\n      User(email: $email) {\n        id\n      }\n    }\n  ";
+            query = "\n    query getUser($id: ID!) {\n      User(id: $id) {\n        id\n      }\n    }\n  ";
             variables = {
-                email: email,
+                id: id,
             };
             return [2 /*return*/, api.request(query, variables)];
-        });
-    });
-}
-function createGraphcoolUser(api, email, password) {
-    return __awaiter(this, void 0, void 0, function () {
-        var mutation, variables;
-        return __generator(this, function (_a) {
-            mutation = "\n    mutation createGraphcoolUser($email: String!, $password: String!) {\n      createUser(\n        email: $email,\n        password: $password\n      ) {\n        id\n      }\n    }\n  ";
-            variables = {
-                email: email,
-                password: password,
-            };
-            return [2 /*return*/, api.request(mutation, variables)
-                    .then(function (r) { return r.createUser.id; })];
         });
     });
 }

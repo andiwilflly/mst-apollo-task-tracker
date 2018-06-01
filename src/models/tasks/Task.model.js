@@ -12,6 +12,7 @@ const Task = {
 	__type: types.maybe(types.string),
 	title: types.maybe(types.string),
 	description: types.maybe(types.string),
+	createdAt: types.maybe(types.string),
 	author: types.frozen,
 	board: types.frozen,
 	list: types.frozen,
@@ -50,6 +51,7 @@ const actions = (self)=> {
 
 const views = (self)=> {
 	return {
+		get createdTime() { return (new Date(self.createdAt)).getTime(); },
 		get authorId() { return self.author.id },
 		get boardId() { return self.board.id },
 		get listId() { return self.list.id },

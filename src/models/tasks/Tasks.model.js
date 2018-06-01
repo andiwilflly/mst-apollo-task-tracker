@@ -40,8 +40,9 @@ const actions = (self)=> {
     return {
 
 		createMutation: ({ authorId, boardId, listId, title, description, labelsIds })=> {
-			console.log(self, 42);
+			// Optimistic updates
 			self.optimisticCreate({ authorId, boardId, listId, title, description, labelsIds });
+
 			return client.mutate({
 				variables: { authorId, boardId, listId, title, description, labelsIds },
 				mutation: TASK_CREATE_MUTATION
@@ -66,8 +67,7 @@ const actions = (self)=> {
 
 
         create(task = {}) {
-			console.log(self.all.has(task.id), "wtfфывфыв??", task.id, self.all);
-			// if(self.all.has(task.id)) return self.all.get(task.id).update(task);
+			if(self.all.has(task.id)) return self.all.get(task.id).update(task);
 			runInAction(`TASK-CREATE-SUCCESS`, ()=> {
 				self.all.set(task.id, { ...task, __type: "Task" } );
 			});

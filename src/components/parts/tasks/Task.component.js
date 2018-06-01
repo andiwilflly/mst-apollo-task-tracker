@@ -63,9 +63,6 @@ class Task extends React.Component {
 				<div className="task cf">
 					<h3 className="task_title">{  this.task.title }</h3>
 					{ this.task.description }<br/>
-					<p style={{ fontSize: 10 }}>taskId: { this.task.id }</p>
-					<p style={{ fontSize: 10 }}>listId: { this.task.listId }</p>
-					<p style={{ fontSize: 10 }}>authorId: { this.task.authorId }</p>
 
 					<ul className="labels_list">
 						{ this.task.labelsIds.map((labelId)=> {
@@ -90,9 +87,8 @@ class Task extends React.Component {
 
 
 	render() {
-		console.log(this.props.taskId, 'taskId');
 		return (
-			<QueryLoader query={TASK_ALL_INFO_QUERY}
+			<QueryLoader query={ TASK_ALL_INFO_QUERY }
 						 preLoader={<div className="task"><PreLoader/></div>}
 						 variables={{ id: this.props.taskId }}>
 				{ this.task ?

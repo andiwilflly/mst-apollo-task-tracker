@@ -63,14 +63,13 @@ class CreateTask extends React.Component {
 					<br/>
 					<p>
 						description:
-						<textarea type="text"
-								  value={ this.form.description }
+						<textarea value={ this.form.description }
 								  onChange={ (e)=> this.form.description = e.currentTarget.value }/>
 					</p>
 
 					<br/>
 					<button onClick={ this.creteTask }
-							disabled={ this.isLoading }>{
+							disabled={ this.isLoading || !this.form.title || !this.form.description }>{
 						this.isLoading ?
 							<PreLoader/>
 							:

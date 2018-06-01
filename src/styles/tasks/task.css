@@ -1,10 +1,9 @@
 .task {
 	background: white;
-	padding: 5px;
+	padding: 5px 5px 45px 5px;
 	margin: 5px 0;
 	cursor: move;
 	width: 208px;
-	min-height: 198px;
 	border: 1px solid lightgray;
 	position: relative;
 }

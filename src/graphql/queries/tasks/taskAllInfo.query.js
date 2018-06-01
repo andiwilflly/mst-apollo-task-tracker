@@ -6,6 +6,7 @@ export default gql`query taskAllInfo($id: ID!) {
         id
         title
         description
+        createdAt
         author {
             id
         }

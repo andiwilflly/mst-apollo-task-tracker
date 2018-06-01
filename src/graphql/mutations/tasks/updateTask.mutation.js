@@ -7,6 +7,7 @@ export default gql`mutation updateTask($id: ID!, $title: String, $description: S
         id
         title
         description
+        createdAt
         author {
             id
         }

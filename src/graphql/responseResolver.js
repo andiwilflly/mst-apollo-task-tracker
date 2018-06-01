@@ -86,7 +86,14 @@ function applyData(dataName, data) {
 			store.tasks.create(data);
 			break;
 		case "createTask":
-			// TODO: Optimistic updates??
+			// TODO: Recheck this optimistic update
+			// store.tasks.optimisticCreate({
+			// 	...data,
+			// 	authorId: data.author.id,
+			// 	boardId: data.board.id,
+			// 	listId: data.list.id,
+			// 	labelsIds: data.labels.map((label)=> label.id)
+			// });
 			// Resolved in [webSocket:TASK_CREATE]
 			break;
 		case "updateTask":

@@ -9,6 +9,11 @@
 	position: relative;
 }
 
+.task > .cssload-loader {
+	width: 50px;
+	height: 50px;
+}
+
 .task_title {
 	font-size: 14px;
 	font-weight: bold;

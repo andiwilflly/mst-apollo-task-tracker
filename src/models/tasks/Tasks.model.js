@@ -4,6 +4,8 @@ import Fuse from 'fuse.js';
 // MobX
 import { runInAction, values } from "mobx";
 import { types } from 'mobx-state-tree';
+// Store
+import store from "store";
 // GraphQL
 import client from "graphql/client";
 import TASK_CREATE_MUTATION from "graphql/mutations/tasks/createTask.mutation";
@@ -38,6 +40,8 @@ const actions = (self)=> {
     return {
 
 		createMutation: ({ authorId, boardId, listId, title, description, labelsIds })=> {
+			console.log(self, 42);
+			self.optimisticCreate({ authorId, boardId, listId, title, description, labelsIds });
 			return client.mutate({
 				variables: { authorId, boardId, listId, title, description, labelsIds },
 				mutation: TASK_CREATE_MUTATION
@@ -62,7 +66,8 @@ const actions = (self)=> {
 
 
         create(task = {}) {
-			if(self.all.has(task.id)) return self.all.get(task.id).update(task);
+			console.log(self.all.has(task.id), "wtfфывфыв??", task.id, self.all);
+			// if(self.all.has(task.id)) return self.all.get(task.id).update(task);
 			runInAction(`TASK-CREATE-SUCCESS`, ()=> {
 				self.all.set(task.id, { ...task, __type: "Task" } );
 			});
@@ -80,6 +85,34 @@ const actions = (self)=> {
 
 		search(text= "") {
 			return fuse.search(text).map((result)=> result.item);
+		},
+
+
+		optimisticCreate({ id="optimisticUpdate", authorId, boardId, listId, title, description, labelsIds }) {
+			const user = store.users.all.get(authorId);
+			const board = store.boards.all.get(boardId);
+			const list = store.lists.all.get(listId);
+			user.update({
+				id: authorId,
+				tasks: [...user.tasks, { id }]
+			});
+			board.update({
+				id: boardId,
+				tasks: [...board.tasks, { id }]
+			});
+			list.update({
+				id: listId,
+				tasks: [...list.tasks, { id }]
+			});
+			store.tasks.create({
+				id,
+				title,
+				description,
+				author: { id: authorId },
+				board: { id: boardId },
+				list: { id: listId },
+				labels: labelsIds.map((labelId)=> ({ id: labelId }))
+			});
 		},
 
 

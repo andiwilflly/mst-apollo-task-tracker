@@ -83,18 +83,10 @@ functions:
     handler:
       code: src/invite/createInviteCustom.js
 
-  # Operation-before hook to validate an email address
-#  onTaskCreate:
-#    type: operationAfter
-#    operation: Task.update
-#    handler:
-#      # Specify a managed function as a handler; since no environment variables
-#      # are specified, we don't need `src`
-#      code: ./hooks/test.hook.js
 
-  checkPostCount:
+  beforeTaskCreate:
     handler:
-      code: ./hooks/checkPostCount.js
+      code: ./hooks/beforeTaskCreate.js
     type: operationBefore
     operation: Task.create
 

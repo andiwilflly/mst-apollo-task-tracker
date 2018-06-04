@@ -18,6 +18,8 @@ class Label extends React.Component {
 
 	get label() { return store.labels.all.get(this.props.labelId); };
 
+
+
 	
 	render() {
 		return (
@@ -26,6 +28,7 @@ class Label extends React.Component {
 						 variables={{ id: this.props.labelId }}>
 				{ this.label ?
 					<div className="labels_list_label"
+						 onClick={ ()=> this.props.onClick && this.props.onClick() }
 						 style={{ background: this.label.color }} />
 					:
 					<div className="labels_list_label"><PreLoader/></div>

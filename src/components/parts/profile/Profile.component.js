@@ -73,9 +73,15 @@ class Profile extends React.Component {
 						   ref={ filedName }
 						   value={ this.form[filedName].value }
 						   onBlur={ ()=> this.onBlur(filedName) }
-						   onChange={ (e)=> this.form[filedName].value = e.currentTarget.value }/>
+						   onChange={ (e)=> this.form[filedName].value = e.currentTarget.value } />
 					:
-					<p className="input">{ this.form[filedName].value }</p>
+					<p className="input">
+						{ filedName === "avatar" ?
+							<img src={ this.form[filedName].value } style={{ height: "100%" }}/>
+							:
+							this.form[filedName].value
+						}
+					</p>
 				}
 			</div>
 		);

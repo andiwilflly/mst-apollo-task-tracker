@@ -10,6 +10,7 @@ import store from "store";
 // Components
 import PreLoader from 'components/parts/PreLoader.component';
 import AllLabels from "components/parts/labels/AllLabels.component";
+import Label from 'components/parts/labels/Label.component';
 
 
 @observer
@@ -70,12 +71,26 @@ class UpdateList extends React.Component {
 					</p>
 
 					<br/>
-					<p>
+					<div>
 						description:
-						<textarea type="text"
-								  value={ this.form.description }
+						<textarea value={ this.form.description }
 								  onChange={ (e)=> this.form.description = e.currentTarget.value }/>
-					</p>
+
+						<div className="create_task_preview">
+							<div className="task cf">
+								<h3 className="task_title">{  this.form.title }</h3>
+								<p dangerouslySetInnerHTML={{ __html: this.form.description }} />
+
+								<ul className="labels_list">
+									{ this.form.labels.map((labelId)=> {
+										return <Label key={labelId}
+													  onClick={ ()=> this.removeLabelFromTask(labelId) }
+													  labelId={ labelId } />;
+									}) }
+								</ul>
+							</div>
+						</div>
+					</div>
 
 					<br/>
 					<button onClick={ this.updateTask }
@@ -88,18 +103,6 @@ class UpdateList extends React.Component {
 				</div>
 				<div className="create_task_sidebar">
 					<AllLabels onLabelClick={ (label)=> this.addLabelToTask(label) } />
-
-					<p>Selected labels:</p>
-					<div className="labels_list">
-						{ this.form.labels.map((labelId)=> {
-							return (
-								<div key={labelId}
-									 className="labels_list_label"
-									 onClick={ ()=> this.removeLabelFromTask(labelId) }
-									 style={{ background: store.labels.all.get(labelId).color }} />
-							);
-						}) }
-					</div>
 				</div>
 			</div>
 		)

@@ -68,7 +68,7 @@ const actions = (self)=> {
 
         create(task = {}) {
 			if(self.all.has(task.id)) return self.all.get(task.id).update(task);
-			runInAction(`TASK-CREATE-SUCCESS`, ()=> {
+			runInAction(`TASK-CREATE-SUCCESS ${task.id}`, ()=> {
 				self.all.set(task.id, { ...task, __type: "Task" } );
 			});
 		},
@@ -76,7 +76,7 @@ const actions = (self)=> {
 
 		delete(taskId) {
 			if(!self.all.has(taskId)) return runInAction(`TASK-DELETE-WARNING (no such task ${taskId})`, ()=> {});
-			runInAction(`TASK-DELETE-SUCCESS`, ()=> {
+			runInAction(`TASK-DELETE-SUCCESS ${taskId}`, ()=> {
 				self.all.delete(taskId);
 				Alert.success("Task was deleted successfully!");
 			});
@@ -89,29 +89,76 @@ const actions = (self)=> {
 
 
 		optimisticCreate({ id="optimisticUpdate", authorId, boardId, listId, title, description, labelsIds }) {
-			const user = store.users.all.get(authorId);
-			const board = store.boards.all.get(boardId);
-			const list = store.lists.all.get(listId);
-			user.update({
-				id: authorId,
-				tasks: [...user.tasks, { id }]
-			});
-			board.update({
-				id: boardId,
-				tasks: [...board.tasks, { id }]
-			});
-			list.update({
-				id: listId,
-				tasks: [...list.tasks, { id }]
-			});
-			store.tasks.create({
-				id,
-				title,
-				description,
-				author: { id: authorId },
-				board: { id: boardId },
-				list: { id: listId },
-				labels: labelsIds.map((labelId)=> ({ id: labelId }))
+
+			if(id !== "optimisticUpdate") self.optimisticDelete("optimisticUpdate");
+
+			runInAction(`TASK-OPTIMISTIC-CREATE-SUCCESS ${id}`, ()=> {
+				const user = store.users.all.get(authorId);
+				const board = store.boards.all.get(boardId);
+				const list = store.lists.all.get(listId);
+				user && user.update({
+					id: authorId,
+					tasks: [...user.tasks, { id }]
+				});
+				board && board.update({
+					id: boardId,
+					tasks: [...board.tasks, { id }]
+				});
+				list && list.update({
+					id: listId,
+					tasks: [...list.tasks, { id }]
+				});
+				store.tasks.create({
+					id,
+					title,
+					description,
+					author: { id: authorId },
+					board: { id: boardId },
+					list: { id: listId },
+					labels: labelsIds.map((labelId)=> ({ id: labelId }))
+				});
+			} );
+		},
+
+
+		optimisticDelete(taskId) {
+			const task = store.tasks.all.get(taskId);
+			if(!task) return runInAction(`TASK-OPTIMISTIC-DELETE-ERROR ${taskId}`, ()=> {});
+
+			runInAction(`TASK-OPTIMISTIC-DELETE-SUCCESS ${taskId}`, ()=> {
+				const user = store.users.all.get(task.authorId);
+				const board = store.boards.all.get(task.boardId);
+				const list = store.lists.all.get(task.listId);
+
+				if(user) {
+					let userTasksId = user.tasksIds;
+					userTasksId.splice(userTasksId.indexOf(taskId), 1);
+
+					user.update({
+						id: task.authorId,
+						tasks: userTasksId.map((taskId)=> ({ id: taskId }))
+					});
+				}
+
+				if(board) {
+					let boardTasksIds = board.tasksIds.slice();
+					boardTasksIds.splice(boardTasksIds.indexOf(taskId), 1);
+					board.update({
+						id: task.boardId,
+						tasks: boardTasksIds.map((taskId)=> ({ id: taskId }))
+					});
+				}
+
+				if(list) {
+					let listTasksIds = list.tasksIds.slice();
+					listTasksIds.splice(listTasksIds.indexOf(taskId), 1);
+					list.update({
+						id: task.listId,
+						tasks: listTasksIds.map((taskId)=> ({ id: taskId }))
+					});
+				}
+
+				self.delete(taskId);
 			});
 		},
 

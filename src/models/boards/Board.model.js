@@ -45,7 +45,7 @@ const views = (self)=> {
 		get authorId() { return self.author.id },
 		get usersIds() { return self.users.map((user)=> user.id) },
 		get listIds() { return self.lists.map((list)=> list.id) },
-		get taskIds() { return self.tasks.map((task)=> task.id) }
+		get tasksIds() { return self.tasks.map((task)=> task.id) }
 	};
 };
 

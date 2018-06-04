@@ -43,7 +43,8 @@ const actions = (self)=> {
 const views = (self)=> {
 	return {
 		get boardsIds() { return self.boards.map((board)=> board.id) },
-		get myBoardsIds() { return self.myBoards.map((board)=> board.id) }
+		get myBoardsIds() { return self.myBoards.map((board)=> board.id) },
+		get tasksIds() { return self.tasks.map((task)=> task.id) }
 	};
 };
 

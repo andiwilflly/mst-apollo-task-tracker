@@ -86,15 +86,14 @@ function applyData(dataName, data) {
 			store.tasks.create(data);
 			break;
 		case "createTask":
-			// TODO: Recheck this optimistic update
-			// store.tasks.optimisticCreate({
-			// 	...data,
-			// 	authorId: data.author.id,
-			// 	boardId: data.board.id,
-			// 	listId: data.list.id,
-			// 	labelsIds: data.labels.map((label)=> label.id)
-			// });
-			// Resolved in [webSocket:TASK_CREATE]
+			// Subscribed at [webSocket:TASK_CREATE]
+			store.tasks.optimisticCreate({
+				...data,
+				authorId: data.author.id,
+				boardId: data.board.id,
+				listId: data.list.id,
+				labelsIds: data.labels.map((label)=> label.id)
+			});
 			break;
 		case "updateTask":
 			// Optimistic updates
@@ -102,8 +101,8 @@ function applyData(dataName, data) {
 			if(task) task.update(data);
 			break;
 		case "deleteTask":
-			// TODO: Optimistic updates??
-			// Resolved in [webSocket:TASK_DELETE]
+			// Subscribed at [webSocket:TASK_DELETE]
+			store.tasks.optimisticDelete(data.id);
 			break;
 		case "deleteTaskCustom":
 			store.tasks.delete(data.id);

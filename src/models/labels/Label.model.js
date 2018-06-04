@@ -26,7 +26,7 @@ const actions = (self)=> {
 
 const views = (self)=> {
 	return {
-		get taskIds() { return self.tasks.map((task)=> task.id); }
+		get tasksIds() { return self.tasks.map((task)=> task.id); }
 	};
 };
 

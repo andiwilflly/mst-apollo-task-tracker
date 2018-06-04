@@ -66,7 +66,7 @@ class List extends React.Component {
 						<button onClick={ this.creteTask }>
 							Create task
 						</button>
-						{ this.list.taskIds.map((taskId)=> <Task key={taskId} taskId={taskId} />) }
+						{ this.list.tasksIds.map((taskId)=> <Task key={taskId} taskId={taskId} />) }
 					</div>
 				</DropTarget>
             </div>

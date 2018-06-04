@@ -36,16 +36,16 @@ class Board extends React.Component {
 		return (
 			<div className="board">
 				<div>
-					<BoardFilters boardId={ this.board.id } />
-
-					<BoardUsersList boardId={ this.board.id } />
-
 					<div className="cf">
 						{ this.board.background ?
 							<div style={{ marginRight: '20px', width: 100, height: 100, background: this.board.background, overflow: 'hidden', borderRadius: "50%", float: "left" }} />
 							: null }
 						<h3 style={{ float: "left", lineHeight: "100px" }}>{ this.board.name }</h3>
 					</div>
+
+					<BoardFilters boardId={ this.board.id } />
+
+					<BoardUsersList boardId={ this.board.id } />
 
 					<div className="board_lists">
 						{ this.board.listIds.map((listId)=> {

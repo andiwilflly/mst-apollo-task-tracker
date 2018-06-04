@@ -3,6 +3,7 @@
 	padding: 10px;
 	margin: 10px 0;
 	position: relative;
+	z-index: 2;
 }
 
 .board_users_list_item {

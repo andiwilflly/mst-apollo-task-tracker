@@ -12,6 +12,7 @@ const Board = {
 	description: types.maybe(types.string),
 	background: types.maybe(types.string),
 	author: types.frozen,
+	users: types.frozen,
 	lists: types.frozen,
 	tasks: types.frozen
 };
@@ -41,11 +42,9 @@ const actions = (self)=> {
 
 const views = (self)=> {
 	return {
-
 		get authorId() { return self.author.id },
-
+		get usersIds() { return self.users.map((user)=> user.id) },
 		get listIds() { return self.lists.map((list)=> list.id) },
-
 		get taskIds() { return self.tasks.map((task)=> task.id) }
 	};
 };

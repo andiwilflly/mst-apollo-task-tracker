@@ -13,7 +13,7 @@ export default async (event)=> {
 
 	console.log("------> !!", user);
 
-	event.data.title = "OTKUDA ETOT TITLE??";
+	// event.data.title = "OTKUDA ETOT TITLE??";
 
 	return event
 }

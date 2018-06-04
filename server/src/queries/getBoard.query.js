@@ -6,14 +6,20 @@ async function getBoard(api, { boardId }) {
 				name
 				description
 				background
+				author {
+					id
+				}
+				users {
+					id
+				}
 				lists {
 					id
 				}
 				tasks {
 					id
 				}
-            }
-        }
+					}
+				}
     `;
 	const variables = {
 		id: boardId

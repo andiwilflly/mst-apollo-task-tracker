@@ -7,7 +7,11 @@ export default gql`mutation createBoard($name: String!, $description: String!, $
         id
         name
         description
+        background
         author {
+            id
+        }
+        users {
             id
         }
         lists {

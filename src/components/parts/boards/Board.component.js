@@ -12,6 +12,7 @@ import LIST_ALL_INFO_QUERY from "graphql/queries/lists/listAllInfo.query";
 import QueryLoader from "components/QueryLoader.component";
 import PreLoader from "components/parts/PreLoader.component";
 import List from "components/parts/lists/List.component";
+import BoardUsersList from "components/parts/boards/BoardUsersList.component";
 import BoardFilters from "components/parts/boards/BoardFilters.component";
 import CreateList from "components/parts/lists/CreateList.component";
 
@@ -36,6 +37,8 @@ class Board extends React.Component {
 			<div className="board">
 				<div>
 					<BoardFilters boardId={ this.board.id } />
+
+					<BoardUsersList boardId={ this.board.id } />
 
 					<div className="cf">
 						{ this.board.background ?

@@ -10,6 +10,9 @@ export default gql`query boardAllInfo($id: ID!) {
         author {
             id
         }
+        users {
+            id
+        }
         lists {
             id
         }

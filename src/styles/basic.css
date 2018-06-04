@@ -63,7 +63,7 @@ textarea,
 	border: none;
 	background-color: lightgray !important;
 	outline: none;
-	padding: 5px;
+	padding: 5px 0;
 	margin: 5px 0;
 	transition: 0.5s background;
 	border-bottom: 1px solid lightgray;
@@ -72,6 +72,7 @@ textarea,
 	min-width: 210px;
 	line-height: 20px;
 	height: 20px;
+	text-indent: 5px;
 }
 
 textarea {

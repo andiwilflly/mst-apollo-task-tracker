@@ -41,14 +41,14 @@ var bcrypt = require("bcryptjs");
 var validator = require("validator");
 var SALT_ROUNDS = 10;
 exports.default = (function (event) { return __awaiter(_this, void 0, void 0, function () {
-    var graphcool, api, _a, email, password, userExists, salt, hash, userId, token, e_1;
+    var graphcool, api, _a, email, password, avatar, name_1, phone, userExists, salt, hash, userId, token, e_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 5, , 6]);
                 graphcool = graphcool_lib_1.fromEvent(event);
                 api = graphcool.api('simple/v1');
-                _a = event.data, email = _a.email, password = _a.password;
+                _a = event.data, email = _a.email, password = _a.password, avatar = _a.avatar, name_1 = _a.name, phone = _a.phone;
                 if (!validator.isEmail(email)) {
                     return [2 /*return*/, { error: 'Not a valid email' }];
                 }
@@ -60,14 +60,10 @@ exports.default = (function (event) { return __awaiter(_this, void 0, void 0, fu
                     return [2 /*return*/, { error: 'Email already in use' }];
                 }
                 salt = bcrypt.genSaltSync(SALT_ROUNDS);
-                return [4 /*yield*/, bcrypt.hash(password, salt)
-                    // create new user
-                ];
+                return [4 /*yield*/, bcrypt.hash(password, salt)];
             case 2:
                 hash = _b.sent();
-                return [4 /*yield*/, createGraphcoolUser(api, email, hash)
-                    // generate node token for new User node
-                ];
+                return [4 /*yield*/, createGraphcoolUser(api, email, hash, avatar, name_1, phone)];
             case 3:
                 userId = _b.sent();
                 return [4 /*yield*/, graphcool.generateNodeToken(userId, 'User')];
@@ -93,14 +89,17 @@ function getUser(api, email) {
         });
     });
 }
-function createGraphcoolUser(api, email, password) {
+function createGraphcoolUser(api, email, password, avatar, name, phone) {
     return __awaiter(this, void 0, void 0, function () {
         var mutation, variables;
         return __generator(this, function (_a) {
-            mutation = "\n    mutation createGraphcoolUser($email: String!, $password: String!) {\n      createUser(\n        email: $email,\n        password: $password\n      ) {\n        id\n      }\n    }\n  ";
+            mutation = "\n    mutation createGraphcoolUser($email: String!, $password: String!, $avatar: String, $name: String, $phone: String) {\n      createUser(\n        email: $email,\n        password: $password,\n        avatar: $avatar,\n        name: $name,\n        phone: $phone\n      ) {\n        id\n      }\n    }\n  ";
             variables = {
                 email: email,
                 password: password,
+                avatar: avatar,
+                name: name,
+                phone: phone,
             };
             return [2 /*return*/, api.request(mutation, variables)
                     .then(function (r) { return r.createUser.id; })];

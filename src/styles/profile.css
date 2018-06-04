@@ -3,12 +3,13 @@
 }
 
 .profile input {
-	max-width: unset;
 	width: calc(100% - 10px);
 }
 
 .profile .input {
+	max-width: 350px;
 	white-space: nowrap;
+	overflow: hidden;
 }
 
 .profile_cards {

@@ -85,12 +85,14 @@ class Profile extends React.Component {
 			<div className="profile cf">
 				<h3>Profile</h3>
 
-				{ this.renderInput("email") }
-				{ this.renderInput("avatar") }
-				{ this.renderInput("name") }
-				{ this.renderInput("phone") }
-
 				<div className="profile_cards">
+					<div className="profile_card">
+						{ this.renderInput("email") }
+						{ this.renderInput("avatar") }
+						{ this.renderInput("name") }
+						{ this.renderInput("phone") }
+					</div>
+
 					<div className="profile_card">
 						<Invites />
 					</div>

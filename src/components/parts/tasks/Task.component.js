@@ -62,7 +62,7 @@ class Task extends React.Component {
 							   }}>
 				<div className="task cf">
 					<h3 className="task_title">{  this.task.title }</h3>
-					{ this.task.description }<br/>
+					<p dangerouslySetInnerHTML={{ __html: this.task.description }} />
 
 					<ul className="labels_list">
 						{ this.task.labelsIds.map((labelId)=> {

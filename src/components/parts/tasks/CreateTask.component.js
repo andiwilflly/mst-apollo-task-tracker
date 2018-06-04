@@ -10,6 +10,7 @@ import store from "store";
 // Components
 import PreLoader from 'components/parts/PreLoader.component';
 import AllLabels from "components/parts/labels/AllLabels.component";
+import Label from 'components/parts/labels/Label.component';
 
 
 @observer
@@ -61,11 +62,24 @@ class CreateTask extends React.Component {
 					</p>
 
 					<br/>
-					<p>
+					<div>
 						description:
 						<textarea value={ this.form.description }
 								  onChange={ (e)=> this.form.description = e.currentTarget.value }/>
-					</p>
+
+						<div className="create_task_preview">
+							<div className="task cf">
+								<h3 className="task_title">{  this.form.title }</h3>
+								<p dangerouslySetInnerHTML={{ __html: this.form.description }} />
+
+								<ul className="labels_list">
+									{ this.form.labels.map((labelId)=> {
+										return <Label key={labelId} labelId={ labelId } />;
+									}) }
+								</ul>
+							</div>
+						</div>
+					</div>
 
 					<br/>
 					<button onClick={ this.creteTask }

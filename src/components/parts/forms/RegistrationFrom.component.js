@@ -27,7 +27,7 @@ class RegistrationFrom extends React.Component {
 	};
 
 
-	login = async (signUpMutation)=> {
+	register = async (signUpMutation)=> {
 		this.isLoading = true;
 		await signUpMutation({ variables: {
 				email: this.form.email,
@@ -72,8 +72,8 @@ class RegistrationFrom extends React.Component {
 					{
 						(signUpMutation)=> {
 							return (
-								<button onClick={ this.login.bind(this, signUpMutation) }
-										disabled={ this.isLoading }>{
+								<button onClick={ this.register.bind(this, signUpMutation) }
+										disabled={ this.isLoading || !this.form.email || !this.form.password }>{
 									this.isLoading ?
 										<PreLoader />
 										:

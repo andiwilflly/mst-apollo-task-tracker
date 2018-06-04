@@ -3,10 +3,8 @@ import { Link, withRouter } from "react-router-dom";
 // MobX
 import { observer } from "mobx-react";
 import { observable } from "mobx";
-// Store
-import store from "store";
 // Components
-import PreLoader from "components/parts/PreLoader.component";
+import LogInForm from "components/parts/forms/LogInForm.component";
 
 
 @withRouter
@@ -28,20 +26,7 @@ class LoginPage extends React.Component {
 	render() {
 		return (
 			<div>
-				<input type="text"
-					   value={ this.form.email }
-					   onChange={ (e)=> this.form.email = e.currentTarget.value }/>
-				<input type="password"
-					   value={ this.form.password }
-					   onChange={ (e)=> this.form.password = e.currentTarget.value }/>
-				<hr/>
-				<Link to="/registration">Sign up</Link>
-
-				{ this.isLoading ?
-					<PreLoader />
-					:
-					<button onClick={ ()=> store.logInMutation(this.form) }>LogIn</button>
-				}
+				<LogInForm />
 			</div>
 		)
 	}

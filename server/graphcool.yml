@@ -83,7 +83,6 @@ functions:
     handler:
       code: src/invite/createInviteCustom.js
 
-
   beforeTaskCreate:
     handler:
       code: ./hooks/beforeTaskCreate.js

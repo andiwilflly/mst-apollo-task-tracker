@@ -19,6 +19,10 @@
 	margin: 10px 10px 10px 0;
 }
 
+.task_created_time {
+	font-size: 10px;
+}
+
 .task_delete_button {
 	float: right;
 	margin: 10px 0 0 0;
@@ -29,11 +33,12 @@
 	font-size: 23px;
 	position: absolute;
 	top: 7px;
-	right: 4px;
+	right: 7px;
 	padding: 7px 5px;
 	cursor: pointer;
+	z-index: 2;
 }
 
 .task_edit:hover {
-	background: lightgray;
+	background: white;
 }

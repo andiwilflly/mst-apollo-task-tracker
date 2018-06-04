@@ -12,7 +12,7 @@ import LIST_ALL_INFO_QUERY from "graphql/queries/lists/listAllInfo.query";
 import QueryLoader from "components/QueryLoader.component";
 import PreLoader from "components/parts/PreLoader.component";
 import List from "components/parts/lists/List.component";
-import BoardUsersList from "components/parts/boards/BoardUsersList.component";
+import UsersList from "components/parts/users/UsersList.component";
 import BoardFilters from "components/parts/boards/BoardFilters.component";
 import CreateList from "components/parts/lists/CreateList.component";
 
@@ -45,7 +45,7 @@ class Board extends React.Component {
 
 					<BoardFilters boardId={ this.board.id } />
 
-					<BoardUsersList boardId={ this.board.id } />
+					<UsersList usersIds={ [...this.board.usersIds, this.board.authorId] } />
 
 					<div className="board_lists">
 						{ this.board.listIds.map((listId)=> {

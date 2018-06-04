@@ -77,7 +77,7 @@ class Profile extends React.Component {
 					:
 					<p className="input">
 						{ filedName === "avatar" ?
-							<img src={ this.form[filedName].value } style={{ height: "100%" }}/>
+							<img src={ this.form[filedName].value } style={{ height: "100%" }} alt={ this.user.name } />
 							:
 							this.form[filedName].value
 						}

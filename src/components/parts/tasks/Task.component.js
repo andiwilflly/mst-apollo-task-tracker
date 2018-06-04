@@ -13,6 +13,7 @@ import store from "store";
 import PreLoader from 'components/parts/PreLoader.component';
 import Label from 'components/parts/labels/Label.component';
 import QueryLoader from "components/QueryLoader.component";
+import UsersList from "components/parts/users/UsersList.component";
 
 
 @observer
@@ -61,7 +62,13 @@ class Task extends React.Component {
 								   listId: this.task.listId
 							   }}>
 				<div className="task cf">
+					<UsersList usersIds={ [this.task.authorId] }>
+						<p className="task_created_time">{ new Date(this.task.createdTime).toLocaleString() }</p>
+					</UsersList>
+
 					<h3 className="task_title">{  this.task.title }</h3>
+					<div className="task_edit" onDoubleClick={ this.editTask }>✎</div>
+
 					<p dangerouslySetInnerHTML={{ __html: this.task.description }} />
 
 					<ul className="labels_list">
@@ -78,8 +85,6 @@ class Task extends React.Component {
 							:
 							'Delete task'
 					}</button>
-
-					<div className="task_edit" onDoubleClick={ this.editTask }>✎</div>
 				</div>
 			</DragDropContainer>
 		);

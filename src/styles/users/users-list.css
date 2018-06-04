@@ -1,12 +1,11 @@
-.board_users_list {
+.users_list {
 	background: lightgray;
 	padding: 10px;
-	margin: 10px 0;
 	position: relative;
 	z-index: 2;
 }
 
-.board_users_list_item {
+.users_list_item {
 	border-radius: 50%;
 	width: 30px;
 	height: 30px;
@@ -15,13 +14,13 @@
 	margin-right: 10px;
 }
 
-.board_users_list_item > a {
+.users_list_item > a {
 	display: block;
 	width: 100%;
 	height: 100%;
 }
 
-.board_users_list_popover {
+.users_list_popover {
 	position: absolute;
 	top: 90%;
 	background: white;

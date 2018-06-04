@@ -34,6 +34,11 @@ class CreateTask extends React.Component {
 	}
 
 
+	removeLabelFromTask(labelId) {
+		this.form.labels.splice(this.form.labels.indexOf(labelId), 1);
+	}
+
+
 	creteTask = async ()=> {
 		this.isLoading = true;
 		await store.tasks.createMutation({
@@ -74,7 +79,9 @@ class CreateTask extends React.Component {
 
 								<ul className="labels_list">
 									{ this.form.labels.map((labelId)=> {
-										return <Label key={labelId} labelId={ labelId } />;
+										return <Label key={labelId}
+													  onClick={ ()=> this.removeLabelFromTask(labelId) }
+													  labelId={ labelId } />;
 									}) }
 								</ul>
 							</div>

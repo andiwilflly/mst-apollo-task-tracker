@@ -44,13 +44,11 @@ class Invites extends React.Component {
 
 
 	acceptInvite = async (invite)=> {
-		this.isLoading = true;
 		await store.authorizedUser.acceptInviteMutation({
 			userId: store.authorizedUser.id,
 			inviteId: invite.id,
 			boardsIds: [...this.user.boardsIds, invite.boardId]
 		});
-		this.isLoading = false;
 	};
 
 

@@ -44,7 +44,9 @@ class Profile extends React.Component {
 	}
 
 
-	@computed get user() { return store.users.all.get(store.authorizedUser.id); };
+	@computed get user() { return store.users.all.get(this.props.userId); };
+
+	@computed get isYou() { return this.props.userId === store.authorizedUser.id; };
 
 
 	onDoubleClick(fieldName) {
@@ -64,9 +66,9 @@ class Profile extends React.Component {
 
 	renderInput(filedName) {
 		return (
-			<div onDoubleClick={ ()=> this.onDoubleClick(filedName) }>
+			<div onDoubleClick={ ()=> this.isYou && this.onDoubleClick(filedName) }>
 				{ filedName }:
-				{ this.form[filedName].isEdit ?
+				{ this.form[filedName].isEdit && this.isYou ?
 					<input type="text"
 						   ref={ filedName }
 						   value={ this.form[filedName].value }
@@ -93,13 +95,17 @@ class Profile extends React.Component {
 						{ this.renderInput("phone") }
 					</div>
 
-					<div className="profile_card">
-						<Invites />
-					</div>
+					{ this.isYou ?
+						<div className="profile_card">
+							<Invites />
+						</div>
+						: null }
 
-					<div className="profile_card">
-						<AllLabels onLabelClick={ this.onLabelClick } />
-					</div>
+					{ this.isYou ?
+						<div className="profile_card">
+							<AllLabels onLabelClick={ this.onLabelClick } />
+						</div>
+					: null }
 				</div>
 			</div>
 		)

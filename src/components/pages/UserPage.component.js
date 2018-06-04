@@ -8,8 +8,8 @@ import lazy from "utils/lazy.utils";
 
 @observer
 @permissions
-@lazy(()=> import(/* webpackChunkName: "ProfilePage" */ 'components/pages/lazyContent/ProfilePageContent.component'))
-class ProfilePage extends React.Component {
+@lazy(()=> import(/* webpackChunkName: "UserPage" */ 'components/pages/lazyContent/UserPageContent.component'))
+class UserPage extends React.Component {
 
 	static permissions = {
 		needAuth: true
@@ -17,4 +17,4 @@ class ProfilePage extends React.Component {
 }
 
 
-export default ProfilePage;
+export default UserPage;

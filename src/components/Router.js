@@ -8,7 +8,7 @@ import store from 'store';
 // Pages
 import Layout from "components/Layout.component";
 import HomePage from "components/pages/HomePage.component";
-import ProfilePage from "components/pages/ProfilePage.component";
+import UserPage from "components/pages/UserPage.component";
 import BoardsPage from "components/pages/BoardsPage.component";
 import BoardPage from "components/pages/BoardPage.component";
 import LoginPage from "components/pages/LoginPage.component";
@@ -39,7 +39,7 @@ const Routes = ()=> {
 		<Router history={history}>
 			<Switch>
 				<RouteComponent exact path="/" component={HomePage} />
-				<RouteComponent exact path="/profile" component={ProfilePage} />
+				<RouteComponent exact path="/users/:userId" component={UserPage} />
 				<RouteComponent exact path="/boards" component={BoardsPage} />
 				<RouteComponent exact path="/boards/:boardId" component={BoardPage} />
 				<RouteComponent exact path="/login" component={LoginPage} />

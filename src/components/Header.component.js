@@ -31,7 +31,7 @@ class Header extends React.Component {
 
 				<div className="main-menu">
 					{ store.authorizedUser ?
-						<Link to="/profile" className="cf">
+						<Link to={ `/users/${store.authorizedUser.id}` } className="cf">
 							<div style={{ width: '60px', height: '60px', background: `url(${this.user.avatar}) center / cover no-repeat`, overflow: 'hidden', borderRadius: "50%", float: "left" }} />
 							<p style={{ float: "left", lineHeight: "60px", marginLeft: '20px' }}>Welcome, { this.user.name || this.user.email }</p>
 						</Link>

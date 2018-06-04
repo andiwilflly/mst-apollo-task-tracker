@@ -23,19 +23,11 @@
 	width: 300px;
 	min-height: 80px;
 	background: lightgray;
-	margin: 10px;
+	margin-right: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	padding: 10px 10px 45px 10px;
 	position: relative;
-}
-
-
-.boards_list_item:nth-child(1) {
-	margin: 10px 10px 10px 0;
-}
-
-
-.boards_list_item:nth-last-child {
-	margin: 10px 0 10px 10px;
 }
 
 

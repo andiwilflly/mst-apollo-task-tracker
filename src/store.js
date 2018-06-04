@@ -16,6 +16,7 @@ const store = RootModel.create({
 	boards: {},
 	lists: {},
 	tasks: {},
+	comments: {},
 	labels: {}
 });
 

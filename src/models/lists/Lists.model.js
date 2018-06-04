@@ -1,5 +1,6 @@
 import { runInAction } from "mobx";
 import { types } from 'mobx-state-tree';
+import Alert from "react-s-alert";
 // Models
 import ListModel from "models/lists/List.model";
 // GraphQL
@@ -40,12 +41,14 @@ const actions = (self)=> {
 		},
 
 
-        delete(listId) {
-            runInAction(`LISTS-DELETE-SUCCESS`, ()=> {
-                self.all.delete(listId);
-            });
-        }
-    };
+		delete(listId) {
+			if(!self.all.has(listId)) return runInAction(`LIST-DELETE-WARNING (no such task ${listId})`, ()=> {});
+			runInAction(`LIST-DELETE-SUCCESS ${listId}`, ()=> {
+				self.all.delete(listId);
+				Alert.success("List was deleted successfully!");
+			});
+		}
+	};
 };
 
 

@@ -17,6 +17,9 @@ export default gql`mutation updateTask($id: ID!, $title: String, $description: S
         list {
             id
         }
+        comments {
+            id
+        }
         labels {
             id
         }

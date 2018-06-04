@@ -8,7 +8,7 @@ export default gql`query getUserInfo($id: ID!) {
         avatar
         name
         phone
-        
+
         tasks {
             id
         }
@@ -18,8 +18,10 @@ export default gql`query getUserInfo($id: ID!) {
         boards {
             id
         }
-        invites {
+        comments {
             id
+        }
+        invites {
             boardId
             emailInviteReceiver
             authorId

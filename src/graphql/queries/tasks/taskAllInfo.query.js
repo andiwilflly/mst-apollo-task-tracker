@@ -16,6 +16,9 @@ export default gql`query taskAllInfo($id: ID!) {
         list {
             id
         }
+        comments {
+            id
+        }
         labels {
             id
         }

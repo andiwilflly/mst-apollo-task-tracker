@@ -16,6 +16,7 @@ const Task = {
 	author: types.frozen,
 	board: types.frozen,
 	list: types.frozen,
+	comments: types.array(types.frozen),
 	labels: types.array(types.frozen)
 };
 
@@ -55,6 +56,7 @@ const views = (self)=> {
 		get authorId() { return self.author.id },
 		get boardId() { return self.board.id },
 		get listId() { return self.list.id },
+		get commentsIds() { return self.comments.map((comment)=> comment.id); },
 		get labelsIds() { return self.labels.map((label)=> label.id); }
 	};
 };

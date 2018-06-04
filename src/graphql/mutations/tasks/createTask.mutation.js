@@ -11,14 +11,17 @@ export default gql`mutation createTask($title: String!, $description: String!, $
         author {
             id
         }
-        list {
-            id
-        }
         board {
             id
         }
-		labels {
-			id
-		}
+        list {
+            id
+        }
+        comments {
+            id
+        }
+        labels {
+            id
+        }
     }
 }`

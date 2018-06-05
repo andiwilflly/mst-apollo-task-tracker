@@ -11,9 +11,10 @@ import DELETE_BOARD_MUTATION from "graphql/mutations/boards/deleteBoard.mutation
 import BOARD_SUBSCRIBE_ON_TASK_CREATE from "graphql/subscriptions/boards/boardSubscribeOnTaskCreate.subscription";
 import BOARD_SUBSCRIBE_ON_TASK_UPDATE from "graphql/subscriptions/boards/boardSubscribeOnTaskUpdate.subscription";
 import BOARD_SUBSCRIBE_ON_TASK_DELETE from "graphql/subscriptions/boards/boardSubscribeOnTaskDelete.subscription";
+// Socket
+import webSocket from 'graphql/websocket';
 // Models
 import BoardModel from "models/boards/Board.model";
-import webSocket from 'graphql/websocket';
 
 
 const Boards = {

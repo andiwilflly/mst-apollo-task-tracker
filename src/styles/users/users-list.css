@@ -9,8 +9,8 @@
 	border-radius: 50%;
 	width: 30px;
 	height: 30px;
-	overflow: hidden;
 	float: left;
+	position: relative;
 	margin-right: 10px;
 }
 
@@ -27,4 +27,13 @@
 	padding: 10px;
 	font-size: 12px;
 	border: 1px solid lightgray;
+}
+
+.users_list_item_online_status {
+	border-radius: 50%;
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	bottom: -1px;
+	right: -1px;
 }

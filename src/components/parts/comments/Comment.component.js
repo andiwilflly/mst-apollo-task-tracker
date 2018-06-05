@@ -1,5 +1,4 @@
 import React from 'react';
-import { DragDropContainer } from 'react-drag-drop-container';
 // Styles
 import "styles/comments/comment.css";
 // MobX

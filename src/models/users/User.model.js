@@ -11,6 +11,7 @@ const UserModel = {
 	avatar: types.maybe(types.string),
 	name: types.maybe(types.string),
 	phone: types.maybe(types.string),
+	lastVisit: types.maybe(types.string),
 	boards: types.frozen,
 	myBoards: types.frozen,
 	tasks: types.frozen,
@@ -24,7 +25,7 @@ const actions = (self)=> {
 
 		updateMutation: ({ id, email, avatar, name, phone })=> {
 			client.mutate({
-				variables: { id, email, avatar, name, phone },
+				variables: { id, email, avatar, name, phone, lastVisit: "" + Date.now() },
 				mutation: USER_UPDATE_MUTATION
 			}).catch((e)=> console.log("USER_UPDATE_MUTATION", e));
 		},

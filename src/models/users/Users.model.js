@@ -16,7 +16,7 @@ const Users = {
 };
 
 
-let interval = null;
+// let interval = null;
 const actions = (self)=> {
 	return {
 
@@ -31,7 +31,7 @@ const actions = (self)=> {
 				// Refresh online status of current [user]
 				if(user.id !== store.authorizedUser.id) return;
 				self.all.get(user.id).updateMutation({ id: user.id });
-				interval = setInterval(()=> self.all.get(user.id).updateMutation({ id: user.id }), 30000);
+				setInterval(()=> self.all.get(user.id).updateMutation({ id: user.id }), 30000);
 			});
 		}
 	};

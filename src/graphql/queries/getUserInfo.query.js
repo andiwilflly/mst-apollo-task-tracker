@@ -23,6 +23,7 @@ export default gql`query getUserInfo($id: ID!) {
             id
         }
         invites {
+            id
             boardId
             emailInviteReceiver
             authorId

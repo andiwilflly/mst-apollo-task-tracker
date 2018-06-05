@@ -77,7 +77,7 @@ webSocket.onmessage = (event) => {
 					if(!user) return console.log("ERROR IN USER_UPDATED");
 
 					// TODO: Recheck this for optimistic updates, etc.
-					updatedUser.updatedFields.map((fieldName)=> {
+					updatedUser.updatedFields.forEach((fieldName)=> {
 						user.update({
 							id: user.id,
 							[fieldName]: updatedUser.node[fieldName]

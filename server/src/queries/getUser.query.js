@@ -22,6 +22,7 @@ async function getUser(api, { userId }) {
 					id
 				}
 				invites {
+					id
 					boardId
 					emailInviteReceiver
 					authorId

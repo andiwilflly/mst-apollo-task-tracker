@@ -11,6 +11,7 @@ import store from "store";
 import PreLoader from 'components/parts/PreLoader.component';
 import AllLabels from "components/parts/labels/AllLabels.component";
 import Label from 'components/parts/labels/Label.component';
+import UserIcon from "components/parts/users/UserIcon.component";
 
 
 @observer
@@ -54,6 +55,44 @@ class CreateTask extends React.Component {
 	};
 
 
+	renderTaskPreview() {
+		const task = this.props.task || {
+			authorId: store.authorizedUser.id,
+			createdTime: Date.now(),
+			commentsIds: []
+		};
+		return (
+			<div className="create_task_preview cf">
+				<div className="task cf" style={{ cursor: "default" }}>
+
+					<div className="task_header cf">
+						<UserIcon userId={ task.authorId } />
+						<h3 className="task_title">{  this.form.title }</h3>
+						<p dangerouslySetInnerHTML={{ __html: this.form.description }} />
+					</div>
+
+					<ul className="labels_list">
+						{ this.form.labels.map((labelId)=> {
+							return <Label key={labelId}
+										  onClick={ ()=> this.removeLabelFromTask(labelId) }
+										  labelId={ labelId } />;
+						}) }
+					</ul>
+
+					<p className="task_created_time">{ new Date(task.createdTime).toLocaleString() }</p>
+
+					{ task.commentsIds.length ?
+						<div className="task_dialog" style={{ float: "right" }}>
+							🗨 { task.commentsIds.length }
+						</div>
+						:
+						null }
+				</div>
+			</div>
+		);
+	}
+
+
 	render() {
 		return (
 			<div className="create_task cf">
@@ -72,20 +111,7 @@ class CreateTask extends React.Component {
 						<textarea value={ this.form.description }
 								  onChange={ (e)=> this.form.description = e.currentTarget.value }/>
 
-						<div className="create_task_preview">
-							<div className="task cf">
-								<h3 className="task_title">{  this.form.title }</h3>
-								<p dangerouslySetInnerHTML={{ __html: this.form.description }} />
-
-								<ul className="labels_list">
-									{ this.form.labels.map((labelId)=> {
-										return <Label key={labelId}
-													  onClick={ ()=> this.removeLabelFromTask(labelId) }
-													  labelId={ labelId } />;
-									}) }
-								</ul>
-							</div>
-						</div>
+						{ this.renderTaskPreview() }
 					</div>
 
 					<br/>

@@ -110,7 +110,13 @@ function applyData(dataName, data) {
 
 		// Comments
 		case "createComment":
-			store.comments.create(data);
+            console.log('%%---> resResolver Comment data', data)
+
+            store.comments.create({
+                ...data,
+                authorId: data.author.id,
+                taskId: data.task.id
+            });
 			break;
 		case "Comment":
 			store.comments.create(data);

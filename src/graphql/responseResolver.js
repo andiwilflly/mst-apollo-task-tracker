@@ -109,13 +109,16 @@ function applyData(dataName, data) {
 			break;
 
 		// Comments
-		case "createComment":
-			store.comments.create(data);
-			break;
 		case "Comment":
 			store.comments.create(data);
 			break;
-
+        case "createComment":
+            store.comments.optimisticCreate({
+                ...data,
+                authorId: data.author.id,
+                taskId: data.task.id
+            });
+            break;
 		// Labels
 		case "allLabels":
 			runInAction('LABELS-CREATE-ALL', ()=> {

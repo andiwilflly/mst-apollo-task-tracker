@@ -14,7 +14,7 @@ import QueryLoader from "components/QueryLoader.component";
 
 
 @observer
-class Task extends React.Component {
+class Comment extends React.Component {
 
 	@observable isLoading = false;
 
@@ -23,10 +23,9 @@ class Task extends React.Component {
 
 
 	renderComment() {
-		console.log(this.comment, 42);
 		return (
 			<div className="comment">
-				COMMENT
+				{ this.comment.text }
 			</div>
 		);
 	}
@@ -48,4 +47,4 @@ class Task extends React.Component {
 }
 
 
-export default Task;
+export default Comment;

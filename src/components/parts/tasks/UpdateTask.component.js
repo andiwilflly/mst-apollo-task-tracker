@@ -61,7 +61,6 @@ class UpdateList extends React.Component {
 
 
 	render() {
-		console.log(this.props.task.commentsIds, 42);
 		return (
 			<div className="create_task cf">
 				<h3>Update task</h3>

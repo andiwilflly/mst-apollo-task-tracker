@@ -65,6 +65,20 @@ webSocket.onmessage = (event) => {
                     });
                     break;
 
+				case "USER_UPDATED":
+					const updatedUser = data.payload.data.User;
+					const user = store.users.all.get(updatedUser.node.id);
+					if(!user) return console.log("ERROR IN USER_UPDATED");
+
+					// TODO: Recheck this for optimistic updates, etc.
+					updatedUser.updatedFields.map((fieldName)=> {
+						console.log(`SOCKET USER_UPDATED__${user.id}: `, fieldName, updatedUser.node[fieldName]);
+						user.update({
+							id: user.id,
+							[fieldName]: updatedUser.node[fieldName]
+						});
+					});
+					break;
 
                 default:
                     console.log(`%c subscription data has been received`, 'color: darkPink', data);

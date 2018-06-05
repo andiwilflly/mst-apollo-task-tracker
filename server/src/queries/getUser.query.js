@@ -7,6 +7,7 @@ async function getUser(api, { userId }) {
 				avatar
 				name
         		phone
+        		lastVisit
 		
 				tasks {
 					id

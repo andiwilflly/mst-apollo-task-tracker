@@ -115,7 +115,8 @@ const actions = (self)=> {
 					author: { id: authorId },
 					board: { id: boardId },
 					list: { id: listId },
-					labels: labelsIds.map((labelId)=> ({ id: labelId }))
+					labels: labelsIds.map((labelId)=> ({ id: labelId })),
+					comments: []
 				});
 			} );
 		},

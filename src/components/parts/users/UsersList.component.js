@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 // Styles
 import "styles/users/users-list.css";
 // MobX
-import { observable } from "mobx";
+import { observable, computed } from "mobx";
 import { observer } from "mobx-react";
 // Store
 import store from "store";
 // GraphQL
 import GET_USER_INFO_QUERY from "graphql/queries/getUserInfo.query";
+// Utils
+import msToTime from "utils/msToTime.util";
 // Components
 import QueryLoader from "components/QueryLoader.component";
 import PreLoader from "components/parts/PreLoader.component";
@@ -20,8 +22,15 @@ class UsersList extends React.Component {
 
 	@observable showUser = null;
 
+	@observable currentTimeMs = Date.now();
 
-	get usersIds() { return this.props.usersIds; };
+
+	componentDidMount() {
+		setInterval(()=> this.currentTimeMs = Date.now(),1000);
+	}
+
+
+	@computed get usersIds() { return this.props.usersIds; };
 
 
 	renderContent(userId) {
@@ -34,6 +43,7 @@ class UsersList extends React.Component {
 				onMouseEnter={ ()=> this.showUser = user }
 				onMouseLeave={ ()=> this.showUser = null }>
 				<Link to={ `/users/${userId}` } />
+				<div className="users_list_item_online_status" style={{ background: ((this.currentTimeMs - +user.lastVisit) / 1000) > 40 ? "transparent" : "#15b915" }} />
 			</li>
 		);
 	}
@@ -57,7 +67,10 @@ class UsersList extends React.Component {
 					);
 				}) }
 				{ this.showUser ?
-					<p className="users_list_popover">{ this.showUser.email }</p>
+					<p className="users_list_popover">
+						<span>{ this.showUser.email }</span><br/>
+						<span>{ ((this.currentTimeMs - +this.showUser.lastVisit) / 1000) > 40 ? "offline for: " + msToTime(this.currentTimeMs - +this.showUser.lastVisit) : "online" }</span>
+						</p>
 					: null }
 				{ this.props.children }
 			</ul>

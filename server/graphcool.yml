@@ -137,6 +137,16 @@ permissions:
   - operation: Task.delete
     authenticated: false
 
+  # Comment
+  - operation: Comment.create
+    authenticated: false
+  - operation: Comment.read
+    authenticated: false
+  - operation: Comment.update
+    authenticated: false
+  - operation: Comment.delete
+    authenticated: false
+
   # Label
   - operation: Label.create
     authenticated: true
@@ -196,6 +206,16 @@ permissions:
   - operation: TasksAndLabels.connect
     authenticated: false
   - operation: TasksAndLabels.disconnect
+    authenticated: false
+
+  - operation: UserOfComments.connect
+    authenticated: false
+  - operation: UserOfComments.disconnect
+    authenticated: false
+
+  - operation: TaskOfComments.connect
+    authenticated: false
+  - operation: TaskOfComments.disconnect
     authenticated: false
 
 #  - operation: "*"

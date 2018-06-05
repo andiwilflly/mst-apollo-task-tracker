@@ -108,6 +108,14 @@ function applyData(dataName, data) {
 			store.tasks.delete(data.id);
 			break;
 
+		// Comments
+		case "createComment":
+			store.comments.create(data);
+			break;
+		case "Comment":
+			store.comments.create(data);
+			break;
+
 		// Labels
 		case "allLabels":
 			runInAction('LABELS-CREATE-ALL', ()=> {

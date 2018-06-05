@@ -19,13 +19,20 @@
 	margin: 10px 10px 10px 0;
 }
 
+
+.task_dialog {
+	font-size: 10px;
+	cursor: pointer;
+}
+
 .task_created_time {
 	font-size: 10px;
 }
 
 .task_delete_button {
-	float: right;
-	margin: 10px 0 0 0;
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
 }
 
 

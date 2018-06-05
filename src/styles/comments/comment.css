@@ -1,0 +1,8 @@
+.comment {
+	margin: 10px;
+}
+
+.comment > .cssload-loader {
+	width: 30px;
+	height: 30px;
+}

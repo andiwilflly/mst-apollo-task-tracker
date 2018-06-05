@@ -77,6 +77,13 @@ class Task extends React.Component {
 						}) }
 					</ul>
 
+					{ this.task.commentsIds.length ?
+						<div className="task_dialog" style={{ float: "right" }}>
+							🗨 { this.task.commentsIds.length }
+						</div>
+						:
+						null }
+
 					<button className="task_delete_button"
 							onClick={ this.deleteTask }
 							disabled={ this.isLoading }>{

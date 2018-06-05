@@ -11,6 +11,8 @@ import store from "store";
 import PreLoader from 'components/parts/PreLoader.component';
 import AllLabels from "components/parts/labels/AllLabels.component";
 import Label from 'components/parts/labels/Label.component';
+import CreateComment from 'components/parts/comments/CreateComment.component';
+import Comment from 'components/parts/comments/Comment.component';
 
 
 @observer
@@ -59,6 +61,7 @@ class UpdateList extends React.Component {
 
 
 	render() {
+		console.log(this.props.task.commentsIds, 42);
 		return (
 			<div className="create_task cf">
 				<h3>Update task</h3>
@@ -91,8 +94,6 @@ class UpdateList extends React.Component {
 							</div>
 						</div>
 					</div>
-
-					<br/>
 					<button onClick={ this.updateTask }
 							disabled={ this.isLoading }>{
 						this.isLoading ?
@@ -102,7 +103,20 @@ class UpdateList extends React.Component {
 					}</button>
 				</div>
 				<div className="create_task_sidebar">
-					<AllLabels onLabelClick={ (label)=> this.addLabelToTask(label) } />
+
+					<div className="create_task_sidebar_item">
+						<AllLabels onLabelClick={ (label)=> this.addLabelToTask(label) } />
+					</div>
+
+					<div className="create_task_sidebar_item">
+						<CreateComment taskId={ this.props.task.id } />
+
+						{ this.props.task.commentsIds.map((commentId)=> {
+							return (
+								<Comment key={commentId} commentId={ commentId } />
+							)
+						}) }
+					</div>
 				</div>
 			</div>
 		)

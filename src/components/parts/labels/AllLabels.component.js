@@ -45,9 +45,9 @@ class AllLabels extends React.Component {
 		return (
 			<QueryLoader query={ ALL_LABELS_QUERY }>
 
-				<h3>Labels</h3>
+				<h4>Labels</h4>
 
-				<div style={{ margin: "10px 0" }}>
+				<div>
 					<div className="cf" style={{ marginBottom: "5px" }}>
 						<input type="text" value={ this.newLabel.color}
 							   style={{ width: 100, minWidth: 100, float: "left" }}

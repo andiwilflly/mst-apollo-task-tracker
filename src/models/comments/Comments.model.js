@@ -18,7 +18,8 @@ const actions = (self)=> {
     return {
 
         createMutation: ({ authorId, taskId, text } = {})=> {
-            self.optimisticCreate({ authorId, taskId, text });
+            // Optimistic updates
+            self.optimisticCreate({ text, authorId, taskId });
 
 			return client.mutate({
                 variables: { authorId, taskId, text },
@@ -35,18 +36,18 @@ const actions = (self)=> {
 		},
 
 
-		create(list) {
-			if(self.all.has(list.id)) return self.all.get(list.id).update(list);
+		create(comment) {
+			if(self.all.has(comment.id)) return self.all.get(comment.id).update(comment);
 
-            runInAction(`COMMENT-CREATE-SUCCESS`, ()=> {
-               self.all.set(list.id, list);
+            runInAction(`COMMENT-CREATE-SUCCESS ${comment.id}`, ()=> {
+               self.all.set(comment.id, comment);
             });
 		},
 
 
-        delete(listId) {
-            runInAction(`COMMENT-DELETE-SUCCESS`, ()=> {
-                self.all.delete(listId);
+        delete(commentId) {
+            runInAction(`COMMENT-DELETE-SUCCESS ${commentId}`, ()=> {
+                self.all.delete(commentId);
             });
         },
 
@@ -54,7 +55,7 @@ const actions = (self)=> {
         optimisticCreate({ id="optimisticUpdate", text, authorId, taskId }) {
             if(id !== "optimisticUpdate") self.optimisticDelete("optimisticUpdate");
 
-            runInAction(`TASK-OPTIMISTIC-CREATE-SUCCESS ${id}`, ()=> {
+            runInAction(`COMMENTS-OPTIMISTIC-CREATE-SUCCESS ${id}`, ()=> {
                 const user = store.users.all.get(authorId);
                 const task = store.tasks.all.get(taskId);
 
@@ -84,33 +85,28 @@ const actions = (self)=> {
 
             runInAction(`COMMENT-OPTIMISTIC-DELETE-SUCCESS ${commentId}`, ()=> {
                 const user = store.users.all.get(comment.authorId);
-                const task = store.lists.all.get(comment.taskId);
+                const task = store.tasks.all.get(comment.taskId);
 
                 if(user) {
-                    let userCommentsIds = user.commentsIds.slice();
-                    userCommentsIds.splice(userCommentsIds.indexOf(commentId), 1);
-
-                    // console.log('%%---> userCommentsIds', userCommentsIds)
-                    // console.log('%%---> mapped', userCommentsIds.map((userCommentsId)=> ({ id: userCommentsId })))
-
+                    let commentsIds = user.commentsIds.slice();
+                    commentsIds.splice(commentsIds.indexOf(commentId), 1);
                     user.update({
-                        id: user.id,
-                        comments: userCommentsIds.map((userCommentsId)=> ({ id: userCommentsId }))
+                        id: comment.authorId,
+                        comments: commentsIds.map((commentId)=> ({ id: commentId }))
                     });
                 }
 
                 if(task) {
-                    let tasksIds = task.tasksIds.slice();
-                    tasksIds.splice(tasksIds.indexOf(comment.taskId), 1);
+                    let commentsIds = task.commentsIds.slice();
+                    commentsIds.splice(commentsIds.indexOf(comment.taskId), 1);
                     task.update({
-                        id: task.id,
-                        tasks: tasksIds.map((taskId)=> ({ id: taskId }))
+                        id: comment.taskId,
+                        comments: commentsIds.map((commentId)=> ({ id: commentId }))
                     });
                 }
 
                 self.delete(commentId);
             });
-
         }
     }
 };

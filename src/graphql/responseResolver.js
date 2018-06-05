@@ -109,19 +109,16 @@ function applyData(dataName, data) {
 			break;
 
 		// Comments
-		case "createComment":
-            console.log('%%---> resResolver Comment data', data)
-
-            store.comments.create({
+		case "Comment":
+			store.comments.create(data);
+			break;
+        case "createComment":
+            store.comments.optimisticCreate({
                 ...data,
                 authorId: data.author.id,
                 taskId: data.task.id
             });
-			break;
-		case "Comment":
-			store.comments.create(data);
-			break;
-
+            break;
 		// Labels
 		case "allLabels":
 			runInAction('LABELS-CREATE-ALL', ()=> {

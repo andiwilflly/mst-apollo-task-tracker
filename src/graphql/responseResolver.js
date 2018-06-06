@@ -119,6 +119,7 @@ function applyData(dataName, data) {
                 taskId: data.task.id
             });
             break;
+
 		// Labels
 		case "allLabels":
 			runInAction('LABELS-CREATE-ALL', ()=> {

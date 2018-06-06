@@ -77,12 +77,7 @@ webSocket.onmessage = (event) => {
 					if(!user) return console.log("ERROR IN USER_UPDATED");
 
 					// TODO: Recheck this for optimistic updates, etc.
-					updatedUser.updatedFields.forEach((fieldName)=> {
-						user.update({
-							id: user.id,
-							[fieldName]: updatedUser.node[fieldName]
-						});
-					});
+					user.update(updatedUser.node);
 					break;
 
                 default:
@@ -92,7 +87,7 @@ webSocket.onmessage = (event) => {
 			break
 		}
 		case 'subscription_success': {
-			//console.log(`%c SOCKET-SUBSCRIPTION-SUCCESS [event: ${data.id}]`, styles);
+			// console.log(`%c SOCKET-SUBSCRIPTION-SUCCESS [event: ${data.id}]`, styles);
             break
 		}
 		case 'subscription_fail': {

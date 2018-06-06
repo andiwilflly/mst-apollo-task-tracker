@@ -3,6 +3,7 @@ import { types } from "mobx-state-tree";
 import client from "graphql/client";
 import INVITE_CREATE_CUSTOM_MUTATION from "graphql/mutations/invites/createInviteCustom.mutation";
 import ACCEPT_INVITE_MUTATION from "graphql/mutations/invites/acceptInvite.mutation";
+import DECLINE_INVITE_MUTATION from "graphql/mutations/invites/declineInvite.mutation";
 
 
 const AuthorizedUserModel = {
@@ -26,7 +27,14 @@ const actions = (self)=> {
 				variables: { userId, inviteId, boardsIds },
 				mutation: ACCEPT_INVITE_MUTATION
 			}).catch((e)=> console.log("ACCEPT_INVITE_MUTATION " + e));
-		}
+		},
+
+        declineInviteMutation({ userId, inviteId }) {
+            return client.mutate({
+                variables: { userId, inviteId },
+                mutation: DECLINE_INVITE_MUTATION
+            }).catch((e)=> console.log("DECLINE_INVITE_MUTATION " + e));
+        }
 	};
 };
 

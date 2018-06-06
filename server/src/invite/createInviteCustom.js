@@ -3,6 +3,7 @@ import { fromEvent } from 'graphcool-lib';
 import getUser from "../queries/getUser.query";
 // Mutations
 import createInvite from "../mutations/createInvite.mutation";
+import updateUser from "../mutations/updateUser.mutation";
 
 
 function isValidEmail(email) {
@@ -39,6 +40,8 @@ export default async (event)=> {
 		boardId: event.data.boardId,
 		emailInviteReceiver: event.data.emailInviteReceiver
 	});
+
+	await updateUser(api, {id: User.User.id }); // trigger socket
 
     return {
         data: {

@@ -12,6 +12,7 @@ type User @model {
     phone: String
     avatar: String! @defaultValue(value: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsi92xgrp_lnmShpMaKusX6f0r6WqDJlY3tk9uGZX_M34-rQrMCQ")
     lastVisit: String @defaultValue(value: "0")
+    trigger: String # for triggering socket update
 
     myBoards: [Board!]! @relation(name: "UserAuthorOfBoards")
     boards: [Board!]! @relation(name: "UsersAndBoards")

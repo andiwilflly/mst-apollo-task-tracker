@@ -80,6 +80,10 @@ webSocket.onmessage = (event) => {
 					});
 					break;
 
+                case "INVITE_CREATED":
+                    // c
+                    break;
+
                 default:
                     console.log(`%c subscription data has been received`, 'color: darkPink', data);
                     break;

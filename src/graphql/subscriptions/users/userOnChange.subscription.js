@@ -32,7 +32,16 @@ export default function ({ userId }) {
 						}
 						comments {
 							id
-						}					
+						}	
+						invites {
+							id
+							boardId
+							emailInviteReceiver
+							authorId
+							user {
+								id
+							}
+						}				
 					}						
 				}
 			}

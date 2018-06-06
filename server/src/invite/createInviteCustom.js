@@ -41,7 +41,7 @@ export default async (event)=> {
 		emailInviteReceiver: event.data.emailInviteReceiver
 	});
 
-	await updateUser(api, {id: User.User.id }); // trigger socket
+	await updateUser(api, { id: User.User.id }); // trigger socket
 
     return {
         data: {

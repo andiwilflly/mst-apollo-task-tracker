@@ -3,7 +3,34 @@ async function updateUser(api, variables = {}) {
 	const query = `
         mutation updateUser($id:ID!, $boardsIds: [ID!], $trigger: String!) {
 			updateUser(id: $id, boardsIds: $boardsIds, trigger: $trigger) {
-				id   
+				id
+				email
+				avatar
+				name
+        		phone
+        		lastVisit
+		
+				tasks {
+					id
+				}
+				myBoards {
+					id
+				}
+				boards {
+					id
+				}
+				comments {
+					id
+				}
+				invites {
+					id
+					boardId
+					emailInviteReceiver
+					authorId
+					user {
+						id
+					}
+				}
 			}
 		}
     `;

@@ -34,7 +34,7 @@ class Header extends React.Component {
 					{ store.authorizedUser ?
 						<div>
 							<UserIcon userId={ store.authorizedUser.id } width={60} height={60} />
-							<p style={{ float: "left", lineHeight: "60px", marginLeft: '20px' }}>Welcome, { this.user.name || this.user.email }</p>
+							<p style={{ float: "left", lineHeight: "60px" }}>Welcome, { this.user.name || this.user.email }</p>
 						</div>
 						:
 						null

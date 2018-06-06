@@ -10,6 +10,7 @@ import store from "store";
 // Components
 import BoardsShortInfo from "components/parts/boards/BoardsShortInfo.component";
 import PreLoader from 'components/parts/PreLoader.component';
+import Invite from 'components/parts/invites/Invite.component';
 
 
 @observer
@@ -44,11 +45,13 @@ class Invites extends React.Component {
 
 
 	acceptInvite = async (invite)=> {
+		this.isLoading = true;
 		await store.authorizedUser.acceptInviteMutation({
 			userId: store.authorizedUser.id,
 			inviteId: invite.id,
 			boardsIds: [...this.user.boardsIds, invite.boardId]
 		});
+		this.isLoading = false;
 	};
 
 
@@ -81,13 +84,7 @@ class Invites extends React.Component {
 				<div className="invites_list">
 					{ this.user.invites.map((invite)=> {
 						return (
-							<div key={invite.boardId} className="invites_list_item">
-								<BoardsShortInfo boardId={ invite.boardId }>
-									<p>from user: { invite.emailInviteReceiver }</p>
-									<button onClick={ this.acceptInvite.bind(this, invite) }>Accept invitation</button>
-									<button onClick={ this.acceptInvite.bind(this, invite) }>Decline invitation</button>
-								</BoardsShortInfo>
-							</div>
+							<Invite invite={ invite } key={invite.id}/>
 						);
 					}) }
 				</div>

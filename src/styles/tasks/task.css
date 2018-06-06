@@ -6,6 +6,11 @@
 	width: 208px;
 	border: 1px solid lightgray;
 	position: relative;
+	float: left;
+}
+
+.task_header {
+	margin-bottom: 20px;
 }
 
 .task > .cssload-loader {
@@ -47,5 +52,5 @@
 }
 
 .task_edit:hover {
-	background: white;
+	opacity: 0.7;
 }

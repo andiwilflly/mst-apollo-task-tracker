@@ -4,36 +4,3 @@
 	position: relative;
 	z-index: 2;
 }
-
-.users_list_item {
-	border-radius: 50%;
-	width: 30px;
-	height: 30px;
-	float: left;
-	position: relative;
-	margin-right: 10px;
-}
-
-.users_list_item > a {
-	display: block;
-	width: 100%;
-	height: 100%;
-}
-
-.users_list_popover {
-	position: absolute;
-	top: 90%;
-	background: white;
-	padding: 10px;
-	font-size: 12px;
-	border: 1px solid lightgray;
-}
-
-.users_list_item_online_status {
-	border-radius: 50%;
-	width: 10px;
-	height: 10px;
-	position: absolute;
-	bottom: -1px;
-	right: -1px;
-}

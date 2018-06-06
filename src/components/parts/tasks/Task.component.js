@@ -13,7 +13,7 @@ import store from "store";
 import PreLoader from 'components/parts/PreLoader.component';
 import Label from 'components/parts/labels/Label.component';
 import QueryLoader from "components/QueryLoader.component";
-import UsersList from "components/parts/users/UsersList.component";
+import UserIcon from "components/parts/users/UserIcon.component";
 
 
 @observer
@@ -62,12 +62,13 @@ class Task extends React.Component {
 								   listId: this.task.listId
 							   }}>
 				<div className="task cf">
-					<UsersList usersIds={ [this.task.authorId] }>
-						<p className="task_created_time">{ new Date(this.task.createdTime).toLocaleString() }</p>
-					</UsersList>
 
-					<h3 className="task_title">{  this.task.title }</h3>
-					<div className="task_edit" onDoubleClick={ this.editTask }>✎</div>
+					<div className="task_header cf">
+						<UserIcon userId={ this.task.authorId } />
+
+						<h3 className="task_title">{  this.task.title }</h3>
+						<div className="task_edit" onDoubleClick={ this.editTask }>✎</div>
+					</div>
 
 					<p dangerouslySetInnerHTML={{ __html: this.task.description }} />
 
@@ -76,6 +77,8 @@ class Task extends React.Component {
 							return <Label key={labelId} labelId={ labelId } />;
 						}) }
 					</ul>
+
+					<p className="task_created_time">{ new Date(this.task.createdTime).toLocaleString() }</p>
 
 					{ this.task.commentsIds.length ?
 						<div className="task_dialog" style={{ float: "right" }}>
@@ -88,7 +91,7 @@ class Task extends React.Component {
 							onClick={ this.deleteTask }
 							disabled={ this.isLoading }>{
 						this.isLoading ?
-							<PreLoader/>
+							<PreLoader />
 							:
 							'Delete task'
 					}</button>

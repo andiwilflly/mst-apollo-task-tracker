@@ -4,29 +4,18 @@ import "styles/tasks/create_task.css";
 import "styles/labels/labels_list.css";
 // MobX
 import { observer } from "mobx-react";
-import { observable } from "mobx";
 // Store
 import store from "store";
 // Components
+import CreateTask from 'components/parts/tasks/CreateTask.component';
 import PreLoader from 'components/parts/PreLoader.component';
 import AllLabels from "components/parts/labels/AllLabels.component";
-import Label from 'components/parts/labels/Label.component';
 import CreateComment from 'components/parts/comments/CreateComment.component';
 import Comment from 'components/parts/comments/Comment.component';
 
 
 @observer
-class UpdateList extends React.Component {
-
-
-	@observable isLoading = false;
-
-	@observable form = {
-		title: '',
-		description: '',
-		labels: []
-	};
-
+class UpdateList extends CreateTask {
 
 	componentDidMount() {
 		this.form.title = this.props.task.title;
@@ -34,16 +23,6 @@ class UpdateList extends React.Component {
 
 		const labels = this.props.task.labels.map((label)=> store.labels.all.get(label.id).id);
 		this.form.labels = [...labels];
-	}
-
-
-	addLabelToTask(label) {
-		if(!this.form.labels.includes(label.id)) this.form.labels.push(label.id);
-	}
-
-
-	removeLabelFromTask(labelId) {
-		this.form.labels.splice(this.form.labels.indexOf(labelId), 1);
 	}
 
 
@@ -78,20 +57,7 @@ class UpdateList extends React.Component {
 						<textarea value={ this.form.description }
 								  onChange={ (e)=> this.form.description = e.currentTarget.value }/>
 
-						<div className="create_task_preview">
-							<div className="task cf">
-								<h3 className="task_title">{  this.form.title }</h3>
-								<p dangerouslySetInnerHTML={{ __html: this.form.description }} />
-
-								<ul className="labels_list">
-									{ this.form.labels.map((labelId)=> {
-										return <Label key={labelId}
-													  onClick={ ()=> this.removeLabelFromTask(labelId) }
-													  labelId={ labelId } />;
-									}) }
-								</ul>
-							</div>
-						</div>
+						{ this.renderTaskPreview() }
 					</div>
 					<button onClick={ this.updateTask }
 							disabled={ this.isLoading }>{

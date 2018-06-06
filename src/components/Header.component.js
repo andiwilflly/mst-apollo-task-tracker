@@ -13,6 +13,7 @@ import store from "store";
 import PreLoader from "components/parts/PreLoader.component";
 import LogOutMutation from "components/parts/mutations/LogOutMutation.component";
 import Search from "components/parts/Search.component";
+import UserIcon from "components/parts/users/UserIcon.component";
 
 
 @withRouter
@@ -31,10 +32,10 @@ class Header extends React.Component {
 
 				<div className="main-menu">
 					{ store.authorizedUser ?
-						<Link to={ `/users/${store.authorizedUser.id}` } className="cf">
-							<div style={{ width: '60px', height: '60px', background: `url(${this.user.avatar}) center / cover no-repeat`, overflow: 'hidden', borderRadius: "50%", float: "left" }} />
+						<div>
+							<UserIcon userId={ store.authorizedUser.id } width={60} height={60} />
 							<p style={{ float: "left", lineHeight: "60px", marginLeft: '20px' }}>Welcome, { this.user.name || this.user.email }</p>
-						</Link>
+						</div>
 						:
 						null
 					}

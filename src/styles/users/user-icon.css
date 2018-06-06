@@ -1,0 +1,34 @@
+.user_icon {
+	border-radius: 50%;
+	float: left;
+	position: relative;
+	margin-right: 10px;
+	cursor: pointer;
+	border-right: 1px solid lightgray;
+}
+
+.user_icon > a {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.user_icon_popover {
+	position: absolute;
+	top: 105%;
+	background: white;
+	padding: 10px;
+	font-size: 12px;
+	border: 1px solid lightgray;
+	line-height: 140%;
+}
+
+
+.user_icon_online_status {
+	border-radius: 50%;
+	width: 22%;
+	height: 22%;
+	position: absolute;
+	bottom: -1px;
+	right: -1px;
+}

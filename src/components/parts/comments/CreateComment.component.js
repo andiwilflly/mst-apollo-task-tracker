@@ -39,10 +39,8 @@ class CreateComment extends React.Component {
 	render() {
 		return (
 			<div className="comment_create">
-				<h4>CreateComment</h4>
-				<input type="text"
-					   value={ this.form.text }
-					   onChange={ (e)=> this.form.text = e.currentTarget.value } />
+				<textarea value={ this.form.text }
+						  onChange={ (e)=> this.form.text = e.currentTarget.value } />
 
 				<button onClick={ this.createComment }
 						disabled={ this.isLoading || !this.form.text }>{

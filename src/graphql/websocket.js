@@ -10,11 +10,11 @@ webSocket.onopen = (event)=> {
 
 webSocket.onmessage = (event) => {
 	const data = JSON.parse(event.data);
-	const styles = 'color: white; background: #82afdc; padding: 2px';
+	const styles = '';
 
 	switch (data.type) {
 		case 'init_success': {
-            console.log(`%c SOCKET-INIT-SUCCESS`, styles);
+
 			break
 		}
 		case 'init_fail': {
@@ -23,8 +23,14 @@ webSocket.onmessage = (event) => {
 		}
 		case 'subscription_data': {
 			const dataName = data.id.split('__')[0];
+			const dataId = data.id.split('__')[1];
 
-			console.log(`%c SOCKET-SUBSCRIPTION-DATA-ARRIVED [event: ${dataName}]`, styles);
+			console.groupCollapsed(`[socket: ${dataName}]`);
+			console.log('dataName: ', dataName);
+			console.log('dataId: ', dataId);
+			console.log('data: ', data);
+			console.groupEnd(`[socket: ${dataName}]`);
+
             switch(dataName) {
 				case 'TASK_CREATED':
 					const createdTask = data.payload.data.Task.node;
@@ -71,8 +77,7 @@ webSocket.onmessage = (event) => {
 					if(!user) return console.log("ERROR IN USER_UPDATED");
 
 					// TODO: Recheck this for optimistic updates, etc.
-					updatedUser.updatedFields.map((fieldName)=> {
-						console.log(`SOCKET USER_UPDATED__${user.id}: `, fieldName, updatedUser.node[fieldName]);
+					updatedUser.updatedFields.forEach((fieldName)=> {
 						user.update({
 							id: user.id,
 							[fieldName]: updatedUser.node[fieldName]
@@ -91,7 +96,7 @@ webSocket.onmessage = (event) => {
 			break
 		}
 		case 'subscription_success': {
-			console.log(`%c SOCKET-SUBSCRIPTION-SUCCESS [event: ${data.id}]`, styles);
+			//console.log(`%c SOCKET-SUBSCRIPTION-SUCCESS [event: ${data.id}]`, styles);
             break
 		}
 		case 'subscription_fail': {

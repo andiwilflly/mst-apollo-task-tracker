@@ -85,6 +85,7 @@ class Invites extends React.Component {
 								<BoardsShortInfo boardId={ invite.boardId }>
 									<p>from user: { invite.emailInviteReceiver }</p>
 									<button onClick={ this.acceptInvite.bind(this, invite) }>Accept invitation</button>
+									<button onClick={ this.acceptInvite.bind(this, invite) }>Decline invitation</button>
 								</BoardsShortInfo>
 							</div>
 						);

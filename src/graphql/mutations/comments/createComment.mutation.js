@@ -6,6 +6,7 @@ export default gql`mutation createComment($text: String!, $authorId: ID!, $taskI
     {
         id
         text
+        createdAt
         author {
             id
         }

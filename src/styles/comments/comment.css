@@ -1,8 +1,38 @@
+.comments {
+	height: 200px;
+	min-width: 300px;
+	overflow: auto;
+}
+
 .comment {
-	margin: 10px;
+	padding: 5px;
+	margin: 10px 0;
+	background: white;
+}
+
+.comment .user_icon {
+	margin-bottom: 5px;
 }
 
 .comment > .cssload-loader {
 	width: 30px;
 	height: 30px;
+}
+
+.comment_created_at {
+	font-size: 9px;
+}
+
+.comment_controller {
+	cursor: pointer;
+	font-size: 12px;
+	margin: 5px 10px 5px 0;
+	color: grey;
+	text-decoration: underline;
+	float: left;
+}
+
+.comment_controller:hover {
+	text-decoration: none;
+	opacity: 0.7;
 }

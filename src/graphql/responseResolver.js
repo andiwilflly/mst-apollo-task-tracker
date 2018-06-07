@@ -109,6 +109,11 @@ function applyData(dataName, data) {
 			break;
 
 		// Comments
+		case "allComments":
+			runInAction(`COMMENTS-CREATE-ALL-SUCCESS`, ()=> {
+				data.map((comment)=> store.comments.create(comment));
+			});
+			break;
 		case "Comment":
 			store.comments.create(data);
 			break;
@@ -118,6 +123,9 @@ function applyData(dataName, data) {
                 authorId: data.author.id,
                 taskId: data.task.id
             });
+            break;
+		case "deleteComment":
+			store.comments.optimisticDelete(data.id);
             break;
 
 		// Labels

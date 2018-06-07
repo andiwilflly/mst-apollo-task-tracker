@@ -22,7 +22,8 @@ const httpLink = new BatchHttpLink({
 	headers: {
 		...sessionStorage.getItem('token') && { Authorization: `Bearer ${ sessionStorage.getItem('token') }`}
 	},
-	batchInterval: 200,
+	batchInterval: 10,
+	batchMax: 50,
 	batchKey: str => {
 		return str.operationName;
 	}

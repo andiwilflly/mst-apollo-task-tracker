@@ -3,6 +3,7 @@ import React from 'react';
 import "styles/tasks/create_task.css";
 import "styles/labels/labels_list.css";
 // MobX
+import { computed } from "mobx";
 import { observer } from "mobx-react";
 // Store
 import store from "store";
@@ -11,7 +12,6 @@ import CreateTask from 'components/parts/tasks/CreateTask.component';
 import PreLoader from 'components/parts/PreLoader.component';
 import AllLabels from "components/parts/labels/AllLabels.component";
 import CreateComment from 'components/parts/comments/CreateComment.component';
-import Comment from 'components/parts/comments/Comment.component';
 
 
 @observer
@@ -59,6 +59,7 @@ class UpdateList extends CreateTask {
 
 						{ this.renderTaskPreview() }
 					</div>
+
 					<button onClick={ this.updateTask }
 							disabled={ this.isLoading }>{
 						this.isLoading ?
@@ -75,12 +76,6 @@ class UpdateList extends CreateTask {
 
 					<div className="create_task_sidebar_item">
 						<CreateComment taskId={ this.props.task.id } />
-
-						{ this.props.task.commentsIds.map((commentId)=> {
-							return (
-								<Comment key={commentId} commentId={ commentId } />
-							)
-						}) }
 					</div>
 				</div>
 			</div>

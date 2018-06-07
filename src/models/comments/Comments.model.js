@@ -98,7 +98,7 @@ const actions = (self)=> {
 
                 if(task) {
                     let commentsIds = task.commentsIds.slice();
-                    commentsIds.splice(commentsIds.indexOf(comment.taskId), 1);
+                    commentsIds.splice(commentsIds.indexOf(commentId), 1);
                     task.update({
                         id: comment.taskId,
                         comments: commentsIds.map((commentId)=> ({ id: commentId }))

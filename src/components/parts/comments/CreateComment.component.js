@@ -32,6 +32,7 @@ class CreateComment extends React.Component {
 	createComment = async ()=> {
 		this.isLoading = true;
 		await store.comments.createMutation(this.form);
+		this.form.text = "";
 		this.isLoading = false;
 	};
 

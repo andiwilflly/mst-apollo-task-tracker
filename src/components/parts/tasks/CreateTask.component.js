@@ -4,7 +4,7 @@ import "styles/tasks/create_task.css";
 import "styles/labels/labels_list.css";
 // MobX
 import { observer } from "mobx-react";
-import { observable, values } from "mobx";
+import { observable, values, computed } from "mobx";
 // Store
 import store from "store";
 // Components
@@ -12,6 +12,7 @@ import PreLoader from 'components/parts/PreLoader.component';
 import AllLabels from "components/parts/labels/AllLabels.component";
 import Label from 'components/parts/labels/Label.component';
 import UserIcon from "components/parts/users/UserIcon.component";
+import Comments from 'components/parts/comments/Comments.component';
 
 
 @observer
@@ -27,7 +28,9 @@ class CreateTask extends React.Component {
 	};
 
 
-	get labels() { return values(store.labels.all); };
+	@computed get taskCommentsIds() { return this.props.task ? this.props.task.commentsIds : []; };
+
+	@computed get labels() { return values(store.labels.all); };
 
 
 	addLabelToTask(label) {
@@ -81,12 +84,11 @@ class CreateTask extends React.Component {
 
 					<p className="task_created_time">{ new Date(task.createdTime).toLocaleString() }</p>
 
-					{ task.commentsIds.length ?
-						<div className="task_dialog" style={{ float: "right" }}>
-							🗨 { task.commentsIds.length }
-						</div>
-						:
-						null }
+					{ this.props.task ?
+						<Comments taskId={ this.props.task.id }
+								  commentsIds={ this.taskCommentsIds } />
+						: null
+					}
 				</div>
 			</div>
 		);

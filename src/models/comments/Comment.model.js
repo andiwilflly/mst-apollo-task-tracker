@@ -6,6 +6,7 @@ import { runInAction } from "mobx";
 const Comment = {
     id: types.identifier(types.string),
     text: types.maybe(types.string),
+	createdAt: types.maybe(types.string),
     author: types.frozen,
     task: types.frozen
 };
@@ -27,6 +28,7 @@ const actions = (self)=> {
 
 const views = (self)=> {
 	return {
+		get createdTime() { return (new Date(self.createdAt)).getTime(); },
 		get authorId() { return self.author.id },
 		get taskId() { return self.task.id }
 	};

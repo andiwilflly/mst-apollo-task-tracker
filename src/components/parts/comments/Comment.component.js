@@ -11,6 +11,7 @@ import store from "store";
 // Components
 import PreLoader from 'components/parts/PreLoader.component';
 import QueryLoader from "components/QueryLoader.component";
+import UserIcon from "components/parts/users/UserIcon.component";
 
 
 @observer
@@ -24,14 +25,25 @@ class Comment extends React.Component {
 
 	renderComment() {
 		return (
-			<div className="comment">
+			<div className="comment cf">
+				<UserIcon userId={ this.comment.authorId } />
+				<p className="comment_created_at">{ new Date(this.comment.createdTime).toLocaleString() }</p>
 				{ this.comment.text }
+				<div className="cf">
+					<p className="comment_controller">edit</p>
+					<p className="comment_controller" onClick={
+						()=> store.comments.deleteMutation({ commentId: this.comment.id })
+					}>delete</p>
+				</div>
 			</div>
 		);
 	}
 
 
 	render() {
+		// W.O. Query...
+		if(this.comment) return this.renderComment();
+
 		return (
 			<QueryLoader query={ COMMENT_ALL_INFO_QUERY }
 						 preLoader={<div className="comment"><PreLoader/></div>}

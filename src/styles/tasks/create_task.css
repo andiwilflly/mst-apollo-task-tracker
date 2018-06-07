@@ -17,5 +17,6 @@
 
 
 .create_task_sidebar_item {
+	min-height: 100px;
 	margin: 20px 0;
 }

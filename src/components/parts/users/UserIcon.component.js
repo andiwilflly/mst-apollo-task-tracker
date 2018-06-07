@@ -66,8 +66,7 @@ class UserIcon extends React.Component {
 
 	render() {
 		return (
-			<QueryLoader key={this.props.userId}
-						 query={ GET_USER_INFO_QUERY }
+			<QueryLoader query={ GET_USER_INFO_QUERY }
 						 preLoader={ <div className="user_icon"><PreLoader/></div>}
 						 variables={{ id: this.props.userId }}>
 				{ this.user ?

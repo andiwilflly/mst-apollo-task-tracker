@@ -25,11 +25,11 @@ webSocket.onmessage = (event) => {
 			const dataName = data.id.split('__')[0];
 			const dataId = data.id.split('__')[1];
 
-			console.groupCollapsed(`[socket: ${dataName}]`);
+			console.groupCollapsed(`[socket: ${dataName}-${dataId}]`);
 			console.log('dataName: ', dataName);
 			console.log('dataId: ', dataId);
 			console.log('data: ', data);
-			console.groupEnd(`[socket: ${dataName}]`);
+			console.groupEnd(`[socket: ${dataName}-${dataId}]`);
 
             switch(dataName) {
 				case 'TASK_CREATED':
@@ -80,10 +80,6 @@ webSocket.onmessage = (event) => {
 					user.update(updatedUser.node);
 					break;
 
-                case "INVITE_CREATED":
-                    // c
-                    break;
-
                 default:
                     console.log(`%c subscription data has been received`, 'color: darkPink', data);
                     break;
@@ -91,7 +87,7 @@ webSocket.onmessage = (event) => {
 			break
 		}
 		case 'subscription_success': {
-			// console.log(`%c SOCKET-SUBSCRIPTION-SUCCESS [event: ${data.id}]`, styles);
+			console.log(`%c SOCKET-SUBSCRIPTION-SUCCESS [event: ${data.id}]`, styles);
             break
 		}
 		case 'subscription_fail': {

@@ -116,10 +116,12 @@ permissions:
   # Board
   - operation: Board.create
     authenticated: true
+    query: ./src/permissions/Board.graphql
   - operation: Board.read
     authenticated: false
   - operation: Board.update
     authenticated: true
+    query: ./src/permissions/Board.graphql
   - operation: Board.delete
     authenticated: true
     query: ./src/permissions/Board.graphql

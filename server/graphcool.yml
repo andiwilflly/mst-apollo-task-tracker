@@ -122,6 +122,7 @@ permissions:
     authenticated: true
   - operation: Board.delete
     authenticated: true
+    query: ./src/permissions/Board.graphql
 
   # List
   - operation: List.create

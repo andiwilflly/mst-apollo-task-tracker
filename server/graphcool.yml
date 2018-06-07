@@ -77,6 +77,12 @@ functions:
     handler:
       code: src/invite/acceptInvite.js
 
+  declineInvite:
+      type: resolver
+      schema: src/mutations/invite/declineInvite.graphql
+      handler:
+        code: src/mutations/invite/declineInvite.js
+
   createInviteCustom:
     type: resolver
     schema: src/invite/createInviteCustom.graphql

@@ -31,19 +31,38 @@ class Invite extends React.Component {
 		this.isLoading = false;
 	};
 
+	declineInvite = async ()=> {
+		this.isLoading = true;
+		await store.authorizedUser.declineInviteMutation({
+			userId: store.authorizedUser.id,
+			inviteId: this.props.invite.id
+		});
+		this.isLoading = false;
+	};
+
 
 	render() {
 		return (
 			<div className="invite">
 				<BoardsShortInfo boardId={ this.props.invite.boardId }>
 					<p>from user: { this.props.invite.emailInviteReceiver }</p>
-					<button onClick={ this.acceptInvite }
+					<button className="invite_accept_button"
+							onClick={ this.acceptInvite }
 							disabled={ this.isLoading }>
 						{ this.isLoading ?
 							<PreLoader />
 							:
 							'Accept invitation'
 						}
+					</button>
+					<button className="invite_decline_button"
+							onClick={ this.declineInvite }
+							disabled={ this.isLoading }>
+                        { this.isLoading ?
+							<PreLoader />
+                            :
+                            'Decline invitation'
+                        }
 					</button>
 				</BoardsShortInfo>
 			</div>

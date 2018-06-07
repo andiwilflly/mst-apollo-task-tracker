@@ -11,3 +11,16 @@
 .invite {
 
 }
+
+.invite .invite_accept_button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+
+.invite .invite_decline_button {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}

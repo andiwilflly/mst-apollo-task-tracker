@@ -1,0 +1,10 @@
+type DeclineInvitePayload {
+    response: String!
+}
+
+extend type Mutation {
+    declineInvite(
+        inviteId: ID!,
+        userId: ID!
+    ): DeclineInvitePayload
+}

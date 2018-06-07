@@ -3,6 +3,7 @@ import { ApolloLink } from 'apollo-link';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { BatchHttpLink } from 'apollo-link-batch-http';
+import { setContext } from 'apollo-link-context';
 // GraphQL
 import responseResolver from "graphql/responseResolver";
 import 'graphql/websocket';
@@ -19,19 +20,25 @@ const responseResolverLink = new ApolloLink((operation, forward)=> {
 
 const httpLink = new BatchHttpLink({
 	uri: 'https://api.graph.cool/simple/v1/cjh1v6rdw1kmk0171da10ighp',
-	headers: {
-		...sessionStorage.getItem('token') && { Authorization: `Bearer ${ sessionStorage.getItem('token') }`}
-	},
 	batchInterval: 200,
-	batchKey: str => {
-		return str.operationName;
-	}
+	batchKey: str => str.operationName
+});
+
+
+const authLink = setContext((_, { headers }) => {
+    const token = sessionStorage.getItem('token');
+    return {
+        headers: {
+            ...headers,
+            authorization: token ? `Bearer ${token}` : "",
+        }
+    }
 });
 
 
 const link = ApolloLink.from([
 	responseResolverLink,
-	httpLink
+    authLink.concat(httpLink)
 ]);
 
 

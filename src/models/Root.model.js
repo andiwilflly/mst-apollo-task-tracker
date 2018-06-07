@@ -48,7 +48,8 @@ const actions = (store)=> {
 		logOut: ()=> {
 			sessionStorage.removeItem('token');
 			store.authorizedUser = null;
-		}
+			client.resetStore();
+        }
 	};
 };
 

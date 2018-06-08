@@ -38,6 +38,13 @@ class Comment extends React.Component {
 	};
 
 
+	onDeleteClick = async ()=> {
+		this.isLoading = true;
+		await store.comments.deleteMutation({ commentId: this.comment.id });
+		this.isLoading = false;
+	};
+
+
 	onChangeComment = (e)=> {
 		this.form.text = e.currentTarget.value;
 	};
@@ -57,6 +64,12 @@ class Comment extends React.Component {
 					<p className="comment_text">{ this.comment.text }</p> }
 				{ this.comment.authorId === store.authorizedUser.id ?
 					<div className="cf">
+						{  this.isLoading ?
+							<p className="comment_controller" >Loading...</p>
+							:
+							<p className="comment_controller" onClick={ this.onDeleteClick }>delete</p>
+						}
+
 
 						<p className="comment_controller" onClick={ this.onEditClick }>
 							{ this.isEditing ?
@@ -65,10 +78,6 @@ class Comment extends React.Component {
 								'edit'
 							}
 						</p>
-
-						<p className="comment_controller" onClick={
-							()=> store.comments.deleteMutation({ commentId: this.comment.id })
-						}>delete</p>
 					</div>
 					: null }
 			</div>

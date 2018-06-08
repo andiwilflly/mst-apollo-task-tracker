@@ -26,10 +26,10 @@ const actions = (self)=> {
 
 
 		updateMutation: (comment={})=> {
-			return client.mutate({
-				variables: comment,
-				mutation: UPDATE_COMMENT_MUTATION
-			}).catch((e)=> console.log("UPDATE_COMMENT_MUTATION", e));
+			// return client.mutate({
+			// 	variables: comment,
+			// 	mutation: UPDATE_COMMENT_MUTATION
+			// }).catch((e)=> console.log("UPDATE_COMMENT_MUTATION", e));
 		},
     };
 };

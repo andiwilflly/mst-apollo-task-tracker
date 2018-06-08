@@ -17,9 +17,9 @@ const Comments = {
 const actions = (self)=> {
     return {
 
-        createMutation: ({ authorId, taskId, text } = {})=> {
+        createMutation: ({ authorId, taskId, text })=> {
             // Optimistic updates
-            self.optimisticCreate({ text, authorId, taskId });
+            self.optimisticCreate({ authorId, taskId, text });
 
 			return client.mutate({
                 variables: { authorId, taskId, text },
@@ -52,7 +52,7 @@ const actions = (self)=> {
         },
 
 
-        optimisticCreate({ id="optimisticUpdate", text, authorId, taskId }) {
+        optimisticCreate({ id="optimisticUpdate", text, authorId, taskId, createdAt=""+new Date() }) {
             if(id !== "optimisticUpdate") self.optimisticDelete("optimisticUpdate");
 
             runInAction(`COMMENTS-OPTIMISTIC-CREATE-SUCCESS ${id}`, ()=> {
@@ -72,6 +72,7 @@ const actions = (self)=> {
                 store.comments.create({
                     id,
                     text,
+                    createdAt,
                     author: { id: authorId },
                     task: { id: taskId }
                 });

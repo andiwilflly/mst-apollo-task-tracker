@@ -29,7 +29,7 @@
 	margin: 5px 10px 5px 0;
 	color: grey;
 	text-decoration: underline;
-	float: left;
+	float: right;
 }
 
 .comment_controller:hover {

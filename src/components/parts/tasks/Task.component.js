@@ -102,6 +102,8 @@ class Task extends React.Component {
 
 
 	render() {
+		if(this.task) return this.renderTask();
+
 		return (
 			<QueryLoader query={ TASK_ALL_INFO_QUERY }
 						 preLoader={<div className="task"><PreLoader/></div>}

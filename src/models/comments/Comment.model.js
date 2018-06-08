@@ -1,6 +1,8 @@
 import { types } from 'mobx-state-tree';
 // MobX
 import { runInAction } from "mobx";
+// GraphQL
+import client from "graphql/client";
 
 
 const Comment = {
@@ -20,7 +22,15 @@ const actions = (self)=> {
 					if(comment[fieldName] !== undefined) self[fieldName] = comment[fieldName];
 				});
 			});
-        }
+        },
+
+
+		updateMutation: (comment={})=> {
+			// return client.mutate({
+			// 	variables: comment,
+			// 	mutation: UPDATE_COMMENT_MUTATION
+			// }).catch((e)=> console.log("UPDATE_COMMENT_MUTATION", e));
+		},
     };
 };
 

@@ -5,8 +5,6 @@ import "styles/labels/labels_list.css";
 // MobX
 import { observer } from "mobx-react";
 import { observable, values, computed } from "mobx";
-// GraphQL
-import TASK_COMMENTS_QUERY from "graphql/queries/comments/taskComments.query";
 // Store
 import store from "store";
 // Components
@@ -14,7 +12,7 @@ import PreLoader from 'components/parts/PreLoader.component';
 import AllLabels from "components/parts/labels/AllLabels.component";
 import Label from 'components/parts/labels/Label.component';
 import UserIcon from "components/parts/users/UserIcon.component";
-import Comments from 'components/parts/comments/Comments.component';
+import TaskComments from 'components/parts/comments/TaskComments.component';
 
 
 @observer
@@ -87,9 +85,7 @@ class CreateTask extends React.Component {
 					<p className="task_created_time">{ new Date(task.createdTime).toLocaleString() }</p>
 
 					{ this.props.task ?
-						<Comments taskId={ this.props.task.id }
-								  query={ TASK_COMMENTS_QUERY }
-								  commentsIds={ this.taskCommentsIds } />
+						<TaskComments taskId={ this.props.task.id } />
 						: null
 					}
 				</div>

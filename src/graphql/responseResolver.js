@@ -82,6 +82,11 @@ function applyData(dataName, data) {
 			break;
 
 		// Tasks
+		case "allTasks":
+			runInAction(`TASKS-CREATE-ALL-SUCCESS`, ()=> {
+				data.map((task)=> store.tasks.create(task));
+			});
+			break;
 		case "Task":
 			store.tasks.create(data);
 			break;

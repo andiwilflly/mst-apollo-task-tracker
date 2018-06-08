@@ -88,7 +88,7 @@ const actions = (self)=> {
 		},
 
 
-		optimisticCreate({ id="optimisticUpdate", authorId, boardId, listId, title, description, labelsIds }) {
+		optimisticCreate({ id="optimisticUpdate", authorId, boardId, listId, title, description, createdAt=""+new Date() , labelsIds }) {
 
 			if(id !== "optimisticUpdate") self.optimisticDelete("optimisticUpdate");
 
@@ -112,6 +112,7 @@ const actions = (self)=> {
 					id,
 					title,
 					description,
+					createdAt,
 					author: { id: authorId },
 					board: { id: boardId },
 					list: { id: listId },

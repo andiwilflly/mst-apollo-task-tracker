@@ -29,12 +29,14 @@ class Comment extends React.Component {
 				<UserIcon userId={ this.comment.authorId } />
 				<p className="comment_created_at">{ new Date(this.comment.createdTime).toLocaleString() }</p>
 				{ this.comment.text }
-				<div className="cf">
-					<p className="comment_controller">edit</p>
-					<p className="comment_controller" onClick={
-						()=> store.comments.deleteMutation({ commentId: this.comment.id })
-					}>delete</p>
-				</div>
+				{ this.comment.authorId === store.authorizedUser.id ?
+					<div className="cf">
+						<p className="comment_controller">edit</p>
+						<p className="comment_controller" onClick={
+							()=> store.comments.deleteMutation({ commentId: this.comment.id })
+						}>delete</p>
+					</div>
+					: null }
 			</div>
 		);
 	}

@@ -19,7 +19,7 @@ export default function (data = {}, errors = null, cache) {
 	console.log("errors", errors);
 	console.groupEnd(`%c🕺 REQUEST`, "color: darkgreen");
 
-    if(errors) return Alert.error(errorMsg);
+    if(errors) return revertData(dataName, errorMsg);
 	applyData(dataName, data);
 }
 
@@ -162,6 +162,23 @@ function applyData(dataName, data) {
 			console.log("UNHANDLED: dataName: ", dataName, data);
 	}
 }
+
+
+function revertData(dataName, errorMsg) {
+
+	Alert.error(errorMsg);
+	switch (dataName) {
+
+		case "createTask":
+			store.tasks.optimisticDelete("optimisticUpdate");
+			break;
+		case "createComment":
+			store.comments.optimisticDelete("optimisticUpdate");
+			break;
+		default:
+	}
+}
+
 
 
 function parse(data) {

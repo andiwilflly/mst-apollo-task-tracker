@@ -6,7 +6,7 @@ export default gql`query allComments($taskId: ID!) {
         task: {
             id: $taskId
         }
-    }){
+    }, orderBy: createdAt_ASC){
         id
         text
         createdAt

@@ -5,6 +5,8 @@ import "styles/labels/labels_list.css";
 // MobX
 import { observer } from "mobx-react";
 import { observable, values, computed } from "mobx";
+// GraphQL
+import TASK_COMMENTS_QUERY from "graphql/queries/comments/taskComments.query";
 // Store
 import store from "store";
 // Components
@@ -86,6 +88,7 @@ class CreateTask extends React.Component {
 
 					{ this.props.task ?
 						<Comments taskId={ this.props.task.id }
+								  query={ TASK_COMMENTS_QUERY }
 								  commentsIds={ this.taskCommentsIds } />
 						: null
 					}

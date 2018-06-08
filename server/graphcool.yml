@@ -148,13 +148,16 @@ permissions:
 
   # Comment
   - operation: Comment.create
-    authenticated: false
+    authenticated: true
+    query: ./src/permissions/Comment.graphql
   - operation: Comment.read
     authenticated: false
   - operation: Comment.update
-    authenticated: false
+    authenticated: true
+    query: ./src/permissions/Comment.graphql
   - operation: Comment.delete
-    authenticated: false
+    authenticated: true
+    query: ./src/permissions/Comment.graphql
 
   # Label
   - operation: Label.create

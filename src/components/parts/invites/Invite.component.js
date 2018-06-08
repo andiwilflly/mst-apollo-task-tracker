@@ -8,7 +8,7 @@ import { observer } from 'mobx-react';
 import store from "store";
 // Components
 import PreLoader from 'components/parts/PreLoader.component';
-import BoardsShortInfo from "components/parts/boards/BoardsShortInfo.component";
+import BoardShortInfo from "components/parts/boards/BoardShortInfo.component";
 
 
 @observer
@@ -44,7 +44,7 @@ class Invite extends React.Component {
 	render() {
 		return (
 			<div className="invite">
-				<BoardsShortInfo boardId={ this.props.invite.boardId }>
+				<BoardShortInfo boardId={ this.props.invite.boardId }>
 					<p>from user: { this.props.invite.emailInviteReceiver }</p>
 					<button className="invite_accept_button"
 							onClick={ this.acceptInvite }
@@ -64,7 +64,7 @@ class Invite extends React.Component {
                             'Decline invitation'
                         }
 					</button>
-				</BoardsShortInfo>
+				</BoardShortInfo>
 			</div>
 		)
 	}

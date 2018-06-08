@@ -1,0 +1,8 @@
+query($node_id: ID!, $user_id: ID!) {
+    SomeCommentExists(filter: {
+        id: $node_id,
+        author: {
+            id: $user_id
+        }
+    })
+}

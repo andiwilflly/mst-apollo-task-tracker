@@ -15,7 +15,7 @@ import PreLoader from "components/parts/PreLoader.component";
 
 
 @observer
-class BoardsShortInfoList extends React.Component {
+class BoardShortInfo extends React.Component {
 
 
 	@observable isLoading = false;
@@ -67,4 +67,4 @@ class BoardsShortInfoList extends React.Component {
 }
 
 
-export default BoardsShortInfoList;
+export default BoardShortInfo;

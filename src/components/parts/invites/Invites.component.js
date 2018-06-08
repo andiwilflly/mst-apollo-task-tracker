@@ -8,7 +8,7 @@ import { observer } from 'mobx-react';
 // Sore
 import store from "store";
 // Components
-import BoardsShortInfo from "components/parts/boards/BoardsShortInfo.component";
+import BoardShortInfo from "components/parts/boards/BoardShortInfo.component";
 import PreLoader from 'components/parts/PreLoader.component';
 import Invite from 'components/parts/invites/Invite.component';
 
@@ -62,13 +62,13 @@ class Invites extends React.Component {
 			<div>
 				{ this.user.myBoardsIds.map((boardId)=> {
 					return (
-						<BoardsShortInfo boardId={ boardId } key={boardId}>
+						<BoardShortInfo boardId={ boardId } key={boardId}>
 							<input type="radio"
 								   name="board"
 								   value={ boardId }
 								   checked={ this.invite.boardId === boardId }
 								   onChange={ (e)=> this.invite.boardId = e.currentTarget.value } />
-						</BoardsShortInfo>
+						</BoardShortInfo>
 					);
 				}) }
 			</div>

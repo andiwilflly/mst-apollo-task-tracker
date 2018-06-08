@@ -1,6 +1,8 @@
 import { types } from 'mobx-state-tree';
 // MobX
 import { runInAction } from "mobx";
+// GraphQL
+import client from "graphql/client";
 
 
 const Comment = {

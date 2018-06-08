@@ -1,6 +1,6 @@
 import { fromEvent } from 'graphcool-lib';
 // Queries
-import getBoard from "../queries/getBoard.query";
+import getBoard from "../../queries/getBoard.query";
 
 
 export default async (event)=> {

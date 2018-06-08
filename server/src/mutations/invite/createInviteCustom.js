@@ -1,9 +1,9 @@
 import { fromEvent } from 'graphcool-lib';
 // Queries
-import getUser from "../queries/getUser.query";
+import getUser from "../../queries/getUser.query";
 // Mutations
-import createInvite from "../mutations/createInvite.mutation";
-import updateUser from "../mutations/updateUser.mutation";
+import createInvite from "../createInvite.mutation";
+import updateUser from "../updateUser.mutation";
 
 
 function isValidEmail(email) {

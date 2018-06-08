@@ -25,7 +25,7 @@
 .profile_card {
 	padding: 20px;
 	background: white;
-	min-width: 300px;
+	min-width: 225px;
 	flex-direction: row;
 	margin: 10px;
 }

@@ -29,9 +29,7 @@ class TaskComments extends React.Component {
 							 variables={{ taskId: this.props.taskId }}>
 					{ this.taskComments.length ?
 						this.taskComments.sort((comment)=> comment.createdTime).map((comment)=> <Comment key={comment.id} commentId={ comment.id } />)
-						:
-						<PreLoader />
-					}
+						: null }
 				</QueryLoader>
 			</div>
 		)

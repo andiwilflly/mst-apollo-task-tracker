@@ -44,6 +44,7 @@
 .task_edit {
 	font-size: 23px;
 	position: absolute;
+	background: white;
 	top: 7px;
 	right: 7px;
 	padding: 7px 5px;

@@ -45,7 +45,7 @@ class AllLabels extends React.Component {
 		return (
 			<QueryLoader query={ ALL_LABELS_QUERY }>
 
-				<h4>Labels</h4>
+				<h3>Labels</h3>
 
 				<div>
 					<div className="cf" style={{ marginBottom: "5px" }}>

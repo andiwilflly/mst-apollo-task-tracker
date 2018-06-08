@@ -87,14 +87,16 @@ class Task extends React.Component {
 						:
 						null }
 
-					<button className="task_delete_button"
-							onClick={ this.deleteTask }
-							disabled={ this.isLoading }>{
-						this.isLoading ?
-							<PreLoader />
-							:
-							'Delete task'
-					}</button>
+					{ this.task.authorId === store.authorizedUser.id ?
+						<button className="task_delete_button"
+								onClick={ this.deleteTask }
+								disabled={ this.isLoading }>{
+							this.isLoading ?
+								<PreLoader />
+								:
+								'Delete task'
+						}</button>
+						: null }
 				</div>
 			</DragDropContainer>
 		);

@@ -1,6 +1,7 @@
 import React from 'react';
 // Styles
 import "styles/profile.css";
+import "styles/lists/list.css";
 // MobX
 import { observable, computed } from "mobx";
 import { observer } from "mobx-react";
@@ -10,6 +11,7 @@ import store from "store";
 import Invites from "components/parts/invites/Invites.component";
 // Components
 import AllLabels from "components/parts/labels/AllLabels.component";
+import UserTasks from "components/parts/tasks/UserTasks.component";
 
 
 @observer
@@ -112,6 +114,12 @@ class Profile extends React.Component {
 							<AllLabels onLabelClick={ this.onLabelClick } />
 						</div>
 					: null }
+
+					<div className="profile_card">
+						<div className="list">
+							<UserTasks userId={ this.user.id } />
+						</div>
+					</div>
 				</div>
 			</div>
 		)

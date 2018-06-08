@@ -116,7 +116,6 @@ permissions:
   # Board
   - operation: Board.create
     authenticated: true
-    query: ./src/permissions/Board.graphql
   - operation: Board.read
     authenticated: false
   - operation: Board.update
@@ -149,7 +148,6 @@ permissions:
   # Comment
   - operation: Comment.create
     authenticated: true
-    query: ./src/permissions/Comment.graphql
   - operation: Comment.read
     authenticated: false
   - operation: Comment.update

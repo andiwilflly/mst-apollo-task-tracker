@@ -85,8 +85,7 @@ class CreateTask extends React.Component {
 					<p className="task_created_time">{ new Date(task.createdTime).toLocaleString() }</p>
 
 					{ this.props.task ?
-						<TaskComments taskId={ this.props.task.id }
-									  commentsIds={ this.taskCommentsIds } />
+						<TaskComments taskId={ this.props.task.id } />
 						: null
 					}
 				</div>

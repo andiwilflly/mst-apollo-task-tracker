@@ -7,8 +7,8 @@ import { observable, computed } from "mobx";
 import { observer } from "mobx-react";
 // Store
 import store from "store";
-
-import Task from 'components/parts/tasks/Task.component';
+// Components
+import ListTasks from 'components/parts/tasks/ListTasks.component';
 
 
 @observer
@@ -66,7 +66,8 @@ class List extends React.Component {
 						<button onClick={ this.creteTask }>
 							Create task
 						</button>
-						{ this.list.tasksIds.map((taskId)=> <Task key={taskId} taskId={taskId} />) }
+
+						<ListTasks listId={ this.list.id }/>
 					</div>
 				</DropTarget>
             </div>

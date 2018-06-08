@@ -22,6 +22,13 @@ class RegistrationFrom extends React.Component {
 	};
 
 
+	logIn = async ()=> {
+		this.isLoading = true;
+		await store.logInMutation(this.form);
+		this.isLoading = false;
+	};
+
+
 	render() {
 		return (
 			<div>
@@ -32,13 +39,14 @@ class RegistrationFrom extends React.Component {
 					   value={ this.form.password }
 					   onChange={ (e)=> this.form.password = e.currentTarget.value }/>
 
-				{ this.isLoading ?
-					<PreLoader />
-					:
-					<button onClick={ ()=> store.logInMutation(this.form) }>LogIn</button>
-				}
+				<button onClick={  this.logIn }
+						disabled={ this.isLoading || !this.form.email || !this.form.password }>{
+					this.isLoading ?
+						<PreLoader/>
+						:
+						'LogIn'
+				}</button>
 
-				<hr/>
 				<p>or</p>
 				<Link to="/registration">Sign up</Link>
 			</div>

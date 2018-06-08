@@ -38,7 +38,7 @@ const actions = (store)=> {
 
 
 		logInMutation: ({ email, password })=> {
-			client.mutate({
+			return client.mutate({
 				variables: { email, password },
 				mutation: LOG_IN_USER_MUTATION
 			}).catch((e)=> console.log("LOG_IN_USER_MUTATION" + e));

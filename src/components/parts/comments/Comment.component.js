@@ -1,4 +1,5 @@
 import React from 'react';
+import Textarea from "react-textarea-autosize";
 // Styles
 import "styles/comments/comment.css";
 // MobX
@@ -19,8 +20,27 @@ class Comment extends React.Component {
 
 	@observable isLoading = false;
 
+	@observable isEditing = false;
+
+
+	@observable form = {
+		text: ""
+	};
+
 
 	@computed get comment() { return store.comments.all.get(this.props.commentId); };
+
+
+	onEditClick = ()=> {
+		if(!this.form.text) this.form.text = this.comment.text;
+		if(this.isEditing) this.comment.updateMutation({ ...this.comment, text: this.form.text });
+		this.isEditing = !this.isEditing;
+	};
+
+
+	onChangeComment = (e)=> {
+		this.form.text = e.currentTarget.value;
+	};
 
 
 	renderComment() {
@@ -28,10 +48,24 @@ class Comment extends React.Component {
 			<div className="comment cf">
 				<UserIcon userId={ this.comment.authorId } />
 				<p className="comment_created_at">{ new Date(this.comment.createdTime).toLocaleString() }</p>
-				{ this.comment.text }
+				{ this.isEditing ?
+					<Textarea value={ this.form.text || this.comment.text }
+							  className="comment_edit_textarea"
+							  useCacheForDOMMeasurements
+							  onChange={ this.onChangeComment } />
+					:
+					<p className="comment_text">{ this.comment.text }</p> }
 				{ this.comment.authorId === store.authorizedUser.id ?
 					<div className="cf">
-						<p className="comment_controller">edit</p>
+
+						<p className="comment_controller" onClick={ this.onEditClick }>
+							{ this.isEditing ?
+								'save'
+								:
+								'edit'
+							}
+						</p>
+
 						<p className="comment_controller" onClick={
 							()=> store.comments.deleteMutation({ commentId: this.comment.id })
 						}>delete</p>

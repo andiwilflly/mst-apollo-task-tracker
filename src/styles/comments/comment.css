@@ -1,6 +1,6 @@
 .comments {
 	height: 200px;
-	min-width: 300px;
+	width: 300px;
 	overflow: auto;
 }
 
@@ -35,4 +35,23 @@
 .comment_controller:hover {
 	text-decoration: none;
 	opacity: 0.7;
+}
+
+
+.comment_text {
+	float: left;
+	width: calc(100% - 50px);
+}
+
+.comment .comment_edit_textarea {
+	font-size: inherit;
+	background-color: transparent !important;
+	border: none;
+	margin: 0;
+	padding: 0;
+	line-height: 120%;
+	font-family: Sathu;
+	width: calc(100% - 50px);
+	text-indent: 0;
+	min-height: auto;
 }

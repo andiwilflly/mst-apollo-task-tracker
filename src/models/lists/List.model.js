@@ -46,7 +46,6 @@ const actions = (self)=> {
 };
 
 
-
 const views = (self)=> {
 	return {
 		get boardId() { return self.board.id },

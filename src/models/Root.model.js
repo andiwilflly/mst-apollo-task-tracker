@@ -12,6 +12,7 @@ import ListsModel from "models/lists/Lists.model";
 import TasksModel from "models/tasks/Tasks.model";
 import CommentsModel from "models/comments/Comments.model";
 import LabelsModel from "models/labels/Labels.model";
+import ChatsModel from "models/chats/Chats.model";
 
 
 const RootModel = {
@@ -25,7 +26,9 @@ const RootModel = {
 	lists: ListsModel,
 	tasks: TasksModel,
 	comments: CommentsModel,
-	labels: LabelsModel
+	labels: LabelsModel,
+
+	chats: ChatsModel
 };
 
 

@@ -179,6 +179,27 @@ permissions:
   - operation: Invite.delete
     authenticated: true
 
+  # Chat
+  - operation: Chat.create
+    authenticated: true
+  - operation: Chat.read
+    authenticated: false
+  - operation: Chat.update
+    authenticated: true
+  - operation: Chat.delete
+    authenticated: true
+
+  # ChatMsg
+  - operation: ChatMsg.create
+    authenticated: true
+  - operation: ChatMsg.read
+    authenticated: false
+  - operation: ChatMsg.update
+    authenticated: true
+  - operation: ChatMsg.delete
+    authenticated: true
+
+
   # Relations
   - operation: UserAuthorOfBoards.connect
     authenticated: false
@@ -230,7 +251,10 @@ permissions:
   - operation: TaskOfComments.disconnect
     authenticated: false
 
-#  - operation: "*"
+  - operation: ChatOfChatMsgs.connect
+    authenticated: false
+  - operation: ChatOfChatMsgs.disconnect
+    authenticated: false
 
 
 # Your root tokens used for functions to get full access to the API

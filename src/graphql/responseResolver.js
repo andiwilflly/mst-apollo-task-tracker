@@ -152,6 +152,13 @@ function applyData(dataName, data) {
 			Alert.success("Invite was send successfully!");
 			break;
 
+		// Chats
+		case "allChats":
+			runInAction('CHATS-CREATE-ALL', ()=> {
+				data.forEach((chat)=> store.chats.create(chat));
+			});
+			break;
+
 		// Custom Functions
 		case "acceptInvite":
 		case "updateBoardRelations":
@@ -164,7 +171,7 @@ function applyData(dataName, data) {
 			break;
 
 		default:
-			console.log("UNHANDLED: dataName: ", dataName, data);
+			console.log(`%c RESPONSE RESOLVER UNHANDLED:`, 'color: darkred', dataName, data);
 	}
 }
 

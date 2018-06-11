@@ -1,0 +1,10 @@
+.chat {
+	border: 1px solid lightgray;
+	width: 300px;
+	height: 300px;
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	background: white;
+	z-index: 5;
+}

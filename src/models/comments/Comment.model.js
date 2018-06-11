@@ -3,6 +3,8 @@ import { types } from 'mobx-state-tree';
 import { runInAction } from "mobx";
 // GraphQL
 import client from "graphql/client";
+// Mutations
+import UPDATE_COMMENT_CUSTOM_MUTATION from "graphql/mutations/comments/updateCommentCustom.mutation";
 
 
 const Comment = {
@@ -26,10 +28,15 @@ const actions = (self)=> {
 
 
 		updateMutation: (comment={})=> {
-			// return client.mutate({
-			// 	variables: comment,
-			// 	mutation: UPDATE_COMMENT_MUTATION
-			// }).catch((e)=> console.log("UPDATE_COMMENT_MUTATION", e));
+			return client.mutate({
+				variables: {
+					id: comment.id,
+					text: comment.text,
+					authorId: comment.author.id,
+					taskId: comment.task.id
+				},
+				mutation: UPDATE_COMMENT_CUSTOM_MUTATION
+			}).catch((e)=> console.log("UPDATE_COMMENT_CUSTOM_MUTATION", e));
 		},
     };
 };

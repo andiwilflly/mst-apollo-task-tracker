@@ -159,7 +159,10 @@ function applyData(dataName, data) {
 		case "updateTaskRelations":
 		case "updateTaskCustom":
 		case "updateTaskCustomRelations":
+        case "updateCommentCustom":
 			data = parse(data).response;
+			console.log('%%---> data', data)
+
 			data.map((data)=> applyData(Object.keys(data)[0], data[Object.keys(data)[0]]));
 			break;
 

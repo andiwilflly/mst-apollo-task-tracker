@@ -12,7 +12,7 @@ export default async (event)=> {
 
     let response = [];
 
-    await updateComment(api, { id, text, changedAt: new Date().toISOString() });
+    response.push(await updateComment(api, { id, text, changedAt: new Date().toISOString() }));
 
     response.push(await getTask(api, { taskId }));
     response.push(await getUser(api, { userId: authorId }));

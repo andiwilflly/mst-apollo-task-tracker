@@ -5,7 +5,7 @@ import ChatModel from "models/chats/Chat.model";
 // GraphQL
 import client from "graphql/client";
 import CHAT_CREATE_MUTATION from "graphql/mutations/chats/createChat.mutation";
-import CHAT_DELETE_MUTATION from "graphql/mutations/chats/deleteChat.mutation";
+// import CHAT_DELETE_MUTATION from "graphql/mutations/chats/deleteChat.mutation";
 
 
 const Chats = {
@@ -16,21 +16,18 @@ const actions = (self)=> {
 	return {
 
 		createMutation: ({ boardId, name })=> {
-			// Optimistic updates
-			self.optimisticCreate({ boardId, name });
-
 			return client.mutate({
-				variables: { boardId },
+				variables: { boardId, name },
 				mutation: CHAT_CREATE_MUTATION
 			}).catch((e)=> console.log("CHAT_CREATE_MUTATION", e));
 		},
 
 
 		deleteMutation: async ({ chatId })=> {
-			return client.mutate({
-				variables: { chatId },
-				mutation: CHAT_DELETE_MUTATION
-			}).catch((e)=> console.log("CHAT_DELETE_MUTATION", e));
+			// return client.mutate({
+			// 	variables: { chatId },
+			// 	mutation: CHAT_DELETE_MUTATION
+			// }).catch((e)=> console.log("CHAT_DELETE_MUTATION", e));
 		},
 
 

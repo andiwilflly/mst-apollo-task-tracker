@@ -17,7 +17,9 @@ const store = RootModel.create({
 	lists: {},
 	tasks: {},
 	comments: {},
-	labels: {}
+	labels: {},
+
+	chats: {}
 });
 
 // MobX spy goes here

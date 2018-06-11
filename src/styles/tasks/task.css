@@ -27,14 +27,13 @@
 
 .task_dialog {
 	font-size: 10px;
-	cursor: pointer;
 	position: absolute;
-	bottom: 5px;
-	right: 5px;
+	bottom: 23px;
+	left: 5px;
 }
 
 .task_created_time {
-	font-size: 10px;
+	font-size: 9px;
 	position: absolute;
 	bottom: 5px;
 }

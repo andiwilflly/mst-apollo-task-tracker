@@ -8,14 +8,14 @@ export default async (event)=> {
 
     const graphcool = fromEvent(event);
     const api = graphcool.api('simple/v1');
+    const { id, authorId, taskId, text } = event.data;
 
     let response = [];
-    console.log('%%---> parameters', event.data)
 
-    await updateComment(api, { ...event.data, changedAt: "" + Date.now() });
+    await updateComment(api, { ...{ id, authorId, text }, changedAt: "" + Date.now() });
 
-    response.push(await getTask(api, { taskId: event.data.taskId }));
-    response.push(await getUser(api, { taskId: event.data.authorId }));
+    response.push(await getTask(api, { taskId }));
+    // response.push(await getUser(api, { id: authorId }));
 
     return {
         data: {
@@ -26,8 +26,8 @@ export default async (event)=> {
 
 
 async function updateComment(api, comment={}) {
-    const mutation = `mutation updateComment($id: ID!, $authorId: ID, $text: String, $changedAt: String) {
-        updateComment(id: $id, authorId: $authorId text: $text changedAt: $changedAt) {
+    const mutation = `mutation updateComment($id: ID!, $text: String, $changedAt: String) {
+        updateComment(id: $id, text: $text, changedAt: $changedAt) {
             id
             text
             createdAt

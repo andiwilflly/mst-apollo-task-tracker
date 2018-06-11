@@ -46,7 +46,7 @@ export default async (event)=> {
 
 async function updateTask(api, task={}) {
     const mutation = `mutation updateTask($id: ID!, $title: String, $description: String, $boardId: ID, $authorId: ID, $listId: ID, $labelsIds: [ID!] $changedAt: String) {
-        updateTask(id: $id, title: $title description: $description boardId: $boardId authorId: $authorId listId: $listId labelsIds: $labelsIds changedAt: $changedAt)
+        updateTask(id: $id title: $title description: $description boardId: $boardId authorId: $authorId listId: $listId labelsIds: $labelsIds changedAt: $changedAt)
         {
             id
 			title

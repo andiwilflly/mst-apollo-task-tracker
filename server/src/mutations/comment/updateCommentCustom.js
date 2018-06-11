@@ -10,7 +10,7 @@ export default async (event)=> {
     const api = graphcool.api('simple/v1');
 
     let response = [];
-    console.log('%%---> parameters', { ...event.data, changedAt: "" + Date.now() })
+    console.log('%%---> parameters', event.data)
 
     await updateComment(api, { ...event.data, changedAt: "" + Date.now() });
 

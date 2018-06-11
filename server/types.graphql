@@ -119,3 +119,28 @@ type Invite @model {
     emailInviteReceiver: String!
 }
 
+
+type Chat @model {
+    # Required system field:
+    id: ID! @isUnique # read-only (managed by Graphcool)
+
+    createdAt: DateTime! # read-only (managed by Graphcool)
+    updatedAt: DateTime! # read-only (managed by Graphcool)
+
+    boardId: String!
+
+    messages: [ChatMsg!]! @relation(name: "ChatOfChatMsgs")
+}
+
+
+type ChatMsg @model {
+    # Required system field:
+    id: ID! @isUnique # read-only (managed by Graphcool)
+
+    createdAt: DateTime! # read-only (managed by Graphcool)
+    updatedAt: DateTime! # read-only (managed by Graphcool)
+
+    text: String!
+
+    chat: Chat! @relation(name: "ChatOfChatMsgs")
+}

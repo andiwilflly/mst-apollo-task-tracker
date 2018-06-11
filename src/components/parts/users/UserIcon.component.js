@@ -56,7 +56,7 @@ class UserIcon extends React.Component {
 				{ this.showUser ?
 					<p className="user_icon_popover">
 						<span>{ this.showUser.email }</span><br/>
-						<span>{ this.isOnline ?  "online" : "offline for: " + msToTime(this.currentTimeMs - +this.showUser.lastVisit) }</span>
+						<span>{ this.isOnline ?  "online" : "last visit: " + msToTime(this.currentTimeMs - +this.showUser.lastVisit) + " ago" }</span>
 					</p>
 					: null }
 			</div>

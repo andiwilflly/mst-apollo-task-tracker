@@ -1,0 +1,12 @@
+type UpdateCommentCustomPayload {
+    response: String!
+}
+
+extend type Mutation {
+    updateCommentCustom(
+        id: ID!,
+        text: String,
+        authorId: ID,
+        taskId: ID
+    ): UpdateCommentCustomPayload
+}

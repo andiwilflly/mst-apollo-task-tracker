@@ -21,61 +21,61 @@ types: ./types.graphql
 functions:
   signup:
    type: resolver
-   schema: src/email-password/signup.graphql
+   schema: src/mutations/email-password/signup.graphql
    handler:
-     code: src/email-password/signup.ts
+     code: src/mutations/email-password/signup.ts
 
   authenticate:
    type: resolver
-   schema: src/email-password/authenticate.graphql
+   schema: src/mutations/email-password/authenticate.graphql
    handler:
-     code: src/email-password/authenticate.ts
+     code: src/mutations/email-password/authenticate.ts
 
   loggedInUser:
    type: resolver
-   schema: src/email-password/loggedInUser.graphql
+   schema: src/mutations/email-password/loggedInUser.graphql
    handler:
-     code: src/email-password/loggedInUser.ts
+     code: src/mutations/email-password/loggedInUser.ts
 
   # Board
   updateBoardRelations:
       type: resolver
-      schema: src/board/updateBoardRelations.graphql
+      schema: src/mutations/board/updateBoardRelations.graphql
       handler:
-        code: src/board/updateBoardRelations.js
+        code: src/mutations/board/updateBoardRelations.js
 
   # List
   updateListRelations:
       type: resolver
-      schema: src/list/updateListRelations.graphql
+      schema: src/mutations/list/updateListRelations.graphql
       handler:
-        code: src/list/updateListRelations.js
+        code: src/mutations/list/updateListRelations.js
 
   # Task
   updateTaskCustom:
     type: resolver
-    schema: src/task/updateTaskCustom.graphql
+    schema: src/mutations/task/updateTaskCustom.graphql
     handler:
-      code: src/task/updateTaskCustom.js
+      code: src/mutations/task/updateTaskCustom.js
 
   updateTaskCustomRelations:
     type: resolver
-    schema: src/task/updateTaskCustomRelations.graphql
+    schema: src/mutations/task/updateTaskCustomRelations.graphql
     handler:
-      code: src/task/updateTaskCustomRelations.js
+      code: src/mutations/task/updateTaskCustomRelations.js
 
   updateTaskRelations:
     type: resolver
-    schema: src/task/updateTaskRelations.graphql
+    schema: src/mutations/task/updateTaskRelations.graphql
     handler:
-      code: src/task/updateTaskRelations.js
+      code: src/mutations/task/updateTaskRelations.js
 
   # Invite
   acceptInvite:
     type: resolver
-    schema: src/invite/acceptInvite.graphql
+    schema: src/mutations/invite/acceptInvite.graphql
     handler:
-      code: src/invite/acceptInvite.js
+      code: src/mutations/invite/acceptInvite.js
 
   declineInvite:
       type: resolver
@@ -85,15 +85,17 @@ functions:
 
   createInviteCustom:
     type: resolver
-    schema: src/invite/createInviteCustom.graphql
+    schema: src/mutations/invite/createInviteCustom.graphql
     handler:
-      code: src/invite/createInviteCustom.js
+      code: src/mutations/invite/createInviteCustom.js
 
-  beforeTaskCreate:
+  # Comment
+  updateCommentCustom:
+    type: resolver
+    schema: src/mutations/comment/updateCommentCustom.graphql
     handler:
-      code: ./hooks/beforeTaskCreate.js
-    type: operationBefore
-    operation: Task.create
+      code: src/mutations/comment/updateCommentCustom.js
+
 
 # Model/Relation permissions are used to limit the API access
 # To take the burden of thinking about those while development, we
@@ -116,7 +118,6 @@ permissions:
   # Board
   - operation: Board.create
     authenticated: true
-    query: ./src/permissions/Board.graphql
   - operation: Board.read
     authenticated: false
   - operation: Board.update
@@ -149,7 +150,6 @@ permissions:
   # Comment
   - operation: Comment.create
     authenticated: true
-    query: ./src/permissions/Comment.graphql
   - operation: Comment.read
     authenticated: false
   - operation: Comment.update

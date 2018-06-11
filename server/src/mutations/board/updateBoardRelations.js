@@ -1,6 +1,6 @@
 import { fromEvent } from 'graphcool-lib';
 // Queries
-import getUser from "../queries/getUser.query";
+import getUser from "../../queries/getUser.query";
 
 
 export default async (event)=> {

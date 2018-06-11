@@ -1,7 +1,7 @@
 import { fromEvent } from 'graphcool-lib';
 // Queries
-import updateUser from "../mutations/updateUser.mutation";
-import deleteInvite from "../mutations/deleteInvite.mutation";
+import updateUser from "../updateUser.mutation";
+import deleteInvite from "../deleteInvite.mutation";
 
 
 export default async (event)=> {

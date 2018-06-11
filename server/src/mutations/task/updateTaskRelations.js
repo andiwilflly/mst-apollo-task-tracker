@@ -1,10 +1,10 @@
 import { fromEvent } from 'graphcool-lib';
 // Queries
-import getTask from "../queries/getTask.query";
-import getUser from "../queries/getUser.query";
-import getList from "../queries/getList.query";
-import getBoard from "../queries/getBoard.query";
-import getLabels from "../queries/getLabels.query";
+import getTask from "../../queries/getTask.query";
+import getUser from "../../queries/getUser.query";
+import getList from "../../queries/getList.query";
+import getBoard from "../../queries/getBoard.query";
+import getLabels from "../../queries/getLabels.query";
 
 
 export default async (event)=> {

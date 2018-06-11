@@ -12,7 +12,7 @@ export default async (event)=> {
 
     let response = [];
 
-    await updateComment(api, { ...{ id, authorId, text }, changedAt: "" + Date.now() });
+    await updateComment(api, { id, authorId, text, changedAt: new Date().toISOString() });
 
     response.push(await getTask(api, { taskId }));
     // response.push(await getUser(api, { id: authorId }));
@@ -26,7 +26,7 @@ export default async (event)=> {
 
 
 async function updateComment(api, comment={}) {
-    const mutation = `mutation updateComment($id: ID!, $text: String, $changedAt: String) {
+    const mutation = `mutation updateComment($id: ID!, $text: String, $changedAt: DateTime) {
         updateComment(id: $id, text: $text, changedAt: $changedAt) {
             id
             text

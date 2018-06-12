@@ -7,10 +7,8 @@ import deleteList from './deleteList.mutation';
 
 
 export default async (event)=> {
-    console.log('%%---> event', event)
 
     const graphcool = fromEvent(event);
-    console.log('%%---> graphcool', graphcool)
     const api = graphcool.api('simple/v1');
 
     const response = [];

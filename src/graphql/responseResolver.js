@@ -160,6 +160,7 @@ function applyData(dataName, data) {
 			});
 			break;
 		case "createChat":
+		case "updateChat":
 			store.chats.create(data);
 			break;
 		case "ChatMsg":

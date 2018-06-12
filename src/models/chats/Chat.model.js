@@ -33,6 +33,7 @@ const actions = (self)=> {
         update(chat) {
 			runInAction(`CHAT-UPDATE-SUCCESS ${chat.id}`, ()=> {
 				Object.keys(self).forEach((fieldName)=> {
+					if(fieldName === "messages") return;
 					if(chat[fieldName] !== undefined) self[fieldName] = chat[fieldName];
 				});
 			});

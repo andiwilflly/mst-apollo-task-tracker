@@ -33,8 +33,9 @@ class Board extends React.Component {
 
 
 	onDropChat = (e)=> {
-		console.log("DROPPED!", store.chats.all.get(e.dragData.chatId));
-		store.chats.all.get(e.dragData.chatId).updateMutation({ id: e.dropData.chatId, x: 42, y: 42 });
+		const chat = store.chats.all.get(e.dragData.chatId);
+		console.log("DROPPED1!", chat, e.dragData.chatId);
+		// chat.updateMutation({ id: chat.id, x: Math.round(Math.random() * 100), y: 42 });
 	};
 
 

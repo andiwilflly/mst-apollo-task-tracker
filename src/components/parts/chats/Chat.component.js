@@ -89,7 +89,7 @@ class Chat extends React.Component {
 				<div className="chat_messages">
 					{ this.chat.messagesIds.length ?
 						this.chat.messagesIds.map((messageId)=> {
-							return <ChatMsg messageId={ messageId } />
+							return <ChatMsg key={messageId} messageId={ messageId } />
 						})
 						:
 						<div>No messages..</div>

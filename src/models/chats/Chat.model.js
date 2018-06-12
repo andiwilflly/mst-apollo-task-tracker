@@ -1,6 +1,8 @@
 import { types } from 'mobx-state-tree';
 // MobX
 import { runInAction } from "mobx";
+// Models
+import ChatMsgModel from "models/chats/ChatMsg.model";
 // GraphQL
 import client from "graphql/client";
 import CREATE_CHAT_MESSAGE_MUTATION from "graphql/mutations/chats/createChatMsg.mutation";
@@ -10,7 +12,8 @@ const Chat = {
     id: types.identifier(types.string),
     name: types.maybe(types.string),
 	boardId: types.maybe(types.string),
-	messages: types.array(types.frozen)
+	messages: types.optional(types.map(ChatMsgModel), {}),
+	messagesIds: types.array(types.frozen)
 };
 
 const actions = (self)=> {
@@ -37,7 +40,6 @@ const actions = (self)=> {
 
 const views = (self)=> {
 	return {
-		get messagesIds() { return self.messages.map((message)=> message.id); }
 	};
 };
 

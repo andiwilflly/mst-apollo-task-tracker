@@ -3,6 +3,7 @@ import { fromEvent } from 'graphcool-lib';
 import getTask from '../../queries/getTask.query';
 // Mutations
 import deleteComment from '../comment/deleteComment.mutation'
+import deleteTask from '../comment/deleteTask.mutation'
 
 
 export default async (event)=> {
@@ -19,6 +20,8 @@ export default async (event)=> {
     Task.comments.forEach(async (comment)=> {
         await deleteComment(api, { commentId: comment.id });
     });
+
+    await deleteTask(api, { taskId: event.data.taskId });
 
 
     return {

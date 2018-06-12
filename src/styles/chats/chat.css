@@ -7,4 +7,69 @@
 	right: 20px;
 	background: white;
 	z-index: 5;
+	padding: 10px;
+}
+
+.chat_show_button {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	width: 100px;
+	height: 100px;
+	background: transparent;
+	font-size: 50px;
+	z-index: 5;
+	border: none;
+}
+
+.chat_show_button:hover {
+	opacity: 0.7;
+	background: transparent;
+}
+
+
+.chat > .cssload-loader {
+	margin: calc(50% - 25px) auto 0 auto;
+}
+
+
+.chat_title {
+	background: lightgray;
+	font-size: 15px;
+	padding: 10px;
+	margin-bottom: 10px;
+	line-height: 22px
+}
+
+
+.chat_message_create {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	right: 10px;
+}
+
+.chat_message_input {
+	float: left;
+	font-size: inherit;
+	border: none;
+	margin: 0;
+	line-height: 120%;
+	font-family: Sathu;
+	width: calc(100% - 80px);
+	text-indent: 0;
+	min-height: auto;
+	padding: 5px;
+	max-height: 100px;
+	height: 40px;
+}
+
+.chat .chat_message_input:hover {
+	background: lightgray !important;
+}
+
+.chat_message_send_btn {
+	border: 1px solid black;
+	height: 100%;
+	position: absolute;
 }

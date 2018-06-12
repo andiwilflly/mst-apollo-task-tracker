@@ -1,0 +1,9 @@
+type DeleteListCascadePayload {
+    response: String!
+}
+
+extend type Mutation {
+    deleteListCascade(
+        listId: ID!
+    ): DeleteListCascadePayload
+}

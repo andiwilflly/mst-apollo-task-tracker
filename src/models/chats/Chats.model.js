@@ -35,7 +35,11 @@ const actions = (self)=> {
 			if(self.all.has(chat.id)) return self.all.get(chat.id).update(chat);
 
 			runInAction(`CHAT-CREATE-SUCCESS ${chat.id}`, ()=> {
-				self.all.set(chat.id, chat);
+				self.all.set(chat.id, {
+					...chat,
+					messages: {},
+					messagesIds: chat.messages.map((message)=> message.id)
+				});
 			});
 		},
 

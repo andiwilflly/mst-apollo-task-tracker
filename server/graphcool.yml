@@ -51,6 +51,12 @@ functions:
       handler:
         code: src/mutations/list/updateListRelations.js
 
+  deleteListCascade:
+    type: resolver
+    schema: src/mutations/list/deleteListCascade.graphql
+    handler:
+      code: src/mutations/list/deleteListCascade.js
+
   # Task
   updateTaskCustom:
     type: resolver
@@ -58,11 +64,11 @@ functions:
     handler:
       code: src/mutations/task/updateTaskCustom.js
 
-  deleteTaskCustom:
+  deleteTaskCascade:
     type: resolver
-    schema: src/mutations/task/deleteTaskCustom.graphql
+    schema: src/mutations/task/deleteTaskCascade.graphql
     handler:
-      code: src/mutations/task/deleteTaskCustom.js
+      code: src/mutations/task/deleteTaskCascade.js
 
 
   updateTaskCustomRelations:

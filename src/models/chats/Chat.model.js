@@ -3,13 +3,17 @@ import { types } from 'mobx-state-tree';
 import { runInAction } from "mobx";
 // Models
 import ChatMsgModel from "models/chats/ChatMsg.model";
+// GraphQL
+import client from "graphql/client";
+import CREATE_CHAT_MESSAGE_MUTATION from "graphql/mutations/chats/createChatMsg.mutation";
 
 
 const Chat = {
     id: types.identifier(types.string),
     name: types.maybe(types.string),
-	board: types.maybe(types.string),
-	messages: types.optional(types.map(ChatMsgModel), {})
+	boardId: types.maybe(types.string),
+	messages: types.optional(types.map(ChatMsgModel), {}),
+	messagesIds: types.array(types.frozen)
 };
 
 const actions = (self)=> {
@@ -21,14 +25,30 @@ const actions = (self)=> {
 					if(chat[fieldName] !== undefined) self[fieldName] = chat[fieldName];
 				});
 			});
-        }
+        },
+
+
+        createMessageMutation({ chatId, text }) {
+			return client.mutate({
+				variables: { chatId, text },
+				mutation: CREATE_CHAT_MESSAGE_MUTATION
+			}).catch((e)=> console.log("CREATE_CHAT_MESSAGE_MUTATION " + e));
+		},
+
+
+		createMessage(message) {
+			if(self.messages.has(message.id)) return self.messages.get(message.id).update(message);
+
+			runInAction(`CHAT-MESSAGE-CREATE-SUCCESS ${message.id}`, ()=> {
+        		self.messages.set(message.id, message);
+			});
+		}
     };
 };
 
 
 const views = (self)=> {
 	return {
-		get boardId() { return self.board.id }
 	};
 };
 

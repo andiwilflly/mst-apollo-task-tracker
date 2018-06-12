@@ -13,7 +13,7 @@ import BOARD_CHAT_ALL_INFO_QUERY from "graphql/queries/chats/boardChatAllInfo.qu
 import PreLoader from 'components/parts/PreLoader.component';
 import QueryLoader from "components/QueryLoader.component";
 import UserIcon from "components/parts/users/UserIcon.component";
-import ChatMsg from "components/parts/chats/ChatMsg.component";
+import ChatMessages from "components/parts/chats/ChatMessages.component";
 
 
 @observer
@@ -30,9 +30,7 @@ class Chat extends React.Component {
 
 	@computed get board() { return store.boards.all.get(this.props.boardId) };
 
-	@computed get chat() {
-		return values(store.chats.all).find((chat)=> chat.boardId === this.props.boardId);
-	};
+	@computed get chat() { return values(store.chats.all).find((chat)=> chat.boardId === this.props.boardId); };
 
 
 	onChangeMessage = (e)=> {
@@ -41,11 +39,12 @@ class Chat extends React.Component {
 
 
 	sendMessage = ()=> {
-		console.log("message sent", this.form.text);
 		this.chat.createMessageMutation({
 			chatId: this.chat.id,
+			authorId: store.authorizedUser.id,
 			text: this.form.text
 		});
+		this.form.text = "";
 	};
 
 
@@ -85,17 +84,11 @@ class Chat extends React.Component {
 						}) }
 					</div>
 				</div>
-				<div className="chat_messages">
-					{ this.chat.messagesIds.length ?
-						this.chat.messagesIds.map((messageId)=> {
-							return <ChatMsg key={messageId} chatId={ this.chat.id } messageId={ messageId } />
-						})
-						:
-						<div>No messages..</div>
-					}
-				</div>
+
+				<ChatMessages chatId={ this.chat.id } />
+
 				<div className="chat_message_create cf">
-					<Textarea value={ this.form.message }
+					<Textarea value={ this.form.text }
 							  className="chat_message_input"
 							  useCacheForDOMMeasurements
 							  onChange={ this.onChangeMessage } />

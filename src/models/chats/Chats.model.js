@@ -37,8 +37,7 @@ const actions = (self)=> {
 			runInAction(`CHAT-CREATE-SUCCESS ${chat.id}`, ()=> {
 				self.all.set(chat.id, {
 					...chat,
-					messages: {},
-					messagesIds: chat.messages.map((message)=> message.id)
+					messages: {}
 				});
 			});
 		},

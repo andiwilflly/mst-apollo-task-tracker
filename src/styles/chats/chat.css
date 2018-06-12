@@ -10,6 +10,11 @@
 	padding: 10px;
 }
 
+.chat_messages {
+	overflow: auto;
+	height: 220px;
+}
+
 .chat_show_button {
 	position: fixed;
 	bottom: 10px;

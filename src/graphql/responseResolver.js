@@ -166,7 +166,13 @@ function applyData(dataName, data) {
 			if(store.chats.all.has(data.chat.id)) store.chats.all.get(data.chat.id).createMessage(data);
 			break;
 		case "createChatMsg":
-			console.log("createChatMsg", data);
+			if(store.chats.all.has(data.chat.id)) store.chats.all.get(data.chat.id).createMessage(data);
+			break;
+
+		case "allChatMsgs":
+			runInAction('CHAT_MESSAGES-CREATE-ALL', ()=> {
+				data.forEach((message)=> store.chats.all.has(message.chat.id) && store.chats.all.get(message.chat.id).createMessage(message) );
+			});
 			break;
 
 		// Custom Functions

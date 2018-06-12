@@ -12,9 +12,9 @@ const Chat = {
     id: types.identifier(types.string),
     name: types.maybe(types.string),
 	boardId: types.maybe(types.string),
-	messages: types.optional(types.map(ChatMsgModel), {}),
-	messagesIds: types.array(types.frozen)
+	messages: types.optional(types.map(ChatMsgModel), {})
 };
+
 
 const actions = (self)=> {
     return {
@@ -28,9 +28,9 @@ const actions = (self)=> {
         },
 
 
-        createMessageMutation({ chatId, text }) {
+        createMessageMutation({ chatId, authorId, text }) {
 			return client.mutate({
-				variables: { chatId, text },
+				variables: { chatId, authorId, text },
 				mutation: CREATE_CHAT_MESSAGE_MUTATION
 			}).catch((e)=> console.log("CREATE_CHAT_MESSAGE_MUTATION " + e));
 		},

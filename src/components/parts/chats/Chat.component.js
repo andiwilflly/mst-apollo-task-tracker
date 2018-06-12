@@ -38,8 +38,13 @@ class Chat extends React.Component {
 	};
 
 
-	sendMessage = ()=> {
-		this.chat.createMessageMutation({
+	onKeyPress = (e)=> {
+		if(e.key === 'Enter') this.sendMessage();
+	};
+
+
+	sendMessage = async ()=> {
+		await this.chat.createMessageMutation({
 			chatId: this.chat.id,
 			authorId: store.authorizedUser.id,
 			text: this.form.text
@@ -89,6 +94,7 @@ class Chat extends React.Component {
 
 				<div className="chat_message_create cf">
 					<Textarea value={ this.form.text }
+							  onKeyPress={ this.onKeyPress }
 							  className="chat_message_input"
 							  useCacheForDOMMeasurements
 							  onChange={ this.onChangeMessage } />

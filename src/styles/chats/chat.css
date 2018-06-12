@@ -2,12 +2,11 @@
 	border: 1px solid lightgray;
 	width: 300px;
 	height: 300px;
-	position: fixed;
-	bottom: 20px;
-	right: 20px;
+	position: absolute;
 	background: white;
 	z-index: 5;
 	padding: 10px;
+	box-shadow: 4px 4px 34px -5px rgba(117,108,117,1);
 }
 
 .chat_messages {
@@ -39,6 +38,7 @@
 
 
 .chat_title {
+	cursor: move;
 	background: lightgray;
 	font-size: 15px;
 	padding: 10px;

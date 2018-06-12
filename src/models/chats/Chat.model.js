@@ -5,6 +5,7 @@ import { runInAction } from "mobx";
 import ChatMsgModel from "models/chats/ChatMsg.model";
 // GraphQL
 import client from "graphql/client";
+import CHAT_UPDATE_MUTATION from "graphql/mutations/chats/updateChat.mutation";
 import CREATE_CHAT_MESSAGE_MUTATION from "graphql/mutations/chats/createChatMsg.mutation";
 
 
@@ -12,12 +13,22 @@ const Chat = {
     id: types.identifier(types.string),
     name: types.maybe(types.string),
 	boardId: types.maybe(types.string),
+	x: types.maybe(types.number),
+	y: types.maybe(types.number),
 	messages: types.optional(types.map(ChatMsgModel), {})
 };
 
 
 const actions = (self)=> {
     return {
+
+		updateMutation: ({ x, y, name })=> {
+			return client.mutate({
+				variables: { x, y, name },
+				mutation: CHAT_UPDATE_MUTATION
+			}).catch((e)=> console.log("CHAT_UPDATE_MUTATION", e));
+		},
+
 
         update(chat) {
 			runInAction(`CHAT-UPDATE-SUCCESS ${chat.id}`, ()=> {

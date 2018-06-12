@@ -130,6 +130,8 @@ type Chat @model {
 
     name: String!
     boardId: String!
+    x: Int! @migrationValue(value: 0) @defaultValue(value: 0)
+    y: Int! @migrationValue(value: 0) @defaultValue(value: 0)
 
     messages: [ChatMsg!]! @relation(name: "ChatOfChatMsgs")
 }

@@ -30,7 +30,8 @@ class ChatMessages extends React.Component {
 				setTimeout(()=> this.refs.chatMessages.scrollTop = this.refs.chatMessages.scrollHeight - this.refs.chatMessages.clientHeight, 0);
 			},
 			{
-				name: "@reaction on add or remove chat message"
+				name: "@reaction on add or remove chat message",
+				fireImmediately: true
 			}
 		);
 	}

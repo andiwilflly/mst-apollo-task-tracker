@@ -1,5 +1,6 @@
 import React from 'react';
 import Textarea from "react-textarea-autosize";
+import { DragDropContainer } from 'react-drag-drop-container';
 // Styles
 import "styles/chats/chat.css";
 // MobX
@@ -77,36 +78,40 @@ class Chat extends React.Component {
 
 
 	renderChat() {
+		console.log(this.chat, "this.chat");
 		return (
-			<div className="chat">
-				<div className="chat_title cf">
-					<span style={{ float: "left", marginRight: 10 }}>🗣 { this.chat.name }</span>
-					<div style={{ float: 'right' }}>
-						{ [...this.board.usersIds, this.board.authorId].map((userId)=> {
-							return (
-								<UserIcon key={userId} userId={ userId } width={20} height={20} />
-							)
-						}) }
+			<DragDropContainer targetKey="chat" dragHandleClassName="chat_title" dragData={{ chatId: this.chat.id }}>
+				<div className="chat" style={{ left: this.chat.x, bottom: this.chat.y }}>
+					<div className="chat_title cf">
+						<span style={{ float: "left", marginRight: 10 }}>🗣 { this.chat.name }</span>
+						<div style={{ float: 'right' }}>
+							{ [...this.board.usersIds, this.board.authorId].map((userId)=> {
+								return (
+									<UserIcon key={userId} userId={ userId } width={20} height={20} />
+								)
+							}) }
+						</div>
+					</div>
+
+					<ChatMessages chatId={ this.chat.id } />
+
+					<div className="chat_message_create cf">
+						<Textarea value={ this.form.text }
+								  onKeyPress={ this.onKeyPress }
+								  className="chat_message_input"
+								  useCacheForDOMMeasurements
+								  onChange={ this.onChangeMessage } />
+						<button className="chat_message_send_btn" onClick={ this.sendMessage }>Send</button>
 					</div>
 				</div>
-
-				<ChatMessages chatId={ this.chat.id } />
-
-				<div className="chat_message_create cf">
-					<Textarea value={ this.form.text }
-							  onKeyPress={ this.onKeyPress }
-							  className="chat_message_input"
-							  useCacheForDOMMeasurements
-							  onChange={ this.onChangeMessage } />
-					<button className="chat_message_send_btn" onClick={ this.sendMessage }>Send</button>
-				</div>
-			</div>
+			</DragDropContainer>
 		);
 	}
 
 
 	render() {
 		if(this.chat) return this.renderChat();
+
 		return (
 			<div className="chat">
 				<QueryLoader query={ BOARD_CHAT_ALL_INFO_QUERY }

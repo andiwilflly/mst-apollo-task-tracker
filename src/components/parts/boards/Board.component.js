@@ -1,4 +1,5 @@
 import React from 'react';
+import { DropTarget } from 'react-drag-drop-container';
 // Styles
 import "styles/boards/board.css";
 // MobX
@@ -31,12 +32,18 @@ class Board extends React.Component {
 	get board() { return store.boards.all.get(this.props.boardId); };
 
 
+	onDropChat = (e)=> {
+		console.log("DROPPED!", store.chats.all.get(e.dragData.chatId));
+		store.chats.all.get(e.dragData.chatId).updateMutation({ x: 42, y: 42 });
+	};
+
+
 	render() {
 		if(!this.board) return <div className="board">No such board ${this.props.boardId}</div>;
 
 		return (
 			<div className="board">
-				<div>
+				<DropTarget targetKey="chat" onHit={ this.onDropChat }>
 					<div className="cf">
 						{ this.board.background ?
 							<div style={{ marginRight: '20px', width: 100, height: 100, background: this.board.background, overflow: 'hidden', borderRadius: "50%", float: "left" }} />
@@ -64,7 +71,7 @@ class Board extends React.Component {
 					<CreateList boardId={ this.props.boardId } />
 
 					<Chat boardId={ this.board.id } />
-				</div>
+				</DropTarget>
 			</div>
 		)
 	}

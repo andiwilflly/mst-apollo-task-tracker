@@ -8,6 +8,8 @@ export default gql`query allChats($boardId: String!) {
         id
         name
         boardId
+        x
+        y
         messages {
             id
         }

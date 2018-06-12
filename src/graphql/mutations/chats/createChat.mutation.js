@@ -7,6 +7,8 @@ export default gql`mutation createChat($name: String!, $boardId: String!) {
         id
         name
         boardId
+        x
+        y
         messages {
             id
         }

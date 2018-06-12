@@ -8,7 +8,7 @@ async function deleteList(api, { listId }) {
   `;
 
     const variables = {
-        id: listId,
+        id: listId
     };
 
     return api.request(mutation, variables);

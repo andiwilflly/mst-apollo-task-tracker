@@ -8,7 +8,7 @@ async function deleteTaskCascade(api, { taskId }) {
   `;
 
     const variables = {
-        taskId,
+        taskId
     };
 
     return api.request(mutation, variables);

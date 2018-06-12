@@ -1,0 +1,9 @@
+type DeleteBoardCascadePayload {
+    response: String!
+}
+
+extend type Mutation {
+    deleteBoardCascade(
+        boardId: ID!
+    ): DeleteBoardCascadePayload
+}

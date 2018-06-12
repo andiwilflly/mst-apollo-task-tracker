@@ -1,15 +1,13 @@
 import { types } from 'mobx-state-tree';
 // MobX
 import { runInAction } from "mobx";
-// Models
-import ChatMsgModel from "models/chats/ChatMsg.model";
 
 
 const Chat = {
     id: types.identifier(types.string),
     name: types.maybe(types.string),
-	board: types.maybe(types.string),
-	messages: types.optional(types.map(ChatMsgModel), {})
+	boardId: types.maybe(types.string),
+	messages: types.array(types.frozen)
 };
 
 const actions = (self)=> {
@@ -28,7 +26,7 @@ const actions = (self)=> {
 
 const views = (self)=> {
 	return {
-		get boardId() { return self.board.id }
+		get messagesIds() { return self.messages.map((message)=> message.id); }
 	};
 };
 

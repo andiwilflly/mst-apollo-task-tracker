@@ -33,7 +33,6 @@ class ChatMessages extends React.Component {
 				name: "@reaction on add or remove chat message"
 			}
 		);
-		console.log(this.refs.chatMessages, 424242);
 	}
 
 

@@ -80,6 +80,12 @@ webSocket.onmessage = (event) => {
 					user.update(updatedUser.node);
 					break;
 
+				case "CHAT_MSG_CREATED":
+					const chatMsg = data.payload.data.ChatMsg.node;
+					if(!store.chats.all.has(chatMsg.chat.id)) return console.log("ERROR IN CHAT_MSG_CREATE");
+					store.chats.all.get(chatMsg.chat.id).createMessage(chatMsg);
+					break;
+
                 default:
                     console.log(`%c subscription data has been received`, 'color: darkPink', data);
                     break;

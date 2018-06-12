@@ -8,7 +8,7 @@ async function deleteTask(api, { taskId }) {
   `;
 
     const variables = {
-        id: taskId,
+        id: taskId
     };
 
     return api.request(mutation, variables);

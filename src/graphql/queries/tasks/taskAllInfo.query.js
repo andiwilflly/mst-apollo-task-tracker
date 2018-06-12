@@ -1,26 +1,10 @@
 import gql from 'graphql-tag';
+import TaskAllInfoFragment from "graphql/fragments/tasks/TaskAllInfo.fragment";
 
 
 export default gql`query taskAllInfo($id: ID!) {
     Task(id: $id) {
-        id
-        title
-        description
-        createdAt
-        author {
-            id
-        }
-        board { 
-            id
-        }
-        list {
-            id
-        }
-        comments {
-            id
-        }
-        labels {
-            id
-        }
+        ...TaskAllInfo
     }
-}`
+}
+${TaskAllInfoFragment}`

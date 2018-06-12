@@ -161,6 +161,9 @@ function applyData(dataName, data) {
 		case "createChat":
 			store.chats.create(data);
 			break;
+		case "createChatMsg":
+
+			break;
 
 		// Custom Functions
 		case "acceptInvite":

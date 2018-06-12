@@ -1,4 +1,5 @@
 import React from 'react';
+import Textarea from "react-textarea-autosize";
 // Styles
 import "styles/chats/chat.css";
 // MobX
@@ -22,11 +23,29 @@ class Chat extends React.Component {
 
 	@observable isShowChat = false;
 
+	@observable form = {
+		text: ""
+	};
+
 
 	@computed get board() { return store.boards.all.get(this.props.boardId) };
 
 	@computed get chat() {
 		return values(store.chats.all).find((chat)=> chat.boardId === this.props.boardId);
+	};
+
+
+	onChangeMessage = (e)=> {
+		this.form.text = e.currentTarget.value;
+	};
+
+
+	sendMessage = ()=> {
+		console.log("message sent", this.form.text);
+		this.chat.createMessageMutation({
+			chatId: this.chat.id,
+			text: this.form.text
+		});
 	};
 
 
@@ -75,6 +94,13 @@ class Chat extends React.Component {
 						:
 						<div>No messages..</div>
 					}
+				</div>
+				<div className="chat_message_create cf">
+					<Textarea value={ this.form.message }
+							  className="chat_message_input"
+							  useCacheForDOMMeasurements
+							  onChange={ this.onChangeMessage } />
+					<button className="chat_message_send_btn" onClick={ this.sendMessage }>Send</button>
 				</div>
 			</div>
 		);

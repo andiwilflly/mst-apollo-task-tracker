@@ -1,6 +1,9 @@
 import { types } from 'mobx-state-tree';
 // MobX
 import { runInAction } from "mobx";
+// GraphQL
+import client from "graphql/client";
+import CREATE_CHAT_MESSAGE_MUTATION from "graphql/mutations/chats/createChatMsg.mutation";
 
 
 const Chat = {
@@ -19,7 +22,15 @@ const actions = (self)=> {
 					if(chat[fieldName] !== undefined) self[fieldName] = chat[fieldName];
 				});
 			});
-        }
+        },
+
+
+        createMessageMutation({ chatId, text }) {
+			return client.mutate({
+				variables: { chatId, text },
+				mutation: CREATE_CHAT_MESSAGE_MUTATION
+			}).catch((e)=> console.log("CREATE_CHAT_MESSAGE_MUTATION " + e));
+		}
     };
 };
 

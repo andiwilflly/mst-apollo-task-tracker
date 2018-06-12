@@ -120,6 +120,7 @@ function applyData(dataName, data) {
 			});
 			break;
 		case "Comment":
+		case "updateComment":
 			store.comments.create(data);
 			break;
         case "createComment":

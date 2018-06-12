@@ -18,6 +18,8 @@ import UserIcon from "components/parts/users/UserIcon.component";
 @observer
 class Comment extends React.Component {
 
+    textArea;
+
 	@observable isLoading = false;
 
 	@observable isEditing = false;
@@ -27,13 +29,15 @@ class Comment extends React.Component {
 		text: ""
 	};
 
-
 	@computed get comment() { return store.comments.all.get(this.props.commentId); };
 
 
 	onEditClick = ()=> {
-		if(!this.form.text) this.form.text = this.comment.text;
 		if(this.isEditing) this.comment.updateMutation({ ...this.comment, text: this.form.text });
+		else {
+			this.form.text = this.comment.text;
+            setTimeout(()=> this.textArea.focus(), 0);
+		}
 		this.isEditing = !this.isEditing;
 	};
 
@@ -56,7 +60,8 @@ class Comment extends React.Component {
 				<UserIcon userId={ this.comment.authorId } />
 				<p className="comment_created_at">{ new Date(this.comment.createdTime).toLocaleString() }</p>
 				{ this.isEditing ?
-					<Textarea value={ this.form.text || this.comment.text }
+					<Textarea value={ this.form.text }
+							  inputRef={ tag => (this.textArea = tag) }
 							  className="comment_edit_textarea"
 							  useCacheForDOMMeasurements
 							  onChange={ this.onChangeComment } />
@@ -69,7 +74,9 @@ class Comment extends React.Component {
 							:
 							<p className="comment_controller" onClick={ this.onDeleteClick }>delete</p>
 						}
-
+                        { this.isEditing &&
+							<p className="comment_controller" onClick={ ()=> this.isEditing = false }>close</p>
+                        }
 
 						<p className="comment_controller" onClick={ this.onEditClick }>
 							{ this.isEditing ?
@@ -78,6 +85,7 @@ class Comment extends React.Component {
 								'edit'
 							}
 						</p>
+
 					</div>
 					: null }
 			</div>

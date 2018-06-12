@@ -58,6 +58,13 @@ functions:
     handler:
       code: src/mutations/task/updateTaskCustom.js
 
+  deleteTaskCustom:
+    type: resolver
+    schema: src/mutations/task/deleteTaskCustom.graphql
+    handler:
+      code: src/mutations/task/deleteTaskCustom.js
+
+
   updateTaskCustomRelations:
     type: resolver
     schema: src/mutations/task/updateTaskCustomRelations.graphql

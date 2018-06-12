@@ -1,0 +1,9 @@
+type DeleteTaskCustomPayload {
+    response: String!
+}
+
+extend type Mutation {
+    deleteTaskCustom(
+        taskId: ID!
+    ): DeleteTaskCustomPayload
+}

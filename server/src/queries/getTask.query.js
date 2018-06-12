@@ -14,6 +14,9 @@ async function getTask(api, { taskId }) {
 				list {
 					id
 				}
+				comments {
+					id
+				}
 				labels {
 					id
 				}

@@ -1,0 +1,9 @@
+type DeleteListsCustomPayload {
+    response: String!
+}
+
+extend type Mutation {
+    deleteListsCustom(
+        boardId: ID
+    ): DeleteListsCustomPayload
+}

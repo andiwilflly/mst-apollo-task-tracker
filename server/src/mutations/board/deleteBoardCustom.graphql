@@ -1,0 +1,9 @@
+type DeleteBoardCustomPayload {
+    response: String!
+}
+
+extend type Mutation {
+    deleteBoardCustom(
+        boardId: ID
+    ): DeleteBoardCustomPayload
+}

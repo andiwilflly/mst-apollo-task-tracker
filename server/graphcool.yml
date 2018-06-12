@@ -51,12 +51,25 @@ functions:
       handler:
         code: src/mutations/list/updateListRelations.js
 
+  deleteListCascade:
+    type: resolver
+    schema: src/mutations/list/deleteListCascade.graphql
+    handler:
+      code: src/mutations/list/deleteListCascade.js
+
   # Task
   updateTaskCustom:
     type: resolver
     schema: src/mutations/task/updateTaskCustom.graphql
     handler:
       code: src/mutations/task/updateTaskCustom.js
+
+  deleteTaskCascade:
+    type: resolver
+    schema: src/mutations/task/deleteTaskCascade.graphql
+    handler:
+      code: src/mutations/task/deleteTaskCascade.js
+
 
   updateTaskCustomRelations:
     type: resolver

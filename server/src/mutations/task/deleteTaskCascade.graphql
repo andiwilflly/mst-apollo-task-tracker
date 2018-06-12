@@ -1,0 +1,9 @@
+type DeleteTaskCascadePayload {
+    response: String!
+}
+
+extend type Mutation {
+    deleteTaskCascade(
+        taskId: ID!
+    ): DeleteTaskCascadePayload
+}

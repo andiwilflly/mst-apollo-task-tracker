@@ -73,7 +73,6 @@ class Chat extends React.Component {
 
 
 	renderChat() {
-		console.log(this.chat);
 		return (
 			<div className="chat">
 				<div className="chat_title cf">
@@ -89,7 +88,7 @@ class Chat extends React.Component {
 				<div className="chat_messages">
 					{ this.chat.messagesIds.length ?
 						this.chat.messagesIds.map((messageId)=> {
-							return <ChatMsg key={messageId} messageId={ messageId } />
+							return <ChatMsg key={messageId} chatId={ this.chat.id } messageId={ messageId } />
 						})
 						:
 						<div>No messages..</div>

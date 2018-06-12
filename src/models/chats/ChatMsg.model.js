@@ -6,7 +6,9 @@ import { runInAction } from "mobx";
 const ChatMsg = {
 	id: types.identifier(types.string),
 	text: types.maybe(types.string),
-	chat: types.maybe(types.string)
+	createdAt: types.maybe(types.string),
+	authorId: types.maybe(types.string),
+	chat: types.frozen
 };
 
 const actions = (self)=> {
@@ -25,6 +27,7 @@ const actions = (self)=> {
 
 const views = (self)=> {
 	return {
+		get createdTime() { return (new Date(self.createdAt)).getTime(); },
 		get chatId() { return self.chat.id; }
 	};
 };

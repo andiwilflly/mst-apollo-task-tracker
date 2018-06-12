@@ -143,6 +143,7 @@ type ChatMsg @model {
     updatedAt: DateTime! # read-only (managed by Graphcool)
 
     text: String!
+    authorId: String! @migrationValue(value: "cji00tm17pufn01682x7h79yg")
 
     chat: Chat! @relation(name: "ChatOfChatMsgs")
 }

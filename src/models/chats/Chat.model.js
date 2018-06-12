@@ -33,6 +33,15 @@ const actions = (self)=> {
 				variables: { chatId, text },
 				mutation: CREATE_CHAT_MESSAGE_MUTATION
 			}).catch((e)=> console.log("CREATE_CHAT_MESSAGE_MUTATION " + e));
+		},
+
+
+		createMessage(message) {
+			if(self.messages.has(message.id)) return self.messages.get(message.id).update(message);
+
+			runInAction(`CHAT-MESSAGE-CREATE-SUCCESS ${message.id}`, ()=> {
+        		self.messages.set(message.id, message);
+			});
 		}
     };
 };

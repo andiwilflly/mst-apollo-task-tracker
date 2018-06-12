@@ -1,3 +1,12 @@
 .chat_msg {
 	padding: 10px;
 }
+
+.chat_msg_date {
+	font-size: 9px;
+	color: gray;
+}
+
+.chat_msg_text {
+
+}

@@ -162,8 +162,11 @@ function applyData(dataName, data) {
 		case "createChat":
 			store.chats.create(data);
 			break;
+		case "ChatMsg":
+			if(store.chats.all.has(data.chat.id)) store.chats.all.get(data.chat.id).createMessage(data);
+			break;
 		case "createChatMsg":
-
+			console.log("createChatMsg", data);
 			break;
 
 		// Custom Functions

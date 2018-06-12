@@ -1,7 +1,7 @@
 async function deleteListCascade(api, { listId }) {
     const mutation = `
-        mutation deleteListCascade($taskId: ID!) {
-            deleteListCascade(taskId: $taskId) {
+        mutation deleteListCascade($listId: ID!) {
+            deleteListCascade(listId: $listId) {
                 response
             }
         }

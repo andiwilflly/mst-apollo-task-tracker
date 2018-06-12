@@ -44,6 +44,12 @@ functions:
       handler:
         code: src/mutations/board/updateBoardRelations.js
 
+  deleteBoardCascade:
+      type: resolver
+      schema: src/mutations/board/deleteBoardCascade.graphql
+      handler:
+        code: src/mutations/board/deleteBoardCascade.js
+
   # List
   updateListRelations:
       type: resolver

@@ -22,9 +22,9 @@ const Chat = {
 const actions = (self)=> {
     return {
 
-		updateMutation: ({ x, y, name })=> {
+		updateMutation: ({ id, x, y, name })=> {
 			return client.mutate({
-				variables: { x, y, name },
+				variables: { id, x, y, name },
 				mutation: CHAT_UPDATE_MUTATION
 			}).catch((e)=> console.log("CHAT_UPDATE_MUTATION", e));
 		},

@@ -18,9 +18,9 @@ export default async (event)=> {
     if(Task.comments.length) {
         response.push({ commentsDeleted: Task.comments.length });
 
-        Task.comments.forEach(async (comment)=> {
+        for(let comment of Task.comments) {
             await deleteComment(api, { commentId: comment.id });
-        });
+        }
     }
 
     await deleteTask(api, { taskId: event.data.taskId });

@@ -18,9 +18,9 @@ export default async (event)=> {
     if(List.tasks.length) {
         response.push({ tasksDeleted: List.tasks.length });
 
-        List.tasks.forEach(async (task)=> {
+        for(let task of List.tasks) {
             await deleteTaskCascade(api, { taskId: task.id });
-        });
+        }
     }
 
     await deleteList(api, { listId: event.data.listId });

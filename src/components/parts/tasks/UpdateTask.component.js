@@ -12,6 +12,7 @@ import CreateTask from 'components/parts/tasks/CreateTask.component';
 import PreLoader from 'components/parts/PreLoader.component';
 import AllLabels from "components/parts/labels/AllLabels.component";
 import CreateComment from 'components/parts/comments/CreateComment.component';
+import EditorHTML from 'components/lazy/EditorHTML.component';
 
 
 @observer
@@ -54,8 +55,9 @@ class UpdateList extends CreateTask {
 					<br/>
 					<div>
 						description:
-						<textarea value={ this.form.description }
-								  onChange={ (e)=> this.form.description = e.currentTarget.value }/>
+						<EditorHTML onModelChange={ this.onDescriptionChange }
+									model={ this.form.description }
+									tag='textarea' />
 
 						{ this.renderTaskPreview() }
 					</div>

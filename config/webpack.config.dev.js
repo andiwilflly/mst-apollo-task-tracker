@@ -139,6 +139,22 @@ module.exports = {
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
+			{
+				test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+				use: "url-loader?limit=10000&mimetype=application/font-woff"
+			}, {
+				test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+				use: "url-loader?limit=10000&mimetype=application/font-woff"
+			}, {
+				test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+				use: "url-loader?limit=10000&mimetype=application/octet-stream"
+			}, {
+				test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+				use: "file-loader"
+			}, {
+				test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+				use: "url-loader?limit=10000&mimetype=image/svg+xml"
+			},
           // Process JS with Babel.
           {
             test: /\.(js|jsx|mjs)$/,
@@ -221,6 +237,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       template: paths.appHtml,
+    }),
+    new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery"
     }),
     // Add module names to factory functions so they appear in browser profiler.
     new webpack.NamedModulesPlugin(),

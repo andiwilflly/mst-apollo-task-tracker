@@ -9,6 +9,10 @@
 	float: left;
 }
 
+.task img {
+	max-width: 208px;
+}
+
 .task_header {
 	margin-bottom: 20px;
 }

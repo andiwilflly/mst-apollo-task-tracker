@@ -8,6 +8,7 @@ import { observable, values, computed } from "mobx";
 // Store
 import store from "store";
 // Components
+import EditorHTML from 'components/lazy/EditorHTML.component';
 import PreLoader from 'components/parts/PreLoader.component';
 import AllLabels from "components/parts/labels/AllLabels.component";
 import Label from 'components/parts/labels/Label.component';
@@ -41,6 +42,11 @@ class CreateTask extends React.Component {
 	removeLabelFromTask(labelId) {
 		this.form.labels.splice(this.form.labels.indexOf(labelId), 1);
 	}
+
+
+	onDescriptionChange = (description)=> {
+		this.form.description = description;
+	};
 
 
 	creteTask = async ()=> {
@@ -109,8 +115,8 @@ class CreateTask extends React.Component {
 					<br/>
 					<div>
 						description:
-						<textarea value={ this.form.description }
-								  onChange={ (e)=> this.form.description = e.currentTarget.value }/>
+						<EditorHTML onModelChange={ this.onDescriptionChange }
+									tag='textarea' />
 
 						{ this.renderTaskPreview() }
 					</div>

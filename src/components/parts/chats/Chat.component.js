@@ -78,10 +78,9 @@ class Chat extends React.Component {
 
 
 	renderChat() {
-		console.log(this.chat, "this.chat");
 		return (
 			<DragDropContainer targetKey="chat" dragHandleClassName="chat_title" dragData={{ chatId: this.chat.id }}>
-				<div className="chat" style={{ left: this.chat.x, bottom: this.chat.y }}>
+				<div className="chat">
 					<div className="chat_title cf">
 						<span style={{ float: "left", marginRight: 10 }}>🗣 { this.chat.name }</span>
 						<div style={{ float: 'right' }}>

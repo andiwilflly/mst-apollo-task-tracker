@@ -138,7 +138,8 @@ permissions:
   - operation: Board.create
     authenticated: true
   - operation: Board.read
-    authenticated: false
+    authenticated: true
+    query: ./src/permissions/Board.graphql
   - operation: Board.update
     authenticated: true
     query: ./src/permissions/Board.graphql

@@ -1,8 +1,15 @@
 query($node_id: ID!, $user_id: ID!) {
     SomeBoardExists(filter: {
-        id: $node_id,
-        author: {
-            id: $user_id
-        }
+        OR: [{
+            id: $node_id,
+            author: {
+                id: $user_id
+            }
+        }, {
+            id: $node_id,
+            users_some: {
+                id: $user_id
+            }
+        }]
     })
 }

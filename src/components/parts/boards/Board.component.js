@@ -16,7 +16,7 @@ import List from "components/parts/lists/List.component";
 import UsersList from "components/parts/users/UsersList.component";
 import BoardFilters from "components/parts/boards/BoardFilters.component";
 import CreateList from "components/parts/lists/CreateList.component";
-import Chat from "components/parts/chats/Chat.component";
+import Chat from "components/lazy/Chat.lazy.component";
 
 
 @observer

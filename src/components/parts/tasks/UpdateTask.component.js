@@ -12,7 +12,7 @@ import CreateTask from 'components/parts/tasks/CreateTask.component';
 import PreLoader from 'components/parts/PreLoader.component';
 import AllLabels from "components/parts/labels/AllLabels.component";
 import CreateComment from 'components/parts/comments/CreateComment.component';
-import EditorHTML from 'components/lazy/EditorHTML.component';
+import EditorHTML from 'components/lazy/EditorHTML.lazy.component';
 
 
 @observer

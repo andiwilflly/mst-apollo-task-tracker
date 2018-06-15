@@ -3,7 +3,7 @@ import React from 'react';
 import lazy from "utils/lazy.utils";
 
 
-@lazy(()=> import(/* webpackChunkName: "EditorHTML" */ 'components/lazy/EditorHTMLContent.component'))
+@lazy(()=> import(/* webpackChunkName: "EditorHTML" */ 'components/parts/EditorHTML.component'))
 class EditorHTML extends React.Component {
 }
 

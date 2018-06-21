@@ -56,7 +56,7 @@ module.exports = {
   // You can exclude the *.map files from the build during deployment.
   devtool: shouldUseSourceMap ? 'source-map' : false,
   // In production, we only want to load the polyfills and the app code.
-  entry: [require.resolve('./polyfills'), paths.appIndexJs],
+  entry: ['babel-polyfill',require.resolve('./polyfills'), paths.appIndexJs],
   output: {
     // The build folder.
     path: paths.appBuild,
@@ -143,6 +143,22 @@ module.exports = {
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
+			{
+				test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+				use: "url-loader?limit=10000&mimetype=application/font-woff"
+			}, {
+				test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+				use: "url-loader?limit=10000&mimetype=application/font-woff"
+			}, {
+				test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+				use: "url-loader?limit=10000&mimetype=application/octet-stream"
+			}, {
+				test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+				use: "file-loader"
+			}, {
+				test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+				use: "url-loader?limit=10000&mimetype=image/svg+xml"
+			},
           // Process JS with Babel.
           {
             test: /\.(js|jsx|mjs)$/,
@@ -240,6 +256,11 @@ module.exports = {
     // In production, it will be an empty string unless you specify "homepage"
     // in `package.json`, in which case it will be the pathname of that URL.
     new InterpolateHtmlPlugin(env.raw),
+
+	  new webpack.ProvidePlugin({
+		  $: "jquery",
+		  jQuery: "jquery"
+	  }),
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
       inject: true,
